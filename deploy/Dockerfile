@@ -1,6 +1,6 @@
 # Build stage: compiles the Ktor server and produces a runnable distribution.
 # Android is disabled: this image has no Android SDK, so AGP must not be applied.
-FROM gradle:9.7.1-jdk21 AS build
+FROM gradle:9.8.2-jdk21 AS build
 WORKDIR /app
 COPY . .
 RUN gradle :server:installDist --no-daemon --console=plain -Pglosso.android=false
