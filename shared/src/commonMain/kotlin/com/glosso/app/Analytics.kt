@@ -35,8 +35,8 @@ import okio.Path
  * advertising id, no text the learner wrote and no audio; the server keeps only
  * the events and properties of its catalogue.
  *
- * On by default with a notice in onboarding; the learner can turn it off in
- * Settings, which drops the queue and tells the server (`X-Analytics: off`) not
+ * On by default with a notice in onboarding ([defaultEnabled]; the F-Droid build
+ * starts with it off); the learner can turn it off (or on) in Settings, which drops the queue and tells the server (`X-Analytics: off`) not
  * to record the score event either. Best-effort: nothing here can block the UI,
  * a take or a launch, and every failure is silent.
  */
@@ -54,6 +54,9 @@ object Analytics {
 
     private val json = Json { ignoreUnknownKeys = true }
     private val serializer = ListSerializer(ClientEvent.serializer())
+
+    /** Whether a new install sends statistics before the learner chooses; set by the app before [init]. */
+    var defaultEnabled: Boolean = true
 
     private val _enabled = MutableStateFlow(true)
     val enabled: StateFlow<Boolean> = _enabled.asStateFlow()
@@ -97,7 +100,7 @@ object Analytics {
         val loaded = keyValueStore(context, FILE)
         prefs = loaded
         platform = platformInfo(context)
-        _enabled.value = loaded.getBoolean(KEY_ENABLED, true)
+        _enabled.value = loaded.getBoolean(KEY_ENABLED, defaultEnabled)
         val files = appFiles(context)
         fileSystem = files.fileSystem
         queueFile = (files.filesDir / QUEUE_FILE).also { file ->
@@ -296,6 +299,7 @@ object Analytics {
         contextRef = null
         queueLock.withLock { queue.clear() }
         _enabled.value = true
+        defaultEnabled = true
         sessionId = null
         foregroundSince = 0
         backgroundSince = 0

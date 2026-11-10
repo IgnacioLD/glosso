@@ -1,0 +1,4 @@
+Première version sur F-Droid.
+- Sans bibliothèques Google : pas de services Play ni de connexion Google (« Changer de téléphone » n'est pas disponible).
+- Les statistiques d'utilisation sont désactivées au départ ; vous pouvez les activer dans les Réglages.
+- Importez le modèle d'évaluation hors ligne depuis un fichier, vérifié avant installation.

@@ -1,0 +1,4 @@
+Erste Version auf F-Droid.
+- Ohne Google-Bibliotheken: keine Play-Dienste und keine Google-Anmeldung („Handy wechseln" ist nicht verfügbar).
+- Nutzungsstatistiken sind zunächst aus; du kannst sie in den Einstellungen einschalten.
+- Importiere das Offline-Bewertungsmodell aus einer Datei, vor der Installation geprüft.

@@ -292,7 +292,10 @@ private fun PromisePage(
         }
         Spacer(Modifier.height(Space.x32))
         Text(
-            text = stringResource(Res.string.onboarding_analytics_notice),
+            text = stringResource(
+                if (Analytics.enabled.collectAsState().value) Res.string.onboarding_analytics_notice
+                else Res.string.onboarding_analytics_notice_off,
+            ),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )

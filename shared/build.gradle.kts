@@ -109,12 +109,10 @@ kotlin {
         }
         findByName("androidMain")?.dependencies {
             implementation(libs.ktor.client.android)
-            // Already in the app: BackHandler and the permission launcher
-            // (activity-compose) and Google sign-in through Credential Manager.
+            // Already in the app: BackHandler, the permission launcher and the
+            // file picker (activity-compose). Google sign-in is not here: it lives
+            // in :androidApp's playstore flavor, so the F-Droid build has none.
             implementation(libs.androidx.activity.compose)
-            implementation(libs.androidx.credentials)
-            implementation(libs.androidx.credentials.play.services.auth)
-            implementation(libs.googleid)
             // Images over OkHttp, the transport Coil 2 already used in the app.
             implementation(libs.coil.network.okhttp)
         }

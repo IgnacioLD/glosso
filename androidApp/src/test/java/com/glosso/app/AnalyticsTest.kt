@@ -51,6 +51,24 @@ class AnalyticsTest {
     private fun names() = sent.flatten().map { it.name }
 
     @Test
+    fun `a build that defaults statistics off sends nothing until the learner turns them on`() {
+        Analytics.resetForTest()
+        Analytics.scope = CoroutineScope(UnconfinedTestDispatcher())
+        Analytics.sender = { batch -> sent.add(batch); 202 }
+        Analytics.defaultEnabled = false
+        Analytics.init(app)
+        assertFalse(Analytics.enabled.value)
+        Analytics.track("lesson_started")
+        Analytics.flush()
+        assertTrue(sent.isEmpty())
+
+        Analytics.setEnabled(app, true)
+        Analytics.track("lesson_started")
+        Analytics.flush()
+        assertEquals(listOf("lesson_started"), names())
+    }
+
+    @Test
     fun `events wait on disk while offline and are sent once the server takes them`() {
         status = null
         Analytics.track("lesson_started", mapOf("lesson_id" to "ru.lesson.a1.01", "cefr" to "A1"))

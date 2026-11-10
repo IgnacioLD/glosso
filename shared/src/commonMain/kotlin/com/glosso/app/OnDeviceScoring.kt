@@ -2,6 +2,7 @@ package com.glosso.app
 
 import com.glosso.app.api.GlossoApi
 import com.glosso.app.api.ScoreRequest
+import com.glosso.app.platform.PickedFile
 import com.glosso.engine.model.PronunciationFeedback
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,6 +20,8 @@ data class OnDeviceScorerState(
     val progress: Float = 0f,
     /** True while the model is being loaded into memory (heavy, once). */
     val preparing: Boolean = false,
+    /** True while picked files are copied and verified ([OnDeviceScoring.importPack]). */
+    val importing: Boolean = false,
     val ready: Boolean = false,
     val error: String? = null,
 )
@@ -58,6 +61,13 @@ interface OnDeviceScoring {
 
     /** Downloads the model pack from the app's own host. */
     suspend fun download()
+
+    /**
+     * Installs the pack from files the learner picked instead of downloading it,
+     * verified against the same digests a download is. Runs in the background;
+     * the outcome shows in [state] (`present`, or a localized `error`).
+     */
+    fun importPack(files: List<PickedFile>) = Unit
 
     /** Removes the pack and unloads the model, freeing the memory it held. */
     suspend fun delete()

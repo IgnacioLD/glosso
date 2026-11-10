@@ -601,4 +601,10 @@
     <string name="settings_usage_erase">Meine Nutzungsdaten löschen</string>
     <string name="settings_usage_erased">Deine Nutzungsdaten wurden gelöscht.</string>
     <string name="settings_usage_erase_failed">Löschen gerade nicht möglich. Versuche es mit Verbindung erneut.</string>
+    <string name="import_model_cta">Aus Datei importieren</string>
+    <string name="import_model_progress">Modell wird geprüft und installiert…</string>
+    <string name="import_model_incomplete">Ein Teil des Pakets fehlt noch. Wähle beide Dateien: das Modell (.onnx) und phoneme_vocab.json.</string>
+    <string name="import_model_rejected">Eine Datei gehört nicht zum Bewertungsmodell von Glosso oder ist beschädigt. Wähle das Modell (.onnx) und phoneme_vocab.json.</string>
+    <string name="import_model_failed">Die Datei konnte nicht gelesen werden. Versuch es noch einmal.</string>
+    <string name="onboarding_analytics_notice_off">Nutzungsstatistiken sind aus. Wenn du helfen willst, den Kurs zu verbessern, kannst du sie in den Einstellungen einschalten: Sie gehen nur an unsere eigenen Server (ohne Werbung, ohne Dritte), verknüpft mit einer zufälligen Installations-ID.</string>
 </resources>

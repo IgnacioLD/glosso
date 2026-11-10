@@ -25,7 +25,8 @@ unattributed, if the assets drift, or if a shipped entry carries a prohibited
 licence (GPL/AGPL, non-commercial, share-alike, or anything not in
 `ALLOWED_LICENCES`). Server/build/test-only artifacts are still catalogued and
 must be attributed, but their licence only warns, because they never enter the
-artifact (see `tools/licensing/runtime-classpath.txt`).
+artifact (see `tools/licensing/runtime-classpath-<flavor>.txt`, one lock per
+app flavor; the catalogue covers their union).
 
 Usage:
   ./gradlew :androidApp:licensesRuntimeClasspath   # refresh the classpath lock
@@ -53,7 +54,9 @@ RESOURCE_FILES = ROOT / "shared/src/commonMain/composeResources/files"
 ASSET = RESOURCE_FILES / "licenses.json"
 SCHEMA = 2
 
-RUNTIME_LOCK = ROOT / "tools/licensing/runtime-classpath.txt"
+# One lock per app flavor (fdroid, playstore). The catalogue lives in :shared,
+# which has no flavors, so it attributes everything either build can ship.
+RUNTIME_LOCKS = [ROOT / f"tools/licensing/runtime-classpath-{flavor}.txt" for flavor in ("fdroid", "playstore")]
 GRADLE_CACHE = Path(os.environ.get("GRADLE_USER_HOME", Path.home() / ".gradle")) / "caches/modules-2/files-2.1"
 
 # Privacy policy, one source per app locale. Spanish reuses the working doc; the
@@ -513,12 +516,15 @@ def _auto_component(module_id, version=None, scope="app"):
 
 
 def runtime_coordinates():
-    if not RUNTIME_LOCK.is_file():
-        raise SystemExit(
-            f"missing {RUNTIME_LOCK.relative_to(ROOT)}. Run:\n"
-            "  ./gradlew :androidApp:licensesRuntimeClasspath"
-        )
-    return [line.strip() for line in RUNTIME_LOCK.read_text(encoding="utf-8").splitlines() if line.strip()]
+    coordinates = set()
+    for lock in RUNTIME_LOCKS:
+        if not lock.is_file():
+            raise SystemExit(
+                f"missing {lock.relative_to(ROOT)}. Run:\n"
+                "  ./gradlew :androidApp:licensesRuntimeClasspath"
+            )
+        coordinates.update(line.strip() for line in lock.read_text(encoding="utf-8").splitlines() if line.strip())
+    return sorted(coordinates)
 
 
 def runtime_module_ids():
@@ -698,7 +704,7 @@ def licence_violations(components=None, distributed_ids=None):
 def _is_blocking(violation):
     """A violation stops the build when it is shipped, or when it leaves any
     catalogued entry unattributed. Server/build/test-only copyleft is a warning:
-    it does not enter the artifact (see tools/licensing/runtime-classpath.txt)."""
+    it does not enter the artifact (see tools/licensing/runtime-classpath-*.txt)."""
     if violation["scope"] == "distributed":
         return True
     return any(problem.startswith("unattributed") for problem in violation["problems"])

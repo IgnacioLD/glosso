@@ -4,7 +4,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Test
 
 /**
- * Runs only for the release variant (`:androidApp:testReleaseUnitTest`): pins the
+ * Runs only for the release variant (`:androidApp:test<Flavor>ReleaseUnitTest`): pins the
  * guard that keeps the model comparison tool out of a release build. The debug
  * source set holds the comparator; in release [modelCompareAvailable] is a
  * constant false and the screen is an empty stub.

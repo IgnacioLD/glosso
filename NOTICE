@@ -193,8 +193,10 @@ Identity (com.google.android.libraries.identity.googleid:googleid)
   License:     Android Software Development Kit License
                (https://developer.android.com/studio/terms.html)
   Used as:     optional Sign in with Google, to carry an account to a new
-               phone. These SDKs are NOT Apache-2.0; their use is governed by
-               the Android SDK License.
+               phone, in the Google Play build (`playstore` flavor) only. The
+               F-Droid build (`fdroid` flavor) contains none of them. These SDKs
+               are NOT Apache-2.0; their use is governed by the Android SDK
+               License.
 
 Test-only libraries (not distributed in the app):
 JUnit 4 (junit:junit)

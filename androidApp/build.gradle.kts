@@ -123,6 +123,30 @@ android {
         buildConfigField("boolean", "STORE_SCREENSHOTS", storeScreenshots.toString())
     }
 
+    // Two distributions of the same app. `playstore` is the Google Play build and
+    // keeps Sign in with Google (Play services). `fdroid` ships no non-free
+    // library: no Play services, no googleid, so "Change phone" is hidden, and
+    // usage statistics start off until the learner turns them on (F-Droid's
+    // Tracking anti-feature). See docs/FDROID.md.
+    flavorDimensions += "distribution"
+    productFlavors {
+        create("playstore") {
+            dimension = "distribution"
+            buildConfigField("boolean", "USAGE_STATISTICS_DEFAULT", "true")
+        }
+        create("fdroid") {
+            dimension = "distribution"
+            buildConfigField("boolean", "USAGE_STATISTICS_DEFAULT", "false")
+        }
+    }
+
+    // The dependency metadata block AGP adds to the APK is encrypted for Google
+    // Play; F-Droid's scanner flags it and it cannot be reproduced. Play reads it
+    // from the bundle, which keeps it.
+    dependenciesInfo {
+        includeInApk = false
+    }
+
     buildFeatures {
         compose = true
         buildConfig = true
@@ -149,7 +173,7 @@ android {
             // key so it can be installed *over* glosso-studio and inspected with
             // `run-as me.shirobyte42.glosso`. Off by default so ordinary debug
             // builds keep their throwaway debug key:
-            //   ./gradlew :androidApp:installDebug -PglossoDebugReleaseSigning=true
+            //   ./gradlew :androidApp:installPlaystoreDebug -PglossoDebugReleaseSigning=true
             if (providers.gradleProperty("glossoDebugReleaseSigning").getOrElse("false") == "true" &&
                 releaseSigning != null
             ) {
@@ -211,8 +235,12 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material.icons.extended)
     // Coil 3 (images, SVG) comes with :shared, which owns the image loader.
-    // Google sign-in (Credential Manager, googleid) comes with :shared's androidMain.
     debugImplementation(libs.compose.ui.tooling)
+
+    // Sign in with Google (Credential Manager + Play services): Google Play build only.
+    "playstoreImplementation"(libs.androidx.credentials)
+    "playstoreImplementation"(libs.androidx.credentials.play.services.auth)
+    "playstoreImplementation"(libs.googleid)
 
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
@@ -232,15 +260,23 @@ dependencies {
 
 // --- Licensing -----------------------------------------------------------------
 // The APK must attribute everything it actually ships, including transitive
-// dependencies (Play Services arrives through Google sign-in). The
-// declared-dependency list is not enough, so these tasks resolve the real debug
-// runtime graph and keep a committed lock for tools/licensing/collect.py, which
-// reads each artifact's POM for its licence.
-val licenseLock = rootProject.layout.projectDirectory.file("tools/licensing/runtime-classpath.txt")
+// dependencies (Play Services arrives through Google sign-in in the playstore
+// flavor). The declared-dependency list is not enough, so these tasks resolve
+// the real debug runtime graph of each flavor and keep one committed lock per
+// flavor for tools/licensing/collect.py, which reads each artifact's POM for its
+// licence. The catalogue lives in :shared, which has no flavors, so it covers
+// the union. Each flavor's build checks only its own lock, so the F-Droid
+// build still passes after its recipe strips the Play-only dependencies.
+val licensedFlavors = listOf("fdroid", "playstore")
 
-fun Project.resolvedRuntimeCoordinates(): List<String> =
-    configurations.getByName("debugRuntimeClasspath").incoming.resolutionResult.allComponents
+fun licenseLock(flavor: String): File = rootProject.file("tools/licensing/runtime-classpath-$flavor.txt")
+
+fun Project.runtimeComponentIds(flavor: String): List<org.gradle.api.artifacts.component.ModuleComponentIdentifier> =
+    configurations.getByName("${flavor}DebugRuntimeClasspath").incoming.resolutionResult.allComponents
         .mapNotNull { it.id as? org.gradle.api.artifacts.component.ModuleComponentIdentifier }
+
+fun Project.resolvedRuntimeCoordinates(flavor: String): List<String> =
+    runtimeComponentIds(flavor)
         .map { "${it.group}:${it.module}:${it.version}" }
         .distinct()
         .sorted()
@@ -251,11 +287,9 @@ fun Project.resolvedRuntimeCoordinates(): List<String> =
  * metadata, so without this the catalogue depends on what an earlier build
  * happened to download and comes out different on another machine.
  */
-fun Project.fetchRuntimePoms() {
-    val ids = configurations.getByName("debugRuntimeClasspath").incoming.resolutionResult.allComponents
-        .mapNotNull { it.id as? org.gradle.api.artifacts.component.ModuleComponentIdentifier }
+fun Project.fetchRuntimePoms(flavor: String) {
     dependencies.createArtifactResolutionQuery()
-        .forComponents(ids)
+        .forComponents(runtimeComponentIds(flavor))
         .withArtifacts(org.gradle.maven.MavenModule::class.java, org.gradle.maven.MavenPomArtifact::class.java)
         .execute()
         .resolvedComponents
@@ -264,33 +298,44 @@ fun Project.fetchRuntimePoms() {
 
 val licensesRuntimeClasspath by tasks.registering {
     group = "licensing"
-    description = "Write the resolved debug runtime classpath lock for tools/licensing/collect.py"
+    description = "Write the resolved debug runtime classpath lock of every flavor for tools/licensing/collect.py"
     doLast {
-        val coordinates = project.resolvedRuntimeCoordinates()
-        project.fetchRuntimePoms()
-        val file = licenseLock.asFile
-        file.parentFile.mkdirs()
-        file.writeText(coordinates.joinToString("\n", postfix = "\n"))
-        logger.lifecycle("licensing: ${coordinates.size} runtime modules -> ${file.relativeTo(rootProject.projectDir)}")
+        licensedFlavors.forEach { flavor ->
+            val coordinates = project.resolvedRuntimeCoordinates(flavor)
+            project.fetchRuntimePoms(flavor)
+            val file = licenseLock(flavor)
+            file.parentFile.mkdirs()
+            file.writeText(coordinates.joinToString("\n", postfix = "\n"))
+            logger.lifecycle("licensing: ${coordinates.size} $flavor runtime modules -> ${file.relativeTo(rootProject.projectDir)}")
+        }
+    }
+}
+
+val licensesRuntimeClasspathChecks = licensedFlavors.associateWith { flavor ->
+    tasks.register("licensesRuntimeClasspathCheck${flavor.replaceFirstChar(Char::uppercase)}") {
+        group = "licensing"
+        description = "Fail if the $flavor runtime classpath lock is stale (run :androidApp:licensesRuntimeClasspath)"
+        outputs.upToDateWhen { false }
+        doLast {
+            val coordinates = project.resolvedRuntimeCoordinates(flavor)
+            project.fetchRuntimePoms(flavor)
+            val lock = licenseLock(flavor)
+            val committed = lock.takeIf { it.isFile }?.readLines()?.filter { it.isNotBlank() } ?: emptyList()
+            if (coordinates != committed) {
+                throw GradleException(
+                    "${lock.relativeTo(rootProject.projectDir)} is out of date. Refresh the runtime locks and the app catalogue:\n" +
+                        "  ./gradlew :androidApp:licensesRuntimeClasspath\n" +
+                        "  python3 tools/licensing/collect.py",
+                )
+            }
+        }
     }
 }
 
 val licensesRuntimeClasspathCheck by tasks.registering {
     group = "licensing"
-    description = "Fail if the runtime classpath lock is stale (run :androidApp:licensesRuntimeClasspath)"
-    outputs.upToDateWhen { false }
-    doLast {
-        val coordinates = project.resolvedRuntimeCoordinates()
-        project.fetchRuntimePoms()
-        val committed = licenseLock.asFile.takeIf { it.isFile }?.readLines()?.filter { it.isNotBlank() } ?: emptyList()
-        if (coordinates != committed) {
-            throw GradleException(
-                "tools/licensing/runtime-classpath.txt is out of date. Refresh the runtime lock and the app catalogue:\n" +
-                    "  ./gradlew :androidApp:licensesRuntimeClasspath\n" +
-                    "  python3 tools/licensing/collect.py",
-            )
-        }
-    }
+    description = "Fail if any flavor's runtime classpath lock is stale"
+    dependsOn(licensesRuntimeClasspathChecks.values)
 }
 
 /**
@@ -328,7 +373,6 @@ fun Project.runLicensingPython(script: File, vararg args: String) {
 val licensesCatalogueCheck by tasks.registering {
     group = "licensing"
     description = "Fail if the in-app licence catalogue is stale, incomplete or carries a prohibited licence"
-    dependsOn(licensesRuntimeClasspathCheck)
     outputs.upToDateWhen { false }
     doLast {
         project.runLicensingPython(rootProject.file("tools/licensing/collect.py"), "--check")
@@ -336,4 +380,9 @@ val licensesCatalogueCheck by tasks.registering {
     }
 }
 
-tasks.named("preBuild") { dependsOn(licensesRuntimeClasspathCheck, licensesCatalogueCheck) }
+tasks.named("preBuild") { dependsOn(licensesCatalogueCheck) }
+licensedFlavors.forEach { flavor ->
+    val check = licensesRuntimeClasspathChecks.getValue(flavor)
+    val variantPrefix = "pre${flavor.replaceFirstChar(Char::uppercase)}"
+    tasks.matching { it.name.startsWith(variantPrefix) && it.name.endsWith("Build") }.configureEach { dependsOn(check) }
+}
