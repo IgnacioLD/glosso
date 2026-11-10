@@ -149,9 +149,10 @@ private fun jsonObjectOrNull(text: String): JsonObject? =
 /**
  * Moves the app to another server. Everything that belonged to the old one is
  * dropped first, so nothing from server A is used against server B: queued
- * downloads, the HTTP cache and content version, downloaded lesson packs, the
- * cached product config and account, the linked Google account and unsent usage
- * events. The learner's own progress (lessons, sounds, streak) is local and kept.
+ * downloads, the HTTP cache and content version, the cached product config and
+ * account, the linked Google account and unsent usage events. Downloaded lesson
+ * packs are kept only when the new server publishes the exact content
+ * fingerprint they were downloaded for. The learner's own progress (lessons, sounds, streak) is local and kept.
  * The scoring model is kept only if its digest is one the new server accepts.
  */
 object ServerSwitch {
@@ -167,7 +168,8 @@ object ServerSwitch {
         if (target == ServerPreferences.base.value) return@withContext
         downloader.state.value.active.forEach { downloader.cancel(it.id) }
         ApiCache.forget()
-        OfflineStore.clear()
+        // Packs stay on disk but unusable until the new server's manifest says
+        // whether it serves the same content (see keepOnly below).
         OfflineStore.setContentVersion("")
         ProductConfigRepository.forget()
         GoogleAccountStore.forget()
@@ -177,5 +179,8 @@ object ServerSwitch {
         onDevice.onServerChanged()
         ProductConfigRepository.refresh()
         api.ensureAssetVersion()
+        // Same fingerprint means the same content: those packs are kept.
+        // Unreachable or no fingerprint: the version is still empty, so all go.
+        OfflineStore.keepOnly(api.contentVersion)
     }
 }

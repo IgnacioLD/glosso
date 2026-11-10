@@ -81,8 +81,9 @@ production setup. To point the app at it, open Settings > Advanced > Server, ent
 (`https://...`) and tap "Check and use". The app checks that the address answers like a Glosso
 server (`/health` and `/v1/config`) before switching; from then on lessons, cloud scoring,
 downloads, usage statistics and sign-in all go to that server. "Use the default server" switches
-back. Switching drops what came from the previous server (downloaded lessons, cached content and
-config, unsent statistics); the learner's progress stays on the phone. Plain `http://` is
+back. Switching drops what came from the previous server (cached content and config, unsent
+statistics); downloaded lessons are kept only when the new server serves exactly the same content
+fingerprint. The learner's progress stays on the phone. Plain `http://` is
 accepted only by debug builds and only for a local address (`localhost`, `10.0.2.2`, private
 LAN ranges).
 

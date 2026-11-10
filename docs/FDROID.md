@@ -60,9 +60,11 @@ declare `TetheredNet`:
   digests, product config, usage statistics, crash traces and sign-in. The app
   has no other network endpoint (no CDN, no third-party SDK).
 - Switching drops what came from the previous server (`ServerSwitch`): queued
-  downloads, the HTTP cache and content version, downloaded lessons, cached
-  config and account, the linked Google account shown on the phone and unsent
-  statistics. The scoring model is kept only when its SHA-256 is the released one
+  downloads, the HTTP cache and content version, cached config and account, the
+  linked Google account shown on the phone and unsent statistics. Downloaded
+  lessons are kept only when the new server's manifest publishes exactly the
+  content fingerprint (`assetVersion`) they were downloaded for; a different
+  fingerprint, none, or an unreachable server deletes them. The scoring model is kept only when its SHA-256 is the released one
   or the one the new server publishes. Progress is local and is kept.
 
 **Downloading the model and content.** The Inclusion Policy only restricts

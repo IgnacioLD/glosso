@@ -618,7 +618,7 @@
     <string name="server_default">Le serveur par défaut</string>
     <string name="server_custom">Un serveur que vous avez choisi</string>
     <string name="server_address">Adresse du serveur</string>
-    <string name="server_switch_note">Changer de serveur supprime les leçons téléchargées, et le modèle de notation si le nouveau serveur en utilise un autre. Votre progression reste sur ce téléphone.</string>
+    <string name="server_switch_note">Changer de serveur supprime les leçons téléchargées et le modèle de notation si le nouveau serveur en sert d'autres. Votre progression reste sur ce téléphone.</string>
     <string name="server_check_and_use">Vérifier et utiliser</string>
     <string name="server_use_default">Utiliser le serveur par défaut</string>
     <string name="server_saved">Serveur utilisé : %1$s.</string>

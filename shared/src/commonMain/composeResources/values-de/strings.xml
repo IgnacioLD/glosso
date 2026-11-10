@@ -616,7 +616,7 @@
     <string name="server_default">Der Standardserver</string>
     <string name="server_custom">Ein von dir gewählter Server</string>
     <string name="server_address">Serveradresse</string>
-    <string name="server_switch_note">Beim Wechsel werden heruntergeladene Lektionen gelöscht, und das Bewertungsmodell, wenn der neue Server ein anderes nutzt. Dein Fortschritt bleibt auf diesem Handy.</string>
+    <string name="server_switch_note">Beim Wechsel werden heruntergeladene Lektionen und das Bewertungsmodell gelöscht, wenn der neue Server andere liefert. Dein Fortschritt bleibt auf diesem Handy.</string>
     <string name="server_check_and_use">Prüfen und verwenden</string>
     <string name="server_use_default">Standardserver verwenden</string>
     <string name="server_saved">Jetzt in Verwendung: %1$s.</string>

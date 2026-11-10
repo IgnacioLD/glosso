@@ -432,6 +432,17 @@ object OfflineStore {
         _state.value = _state.value.copy(metas = fresh)
     }
 
+    /**
+     * Keeps only the packs downloaded for [version], the content fingerprint the
+     * manifest publishes, and deletes every other one. A blank [version] (no
+     * manifest, or one without a fingerprint) deletes them all.
+     */
+    suspend fun keepOnly(version: String) = withContext(Dispatchers.IO) {
+        if (version.isBlank()) return@withContext clear()
+        readIndex().lessons.filterValues { it.contentVersion != version }.keys.forEach { delete(it) }
+        pruneOtherVersions(version)
+    }
+
     suspend fun clear() = withContext(Dispatchers.IO) {
         cache.clear()
         assetSizes.clear()

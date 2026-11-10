@@ -6,12 +6,15 @@ import com.glosso.app.api.GlossoApi
 import com.glosso.app.download.DownloadItem
 import com.glosso.app.download.DownloadItemState
 import com.glosso.app.download.DownloadKind
+import com.glosso.app.download.DownloadManager
 import com.glosso.app.download.DownloadOutcome
 import com.glosso.app.download.DownloadStatus
 import com.glosso.app.download.Downloader
 import com.glosso.app.download.DownloadsState
 import com.glosso.app.platform.keyValueStore
 import com.glosso.app.product.ProductConfigRepository
+import com.glosso.engine.model.LessonModel
+import com.glosso.engine.model.WordModel
 import io.ktor.client.engine.mock.MockEngine
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
@@ -24,6 +27,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -56,7 +60,14 @@ class ServerSwitchTest {
             request.url.encodedPath == "/v1/config" -> respond("""{"schema":1,"flags":{"server_$tag":true}}""", headers = json)
             request.url.encodedPath == "/v1/me" ->
                 respond(if (tag == "a") """{"linkedAccounts":["google"]}""" else "{}", headers = json)
-            request.url.encodedPath == "/v1/content/manifest" -> respond("""{"assetVersion":"$tag-v1"}""", headers = json)
+            // mirror.test serves A's content (same fingerprint); nofp.test publishes none.
+            request.url.encodedPath == "/v1/content/manifest" -> when (tag) {
+                "mirror" -> respond("""{"assetVersion":"a-v1"}""", headers = json)
+                "nofp" -> respond("{}", headers = json)
+                else -> respond("""{"assetVersion":"$tag-v1"}""", headers = json)
+            }
+            request.url.encodedPath.endsWith("/audio/city.ogg") ->
+                respond(byteArrayOf(1, 2, 3), headers = headersOf(HttpHeaders.ContentLength, "3"))
             else -> respond("{}", HttpStatusCode.NotFound, json)
         }
     }
@@ -70,6 +81,47 @@ class ServerSwitchTest {
         override fun cancel(id: String) { cancelled += id }
         override fun allowMetered(id: String) = Unit
         override fun wifiOnlyChanged() = Unit
+    }
+
+    private fun bundle() = OfflineBundle(
+        lesson = LessonModel(id = "l1", title = "Lesson", theme = "city", level = "A1"),
+        words = listOf(WordModel(id = "w1", lemma = "city", audio = mapOf("en-GB-female" to "audio/city.ogg"))),
+    )
+
+    /** Downloads a pack from A, switches to [server] and answers whether the pack survived. */
+    private suspend fun packSurvivesSwitchTo(server: String): Boolean {
+        val app = RuntimeEnvironment.getApplication()
+        val serverStore = keyValueStore(app, "glosso_server").apply { edit(commit = true) { clear() } }
+        ServerPreferences.init(serverStore, "https://a.test")
+        ApiCache.init(app)
+        ApiCache.forget()
+        OfflineStore.downloader = DownloadManager
+        OfflineStore.init(app)
+        OfflineStore.clear()
+        val api = GlossoApi(engine = engine, contentCache = null, versionStore = ApiCache)
+        api.onContentVersionChanged = { OfflineStore.setContentVersion(it) }
+        ProductConfigRepository.api = { api }
+        api.manifest()
+        OfflineStore.setContentVersion(api.contentVersion)
+        assertTrue(OfflineStore.download(bundle(), api))
+        assertNotNull("the pack is on disk before the switch", OfflineStore.localAsset("audio/city.ogg"))
+
+        ServerSwitch.apply(server, FakeDownloader(emptyList()), NoOnDeviceScoring, api)
+        val kept = OfflineStore.bundles().map { it.lesson.id } == listOf("l1")
+        assertEquals(kept, OfflineStore.localAsset("audio/city.ogg") != null)
+        return kept
+    }
+
+    @Test
+    fun `a pack is kept when the new server publishes the same fingerprint`() = runTest {
+        assertTrue(packSurvivesSwitchTo("https://mirror.test"))
+    }
+
+    @Test
+    fun `a pack is deleted when the fingerprint differs, is missing or cannot be fetched`() = runTest {
+        assertFalse("different fingerprint", packSurvivesSwitchTo("https://b.test"))
+        assertFalse("no fingerprint", packSurvivesSwitchTo("https://nofp.test"))
+        assertFalse("unreachable", packSurvivesSwitchTo("https://down.test"))
     }
 
     @Test

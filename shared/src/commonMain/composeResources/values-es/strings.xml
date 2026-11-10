@@ -618,7 +618,7 @@
     <string name="server_default">El servidor predeterminado</string>
     <string name="server_custom">Un servidor que has elegido</string>
     <string name="server_address">Dirección del servidor</string>
-    <string name="server_switch_note">Al cambiar se borran las lecciones descargadas, y el modelo de puntuación si el nuevo servidor usa otro. Tu progreso se queda en este móvil.</string>
+    <string name="server_switch_note">Al cambiar se borran las lecciones descargadas y el modelo de puntuación si el nuevo servidor sirve otros distintos. Tu progreso se queda en este móvil.</string>
     <string name="server_check_and_use">Comprobar y usar</string>
     <string name="server_use_default">Usar el servidor predeterminado</string>
     <string name="server_saved">Ahora se usa %1$s.</string>

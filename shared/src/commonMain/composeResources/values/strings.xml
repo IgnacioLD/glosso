@@ -643,7 +643,7 @@
     <string name="server_default">The default server</string>
     <string name="server_custom">A server you chose</string>
     <string name="server_address">Server address</string>
-    <string name="server_switch_note">Switching removes downloaded lessons, and the scoring model if the new server uses a different one. Your progress stays on this phone.</string>
+    <string name="server_switch_note">Switching removes downloaded lessons and the scoring model if the new server serves different ones. Your progress stays on this phone.</string>
     <string name="server_check_and_use">Check and use</string>
     <string name="server_use_default">Use the default server</string>
     <string name="server_saved">Now using %1$s.</string>
