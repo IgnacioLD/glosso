@@ -6,7 +6,7 @@ COPY . .
 RUN gradle :server:installDist --no-daemon --console=plain -Pglosso.android=false
 
 # Runtime stage.
-FROM eclipse-temurin:21-jre
+FROM eclipse-temurin:25-jre
 # La imagen base se publica cada cierto tiempo y entre medias salen parches de
 # seguridad de Ubuntu (OpenSSL, CVE-2026-84782). Se aplican al construir, para
 # que el escaner de CI no falle por algo ya corregido en el repositorio de
