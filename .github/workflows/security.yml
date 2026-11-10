@@ -45,6 +45,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITLEAKS_CONFIG: .github/gitleaks.toml
+          # The config uses [[allowlists]], which older gitleaks releases ignore.
+          GITLEAKS_VERSION: 8.30.1
 
   dependencies:
     name: dependencias (trivy)
