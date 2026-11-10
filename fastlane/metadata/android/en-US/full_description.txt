@@ -1,0 +1,18 @@
+Glosso is a language course that measures your pronunciation for real. It listens to each take, recognizes the sounds you actually made, compares them with the expected ones and tells you exactly which sound to fix.
+
+Languages: English (British and American), French, German and Russian.
+
+<b>What you get</b>
+<ul>
+<li>Lessons with dialogues, stories, vocabulary and exercises, with native-speaker style audio.</li>
+<li>Pronunciation feedback per sound: perfect, close or missed, with the sound you produced next to the one expected.</li>
+<li>Spaced review of the words and sounds you find hardest.</li>
+<li>Optional offline scoring: download the scoring model (about 350 MB) or import it from a file, and every take is scored on the phone with the same engine the server runs.</li>
+<li>Download lessons to study with no connection.</li>
+</ul>
+
+<b>Free and open source</b>
+Glosso is free for everyone, with no paid tier and no ads. The app and its server are free software under the GNU AGPL v3 or later. Support is a voluntary donation.
+
+<b>Network and privacy</b>
+Lessons and, without the offline model, pronunciation scoring come from the Glosso server, whose source code is in the same repository and can be self-hosted. Usage statistics are off in this build until you turn them on in Settings; when on, they go only to Glosso's own server, with no third-party SDKs. The F-Droid build contains no Google libraries.

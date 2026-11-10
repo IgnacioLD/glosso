@@ -1,0 +1,4 @@
+First F-Droid release.
+- Build without Google libraries: no Play services, no Google sign-in ("Change phone" is not available).
+- Usage statistics start off; you can turn them on in Settings.
+- Import the offline scoring model from a file, verified before it is installed.

@@ -56,9 +56,10 @@ class GlossoApplication : Application(), SingletonImageLoader.Factory {
         Analytics.eraser = { appApi.deleteEvents() }
         Analytics.traceSender = { appApi.sendCrashTrace(it) }
         Analytics.onDeviceModel = { OnDeviceScorer.available() }
+        Analytics.defaultEnabled = BuildConfig.USAGE_STATISTICS_DEFAULT
         ProductConfigRepository.api = { appApi }
         OfflineStore.downloader = DownloadManager
-        GoogleSignIn.serverClientId = BuildConfig.GOOGLE_SERVER_CLIENT_ID
+        Flavor.install()
     }
 
     override fun newImageLoader(context: PlatformContext): ImageLoader = glossoImageLoader(this)

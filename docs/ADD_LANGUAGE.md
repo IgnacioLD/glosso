@@ -335,7 +335,7 @@ Si no se usa `publishContent` (p. ej. solo datos), recuerda que el servidor lee
 Tests y build:
 
 ```sh
-./gradlew :engine:jvmTest :server:test :androidApp:testDebugUnitTest
+./gradlew :engine:jvmTest :server:test :androidApp:testFdroidDebugUnitTest :androidApp:testPlaystoreDebugUnitTest
 ./gradlew build
 ```
 

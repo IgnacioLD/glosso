@@ -188,10 +188,11 @@ completa viaja en el APK:
   por idioma de interfaz (en/es/fr/de); `PrivacyScreen` elige la activa.
 - `tools/licensing/collect.py` genera ambos; `collect_test.py` falla si un
   artefacto del runtime no tiene entrada o si el asset se desincroniza.
-- El classpath se resuelve con `:androidApp:licensesRuntimeClasspath` (lock
-  versionado en `tools/licensing/runtime-classpath.txt`); `preBuild` depende de
-  `:androidApp:licensesRuntimeClasspathCheck`, asi que un lock desactualizado
-  rompe el build.
+- El classpath se resuelve con `:androidApp:licensesRuntimeClasspath` (un lock
+  versionado por sabor: `tools/licensing/runtime-classpath-fdroid.txt` y
+  `-playstore.txt`; el catalogo cubre la union). El `preBuild` de cada sabor
+  depende de su `licensesRuntimeClasspathCheck<Sabor>`, asi que un lock
+  desactualizado rompe el build.
 
 ---
 

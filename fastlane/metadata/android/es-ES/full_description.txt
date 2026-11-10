@@ -1,0 +1,18 @@
+Glosso es un curso de idiomas que mide tu pronunciación de verdad. Escucha cada intento, reconoce los sonidos que has hecho de verdad, los compara con los esperados y te dice exactamente qué sonido corregir.
+
+Idiomas: inglés (británico y americano), francés, alemán y ruso.
+
+<b>Qué incluye</b>
+<ul>
+<li>Lecciones con diálogos, historias, vocabulario y ejercicios, con audio.</li>
+<li>Corrección de la pronunciación por sonido: perfecto, cerca o fallado, con el sonido que hiciste junto al esperado.</li>
+<li>Repaso espaciado de las palabras y los sonidos que más te cuestan.</li>
+<li>Puntuación sin conexión opcional: descarga el modelo (unos 350 MB) o impórtalo desde un archivo, y cada intento se puntúa en el móvil con el mismo motor que usa el servidor.</li>
+<li>Descarga lecciones para estudiar sin conexión.</li>
+</ul>
+
+<b>Gratis y de código abierto</b>
+Glosso es gratis para todos, sin plan de pago y sin anuncios. La app y su servidor son software libre bajo la GNU AGPL v3 o posterior. El apoyo es una donación voluntaria.
+
+<b>Red y privacidad</b>
+Las lecciones y, sin el modelo sin conexión, la puntuación de la pronunciación vienen del servidor de Glosso, cuyo código está en el mismo repositorio y se puede alojar por cuenta propia. En esta versión las estadísticas de uso están desactivadas hasta que las actives en Ajustes; si las activas, solo van al servidor de Glosso, sin SDK de terceros. La versión de F-Droid no contiene bibliotecas de Google.

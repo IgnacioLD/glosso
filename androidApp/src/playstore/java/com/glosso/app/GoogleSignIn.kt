@@ -12,8 +12,6 @@ import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.libraries.identity.googleid.GoogleIdTokenParsingException
 
-actual val accountSignIn: AccountSignIn get() = GoogleSignIn
-
 /**
  * Sign in with Google through Android Credential Manager: the system shows the
  * Google accounts already on the device and the learner picks one. No password

@@ -3,7 +3,7 @@
 `shared/src/commonMain/composeResources/files/licenses.json` is the file the app
 actually serves.
 The list is built from the **resolved runtime classpath** (see
-`tools/licensing/runtime-classpath.txt`), not just the hand-declared
+`tools/licensing/runtime-classpath-*.txt`), not just the hand-declared
 dependencies, so these tests fail if:
 
   * any runtime artifact has no entry (unattributed code shipped in the APK), or
