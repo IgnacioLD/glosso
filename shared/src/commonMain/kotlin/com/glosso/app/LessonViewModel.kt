@@ -177,7 +177,7 @@ data class LessonState(
 
 class LessonViewModel(private val services: AppServices) : ViewModel() {
 
-    private val api = services.newApi()
+    private val api = appApi
     private val profiles = ProfileStore.get(services.context)
     private val platform = platformInfo(services.context)
     private val engine = PracticeEngine(

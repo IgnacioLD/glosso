@@ -37,6 +37,7 @@ import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import kotlin.concurrent.Volatile
 import kotlin.time.Clock
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.Serializable
@@ -219,9 +220,36 @@ class GlossoApi(
      * The catalog: which levels and themes exist, and the version of every bank.
      * Revalidated with the server's ETag, so publishing content needs no app
      * update but an unchanged catalog costs one cheap 304.
+     *
+     * Single-flight: several screens open at once on start, and before this each
+     * sent its own request, so an empty cache downloaded the whole catalog once
+     * per screen. A call that waited while another fetch ran takes that result.
      */
-    suspend fun manifest(): ContentManifest =
-        client.get("$baseUrl/v1/content/manifest") {
+    suspend fun manifest(): ContentManifest {
+        val round = manifestRound
+        return manifestLock.withLock {
+            val base = baseUrl
+            val key = "$base|$language"
+            val shared = manifestShared
+            // Only a result for this server and language: a switch may land mid-fetch.
+            if (manifestRound != round && shared != null && shared.first == key) {
+                return@withLock shared.second.getOrThrow()
+            }
+            val result = try {
+                Result.success(fetchManifest(base))
+            } catch (e: CancellationException) {
+                throw e // the caller left; waiters fetch for themselves
+            } catch (e: Exception) {
+                Result.failure(e)
+            }
+            manifestShared = key to result
+            manifestRound++
+            result.getOrThrow()
+        }
+    }
+
+    private suspend fun fetchManifest(base: String): ContentManifest =
+        client.get("$base/v1/content/manifest") {
             headers { append(HttpHeaders.CacheControl, "no-cache") }
             url { parameters.append("language", language) }
         }.body<ContentManifest>().also {
@@ -497,6 +525,14 @@ class GlossoApi(
 
     private val manifestLock = Mutex()
 
+    /** The outcome of the last manifest fetch, shared with calls that waited for it. */
+    @Volatile
+    private var manifestShared: Pair<String, Result<ContentManifest>>? = null
+
+    /** Bumped after every manifest fetch, so a waiting call knows one completed. */
+    @Volatile
+    private var manifestRound = 0
+
     /** The content version currently in use, empty until the manifest is seen. */
     val contentVersion: String get() = assetVersion
 
@@ -524,12 +560,11 @@ class GlossoApi(
     /**
      * Revalidates the manifest and records the served content version, so a cold
      * start that had the old version persisted learns the new one. Cheap: the
-     * server answers 304 when nothing changed. Single-flight, so several screens
-     * calling it on start share one request; a failure (offline) leaves the
-     * persisted version in place.
+     * server answers 304 when nothing changed. Single-flight like [manifest]; a
+     * failure (offline) leaves the persisted version in place.
      */
     suspend fun ensureAssetVersion() {
-        manifestLock.withLock { runCatching { manifest() } }
+        runCatching { manifest() }
     }
 
     fun assetUrl(path: String): String {

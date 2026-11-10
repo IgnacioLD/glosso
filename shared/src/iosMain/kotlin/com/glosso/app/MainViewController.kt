@@ -135,7 +135,6 @@ private object IosHost {
             connectivity = connectivity,
             onDevice = NoOnDeviceScoring,
             downloader = downloader,
-            newApi = newApi,
         )
     }
 
