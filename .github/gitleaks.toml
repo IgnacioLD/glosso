@@ -1,7 +1,7 @@
-# Configuracion de gitleaks para Glosso Pro. Usa las reglas por defecto y anade
+# Configuracion de gitleaks para Glosso. Usa las reglas por defecto y anade
 # exclusiones SOLO por ruta y por patron de relleno. Nunca se mete el valor de un
-# secreto real aqui. Ver docs/OWASP-BACKEND.md (A06/A08).
-title = "Glosso Pro gitleaks"
+# secreto real aqui.
+title = "Glosso gitleaks"
 
 [extend]
 useDefault = true
@@ -12,13 +12,9 @@ description = "Falsos positivos conocidos: placeholders de .env, fixtures de tes
 paths = [
   '''deploy/\.env\.example''',
   '''server/src/test/''',
-  '''docs/SECRETS-AUDIT.*\.md''',
   '''docs/LICENSING.*\.md''',
-  '''docs/LICENSE.*\.md''',
   '''licenses/''',
-  '''COMMERCIAL-LICENSING\.md''',
   '''NOTICE''',
-  '''benchmark/''',
 ]
 regexTarget = "match"
 # Patrones de relleno, no valores reales.
