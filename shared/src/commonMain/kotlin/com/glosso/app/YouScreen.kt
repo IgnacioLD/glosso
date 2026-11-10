@@ -41,15 +41,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.glosso.app.billing.AccessController
-import com.glosso.app.billing.ProFeature
-import com.glosso.app.billing.ProductAccess
-import com.glosso.app.billing.SubscriptionStatus
 import com.glosso.app.designsystem.GlossoColors
 import com.glosso.app.designsystem.GlossoType
 import com.glosso.app.designsystem.Radius
 import com.glosso.app.designsystem.Space
-import com.glosso.app.product.ProductConfigRepository
 import com.glosso.app.resources.*
 import com.glosso.engine.model.PhonemeStatModel
 import com.glosso.engine.phonetics.ErrorRules
@@ -85,40 +80,13 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun YouScreen(
     vm: ProfileViewModel = profileViewModel(),
-    subscription: SubscriptionStatus = SubscriptionStatus.NONE,
-    productAccess: ProductAccess = ProductAccess.Unknown,
-    onShowPaywall: (String?) -> Unit = {},
     onPractice: () -> Unit = {},
 ) {
-    // The phonetic profile is Pro. A free learner gets the same locked card as
-    // every other wall; the data itself is never rendered.
-    val access = remember(subscription, productAccess) { AccessController(subscription, productAccess = productAccess) }
-    if (access.isLocked(ProFeature.PHONETIC_PROFILE)) {
-        Column(Modifier.fillMaxSize().statusBarsPadding()) {
-            TopHeader(
-                title = stringResource(Res.string.you_title),
-            )
-            Box(
-                modifier = Modifier.fillMaxSize().padding(horizontal = Space.gutter),
-                contentAlignment = Alignment.Center,
-            ) {
-                ProLockedCard(
-                    title = stringResource(Res.string.pro_locked_title),
-                    message = stringResource(Res.string.pro_locked_message),
-                    onUnlock = { onShowPaywall(null) },
-                )
-            }
-        }
-        return
-    }
-
     val profile by vm.profile.collectAsState()
     val history by vm.history.collectAsState()
     val progress by ProgressStore.state.collectAsState()
     val baselines by PhonemeHistory.baselines.collectAsState()
     val showPhonetics by PhoneticsPreferences.visible.collectAsState()
-    val betaConfig by ProductConfigRepository.config.collectAsState()
-    val betaAccount by ProductConfigRepository.account.collectAsState()
     val baseline = baselines[LanguagePreferences.current.code]
     val today = todayEpochDay()
     val stats = profile?.stats.orEmpty().sortedWith(compareBy({ it.accuracy }, { it.phoneme }))
@@ -247,13 +215,6 @@ fun YouScreen(
                 Spacer(Modifier.height(Space.x24))
             }
 
-            if (betaConfig.isBeta || betaConfig.beta.active) {
-                item {
-                    BetaBanner(config = betaConfig, account = betaAccount)
-                    Spacer(Modifier.height(Space.x24))
-                }
-            }
-
             if (skills.isNotEmpty()) {
                 item {
                     SectionLabel(stringResource(Res.string.you_competences))
@@ -275,6 +236,13 @@ fun YouScreen(
                 SectionLabel(stringResource(Res.string.you_achievements))
                 Spacer(Modifier.height(Space.x12))
                 AchievementsGrid(progress, signals)
+            }
+
+            if (KOFI_URL.isNotBlank()) {
+                item {
+                    Spacer(Modifier.height(Space.x32))
+                    SupportGlossoRow()
+                }
             }
         }
     }

@@ -64,7 +64,6 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.outlined.CloudDone
 import androidx.compose.material.icons.outlined.CloudOff
 import androidx.compose.material.icons.outlined.DownloadForOffline
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -95,17 +94,11 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.semantics.Role
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.glosso.app.billing.AccessController
-import com.glosso.app.billing.AccessPolicy
-import com.glosso.app.billing.LessonAccess
-import com.glosso.app.billing.ProductAccess
-import com.glosso.app.billing.SubscriptionStatus
 import com.glosso.app.designsystem.GlossoColors
 import com.glosso.app.designsystem.GlossoType
 import com.glosso.app.designsystem.LocalReduceMotion
@@ -125,23 +118,10 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun LessonsScreen(
     vm: LessonViewModel = lessonViewModel(),
-    subscription: SubscriptionStatus = SubscriptionStatus.NONE,
-    productAccess: ProductAccess = ProductAccess.Unknown,
-    onShowPaywall: (String?) -> Unit = {},
 ) {
     val state by vm.state.collectAsState()
     val progress by ProgressStore.state.collectAsState()
     val offline by OfflineStore.state.collectAsState()
-    // The one object the screen asks about access: it fixes the free frontier
-    // from the teaching order and answers per lesson, so no row re-derives it.
-    val access = remember(subscription, productAccess, state.resumeLessonId) {
-        AccessController(
-            status = subscription,
-            inProgressLessonId = state.resumeLessonId,
-            productAccess = productAccess,
-        )
-    }
-    val entitled = access.entitled
     val active = state.active
     var showLevelPicker by remember { mutableStateOf(false) }
     var downloadSheet by remember { mutableStateOf<LessonModel?>(null) }
@@ -222,27 +202,23 @@ fun LessonsScreen(
                     )
 
                 else -> {
-                    // The resume target and its access decision live here, once,
+                    // The resume target lives here, once,
                     // shared by the big hero and the compact bar so the two can
                     // never disagree on what "Continue" does.
                     val today = state.lessons.firstOrNull { it.id == state.resumeLessonId }
-                        ?: AccessPolicy.nextLesson(state.lessons, state.themeOrder, progress.finishedLessons)
+                        ?: CourseOrder.nextLesson(state.lessons, state.themeOrder, progress.finishedLessons)
                     val resumeStep = state.resumeStep
                         .takeIf { today != null && today.id == state.resumeLessonId && it != LessonStep.SUMMARY }
                     // "Start here" is only true of the very first lesson: once the
                     // learner has moved past it, the hero names what comes next.
-                    val first = AccessPolicy.firstLesson(state.lessons, state.themeOrder)
+                    val first = CourseOrder.firstLesson(state.lessons, state.themeOrder)
                     val heroKicker = when {
                         resumeStep != null -> Res.string.lessons_continue_kicker
                         today != null && today.id != first?.id -> Res.string.lessons_next_kicker
                         else -> Res.string.lessons_start_kicker
                     }
-                    val heroLocked = today != null && access.isLocked(today)
-                    val heroFree = today != null && !entitled &&
-                        access.accessOf(today) == LessonAccess.FREE
                     val openToday: () -> Unit = {
                         when {
-                            heroLocked -> onShowPaywall(today.level)
                             resumeStep != null -> vm.resume()
                             else -> today?.let { vm.openLesson(it) }
                         }
@@ -273,7 +249,6 @@ fun LessonsScreen(
                                 lesson = today,
                                 kicker = heroKicker,
                                 step = resumeStep,
-                                locked = heroLocked,
                                 onOpen = openToday,
                             )
                         }
@@ -293,16 +268,14 @@ fun LessonsScreen(
                                         lesson = today,
                                         kicker = heroKicker,
                                         step = resumeStep,
-                                        locked = heroLocked,
-                                        free = heroFree,
                                         onOpen = openToday,
                                     )
                                 }
                             }
                             val byTheme = state.lessons.groupBy { it.theme }
-                            AccessPolicy.blockOrder(state.lessons, state.themeOrder)
+                            CourseOrder.blockOrder(state.lessons, state.themeOrder)
                                 .forEach { theme ->
-                                    val lessons = byTheme[theme].orEmpty().sortedWith(AccessPolicy.lessonOrder)
+                                    val lessons = byTheme[theme].orEmpty().sortedWith(CourseOrder.lessonOrder)
                                     item(key = "section:$theme") {
                                         UnitHeader(
                                             title = themeLabel(theme, state.themeLabels),
@@ -314,16 +287,12 @@ fun LessonsScreen(
                                         val finished = lesson.id in progress.finishedLessons
                                         val inProgressStep = state.resumeStep
                                             .takeIf { lesson.id == state.resumeLessonId && !finished }
-                                        val locked = access.isLocked(lesson)
-                                        val free = !entitled && access.accessOf(lesson) == LessonAccess.FREE
-                                        val canDownload = access.canDownload(lesson)
                                         StaggeredAppear(index = index) {
                                             PathRow(
                                                 first = index == 0,
                                                 last = index == lessons.lastIndex,
                                                 finished = finished,
                                                 stepFraction = inProgressStep?.let { stepFraction(lessonSteps(lesson), it) },
-                                                locked = locked,
                                             ) {
                                                 LessonRow(
                                                     lesson = lesson,
@@ -331,15 +300,8 @@ fun LessonsScreen(
                                                     finished = finished,
                                                     step = inProgressStep,
                                                     offline = offline,
-                                                    locked = locked,
-                                                    showFreeBadge = free,
-                                                    onClick = {
-                                                        if (locked) onShowPaywall(lesson.level) else vm.openLesson(lesson)
-                                                    },
-                                                    onDownload = {
-                                                        if (canDownload) downloadSheet = lesson
-                                                        else onShowPaywall(lesson.level)
-                                                    },
+                                                    onClick = { vm.openLesson(lesson) },
+                                                    onDownload = { downloadSheet = lesson },
                                                 )
                                             }
                                         }
@@ -378,7 +340,6 @@ private fun ContinueBar(
     lesson: LessonModel,
     kicker: StringResource,
     step: LessonStep?,
-    locked: Boolean,
     onOpen: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -426,11 +387,7 @@ private fun ContinueBar(
                     ) {
                         Text(
                             text = stringResource(
-                                when {
-                                    locked -> Res.string.lessons_unlock_with_pro
-                                    step != null -> Res.string.lessons_continue
-                                    else -> Res.string.lessons_start
-                                },
+                                if (step != null) Res.string.lessons_continue else Res.string.lessons_start,
                             ),
                             style = MaterialTheme.typography.labelLarge,
                         )
@@ -451,20 +408,11 @@ private fun TodayHeroCard(
     lesson: LessonModel,
     kicker: StringResource,
     step: LessonStep?,
-    locked: Boolean,
-    free: Boolean,
     onOpen: () -> Unit,
 ) {
     LessonHeroSurface(
         kicker = stringResource(kicker),
-        tags = {
-            if (locked) {
-                GlossoTag("Pro")
-            } else {
-                GlossoTag(baseLabel(lesson))
-                if (free) FreeTag()
-            }
-        },
+        tags = { GlossoTag(baseLabel(lesson)) },
     ) {
         LessonHeroTitle(lesson.title, lesson.objective)
         if (step != null) {
@@ -473,13 +421,7 @@ private fun TodayHeroCard(
         }
         Spacer(Modifier.height(Space.x24))
         PrimaryButton(
-            text = stringResource(
-                when {
-                    locked -> Res.string.lessons_unlock_with_pro
-                    step != null -> Res.string.lessons_continue
-                    else -> Res.string.lessons_start
-                },
-            ),
+            text = stringResource(if (step != null) Res.string.lessons_continue else Res.string.lessons_start),
             onClick = onOpen,
         )
     }
@@ -508,8 +450,8 @@ private fun UnitHeader(title: String, done: Int, total: Int) {
 /**
  * One stop on the course path: a rail runs down the left edge through every
  * lesson of a unit, and each lesson sits on a node that says its state - a
- * filled brass seal when done, a ring filling up while in progress, a lock
- * past the frontier, an open circle still to do.
+ * filled brass seal when done, a ring filling up while in progress, an open
+ * circle still to do.
  */
 @Composable
 private fun PathRow(
@@ -517,7 +459,6 @@ private fun PathRow(
     last: Boolean,
     finished: Boolean,
     stepFraction: Float?,
-    locked: Boolean,
     content: @Composable () -> Unit,
 ) {
     val rail = MaterialTheme.colorScheme.outline
@@ -543,7 +484,7 @@ private fun PathRow(
                     .size(28.dp),
                 contentAlignment = Alignment.Center,
             ) {
-                PathNode(finished = finished, stepFraction = stepFraction, locked = locked)
+                PathNode(finished = finished, stepFraction = stepFraction)
             }
         }
         Box(Modifier.weight(1f)) { content() }
@@ -551,7 +492,7 @@ private fun PathRow(
 }
 
 @Composable
-private fun PathNode(finished: Boolean, stepFraction: Float?, locked: Boolean) {
+private fun PathNode(finished: Boolean, stepFraction: Float?) {
     val bg = MaterialTheme.colorScheme.background
     val outline = MaterialTheme.colorScheme.outline
     val primary = MaterialTheme.colorScheme.primary
@@ -565,18 +506,6 @@ private fun PathNode(finished: Boolean, stepFraction: Float?, locked: Boolean) {
                 contentDescription = stringResource(Res.string.lessons_finished),
                 tint = MaterialTheme.colorScheme.onPrimary,
                 modifier = Modifier.size(16.dp),
-            )
-        }
-
-        locked -> Box(
-            Modifier.size(28.dp).clip(CircleShape).background(bg).border(1.dp, outline, CircleShape),
-            contentAlignment = Alignment.Center,
-        ) {
-            Icon(
-                Icons.Outlined.Lock,
-                contentDescription = stringResource(Res.string.lessons_locked),
-                tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.size(14.dp),
             )
         }
 
@@ -664,8 +593,6 @@ private fun LessonRow(
     finished: Boolean,
     step: LessonStep?,
     offline: OfflineState,
-    locked: Boolean,
-    showFreeBadge: Boolean,
     onClick: () -> Unit,
     onDownload: () -> Unit,
 ) {
@@ -680,10 +607,6 @@ private fun LessonRow(
         Column(Modifier.weight(1f)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 BaseTag(baseLabel(lesson))
-                if (showFreeBadge) {
-                    Spacer(Modifier.width(Space.x8))
-                    FreeTag()
-                }
                 Spacer(Modifier.width(Space.x12))
                 Text(
                     // The unit header above already names the theme.
@@ -699,8 +622,7 @@ private fun LessonRow(
                 Text(
                     text = lesson.title,
                     style = MaterialTheme.typography.titleLarge,
-                    color = if (locked) MaterialTheme.colorScheme.onSurfaceVariant
-                    else MaterialTheme.colorScheme.onSurface,
+                    color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f),
                 )
                 Spacer(Modifier.width(Space.x8))
@@ -757,30 +679,12 @@ private fun BaseTag(label: String) {
     GlossoTag(label)
 }
 
-/** Marks a lesson inside the free block, so the frontier is visible. */
-@Composable
-private fun FreeTag() {
-    Surface(
-        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
-        shape = RoundedCornerShape(Radius.full),
-    ) {
-        Text(
-            text = stringResource(Res.string.lesson_free_badge),
-            modifier = Modifier.padding(horizontal = Space.x12, vertical = Space.x4),
-            style = MaterialTheme.typography.labelMedium,
-            fontWeight = FontWeight.Bold,
-            color = GlossoColors.accentText,
-        )
-    }
-}
-
 /**
  * Swallows every pointer event that reaches this surface. Used as a guard layer
  * between an overlay (the lesson player, the first-run welcome) and the screen
  * behind it: without it, a tap or drag on an empty area of the overlay - the
  * header, a gap between lines, the padding around the action bar - falls through
- * to whatever row sits behind, opening another lesson or the paywall by
- * accident. Kept as a sibling under the overlay so the overlay's own buttons and
+ * to whatever row sits behind, opening another lesson by accident. Kept as a sibling under the overlay so the overlay's own buttons and
  * scrolling are never starved of events.
  */
 internal fun Modifier.consumePointerEvents(): Modifier = pointerInput(Unit) {

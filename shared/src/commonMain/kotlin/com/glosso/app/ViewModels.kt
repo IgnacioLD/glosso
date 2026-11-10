@@ -51,9 +51,3 @@ fun profileViewModel(): ProfileViewModel {
     val services = LocalAppServices.current
     return viewModel { ProfileViewModel(services.context) }
 }
-
-@Composable
-fun subscriptionViewModel(): SubscriptionViewModel {
-    val services = LocalAppServices.current
-    return viewModel { SubscriptionViewModel(services.subscriptions()) }
-}

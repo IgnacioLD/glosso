@@ -16,12 +16,6 @@ expect fun formatDecimal(value: Double, decimals: Int, languageTag: String? = nu
 expect fun localeLanguage(languageTag: String? = null): String
 
 /**
- * The long, localized date of an ISO-8601 instant read in UTC ("December 31,
- * 2027", "31 de diciembre de 2027"), or null when [iso] is not one.
- */
-expect fun formatLongUtcDate(iso: String): String?
-
-/**
  * Weekday, day and month of [epochDay] in the order [languageTag] writes them
  * ("Friday, September 25", "viernes, 25 de septiembre").
  */

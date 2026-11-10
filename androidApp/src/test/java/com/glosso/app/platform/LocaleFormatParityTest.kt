@@ -2,14 +2,10 @@ package com.glosso.app.platform
 
 import android.text.format.DateFormat
 import com.glosso.app.formatBytes
-import com.glosso.app.product.formatBetaEndDate
 import java.text.NumberFormat
 import java.time.DayOfWeek
-import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.time.format.TextStyle
 import java.util.Locale
 import org.junit.After
@@ -85,42 +81,6 @@ class LocaleFormatParityTest {
         // 1.25 GiB: half-even rounding, as java.text always did.
         assertEquals("1,2 Go", formatBytes(1_342_177_280L, "fr"))
         assertEquals("512 B", formatBytes(512L, "es"))
-    }
-
-    /** `formatBetaEndDate` as the Android app had it (BetaEndDate.kt before the move). */
-    private fun legacyBetaEndDate(iso: String?): String? {
-        val value = iso?.takeIf { it.isNotBlank() } ?: return null
-        return runCatching {
-            Instant.parse(value).atZone(ZoneOffset.UTC).toLocalDate()
-                .format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))
-        }.getOrNull()
-    }
-
-    @Test
-    fun `the beta end date reads as before in every app language`() {
-        val dates = listOf(
-            "2027-12-31T23:59:59Z", "2026-12-31T23:59:59Z", "2027-01-01T00:00:00Z", "2027-06-15T12:30:00Z",
-            "2028-02-29T10:00:00Z", "2027-12-31T23:59:59.999Z", null, "", "  ", "not-a-date", "2027-12-31",
-            "2027-12-31T23:59:59+01:00",
-        )
-        for (tag in locales) {
-            Locale.setDefault(Locale.forLanguageTag(tag))
-            for (iso in dates) assertEquals("$iso in $tag", legacyBetaEndDate(iso), formatBetaEndDate(iso))
-        }
-    }
-
-    @Test
-    fun `the beta end date fixed strings`() {
-        val cases = mapOf(
-            "en-US" to "December 31, 2027",
-            "es-ES" to "31 de diciembre de 2027",
-            "fr-FR" to "31 décembre 2027",
-            "de-DE" to "31. Dezember 2027",
-        )
-        for ((tag, expected) in cases) {
-            Locale.setDefault(Locale.forLanguageTag(tag))
-            assertEquals(tag, expected, formatBetaEndDate("2027-12-31T23:59:59Z"))
-        }
     }
 
     @Test

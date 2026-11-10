@@ -215,35 +215,6 @@ data class ThemeSuggestionResponse(
 )
 
 /**
- * Server-side entitlement verification.
- *
- * A client can always be tampered with, so it can never be the source of truth
- * for entitlement: it sends the Play [purchaseToken] here and the server validates
- * it against the Google Play Developer API (Android Publisher) with a service
- * account. The response carries the verdict and its expiry. A signed offline
- * entitlement token is a separate, later step (see docs/BILLING-E2E.md); today
- * [BillingVerifyResponse.entitlementToken] is null.
- */
-@Serializable
-data class BillingVerifyRequest(
-    val productId: String,
-    val purchaseToken: String,
-    val packageName: String,
-    /** Anonymous, per-install id; never a hardware identifier. */
-    val deviceId: String? = null,
-)
-
-@Serializable
-data class BillingVerifyResponse(
-    val entitled: Boolean,
-    /** NONE, TRIAL, ACTIVE, GRACE, CANCELED or PENDING. */
-    val status: String,
-    /** Reserved for a future signed offline entitlement token; null today. */
-    val entitlementToken: String? = null,
-    val expiresAtMillis: Long? = null,
-)
-
-/**
  * One sound's aggregate in a profile sync. It carries only numbers the on-device
  * scorer already produced: never audio, never the reference text, never a note.
  * [lastSeen] is an ISO-8601 instant; the server stores it, not the client.
@@ -400,24 +371,4 @@ data class GenerationStatusResponse(
     val depth: Long,
     val pending: Long,
     val jobs: Map<String, Int>,
-)
-
-/**
- * Pub/Sub push envelope Google sends to the RTDN webhook (`POST /v1/billing/rtdn`).
- * [PubSubMessage.data] is the base64-encoded DeveloperNotification JSON that
- * carries subscription notifications (renewed, canceled, in grace, on hold,
- * revoked, price change). See docs/BILLING-E2E.md.
- */
-@Serializable
-data class PubSubPushEnvelope(
-    val message: PubSubMessage,
-    val subscription: String? = null,
-)
-
-@Serializable
-data class PubSubMessage(
-    val data: String,
-    val messageId: String? = null,
-    val publishTime: String? = null,
-    val attributes: Map<String, String> = emptyMap(),
 )

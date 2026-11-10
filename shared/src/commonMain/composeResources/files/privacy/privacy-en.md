@@ -32,7 +32,7 @@ The server **does not store the IP** in the events table. Server events
 
 ## Account: Continue with Google (optional)
 
-It carries the account (and the Beta Founder status) to a new phone. It is
+It carries the account to a new phone. It is
 optional; the app works the same without it.
 
 - **Continue with Google**: the user picks a Google account on the phone
@@ -83,9 +83,8 @@ optional; the app works the same without it.
 - The events the app sends: app opened, session length, onboarding started and
   finished, lesson started, finished or left, exercise finished (kind, a
   10-point score band, mastered or not), pronunciation attempt scored on the
-  phone (score band, mastered or not, ids of the error rules), microphone
-  permission denied, paywall seen, Pro button tapped and purchase started or
-  failed.
+  phone (score band, mastered or not, ids of the error rules) and microphone
+  permission denied.
 
 From app 2.5.4, the app also sends:
 

@@ -5,20 +5,4 @@
     <string name="download_channel_name">Téléchargements</string>
     <string name="download_channel_description">Continue le téléchargement quand vous quittez l\'app.</string>
 
-    <!-- Messages d\'erreur de facturation (visibles dans le paywall) -->
-    <string name="billing_error_offline">Pas de connexion à Google Play. Une nouvelle tentative suivra.</string>
-    <string name="billing_error_reconnect">Impossible de se connecter à Google Play.</string>
-    <string name="billing_error_connecting">Connexion à Google Play en cours. Réessaie dans un instant.</string>
-    <string name="billing_error_not_configured">L\'abonnement n\'est pas configuré dans Google Play.</string>
-    <string name="billing_error_no_offers">L\'abonnement n\'a pas d\'offres actives.</string>
-    <string name="billing_error_not_available_yet">L\'abonnement n\'est pas encore disponible.</string>
-    <string name="billing_error_confirm">L\'achat n\'a pas pu être confirmé. Une nouvelle tentative suivra.</string>
-    <string name="billing_error_network">Pas de connexion. Vérifie ton réseau et réessaie.</string>
-    <string name="billing_error_service_unavailable">Google Play n\'est pas disponible pour le moment.</string>
-    <string name="billing_error_service_disconnected">La connexion à Google Play a été perdue.</string>
-    <string name="billing_error_unavailable">Les achats ne sont pas disponibles sur cet appareil ou ce compte.</string>
-    <string name="billing_error_item_unavailable">L\'abonnement n\'est pas disponible dans ce pays ou ce compte.</string>
-    <string name="billing_error_developer">Erreur de configuration de l\'achat. Vérifie la Play Console.</string>
-    <string name="billing_error_already_owned">Tu as déjà cet abonnement.</string>
-    <string name="billing_error_generic">L\'opération avec Google Play n\'a pas pu aboutir.</string>
 </resources>

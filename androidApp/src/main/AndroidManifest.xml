@@ -5,8 +5,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <!-- Play Billing: the Pro subscription is purchased through Google Play. -->
-    <uses-permission android:name="com.android.vending.BILLING" />
     <!-- Downloads started by the learner keep going when the app is left or the
          screen is off: a dataSync foreground service. The runtime notification
          permission is requested in context, when the first download starts. -->

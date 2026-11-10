@@ -16,18 +16,18 @@ Revisado el repo antes de escribir codigo. Lo que hay hoy:
 
 | Pieza | Estado real |
 |---|---|
-| Backend | `:server` Ktor 3.0.3, un `Application.kt`. Rutas de scoring, contenido, billing, admin. |
+| Backend | `:server` Ktor 3.0.3, un `Application.kt`. Rutas de scoring, contenido, admin. |
 | Content Pool | **No existe** como concepto del brief. El contenido publicado vive en SQLite `content.db` por idioma (`ContentDb.kt`), solo lectura, escrito por `tools/content/pipeline.py`. |
 | Generacion de contenido | Fase 1 (`feat/need-engine`, PR #61) cubre perfil -> necesidad -> need class -> demanda y ya esta **mergeada** en `main`. Fases 2/3 (Content Pool, cola Redis, worker) **no existen todavia**. |
 | Almacenamiento | **No hay R2/S3.** Solo el volumen de assets `/srv/glosso/assets` y la cache en disco del pipeline. |
-| Configuracion | Variables de entorno leidas sueltas en `AnalyticsStore`, `BillingService`, etc. No habia `.env.example`. |
+| Configuracion | Variables de entorno leidas sueltas en `AnalyticsStore`, etc. No habia `.env.example`. |
 | Worker / queue | **No existen.** Ni Redis, ni scheduler, ni streams. |
 | Redis | **No existe** (ni dependencia, ni compose). |
 | Abstraccion TTS previa | **No existe.** `elevenlabs`/`cartesia` solo aparecian en documentacion. El audio offline lo hace Kokoro/Chatterbox en `tools/content/pipeline.py`. |
 
 Conclusion: no habia una abstraccion que reutilizar. Se implementa una nueva,
 aislada en `com.glosso.server.tts`, sin tocar el plano de senal
-(`/v1/score`, `/v1/content/*`, `/assets`), billing ni `:engine`.
+(`/v1/score`, `/v1/content/*`, `/assets`) ni `:engine`.
 
 ---
 

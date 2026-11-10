@@ -2,15 +2,11 @@ package com.glosso.server
 
 import com.glosso.server.api.GoogleSignInRequest
 import com.glosso.server.product.AccountSecret
-import com.glosso.server.product.BetaConfig
 import com.glosso.server.product.ClientConfig
-import com.glosso.server.product.EntitlementService
-import com.glosso.server.product.FounderBenefitConfig
 import com.glosso.server.product.GoogleTokens
-import com.glosso.server.product.InMemoryEntitlementStore
+import com.glosso.server.product.InMemoryAccountStore
 import com.glosso.server.product.NimbusGoogleIdTokenVerifier
 import com.glosso.server.product.ProductConfig
-import com.glosso.server.product.ProductMode
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
@@ -28,6 +24,7 @@ import java.nio.file.Files
 import java.time.Instant
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
 import kotlinx.serialization.json.Json
@@ -38,8 +35,7 @@ import kotlinx.serialization.json.jsonPrimitive
 /**
  * Sign in with Google end to end through HTTP: nonce, a signed ID token (with
  * a local key standing in for Google's) and the account following the person
- * to a new phone. The founder window is closed, so a founder status on the new
- * phone can only come from the sign-in.
+ * to a new phone.
  */
 class GoogleSignInRouteTest {
 
@@ -47,38 +43,22 @@ class GoogleSignInRouteTest {
     private val secret = AccountSecret(ByteArray(32) { 4 })
     private val verifier = NimbusGoogleIdTokenVerifier(setOf(GoogleTokens.CLIENT_ID), GoogleTokens.keys(google))
 
-    private val config = ProductConfig(
-        mode = ProductMode.FREE,
-        beta = BetaConfig(
-            endDate = ProductConfig.DEFAULT_END_DATE,
-            founderEnabled = true,
-            founderBenefit = FounderBenefitConfig(
-                kind = ProductConfig.PRO_LIFETIME,
-                value = null,
-                until = null,
-                label = ProductConfig.DEFAULT_FOUNDER_LABEL,
-            ),
-            founderUntil = Instant.parse("2020-01-01T00:00:00Z"),
-        ),
-        flags = emptyMap(),
-        client = ClientConfig(2210, 2219, false),
-    )
+    private val config = ProductConfig(flags = emptyMap(), client = ClientConfig(2210, 2219, false))
 
-    /** A founder made while the window was open, on "old-phone". */
-    private fun founderStore(): InMemoryEntitlementStore {
-        val store = InMemoryEntitlementStore()
-        val open = config.copy(beta = config.beta.copy(founderUntil = ProductConfig.DEFAULT_FOUNDER_UNTIL))
-        EntitlementService(store, open, clock = { Instant.parse("2026-03-01T00:00:00Z") }).identify("old-phone")
+    /** An account first seen on "old-phone". */
+    private fun storeWithOldPhone(): InMemoryAccountStore {
+        val store = InMemoryAccountStore()
+        store.upsertUser("old-phone", Instant.parse("2026-03-01T00:00:00Z"))
         return store
     }
 
-    private fun ApplicationTestBuilder.app(store: InMemoryEntitlementStore, withGoogle: Boolean = true) {
+    private fun ApplicationTestBuilder.app(store: InMemoryAccountStore, withGoogle: Boolean = true) {
         application {
             module(
                 Files.createTempDirectory("glosso-google-assets").toFile(),
                 adminToken = null,
                 analytics = null,
-                entitlementStore = store,
+                accountStore = store,
                 productConfig = config,
                 accountSecret = secret,
                 googleVerifier = verifier.takeIf { withGoogle },
@@ -103,8 +83,9 @@ class GoogleSignInRouteTest {
         }
 
     @Test
-    fun `the founder signs in with Google on a new phone and keeps PRO for life`() = testApplication {
-        val store = founderStore()
+    fun `signing in with Google on a new phone moves the account there`() = testApplication {
+        val store = storeWithOldPhone()
+        val account = assertNotNull(store.identityOf("old-phone"))
         app(store)
         val client = createClient { install(ContentNegotiation) { json() } }
 
@@ -115,12 +96,10 @@ class GoogleSignInRouteTest {
         val moved = signIn(client, "new-phone", GoogleTokens.sign(google, "sub-1", nonce(client, "new-phone")))
         assertEquals(HttpStatusCode.OK, moved.status, moved.bodyAsText())
         val body = moved.bodyAsText()
-        assertTrue(body.contains("\"betaFounder\": true"), body)
-        assertTrue(body.contains("\"plan\": \"PRO\""), body)
-        assertTrue(body.contains("\"planSource\": \"LIFETIME\""), body)
         assertEquals("no-store", moved.headers["Cache-Control"])
         // No personal data from the token reaches the answer.
         assertTrue("learner@example.com" !in body, body)
+        assertEquals(account.id, store.identityOf("new-phone")?.id)
         assertNull(store.identityOf("old-phone"))
         assertEquals(listOf("google"), linkedAccounts(body))
         // The old phone is a fresh anonymous user now: /v1/me says it is linked
@@ -131,7 +110,7 @@ class GoogleSignInRouteTest {
 
     @Test
     fun `a token minted for another device is refused`() = testApplication {
-        app(founderStore())
+        app(storeWithOldPhone())
         val client = createClient { install(ContentNegotiation) { json() } }
 
         val stolen = GoogleTokens.sign(google, "sub-1", nonce(client, "old-phone"))
@@ -144,7 +123,7 @@ class GoogleSignInRouteTest {
 
     @Test
     fun `a phone linked to one Google account answers conflict for another`() = testApplication {
-        app(founderStore())
+        app(storeWithOldPhone())
         val client = createClient { install(ContentNegotiation) { json() } }
 
         signIn(client, "old-phone", GoogleTokens.sign(google, "sub-1", nonce(client, "old-phone")))
@@ -155,7 +134,7 @@ class GoogleSignInRouteTest {
 
     @Test
     fun `sign-in is unavailable without a Google client id`() = testApplication {
-        app(founderStore(), withGoogle = false)
+        app(storeWithOldPhone(), withGoogle = false)
         val client = createClient { install(ContentNegotiation) { json() } }
 
         assertEquals(
@@ -167,7 +146,7 @@ class GoogleSignInRouteTest {
 
     @Test
     fun `sign-in requires a device id and a token`() = testApplication {
-        app(founderStore())
+        app(storeWithOldPhone())
         val client = createClient { install(ContentNegotiation) { json() } }
 
         assertEquals(HttpStatusCode.BadRequest, client.post("/v1/auth/google/nonce").status)

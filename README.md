@@ -8,14 +8,16 @@ exactly which sound to fix. Android first, with an iOS app in progress. Language
 The same phonetic engine runs on the phone (offline, ONNX Runtime) and on the server, so a
 take gets the same score in both places.
 
+Glosso is free for everyone, with no paid tier. Support is a voluntary donation.
+
 ## Repository layout
 
 | Module | What it is |
 |---|---|
 | `:engine` | Kotlin Multiplatform phonetic engine: G2P, wav2vec2 phoneme recognition (ONNX), speech gate, phonetic comparison and feedback. The only place a score is computed. |
-| `:server` | Ktor API (`/v1/score`, content, assets, product config, billing verification). Reuses `:engine`. |
+| `:server` | Ktor API (`/v1/score`, content, assets, product config, accounts). Reuses `:engine`. |
 | `:shared` | The app itself in Compose Multiplatform (screens, view models, stores, API client), shared by Android and iOS. |
-| `:androidApp` | Android shell: activity, on-device scorer, download service, Play Billing. |
+| `:androidApp` | Android shell: activity, on-device scorer, download service. |
 | `iosApp/` | Xcode project that runs the shared app on iOS. |
 | `deploy/` | Dockerfile, Compose stack, Caddy and monitoring config for self-hosting the server. |
 | `tools/` | Asset download, scoring bench, score parity, content pipeline and license tooling. |
@@ -71,7 +73,8 @@ that are not part of the public repository.
 - `docs/ENGINE-BENCHMARK.md`, `docs/SCORING-DECISION-LAYER.md`, `docs/PHONEME_PROFILE.md` - scoring
 - `docs/MULTI-ACCENT.md` - scoring against whole accent systems
 - `docs/CONTENT-ENGINE.md`, `docs/CONTENT_POOL.md`, `docs/TTS-LAYER.md`, `docs/TTS-CACHE.md` - content and audio generation
-- `docs/PRODUCT-CONFIG-CONTRACT.md`, `docs/BILLING.md`, `docs/GOOGLE-SIGNIN.md` - plans, billing and accounts
+- `docs/PRODUCT-CONFIG-CONTRACT.md`, `docs/GOOGLE-SIGNIN.md` - product config and accounts
+- `docs/BILLING.md` - why there is no paid tier
 - `docs/IOS-DEV.md`, `docs/IOS-ENGINE.md` - iOS
 - `docs/PRIVACY.md`, `docs/LICENSING.md` - privacy and third-party licensing
 

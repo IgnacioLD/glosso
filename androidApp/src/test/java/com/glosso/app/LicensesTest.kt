@@ -56,10 +56,10 @@ class LicensesTest {
     }
 
     @Test
-    fun `google paid sdks keep their non-Apache licence`() {
+    fun `google sdks keep their non-Apache licence`() {
         val byId = catalog().components.associateBy { it.id }
-        assertEquals("Android-SDK", byId.getValue("com.android.billingclient:billing").license)
-        assertEquals("Play-Core-ToS", byId.getValue("com.google.android.play:review-ktx").license)
+        assertFalse("Play Billing is no longer linked", "com.android.billingclient:billing" in byId)
+        assertEquals("Android-SDK", byId.getValue("com.google.android.gms:play-services-auth").license)
     }
 
     @Test

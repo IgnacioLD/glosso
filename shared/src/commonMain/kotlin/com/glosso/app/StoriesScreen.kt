@@ -21,7 +21,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.AutoStories
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -37,9 +36,6 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.glosso.app.audio.PieceState
-import com.glosso.app.billing.AccessController
-import com.glosso.app.billing.ProductAccess
-import com.glosso.app.billing.SubscriptionStatus
 import com.glosso.app.designsystem.Space
 import com.glosso.app.resources.*
 import com.glosso.engine.model.ExerciseModel
@@ -50,15 +46,9 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun StoriesScreen(
     vm: StoriesViewModel = storiesViewModel(),
-    subscription: SubscriptionStatus = SubscriptionStatus.NONE,
-    productAccess: ProductAccess = ProductAccess.Unknown,
-    onShowPaywall: (String?) -> Unit = {},
     onBack: () -> Unit,
 ) {
     val state by vm.state.collectAsState()
-    // One gate for the whole list: each story carries its own CEFR level and the
-    // controller answers per item, so no row re-derives the frontier.
-    val access = remember(subscription, productAccess) { AccessController(subscription, productAccess = productAccess) }
 
     val story = state.reading
     if (story != null) {
@@ -99,13 +89,12 @@ fun StoriesScreen(
                 contentPadding = PaddingValues(start = Space.gutter, end = Space.gutter, bottom = listBottomPadding()),
             ) {
                 itemsIndexed(state.stories, key = { _, it -> it.id }) { index, item ->
-                    val locked = access.isLocked(item)
-                    val open = { if (locked) onShowPaywall(item.level) else vm.openStory(item) }
+                    val open = { vm.openStory(item) }
                     StaggeredAppear(index = index) {
                         if (index == 0) {
-                            StoryRow(story = item, labels = state.themeLabels, locked = locked, onClick = open)
+                            StoryRow(story = item, labels = state.themeLabels, onClick = open)
                         } else {
-                            StoryCompactRow(story = item, labels = state.themeLabels, locked = locked, onClick = open)
+                            StoryCompactRow(story = item, labels = state.themeLabels, onClick = open)
                         }
                     }
                     Hairline()
@@ -119,7 +108,6 @@ fun StoriesScreen(
 private fun StoryRow(
     story: StoryModel,
     labels: Map<String, String>,
-    locked: Boolean,
     onClick: () -> Unit,
 ) {
     Column(
@@ -136,15 +124,6 @@ private fun StoryRow(
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
-            if (locked) {
-                Spacer(Modifier.width(Space.x8))
-                Icon(
-                    imageVector = Icons.Outlined.Lock,
-                    contentDescription = stringResource(Res.string.lessons_unlock_with_pro),
-                    tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                    modifier = Modifier.size(14.dp),
-                )
-            }
         }
         Spacer(Modifier.height(Space.x8))
         Text(
@@ -170,7 +149,6 @@ private fun StoryRow(
 private fun StoryCompactRow(
     story: StoryModel,
     labels: Map<String, String>,
-    locked: Boolean,
     onClick: () -> Unit,
 ) {
     val interaction = remember { MutableInteractionSource() }
@@ -196,15 +174,6 @@ private fun StoryCompactRow(
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier.weight(1f, fill = false),
                 )
-                if (locked) {
-                    Spacer(Modifier.width(Space.x8))
-                    Icon(
-                        imageVector = Icons.Outlined.Lock,
-                        contentDescription = stringResource(Res.string.lessons_unlock_with_pro),
-                        tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.size(14.dp),
-                    )
-                }
             }
             Spacer(Modifier.height(Space.x4))
             Text(

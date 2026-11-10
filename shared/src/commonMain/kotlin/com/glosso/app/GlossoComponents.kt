@@ -50,7 +50,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.outlined.CloudOff
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -940,50 +939,6 @@ internal fun OfflineBanner(
                     nudge?.invoke()
                 }
             }
-        }
-    }
-}
-
-/**
- * The one shape a locked Pro surface takes: a lock, the plain reason and the CTA
- * that opens the paywall. Every gated surface uses it, so the wall reads the same
- * wherever the learner meets it and no screen invents its own.
- */
-@Composable
-internal fun ProLockedCard(
-    title: String,
-    message: String,
-    onUnlock: () -> Unit,
-    modifier: Modifier = Modifier,
-    cta: String = stringResource(Res.string.lessons_unlock_with_pro),
-) {
-    Surface(
-        color = MaterialTheme.colorScheme.surface,
-        shape = RoundedCornerShape(Radius.l),
-        border = cardBorder(),
-        modifier = modifier.fillMaxWidth(),
-    ) {
-        Column(Modifier.padding(Space.x20), horizontalAlignment = Alignment.Start) {
-            Icon(
-                imageVector = Icons.Outlined.Lock,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(26.dp),
-            )
-            Spacer(Modifier.height(Space.x12))
-            Text(
-                text = title,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Spacer(Modifier.height(Space.x4))
-            Text(
-                text = message,
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(Modifier.height(Space.x20))
-            PrimaryButton(text = cta, onClick = onUnlock)
         }
     }
 }

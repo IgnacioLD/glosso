@@ -45,11 +45,10 @@ class TestRuntimeCoverage(unittest.TestCase):
         unresolved = collect.unresolved_dependencies()
         self.assertEqual(unresolved, [], f"runtime artifacts with no resolvable licence: {unresolved[:20]}")
 
-    def test_transitive_google_runtime_arrives_through_billing(self):
-        # Regression: play-services/firebase enter through Billing and are shipped.
+    def test_transitive_google_runtime_is_attributed(self):
+        # Regression: play-services enter transitively through Google sign-in and are shipped.
         ids = {c["id"] for c in _asset()["components"]}
         self.assertTrue(any(i.startswith("com.google.android.gms:play-services") for i in ids))
-        self.assertTrue(any(i.startswith("com.google.android.datatransport:") for i in ids))
 
     def test_every_declared_dependency_has_an_entry(self):
         declared = collect.declared_dependency_ids()
@@ -110,8 +109,8 @@ class TestAssetIntegrity(unittest.TestCase):
 
     def test_google_sdks_are_not_mislabelled_as_apache(self):
         by_id = {c["id"]: c for c in _asset()["components"]}
-        self.assertEqual(by_id["com.android.billingclient:billing"]["license"], "Android-SDK")
-        self.assertEqual(by_id["com.google.android.play:review-ktx"]["license"], "Play-Core-ToS")
+        self.assertEqual(by_id["com.google.android.gms:play-services-auth"]["license"], "Android-SDK")
+        self.assertNotIn("com.android.billingclient:billing", by_id)
 
     def test_distributed_media_and_model_are_present(self):
         ids = {c["id"] for c in _asset()["components"]}

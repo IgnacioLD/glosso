@@ -1,19 +1,14 @@
 package com.glosso.app.platform
 
-import android.app.Activity
 import android.app.LocaleManager
 import android.content.Context
-import android.content.ContextWrapper
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.os.LocaleList
 import android.provider.Settings
-import android.view.Window
-import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalContext
 
@@ -36,26 +31,6 @@ actual fun rememberReduceMotion(): Boolean {
 }
 
 @Composable
-actual fun ScreenshotProtection() {
-    val context = LocalContext.current
-    DisposableEffect(context) {
-        val window = context.findActivity()?.window
-        window.setScreenshotProtected(true)
-        onDispose { window.setScreenshotProtected(false) }
-    }
-}
-
-/** `Window.FLAG_SECURE` on/off; a null window is a no-op. */
-fun Window?.setScreenshotProtected(protected: Boolean) {
-    if (this == null) return
-    if (protected) {
-        addFlags(WindowManager.LayoutParams.FLAG_SECURE)
-    } else {
-        clearFlags(WindowManager.LayoutParams.FLAG_SECURE)
-    }
-}
-
-@Composable
 actual fun rememberPlatformActions(): PlatformActions {
     val context = LocalContext.current
     return remember(context) { AndroidPlatformActions(context) }
@@ -70,14 +45,6 @@ private class AndroidPlatformActions(private val context: Context) : PlatformAct
                 Uri.fromParts("package", context.packageName, null),
             ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
         )
-    }
-
-    override fun openSubscriptionManagement(productId: String) {
-        val url = "https://play.google.com/store/account/subscriptions" +
-            "?sku=$productId&package=${context.packageName}"
-        runCatching {
-            context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
-        }
     }
 
     override val appLocaleSupported: Boolean
@@ -116,14 +83,4 @@ fun setAppLocale(context: Context, tag: String) {
     val manager = context.getSystemService(LocaleManager::class.java) ?: return
     manager.applicationLocales =
         if (tag.isBlank()) LocaleList.getEmptyLocaleList() else LocaleList.forLanguageTags(tag)
-}
-
-actual typealias PlatformActivity = Activity
-
-@Composable
-actual fun currentPlatformActivity(): PlatformActivity? = LocalContext.current.findActivity()
-
-private tailrec fun Context.findActivity(): Activity? = when (this) {
-    is Activity -> this
-    else -> (this as? ContextWrapper)?.baseContext?.findActivity()
 }

@@ -43,7 +43,6 @@ import androidx.compose.material.icons.outlined.DownloadForOffline
 import androidx.compose.material.icons.outlined.Mic
 import androidx.compose.material.icons.outlined.Quiz
 import androidx.compose.material.icons.outlined.Tune
-import androidx.compose.material.icons.outlined.WorkspacePremium
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -69,12 +68,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.compose.LocalLifecycleOwner
-import com.glosso.app.billing.AccessController
-import com.glosso.app.billing.AccessPolicy
-import com.glosso.app.billing.ProFeature
-import com.glosso.app.billing.ProductAccess
-import com.glosso.app.billing.SubscriptionStatus
-import com.glosso.app.billing.todayPlan
 import com.glosso.app.designsystem.GlossoColors
 import com.glosso.app.designsystem.LocalReduceMotion
 import com.glosso.app.designsystem.Motion
@@ -82,6 +75,7 @@ import com.glosso.app.designsystem.Radius
 import com.glosso.app.designsystem.Sizes
 import com.glosso.app.designsystem.Space
 import com.glosso.app.product.ProductConfigRepository
+import com.glosso.app.product.VersionNotice
 import com.glosso.app.resources.*
 import com.glosso.engine.model.LessonModel
 import com.glosso.engine.model.StoryModel
@@ -208,10 +202,8 @@ fun GlossoApp() {
 
     val lessonVm: LessonViewModel = lessonViewModel()
     val storiesVm: StoriesViewModel = storiesViewModel()
-    val subscriptionVm: SubscriptionViewModel = subscriptionViewModel()
     val lessonState by lessonVm.state.collectAsState()
     val storiesState by storiesVm.state.collectAsState()
-    val subscription by subscriptionVm.status.collectAsState()
 
     // After a process death the ViewModels start empty while the shell comes
     // back saved: reopen the lesson or story it had open once the content is
@@ -240,7 +232,6 @@ fun GlossoApp() {
             }
         }
     }
-    val productAccess by ProductConfigRepository.access.collectAsState()
     val productConfig by ProductConfigRepository.config.collectAsState()
     val config = LocalAppConfig.current
     val onboardingDone by OnboardingStore.done.collectAsState()
@@ -256,10 +247,10 @@ fun GlossoApp() {
     val showOfflineModelNudge = LocalAppServices.current.onDevice.supported && !online && !scorer.present &&
         !scorer.downloading && !scorer.preparing && !offlineHintDismissed
 
-    // A newer build may be recommended, but during the beta the notice only
-    // warns and is dismissible: nothing here blocks the learner.
+    // A newer build may be recommended, but the notice only warns and is
+    // dismissible: nothing here blocks the learner.
     val versionNotice = remember(productConfig) {
-        AccessPolicy.versionNotice(productConfig, config.versionCode)
+        VersionNotice.from(productConfig, config.versionCode)
     }
     var updateDismissed by rememberSaveable { mutableStateOf(false) }
 
@@ -278,26 +269,14 @@ fun GlossoApp() {
         wasOnline = online
     }
 
-    // One paywall surface for the whole app, opened from any locked feature. The
-    // level the learner reached rides along so the copy names the moment (the end
-    // of A1) instead of an arbitrary mid-course wall.
-    var showPaywall by remember { mutableStateOf(false) }
-    var paywallNextLevel by remember { mutableStateOf<String?>(null) }
-    val openPaywall: (String?) -> Unit = { level ->
-        paywallNextLevel = level
-        showPaywall = true
-    }
-
-    // Re-validate on every return to the foreground: the trial may have ended, the
-    // subscription may have been canceled or gone into grace while backgrounded,
-    // the beta may have ended, and the server flags may have changed.
+    // Re-validate on every return to the foreground: the connection, the server
+    // flags and the version policy may have changed while backgrounded.
     val lifecycleOwner = LocalLifecycleOwner.current
     val context = currentPlatformContext()
     val resumeScope = rememberCoroutineScope()
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
-                subscriptionVm.refresh()
                 connectivity.refresh()
                 resumeScope.launch { ProductConfigRepository.refresh() }
                 resumeScope.launch { AccentScoringFlag.refresh(appApi) }
@@ -341,27 +320,22 @@ fun GlossoApp() {
         }
     }
 
-    // Today's one tap: continue the lesson in progress, or open the first one in
-    // teaching order. It goes through the same AccessPolicy as the lesson list, so
-    // a locked lesson opens the paywall instead of slipping past the gate, and an
-    // in-progress lesson stays finishable. LessonsScreen renders the player, so
-    // the destination moves there first.
+    // Today's one tap: continue the lesson in progress, or open the next one in
+    // teaching order. LessonsScreen renders the player, so the destination moves
+    // there first.
     val progress by ProgressStore.state.collectAsState()
-    val today = remember(subscription, productAccess, lessonState.lessons, lessonState.themeOrder, lessonState.resumeLessonId, lessonState.resumeStep, progress.finishedLessons) {
+    val today = remember(lessonState.lessons, lessonState.themeOrder, lessonState.resumeLessonId, lessonState.resumeStep, progress.finishedLessons) {
         todayPlan(
             lessons = lessonState.lessons,
             themeOrder = lessonState.themeOrder,
             resumeLessonId = lessonState.resumeLessonId,
             resumeInProgress = lessonState.resumeStep != LessonStep.SUMMARY,
-            status = subscription,
-            productAccess = productAccess,
             finishedLessonIds = progress.finishedLessons,
         )
     }
     val startTodayLesson: () -> Unit = {
         shell = shell.openLessons()
         when {
-            today.locked -> openPaywall(today.lesson?.level)
             today.resumable -> lessonVm.resume()
             else -> today.lesson?.let { lessonVm.openLesson(it) }
         }
@@ -369,16 +343,8 @@ fun GlossoApp() {
     val browseLessons: () -> Unit = {
         shell = shell.openLessons()
     }
-    // One gate for the shell: the Today CTAs ask the same controller the lesson
-    // list does, so a Pro action can never slip past the wall.
-    val access = remember(subscription, productAccess) { AccessController(subscription, productAccess = productAccess) }
-    val profileLocked = access.isLocked(ProFeature.PHONETIC_PROFILE)
     val openTodayReview: () -> Unit = {
-        if (access.isLocked(ProFeature.PERSONALIZED_PRACTICE)) {
-            openPaywall(null)
-        } else {
-            shell = shell.copy(destination = GlossoDestination.LIBRARY, route = LibraryRoute.PRACTICE)
-        }
+        shell = shell.copy(destination = GlossoDestination.LIBRARY, route = LibraryRoute.PRACTICE)
     }
     val openTodaySettings: () -> Unit = {
         shell = shell.copy(destination = GlossoDestination.LIBRARY, route = LibraryRoute.SETTINGS)
@@ -425,27 +391,17 @@ fun GlossoApp() {
                             loading = lessonState.loading && lessonState.lessons.isEmpty(),
                             hasLessons = lessonState.lessons.isNotEmpty(),
                             offline = !online,
-                            soundsLocked = profileLocked,
                             onStartLesson = startTodayLesson,
                             onBrowseLessons = browseLessons,
                             onReviewSounds = openTodayReview,
-                            onUnlockSounds = { openPaywall(null) },
                             onSettings = openTodaySettings,
                             error = lessonState.error,
                             onRetry = { lessonVm.refresh() },
                         )
 
-                        GlossoDestination.LESSONS -> LessonsScreen(
-                            vm = lessonVm,
-                            subscription = subscription,
-                            productAccess = productAccess,
-                            onShowPaywall = openPaywall,
-                        )
+                        GlossoDestination.LESSONS -> LessonsScreen(vm = lessonVm)
 
                         GlossoDestination.YOU -> YouScreen(
-                            subscription = subscription,
-                            productAccess = productAccess,
-                            onShowPaywall = openPaywall,
                             onPractice = {
                                 shell = shell.copy(destination = GlossoDestination.LIBRARY, route = LibraryRoute.PRACTICE)
                             },
@@ -455,9 +411,6 @@ fun GlossoApp() {
                             route = route,
                             storiesVm = storiesVm,
                             lessonVm = lessonVm,
-                            subscription = subscription,
-                            productAccess = productAccess,
-                            onShowPaywall = openPaywall,
                             onOpen = { shell = shell.copy(route = it) },
                             onOpenLesson = { lesson ->
                                 shell = shell.openLessons()
@@ -502,16 +455,6 @@ fun GlossoApp() {
         AchievementOverlay(modifier = Modifier.align(Alignment.TopCenter))
     }
 
-    if (showPaywall) {
-        TrackScreen("paywall")
-        PaywallSheet(
-            vm = subscriptionVm,
-            productAccess = productAccess,
-            nextLevel = paywallNextLevel,
-            onDismiss = { showPaywall = false },
-        )
-    }
-
     // First run only: the short welcome, over the course, until it is dismissed.
     // The guard keeps a tap on its empty areas from reaching the app behind.
     if (!onboardingDone) {
@@ -526,24 +469,10 @@ private fun LibraryRoutes(
     route: LibraryRoute?,
     storiesVm: StoriesViewModel,
     lessonVm: LessonViewModel,
-    subscription: SubscriptionStatus,
-    productAccess: ProductAccess,
-    onShowPaywall: (String?) -> Unit,
     onOpen: (LibraryRoute) -> Unit,
     onOpenLesson: (LessonModel) -> Unit,
     onBack: () -> Unit,
 ) {
-    // The exercise library names and opens the base of every task it shows. The
-    // jump asks the same controller the lesson list does, in-progress lesson
-    // included: a Pro lesson seen as unlocked in Lessons must not paywall here.
-    val lessonState by lessonVm.state.collectAsState()
-    val access = remember(subscription, productAccess, lessonState.resumeLessonId) {
-        AccessController(
-            status = subscription,
-            inProgressLessonId = lessonState.resumeLessonId,
-            productAccess = productAccess,
-        )
-    }
     AnimatedContent(
         targetState = route,
         transitionSpec = {
@@ -559,53 +488,24 @@ private fun LibraryRoutes(
         label = "libraryRoute",
     ) { r ->
         when (r) {
-            null -> LibraryScreen(
-                onOpen = onOpen,
-                subscription = subscription,
-                productAccess = productAccess,
-                onShowPaywall = onShowPaywall,
-            )
+            null -> LibraryScreen(onOpen = onOpen)
 
-            LibraryRoute.STORIES -> StoriesScreen(
-                vm = storiesVm,
-                subscription = subscription,
-                productAccess = productAccess,
-                onShowPaywall = onShowPaywall,
-                onBack = onBack,
-            )
+            LibraryRoute.STORIES -> StoriesScreen(vm = storiesVm, onBack = onBack)
 
             LibraryRoute.EXERCISES -> ExercisesScreen(
-                subscription = subscription,
-                productAccess = productAccess,
-                onShowPaywall = onShowPaywall,
                 onOpenSource = { source ->
                     when (source) {
                         is ExerciseSource.Story -> {
-                            if (access.isLocked(source.story)) {
-                                onShowPaywall(source.story.level)
-                            } else {
-                                storiesVm.openStory(source.story)
-                                onOpen(LibraryRoute.STORIES)
-                            }
+                            storiesVm.openStory(source.story)
+                            onOpen(LibraryRoute.STORIES)
                         }
-                        is ExerciseSource.Lesson -> {
-                            if (access.isLocked(source.lesson)) {
-                                onShowPaywall(source.lesson.level)
-                            } else {
-                                onOpenLesson(source.lesson)
-                            }
-                        }
+                        is ExerciseSource.Lesson -> onOpenLesson(source.lesson)
                     }
                 },
                 onBack = onBack,
             )
 
-            LibraryRoute.PRACTICE -> PracticeScreen(
-                subscription = subscription,
-                productAccess = productAccess,
-                onShowPaywall = onShowPaywall,
-                onBack = onBack,
-            )
+            LibraryRoute.PRACTICE -> PracticeScreen(onBack = onBack)
 
             LibraryRoute.OFFLINE -> OfflineScreen(vm = lessonVm, onBack = onBack)
 
@@ -615,12 +515,7 @@ private fun LibraryRoutes(
 }
 
 @Composable
-private fun LibraryScreen(
-    onOpen: (LibraryRoute) -> Unit,
-    subscription: SubscriptionStatus,
-    productAccess: ProductAccess,
-    onShowPaywall: (String?) -> Unit,
-) {
+private fun LibraryScreen(onOpen: (LibraryRoute) -> Unit) {
     val scroll = rememberScrollState()
     val collapse = rememberCollapse(scroll)
     Column(Modifier.fillMaxSize().statusBarsPadding()) {
@@ -643,18 +538,6 @@ private fun LibraryScreen(
                 onClick = { onOpen(LibraryRoute.PRACTICE) },
             )
             Spacer(Modifier.height(Space.x12))
-            // While the beta is open nothing is for sale, so the Pro row is not
-            // shown: the app does not advertise a plan it cannot sell. Once the
-            // beta ends (and a real price is published) the row returns.
-            if (!productAccess.betaFree) {
-                HubRow(
-                    icon = Icons.Outlined.WorkspacePremium,
-                    title = stringResource(Res.string.library_pro_title),
-                    subtitle = subscriptionSummary(subscription, productAccess),
-                    onClick = { onShowPaywall(null) },
-                )
-                Hairline()
-            }
             HubRow(
                 icon = Icons.Outlined.AutoStories,
                 title = stringResource(Res.string.library_stories_title),
@@ -739,32 +622,10 @@ private fun FeaturedTile(
     }
 }
 
-/** The Library row's honest one-liner about the current access or subscription. */
-@Composable
-private fun subscriptionSummary(status: SubscriptionStatus, productAccess: ProductAccess): String = when {
-    productAccess.lifetimeGrant != null -> {
-        if (productAccess.betaFounder) {
-            stringResource(Res.string.entitlement_lifetime_founder)
-        } else {
-            stringResource(Res.string.entitlement_lifetime_pro)
-        }
-    }
-    status == SubscriptionStatus.NONE -> stringResource(Res.string.pro_summary_none)
-    status == SubscriptionStatus.TRIAL -> stringResource(Res.string.pro_summary_trial)
-    status == SubscriptionStatus.ACTIVE -> stringResource(Res.string.pro_summary_active)
-    status == SubscriptionStatus.GRACE -> stringResource(Res.string.pro_summary_grace)
-    status == SubscriptionStatus.CANCELED -> stringResource(Res.string.pro_summary_canceled)
-    status == SubscriptionStatus.PENDING -> stringResource(Res.string.pro_summary_pending)
-    else -> stringResource(Res.string.pro_summary_none)
-}
-
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun PracticeScreen(
     vm: PracticeViewModel = practiceViewModel(),
-    subscription: SubscriptionStatus = SubscriptionStatus.NONE,
-    productAccess: ProductAccess = ProductAccess.Unknown,
-    onShowPaywall: (String?) -> Unit = {},
     onBack: () -> Unit,
 ) {
     val config = LocalAppConfig.current
@@ -773,12 +634,10 @@ internal fun PracticeScreen(
     val level = vm.level.collectAsState()
     val playing by vm.playing.collectAsState()
     val total = state.drills.size.coerceAtLeast(1)
-    // The same gate the lessons use: the view model is told the entitlement and
-    // only plans from the profile when it is Pro, and each drill is checked again
-    // here so a free learner can never open an A2+ one.
-    val access = remember(subscription, productAccess) { AccessController(subscription, productAccess = productAccess) }
-    LaunchedEffect(subscription, productAccess) { vm.setAccess(subscription, productAccess) }
-    val personalized = access.entitled && state.source == PracticeSource.PROFILE
+    // Re-plan on every entry, so a profile recorded since the last visit turns
+    // the general bank into the personalised plan.
+    LaunchedEffect(Unit) { vm.load() }
+    val personalized = state.source == PracticeSource.PROFILE
 
     Column(Modifier.fillMaxSize().statusBarsPadding()) {
         SubHeader(
@@ -822,20 +681,6 @@ internal fun PracticeScreen(
         }
 
         when {
-            // A Pro drill that still reaches the screen: gate it here, item by
-            // item, instead of letting its record control start a paid take.
-            state.drill?.let { access.isLocked(it) } == true -> {
-                val locked = state.drill!!
-                Column(Modifier.fillMaxSize().padding(horizontal = Space.gutter)) {
-                    Spacer(Modifier.height(Space.x24))
-                    ProLockedCard(
-                        title = stringResource(Res.string.pro_locked_title),
-                        message = stringResource(Res.string.pro_locked_message),
-                        onUnlock = { onShowPaywall(locked.level) },
-                    )
-                }
-            }
-
             state.loading && state.drills.isEmpty() ->
                 LoadingState(Modifier.weight(1f))
 

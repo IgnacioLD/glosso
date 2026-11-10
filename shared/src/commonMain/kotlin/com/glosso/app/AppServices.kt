@@ -4,7 +4,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.glosso.app.api.GlossoApi
-import com.glosso.app.billing.SubscriptionRepository
 import com.glosso.app.download.Downloader
 import com.glosso.app.download.LocalDownloader
 import com.glosso.app.platform.Connectivity
@@ -26,8 +25,6 @@ class AppServices(
     val downloader: Downloader,
     /** A new API client; every ViewModel keeps its own, as each built one before. */
     val newApi: () -> GlossoApi,
-    /** The process's subscription repository (the store, or a debug fake). */
-    val subscriptions: () -> SubscriptionRepository,
 )
 
 /** The process's [AppServices], provided by [ProvideAppServices]. */

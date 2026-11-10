@@ -5,12 +5,12 @@ The Android About screen cannot link to this repository (it is private), so the
 full attribution list has to travel inside the APK.
 
 Coverage is the **resolved debug runtime classpath**, not the hand-declared
-dependencies: Play Services/Firebase and the rest of the transitive closure end
+dependencies: Play Services and the rest of the transitive closure end
 up in the APK and need attribution too. The classpath lock is produced by the
 Gradle task `:androidApp:licensesRuntimeClasspath` (kept fresh by
 `:androidApp:licensesRuntimeClasspathCheck`). For each runtime module this script
 reads the licence declared in its POM in the Gradle cache; a small curated
-catalogue overrides the rows that are special (billing, the fonts, the model, the
+catalogue overrides the rows that are special (the fonts, the model, the
 generated art, ...) and group rules cover artifacts shipped without a POM
 (Compose publishes Gradle Module Metadata). POMs are matched by local XML name,
 so namespace-less POMs are attributed too.
@@ -356,12 +356,6 @@ CURATED_DEPS = {c["id"]: c for c in [
     _dep("io.micrometer:micrometer-registry-prometheus", "Micrometer Prometheus registry",
          "VMware, Inc. / Broadcom", "Apache-2.0",
          "https://github.com/micrometer-metrics/micrometer", "Server metrics.", "server"),
-    _dep("com.android.billingclient:billing", "Google Play Billing Library", "Google LLC",
-         "Android-SDK", "https://developer.android.com/google/play/billing",
-         "In-app subscriptions. Governed by the Android SDK License, not Apache-2.0.", "app"),
-    _dep("com.google.android.play:review-ktx", "Google Play In-App Review", "Google LLC",
-         "Play-Core-ToS", "https://developer.android.com/guide/playcore/in-app-review",
-         "In-app review prompt. Governed by the Play Core SDK Terms of Service.", "app"),
     _dep("io.coil-kt:coil-compose", "Coil", "Coil Contributors", "Apache-2.0",
          "https://github.com/coil-kt/coil", "Image loading in Compose.", "app"),
     _dep("junit:junit", "JUnit 4", "JUnit", "EPL-1.0", "https://junit.org/junit4/",

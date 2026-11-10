@@ -109,7 +109,6 @@ class UmamiMirror(
             "screen_view" -> prop("screen")?.let { "/$it" }
             "lesson_started" -> prop("lesson_id")?.let { "/lesson/$it" }
             "story_opened" -> prop("story_id")?.let { "/story/$it" }
-            "paywall_viewed" -> "/paywall"
             else -> null
         }
         val seconds = (event.occurredAt ?: Instant.now()).epochSecond

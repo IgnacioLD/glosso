@@ -78,28 +78,6 @@ data class DrillPlanRequest(
     val language: String = "",
 )
 
-/**
- * Phase 2 contract for server-side purchase verification. The subscription flow
- * does not call this yet: the server endpoint returns 501 until a Google Play
- * service account is configured. It exists so the client and server shapes are
- * agreed before the server work starts. See docs/BILLING.md.
- */
-@Serializable
-data class BillingVerifyRequest(
-    val productId: String,
-    val purchaseToken: String,
-    val packageName: String,
-    val deviceId: String? = null,
-)
-
-@Serializable
-data class BillingVerifyResponse(
-    val entitled: Boolean,
-    val status: String,
-    val entitlementToken: String? = null,
-    val expiresAtMillis: Long? = null,
-)
-
 /** A non-2xx answer from an account call; [status] tells the UI what to say. */
 class ApiStatusException(val status: Int) : Exception("HTTP $status")
 
@@ -204,7 +182,7 @@ class GlossoApi(
         }
         // Content and assets are immutable per version, so GET responses with
         // cache headers are reused (and survive offline); the plugin never
-        // touches POST, so score, events and billing stay uncached.
+        // touches POST, so score and events stay uncached.
         install(HttpCache) {
             publicStorage(contentCache ?: CacheStorage.Disabled)
         }
@@ -249,11 +227,9 @@ class GlossoApi(
         }.successBody()
 
     /**
-     * The effective access of this device, keyed by `X-Device-Id`. The server is
-     * the authority on the plan and the Beta Founder status; the client only
-     * caches and displays them. A non-2xx answer (e.g. 409 when the account
-     * changed meanwhile) throws [ApiStatusException] instead of decoding the
-     * error body into an all-defaults FREE account.
+     * This device's account, keyed by `X-Device-Id`. A non-2xx answer (e.g. 409
+     * when the account changed meanwhile) throws [ApiStatusException] instead of
+     * decoding the error body into an all-defaults account.
      */
     suspend fun me(): AccountState =
         client.get("$baseUrl/v1/me") {
@@ -307,18 +283,6 @@ class GlossoApi(
         }.body<DrillPlanModel>().let { plan -> plan.copy(drills = plan.drills.map { it.forAccent(accent, authoredAccent) }) }
 
     /**
-     * Phase 2 hollow: asks the server to validate a purchase token with the
-     * Google Play Developer API. Not wired into the subscription flow yet; the
-     * server answers 501 until a service account is configured.
-     */
-    suspend fun verifyPurchase(request: BillingVerifyRequest): BillingVerifyResponse =
-        client.post("$baseUrl/v1/billing/verify") {
-            noCache()
-            contentType(ContentType.Application.Json)
-            setBody(request)
-        }.body()
-
-    /**
      * A short-lived nonce for Sign in with Google, bound to this device. It goes
      * into the Credential Manager request, so the ID token Google returns can
      * only be used from this device.
@@ -331,7 +295,7 @@ class GlossoApi(
     /**
      * Signs this device in with the Google account the learner picked. The
      * first time it links the account where it is; on a new phone the account
-     * (Beta Founder, lifetime PRO) moves here. Answers the `/v1/me` snapshot;
+     * moves here. Answers the `/v1/me` snapshot;
      * 401 is a rejected token and 409 a device linked to another Google account.
      */
     suspend fun signInWithGoogle(idToken: String): AccountState =
@@ -596,7 +560,7 @@ class GlossoApi(
     /**
      * The decoded body of a 2xx answer, or [ApiStatusException]. The account
      * calls need it: [AccountState] has defaults for every field, so an error
-     * body like `{"error": ...}` would otherwise decode into a FREE account.
+     * body like `{"error": ...}` would otherwise decode into an empty account.
      */
     private suspend inline fun <reified T> io.ktor.client.statement.HttpResponse.successBody(): T {
         if (!status.isSuccess()) throw ApiStatusException(status.value)

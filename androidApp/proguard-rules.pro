@@ -12,16 +12,6 @@
 # kotlinx.serialization reads @Serializable and @SerialName from annotations.
 -keepattributes RuntimeVisibleAnnotations,AnnotationDefault
 
-# --- Release entitlement guard ---
-# The build fails if the debug fake ever reaches a release artifact:
-# verifyReleaseApkEntitlement / verifyReleaseBundleEntitlement (build.gradle.kts)
-# unzip the APK/AAB and look for the class name "FakeSubscriptionRepository".
-# R8 renames com.glosso.* on release, so without this the guard would keep
-# searching for a name that no longer exists and would silently stop protecting
-# anything. Keeping the *name* (not the class: it is still shrunk when
-# unreachable) is what keeps the guard live.
--keepnames class **FakeSubscriptionRepository
-
 # --- ONNX Runtime ---
 # ai.onnxruntime.** mirrors the ONNX C++ objects. The runtime is reached from
 # two directions: the JNI layer resolves classes and `native` methods by name,

@@ -38,8 +38,6 @@
     <string name="today_sounds_no_profile">Ton profil n'est pas encore prêt. Dis quelques phrases et il se remplira.</string>
     <string name="today_sounds_clear">Aucun son faible pour l'instant.</string>
     <string name="today_sounds_hint">Les plus faibles d'abord, d'après tes propres enregistrements.</string>
-    <string name="today_sounds_unlock">Voir Glosso Pro</string>
-    <string name="today_sounds_locked">Ton profil phonétique est Pro.</string>
     <plurals name="today_review">
         <item quantity="one">Revoir %1$d son</item>
         <item quantity="many">Revoir %1$d sons</item>
@@ -131,7 +129,6 @@
     <string name="lessons_downloaded">Téléchargé pour l'usage hors ligne</string>
     <string name="lessons_download">Télécharger pour l'usage hors ligne</string>
     <string name="lessons_finished">Terminée</string>
-    <string name="lessons_locked">Leçon verrouillée</string>
     <string name="lessons_close">Fermer la leçon</string>
     <string name="lessons_offline_badge">Hors ligne</string>
     <string name="lessons_words">Mots</string>
@@ -392,6 +389,9 @@
     <string name="about_licenses_title">Licences</string>
     <string name="about_licenses_intro">Glosso s'appuie sur des composants open source et des ressources tierces. Leurs licences et attributions sont listées ici, dans l'application.</string>
     <string name="about_licenses_open">Licences et attributions open source</string>
+    <string name="support_title">Soutenir Glosso</string>
+    <string name="support_subtitle">Glosso est gratuit et open source. Un café aide à faire tourner les serveurs.</string>
+    <string name="support_link">Offrir un café sur Ko-fi</string>
     <string name="licenses_full_terms">Lire les conditions complètes</string>
 
     <string name="exercise_choose_word">Choisis le mot qui convient</string>
@@ -504,89 +504,7 @@
     <string name="theme_storytelling">Récits</string>
     <string name="theme_university">Université</string>
 
-    <!-- Billing and the Pro gate -->
-    <string name="library_pro_title">Glosso Pro</string>
-    <string name="lesson_free_badge">GRATUIT</string>
-    <string name="lessons_unlock_with_pro">Débloquer avec Pro</string>
-    <string name="pro_locked_title">Voici Glosso Pro</string>
-    <string name="pro_locked_message">Tout le A1 et l'entraînement libre restent ouverts. À partir du A2, votre entraînement personnalisé et votre profil phonétique sont Pro.</string>
-    <string name="pro_summary_none">Le cours complet et les téléchargements hors ligne</string>
-    <string name="pro_summary_trial">Essai gratuit actif</string>
-    <string name="pro_summary_active">Abonnement actif</string>
-    <string name="pro_summary_grace">Vérifie ton moyen de paiement dans Google Play</string>
-    <string name="pro_summary_canceled">Annulé, accès jusqu'à la fin de la période</string>
-    <string name="pro_summary_pending">Paiement en attente dans Google Play</string>
-    <string name="paywall_headline">Tout le cours, de A1 à B2.</string>
-    <string name="paywall_body">Tout le niveau A1 est gratuit et le restera. Glosso Pro débloque le A2 et le reste du cours, ainsi que les téléchargements pour étudier hors ligne.</string>
-    <string name="paywall_headline_next_level">Tu as terminé le A1. Un bon moment pour continuer.</string>
-    <string name="paywall_body_next_level">Tout le niveau A1 est gratuit et le restera. Glosso Pro débloque le %1$s et le reste du cours, ainsi que les téléchargements pour étudier hors ligne.</string>
-    <string name="paywall_benefit_course">Le A2, B1, B2 et tout le cours au-delà du A1</string>
-    <string name="paywall_benefit_offline">Téléchargements pour étudier hors ligne</string>
-    <string name="paywall_benefit_practice">Entraînement et profil phonétique inclus</string>
-    <string name="paywall_default_title">Abonnement mensuel</string>
-    <string name="paywall_price_loading">Chargement du prix Google Play…</string>
-    <string name="paywall_price_unavailable">Prix indisponible. Vérifie ta connexion.</string>
-    <string name="paywall_cta_trial">Commencer %1$s gratuit</string>
-    <string name="paywall_cta_price">S'abonner pour %1$s</string>
-    <string name="paywall_cta_default">S'abonner</string>
-    <string name="paywall_restore">Restaurer les achats</string>
-    <string name="paywall_manage">Gérer ou annuler l'abonnement</string>
-    <string name="paywall_status_trial">Essai gratuit actif. Il deviendra %1$s à la fin.</string>
-    <string name="paywall_status_trial_no_price">Essai gratuit actif.</string>
-    <string name="paywall_status_active">Abonnement actif.</string>
-    <string name="paywall_status_grace">Un problème est survenu avec ton paiement. Mets à jour ton moyen dans Google Play pour garder l'accès.</string>
-    <string name="paywall_status_canceled">Abonnement annulé. Tu gardes l'accès jusqu'à la fin de la période payée.</string>
-    <string name="paywall_status_pending">Paiement en attente. Il s'ouvrira quand Google Play le confirmera.</string>
-    <string name="paywall_legal">Le paiement est débité sur ton compte Google Play. L'abonnement se renouvelle automatiquement %1$s jusqu'à ce que tu annules.</string>
-    <string name="paywall_legal_no_frequency">Le paiement est débité sur ton compte Google Play. L'abonnement se renouvelle automatiquement jusqu'à ce que tu annules.</string>
-    <string name="paywall_legal_trial">L'essai gratuit de %1$s se renouvelle automatiquement ; annule avant la fin pour ne pas payer.</string>
-    <string name="paywall_legal_manage">Gère ou annule l'abonnement dans Google Play &gt; Abonnements.</string>
-    <string name="paywall_close">Fermer</string>
-    <string name="billing_price_with_frequency">%1$s %2$s</string>
-    <string name="billing_offer_with_trial">%1$s gratuit, puis %2$s</string>
-    <string name="billing_offer_trial_only">%1$s gratuit</string>
-    <plurals name="billing_period_days">
-        <item quantity="one">%1$d jour</item>
-        <item quantity="many">%1$d jours</item>
-        <item quantity="other">%1$d jours</item>
-    </plurals>
-    <plurals name="billing_period_weeks">
-        <item quantity="one">%1$d semaine</item>
-        <item quantity="many">%1$d semaines</item>
-        <item quantity="other">%1$d semaines</item>
-    </plurals>
-    <plurals name="billing_period_months">
-        <item quantity="one">%1$d mois</item>
-        <item quantity="many">%1$d mois</item>
-        <item quantity="other">%1$d mois</item>
-    </plurals>
-    <plurals name="billing_period_years">
-        <item quantity="one">%1$d an</item>
-        <item quantity="many">%1$d ans</item>
-        <item quantity="other">%1$d ans</item>
-    </plurals>
-    <!-- The singular forms are intentionally numberless ("par mois"), so lint's
-         ImpliedQuantity (French one covers 0 and 1) does not apply. -->
-    <plurals name="billing_freq_days" tools:ignore="ImpliedQuantity">
-        <item quantity="one">par jour</item>
-        <item quantity="many">tous les %1$d jours</item>
-        <item quantity="other">tous les %1$d jours</item>
-    </plurals>
-    <plurals name="billing_freq_weeks" tools:ignore="ImpliedQuantity">
-        <item quantity="one">par semaine</item>
-        <item quantity="many">toutes les %1$d semaines</item>
-        <item quantity="other">toutes les %1$d semaines</item>
-    </plurals>
-    <plurals name="billing_freq_months" tools:ignore="ImpliedQuantity">
-        <item quantity="one">par mois</item>
-        <item quantity="many">tous les %1$d mois</item>
-        <item quantity="other">tous les %1$d mois</item>
-    </plurals>
-    <plurals name="billing_freq_years" tools:ignore="ImpliedQuantity">
-        <item quantity="one">par an</item>
-        <item quantity="many">tous les %1$d ans</item>
-        <item quantity="other">tous les %1$d ans</item>
-    </plurals>
+    <!-- Settings: written pronunciation -->
     <string name="settings_phonetics">Prononciation écrite</string>
     <string name="settings_phonetics_desc">Affiche la transcription IPA sous chaque phrase et chaque son, à l'entraînement et dans ton profil. Désactive-la si elle te distrait.</string>
     <string name="settings_phonetics_toggle">Afficher la prononciation écrite (IPA)</string>
@@ -643,18 +561,9 @@
     <string name="settings_wifi_only_desc">Met en pause les téléchargements en données mobiles pour ne rien consommer à votre insu. Vous pouvez autoriser un téléchargement précis depuis sa notification.</string>
     <string name="offline_downloading_section">Téléchargement</string>
 
-    <!-- Bêta et configuration produit (les dates viennent toujours du serveur) -->
-    <string name="beta_open_title">Glosso est en bêta</string>
-    <string name="beta_free_until">Gratuit jusqu'au %1$s.</string>
-    <string name="beta_free_during">Gratuit pendant la bêta.</string>
-    <string name="beta_founder_note">En tant que Beta Founder, tu auras Glosso Pro gratuit pour toujours. L'offre Personnalisée n'est pas incluse.</string>
-    <string name="beta_founder_you_are">Tu es Beta Founder : tu as Glosso Pro gratuit pour toujours. L'offre Personnalisée n'est pas incluse.</string>
-    <string name="entitlement_lifetime_pro">Accès permanent à Glosso Pro</string>
-    <string name="entitlement_lifetime_founder">Accès permanent à Glosso Pro (Beta Founder)</string>
-    <string name="about_beta_title">Bêta</string>
+    <!-- Version notice -->
     <string name="update_notice">Une nouvelle version de Glosso est disponible. La mise à jour est recommandée, mais tout continue de fonctionner.</string>
     <string name="update_notice_dismiss">Ignorer</string>
-    <string name="paywall_not_for_sale">Les offres ne sont pas encore en vente.</string>
     <string name="score_a11y">Score : %1$d sur 100</string>
 
     <!-- Rhythm and intonation bonus (ProsodyBonus) -->
@@ -675,15 +584,15 @@
     <!-- Changer de telephone : emporter le compte avec Google (sans donnees personnelles) -->
     <string name="settings_account">Compte</string>
     <string name="settings_recovery">Changer de téléphone</string>
-    <string name="settings_recovery_subtitle">Emporte ton compte et ton statut Beta Founder</string>
+    <string name="settings_recovery_subtitle">Emporte ton compte sur un nouveau téléphone</string>
     <string name="recovery_title">Changer de téléphone</string>
-    <string name="recovery_intro">Transfère ton compte et ton statut Beta Founder sur un nouveau téléphone.</string>
+    <string name="recovery_intro">Associe ton compte à Google pour l'emporter sur un nouveau téléphone.</string>
     <string name="google_section">Avec ton compte Google</string>
     <string name="google_desc">Choisis un des comptes Google de ce téléphone, sans mot de passe. Sur le nouveau téléphone, fais pareil avec le même compte.</string>
     <string name="google_linked">Lié à %1$s. Sur le nouveau téléphone, connecte-toi avec ce même compte.</string>
     <string name="google_continue">Continuer avec Google</string>
     <string name="google_privacy">On garde seulement l'identifiant que Google attribue à ton compte, ni ton e-mail ni ton nom. Aucun accès à Gmail ni à Drive.</string>
-    <string name="google_success">C'est fait. Ton compte et ton statut Beta Founder suivent maintenant ton compte Google.</string>
+    <string name="google_success">C'est fait. Ton compte suit maintenant ton compte Google.</string>
     <string name="google_error_no_account">Aucun compte Google sur ce téléphone. Ajoutes-en un dans les réglages du système.</string>
     <string name="google_error_failed">Impossible de se connecter avec Google. Réessaie.</string>
     <string name="google_error_conflict">Ce téléphone est déjà lié à un autre compte Google. Connecte-toi avec celui-là.</string>

@@ -6,7 +6,6 @@ import coil3.compose.setSingletonImageLoaderFactory
 import com.glosso.app.api.ApiCache
 import com.glosso.app.api.AppContentScope
 import com.glosso.app.api.GlossoApi
-import com.glosso.app.billing.NoSubscriptions
 import com.glosso.app.designsystem.GlossoTheme
 import com.glosso.app.download.ForegroundDownloader
 import com.glosso.app.download.WifiOnlyPreference
@@ -50,8 +49,7 @@ data class IosBuild(
  *   open), the daily reminder and crash reports ([CrashReporter] not installed);
  * - phase 5: Sign in with Apple (no Google sign-in on iOS);
  * - phase 6: analytics (not initialised, so nothing is recorded or sent until the
- *   catalogue, the policies and the App Store labels cover iOS);
- * - StoreKit: [NoSubscriptions], no purchases or prices during the beta.
+ *   catalogue, the policies and the App Store labels cover iOS).
  */
 fun MainViewController(build: IosBuild = IosBuild()): UIViewController {
     val services = IosHost.start(build)
@@ -136,7 +134,6 @@ private object IosHost {
             onDevice = NoOnDeviceScoring,
             downloader = downloader,
             newApi = newApi,
-            subscriptions = { NoSubscriptions },
         )
     }
 

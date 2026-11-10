@@ -33,7 +33,7 @@ Der Server **speichert die IP nicht** in der Ereignistabelle. Serverereignisse
 
 ## Konto: Weiter mit Google (optional)
 
-Es nimmt das Konto (und den Beta Founder Status) auf ein neues Handy mit. Es ist
+Es nimmt das Konto auf ein neues Handy mit. Es ist
 optional; die App funktioniert ohne es genauso.
 
 - **Weiter mit Google**: Die Person wählt ein Google-Konto auf dem Handy
@@ -86,8 +86,7 @@ optional; die App funktioniert ohne es genauso.
   beendet, Lektion begonnen, beendet oder verlassen, Übung beendet (Art,
   10-Punkte-Bereich der Bewertung, gemeistert oder nicht), auf dem Telefon
   bewerteter Ausspracheversuch (Bewertungsbereich, gemeistert oder nicht, IDs
-  der Fehlerregeln), Mikrofon verweigert, Pro-Angebot gesehen, Pro-Schaltfläche
-  getippt und Kauf begonnen oder fehlgeschlagen.
+  der Fehlerregeln) und Mikrofon verweigert.
 
 Ab App 2.5.4 sendet die App außerdem:
 

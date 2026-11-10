@@ -1,4 +1,4 @@
-# Privacidad y analitica - Glosso Pro
+# Privacidad y analitica - Glosso
 
 Resumen de que datos trata el producto y como declararlo en Google Play. No es
 asesoramiento legal.
@@ -32,7 +32,7 @@ El servidor **no almacena la IP** en la tabla de eventos. Los eventos de servido
 
 ## Cuenta: entrar con Google (opcional)
 
-Sirve para llevarse la cuenta (y el estatus Beta Founder) a un movil nuevo. Es
+Sirve para llevarse la cuenta a un movil nuevo. Es
 opcional; sin ello la app funciona igual.
 
 - **Entrar con Google**: el usuario elige una cuenta de Google del movil (Android
@@ -83,8 +83,7 @@ opcional; sin ello la app funciona igual.
   empezado y terminado, leccion empezada, terminada o abandonada, ejercicio
   terminado (tipo, franja de nota de 10 puntos, dominado o no), intento de
   pronunciacion puntuado en el movil (franja de nota, dominado o no, ids de las
-  reglas de error), permiso de microfono denegado, muro de pago visto, boton de
-  Pro pulsado y compra empezada o fallida.
+  reglas de error) y permiso de microfono denegado.
 
 Desde la app 2.5.4, la app manda ademas:
 

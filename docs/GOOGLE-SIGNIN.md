@@ -2,10 +2,9 @@
 
 Como en Niagara Launcher: el usuario pulsa **Entrar con Google**, Android le
 muestra las cuentas de Google que ya tiene en el movil, elige una y entra. Sin
-usuario, sin contrasena y sin formularios. Es **la unica forma** de que el
-**Beta Founder y su PRO de por vida sigan a la persona, no al movil**: en el
-movil nuevo entra con la misma cuenta y la cuenta se mueve alli (ver
-`docs/BETA-RUNBOOK.md`, 6.1). Ya no hay recuperacion por codigo.
+usuario, sin contrasena y sin formularios. It is the way a
+learner's profile follows the person, not the phone: on the new phone they sign
+in with the same account and the account moves there.
 
 Estado: **la implementacion esta lista; falta la configuracion de Google**
 (client id y huellas SHA-1). Sin ella la app oculta "Cambiar de movil" y el
@@ -29,8 +28,7 @@ servidor responde `503` en `/v1/auth/google*`; todo lo demas funciona igual.
    - `exp` no vencido;
    - `nonce` emitido para **este** `X-Device-Id` y aun fresco: un token filtrado
      solo puede mover la cuenta al dispositivo del nonce, nunca a otro. Conocer
-     ese `X-Device-Id` ya equivale a ser ese dispositivo (modelo de amenaza en
-     `docs/BETA-RUNBOOK.md`).
+     ese `X-Device-Id` ya equivale a ser ese dispositivo.
 4. Primera vez: vincula el `sub` de Google a la cuenta de este movil
    (`glosso.linked_accounts`). En otro movil: la cuenta se mueve alli y lo que
    ese movil tuviera se fusiona. Respuesta: el mismo `MeState` que `/v1/me`.
@@ -92,14 +90,14 @@ Google Cloud del proyecto de Play (o uno nuevo del mismo propietario):
 ## Verificar
 
 - Tests: `./gradlew :server:test` (`GoogleSignInRouteTest`,
-  `EntitlementServiceGoogleTest`, `NimbusGoogleIdTokenVerifierTest`,
-  `JdbcEntitlementStorePostgresTest`) y `./gradlew :androidApp:testDebugUnitTest`
-  (`GlossoApiGoogleSignInTest`, `FounderRecoveryCopyTest`).
+  `AccountServiceGoogleTest`, `NimbusGoogleIdTokenVerifierTest`,
+  `JdbcAccountStorePostgresTest`) y `./gradlew :androidApp:testDebugUnitTest`
+  (`GlossoApiGoogleSignInTest`).
 - E2E real (solo con la configuracion hecha): en un emulador con una cuenta de
   Google anadida, Ajustes > Cuenta > Cambiar de movil > Entrar con Google, elegir
   la cuenta -> "Listo...". En otro emulador, lo mismo con la misma cuenta ->
-  `GET /v1/me` del segundo muestra `betaFounder=true` y el primero pasa a ser un
-  usuario anonimo nuevo.
+  `GET /v1/me` on the second one lists `google` in `linkedAccounts` and the first
+  one becomes a new anonymous user.
 - Errores tipicos: `NoCredentialException` / "No hay ninguna cuenta de Google"
   sin cuentas en el movil; `[28444] Developer console is not set up correctly`
   si falta el client id Android con el SHA-1 de la firma instalada, o el

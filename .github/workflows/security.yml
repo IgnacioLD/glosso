@@ -6,8 +6,7 @@ name: security
 #     arreglo disponible (trivy),
 #   - la imagen del contenedor arrastra una vulnerabilidad alta/critica con
 #     arreglo disponible (trivy),
-#   - los tests del servidor (`:server:test`) fallan, incluidos los de la
-#     migracion V4 y los entitlements.
+#   - the server tests (`:server:test`) fail.
 # Las vulnerabilidades aceptadas temporalmente van por ID de CVE en
 # .github/trivyignore (nunca comodines): una NUEVA sigue fallando el build.
 # Las acciones van pinneadas por SHA (integridad de la cadena de CI, A08) y trivy

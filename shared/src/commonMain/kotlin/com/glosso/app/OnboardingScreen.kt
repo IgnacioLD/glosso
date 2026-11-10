@@ -65,8 +65,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.glosso.app.api.AccountState
-import com.glosso.app.api.ProductConfig
 import com.glosso.app.designsystem.GlossoColors
 import com.glosso.app.designsystem.LocalReduceMotion
 import com.glosso.app.designsystem.Motion
@@ -74,7 +72,6 @@ import com.glosso.app.designsystem.Radius
 import com.glosso.app.designsystem.Sizes
 import com.glosso.app.designsystem.Space
 import com.glosso.app.download.DownloadItemState
-import com.glosso.app.product.ProductConfigRepository
 import com.glosso.app.resources.*
 import com.glosso.engine.model.LanguagePacks
 import com.glosso.engine.model.displayPhonetic
@@ -95,8 +92,6 @@ fun OnboardingScreen(onFinish: () -> Unit) {
     val attempt by vm.attempt.collectAsState()
     val playing by vm.playing.collectAsState()
     val level = vm.level.collectAsState()
-    val productConfig by ProductConfigRepository.config.collectAsState()
-    val account by ProductConfigRepository.account.collectAsState()
     val scorer by scoringVm.state.collectAsState()
     val downloads by LocalDownloader.current.state.collectAsState()
     val online by rememberConnectivity().online.collectAsState()
@@ -220,8 +215,6 @@ fun OnboardingScreen(onFinish: () -> Unit) {
                 when (page) {
                     0 -> PromisePage(
                         targetLanguage = targetLanguage,
-                        config = productConfig,
-                        account = account,
                         onTargetLanguage = { code ->
                             LanguagePreferences.set(code)
                             OfferedLanguages.orNull(code)?.let { VoicePreferences.onLanguageChanged(it) }
@@ -262,8 +255,6 @@ private const val LAST_PAGE = PAGE_COUNT - 1
 @Composable
 private fun PromisePage(
     targetLanguage: String,
-    config: ProductConfig,
-    account: AccountState?,
     onTargetLanguage: (String) -> Unit,
 ) {
     val scroll = rememberScrollState()
@@ -290,13 +281,11 @@ private fun PromisePage(
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-        // What the learner studies comes before the beta note: the next pages
-        // already speak in the chosen accent, so the choice must not sit below the fold.
+        // The next pages already speak in the chosen accent, so the choice must
+        // not sit below the fold.
         Spacer(Modifier.height(Space.x24))
         TargetLanguageChoice(selected = targetLanguage, onSelect = onTargetLanguage)
         AccentChoice(targetLanguage)
-        Spacer(Modifier.height(Space.x32))
-        BetaBanner(config = config, account = account)
         if (rememberPlatformActions().appLocaleSupported) {
             Spacer(Modifier.height(Space.x32))
             AppLanguageChoice()
