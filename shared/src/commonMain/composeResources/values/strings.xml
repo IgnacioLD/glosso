@@ -634,4 +634,22 @@
     <string name="import_model_rejected">A file is not part of the Glosso scoring model, or it is damaged. Pick the model (.onnx) and phoneme_vocab.json.</string>
     <string name="import_model_failed">Could not read that file. Try again.</string>
     <string name="onboarding_analytics_notice_off">Usage statistics are off. To help improve the course, you can turn them on in Settings: they go only to our own servers (no ads, no third parties), linked to a random installation id.</string>
+    <string name="settings_advanced">Advanced</string>
+    <string name="settings_server">Server</string>
+    <string name="settings_server_default">Default: %1$s</string>
+    <string name="server_title">Server</string>
+    <string name="server_intro">Glosso is free software, and anyone can run its server. Enter the address of a Glosso server you trust, such as one you host yourself. Lessons, cloud scoring and downloads will then come from it.</string>
+    <string name="server_in_use">In use</string>
+    <string name="server_default">The default server</string>
+    <string name="server_custom">A server you chose</string>
+    <string name="server_address">Server address</string>
+    <string name="server_switch_note">Switching removes downloaded lessons and the scoring model if the new server serves different ones. Your progress stays on this phone.</string>
+    <string name="server_check_and_use">Check and use</string>
+    <string name="server_use_default">Use the default server</string>
+    <string name="server_saved">Now using %1$s.</string>
+    <string name="server_error_invalid">That is not a server address. It looks like https://glosso.example.org.</string>
+    <string name="server_error_https">The address must start with https://.</string>
+    <string name="server_error_unreachable">Could not reach that server. Check the address and your connection.</string>
+    <string name="server_error_not_glosso">That address answers, but it is not a Glosso server.</string>
+    <string name="about_server">Server: %1$s</string>
 </resources>

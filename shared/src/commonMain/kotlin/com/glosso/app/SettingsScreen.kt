@@ -30,6 +30,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.CompareArrows
 import androidx.compose.material.icons.filled.Check
+import androidx.compose.material.icons.outlined.Dns
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.PhoneAndroid
@@ -75,6 +76,8 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
     var showAbout by rememberSaveable { mutableStateOf(false) }
     var showRecovery by rememberSaveable { mutableStateOf(false) }
     var showModelCompare by rememberSaveable { mutableStateOf(false) }
+    var showServer by rememberSaveable { mutableStateOf(false) }
+    val server by ServerPreferences.base.collectAsState()
     val context = currentPlatformContext()
     val actions = rememberPlatformActions()
     val debugTools = LocalDebugTools.current
@@ -98,6 +101,13 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
         TrackScreen("recovery")
         PlatformBackHandler { showRecovery = false }
         ChangePhoneScreen(onBack = { showRecovery = false })
+        return
+    }
+
+    if (showServer) {
+        TrackScreen("server")
+        PlatformBackHandler { showServer = false }
+        ServerScreen(onBack = { showServer = false })
         return
     }
 
@@ -390,6 +400,21 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
             }
             Hairline()
             Spacer(Modifier.height(Space.x20))
+            SectionLabel(stringResource(Res.string.settings_advanced))
+            Spacer(Modifier.height(Space.x8))
+            HubRow(
+                icon = Icons.Outlined.Dns,
+                title = stringResource(Res.string.settings_server),
+                subtitle = if (server == ServerPreferences.defaultBase) {
+                    stringResource(Res.string.settings_server_default, serverHost(server))
+                } else {
+                    serverHost(server)
+                },
+                onClick = { showServer = true },
+            )
+            Spacer(Modifier.height(Space.x20))
+            Hairline()
+            Spacer(Modifier.height(Space.x20))
             if (debugTools.modelCompareAvailable) {
                 SectionLabel("Debug")
                 Spacer(Modifier.height(Space.x8))
@@ -413,6 +438,9 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
         }
     }
 }
+
+/** The address without its scheme, as a learner reads it: `glosso.example.org:8443`. */
+internal fun serverHost(base: String): String = base.substringAfter("://")
 
 @Composable
 internal fun appLocaleDisplay(tag: String): String = when (tag) {

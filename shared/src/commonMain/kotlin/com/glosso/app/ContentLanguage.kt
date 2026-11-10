@@ -35,11 +35,12 @@ object UiLanguage {
 /**
  * Emits once per relevant language change: the target language (a different
  * content bank), the interface language (different server labels) or the accent
- * (the content is worded per accent). Combined so a screen reloads for all. Pure flows, so the trigger is testable without
+ * (the content is worded per accent), or the server. Combined so a screen reloads for all. Pure flows, so the trigger is testable without
  * Android resources.
  */
 fun contentReloadSignal(
     targetLanguage: Flow<String>,
     uiLanguage: Flow<String>,
     accent: Flow<String> = VoicePreferences.accentFlow,
-): Flow<Unit> = combine(targetLanguage, uiLanguage, accent) { _, _, _ -> }
+    server: Flow<String> = ServerPreferences.base,
+): Flow<Unit> = combine(targetLanguage, uiLanguage, accent, server) { _, _, _, _ -> }

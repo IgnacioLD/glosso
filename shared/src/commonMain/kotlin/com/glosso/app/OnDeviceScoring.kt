@@ -76,6 +76,13 @@ interface OnDeviceScoring {
     fun dismissError()
 
     /**
+     * The app now talks to another server ([ServerSwitch]). The installed pack is
+     * kept only if its digest is one the new server accepts, so on-device scores
+     * keep matching that server's.
+     */
+    suspend fun onServerChanged() = Unit
+
+    /**
      * Decodes a reference clip (the content's compressed audio) to the 16 kHz
      * mono WAV the recognizer reads, or null when it cannot. Used by the
      * debug-only native take, which scores another reference voice as a take.

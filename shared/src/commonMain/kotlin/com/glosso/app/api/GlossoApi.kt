@@ -122,7 +122,11 @@ private data class ClientEventBatch(val events: List<ClientEvent>, val sentAt: L
  * factory in `:androidApp`).
  */
 class GlossoApi(
-    private val baseUrl: String,
+    /**
+     * The server, read at call time so the whole app follows the server setting
+     * (`ServerPreferences.base`); a test passes a fixed one.
+     */
+    private val serverBase: () -> String,
     /** The HTTP engine; null picks the platform's own ([defaultHttpEngine]). */
     engine: HttpClientEngine?,
     /** Disk cache for immutable content; null disables HTTP caching. */
@@ -148,6 +152,29 @@ class GlossoApi(
     /** The learner's language and accent choices, read at call time. */
     private val scope: ContentScope,
 ) {
+
+    /** The server this client last used, to notice a switch (see [baseUrl]). */
+    @Volatile
+    private var currentServer: String? = null
+
+    /**
+     * The server for this request. On a switch, what this client learned from the
+     * previous server (the manifest and its content version) is forgotten, and
+     * the content version is read again from the store `ServerSwitch` emptied.
+     */
+    private val baseUrl: String
+        get() {
+            val base = serverBase()
+            if (base != currentServer) {
+                if (currentServer != null) {
+                    lastManifest = null
+                    manifestLoaded = false
+                    assetVersion = versionStore.load().orEmpty()
+                }
+                currentServer = base
+            }
+            return base
+        }
 
     /** The target language every request and asset URL is scoped to. */
     private val language: String get() = scope.language
@@ -507,8 +534,9 @@ class GlossoApi(
 
     fun assetUrl(path: String): String {
         if (path.isBlank()) return ""
+        val base = baseUrl // first: a server switch resets the version read below
         val suffix = if (assetVersion.isEmpty()) "" else "?v=$assetVersion"
-        return "$baseUrl/assets/content/$language/$path$suffix"
+        return "$base/assets/content/$language/$path$suffix"
     }
 
     /** Absolute URL of a shared asset that is not per-language (model, vocab). */

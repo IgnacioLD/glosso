@@ -175,6 +175,14 @@ object OnDeviceScorer : OnDeviceScoring {
         }
     }
 
+    /** Keeps the pack only if every file's digest is pinned or published by the new server. */
+    override suspend fun onServerChanged(): Unit = withContext(Dispatchers.IO) {
+        if (!packPresent() || _state.value.downloading) return@withContext
+        val accepted = acceptedDigests()
+        val matches = accepted.all { (name, digests) -> ModelPackImport.sha256(File(root, name)) in digests }
+        if (!matches) delete()
+    }
+
     private suspend fun acceptedDigests(): Map<String, Set<String>> =
         PINNED_SHA256.mapValues { (name, pinned) ->
             val served = withTimeoutOrNull(PUBLISHED_DIGEST_TIMEOUT_MS) { appApi.sharedAssetSha256(name) }

@@ -31,6 +31,7 @@ import platform.UIKit.UIViewController
  * `CFBundleVersion`), as `PlatformInfo` already reads it.
  */
 data class IosBuild(
+    /** The default server; the learner can choose another in Settings ([ServerPreferences]). */
     val apiBaseUrl: String = "https://api.glossostudio.com",
     /** The `/v1/score` key; empty sends no header, as on Android. */
     val apiKey: String = "",
@@ -80,7 +81,7 @@ private object IosHost {
         AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, error = null)
         val newApi = {
             GlossoApi(
-                baseUrl = build.apiBaseUrl,
+                serverBase = { ServerPreferences.base.value },
                 engine = null,
                 contentCache = ApiCache.storageOrNull(),
                 versionStore = ApiCache,
@@ -95,6 +96,7 @@ private object IosHost {
 
         // The same order as GlossoApplication: the API's dependencies first.
         AppApi.factory = newApi
+        ServerPreferences.init(context, build.apiBaseUrl)
         ProductConfigRepository.api = { appApi }
         OfflineStore.downloader = downloader
         DeviceId.init(context)

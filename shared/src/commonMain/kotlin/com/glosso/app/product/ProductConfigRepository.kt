@@ -1,6 +1,7 @@
 package com.glosso.app.product
 
 import com.glosso.app.GoogleAccountStore
+import com.glosso.app.ServerPreferences
 import com.glosso.app.api.AccountState
 import com.glosso.app.api.ProductConfig
 import com.glosso.app.api.GlossoApi
@@ -89,12 +90,14 @@ object ProductConfigRepository {
     suspend fun refresh() {
         if (refreshing) return
         refreshing = true
+        // An answer from a server the learner just switched away from is dropped.
+        val server = ServerPreferences.base.value
         try {
-            runCatching { api().productConfig() }.getOrNull()?.let { fetched ->
+            runCatching { api().productConfig() }.getOrNull()?.takeIf { server == ServerPreferences.base.value }?.let { fetched ->
                 _config.value = fetched
                 persist(KEY_CONFIG, encodeConfig(fetched))
             }
-            runCatching { api().me() }.getOrNull()?.let { fetched ->
+            runCatching { api().me() }.getOrNull()?.takeIf { server == ServerPreferences.base.value }?.let { fetched ->
                 _account.value = fetched
                 persist(KEY_ACCOUNT, encodeAccount(fetched))
                 GoogleAccountStore.reconcile(fetched.linkedAccounts)
@@ -102,6 +105,17 @@ object ProductConfigRepository {
         } finally {
             refreshing = false
         }
+    }
+
+    /** Forgets the previous server's config and account ([ServerSwitch]); a refresh follows. */
+    fun forget() {
+        _config.value = ProductConfig()
+        _account.value = null
+        prefs?.edit(commit = true) {
+            remove(KEY_CONFIG)
+            remove(KEY_ACCOUNT)
+        }
+        refreshing = false
     }
 
     private fun loadCached() {

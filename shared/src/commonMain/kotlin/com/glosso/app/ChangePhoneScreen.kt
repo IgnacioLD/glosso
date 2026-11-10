@@ -155,7 +155,7 @@ fun ChangePhoneScreen(onBack: () -> Unit) {
  */
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-private fun StatusMessage(text: String, color: androidx.compose.ui.graphics.Color) {
+internal fun StatusMessage(text: String, color: androidx.compose.ui.graphics.Color) {
     val bringIntoView = remember { BringIntoViewRequester() }
     LaunchedEffect(text) { bringIntoView.bringIntoView() }
     Text(
