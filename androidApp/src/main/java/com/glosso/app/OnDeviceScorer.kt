@@ -1,6 +1,8 @@
 package com.glosso.app
 
+import android.content.ComponentCallbacks2
 import android.content.Context
+import android.content.res.Configuration
 import android.util.Base64
 import com.glosso.app.api.GlossoApi
 import com.glosso.app.api.ScoreRequest
@@ -77,7 +79,24 @@ object OnDeviceScorer : OnDeviceScoring {
         if (::root.isInitialized) return
         appContext = context.applicationContext
         root = File(context.filesDir, DIR)
+        appContext.registerComponentCallbacks(releaseInBackground)
         scope.launch { refresh() }
+    }
+
+    /**
+     * The loaded model is the largest thing the app holds (hundreds of MB of native
+     * memory). Once the app is in the background list it is released, so the system
+     * does not have to kill the process to get it back; the next take reloads it.
+     */
+    private val releaseInBackground = object : ComponentCallbacks2 {
+        override fun onTrimMemory(level: Int) {
+            if (level >= ComponentCallbacks2.TRIM_MEMORY_BACKGROUND && recognizer != null) scope.launch { unload() }
+        }
+
+        override fun onConfigurationChanged(newConfig: Configuration) = Unit
+
+        @Deprecated("Required by ComponentCallbacks; onTrimMemory covers it.")
+        override fun onLowMemory() = Unit
     }
 
     private fun modelFile() = File(root, PhonemeModelConfig.MODEL_FILE)
@@ -315,6 +334,18 @@ object OnDeviceScorer : OnDeviceScoring {
         expectedWordVariants: List<List<String>>,
         referenceAudio: String?,
     ): PronunciationFeedback = withContext(Dispatchers.Default) {
+        // Reloads a model released in the background since the caller's ensureReady.
+        ensureReady()
+        // Held for the whole take, so a release in the background cannot close the
+        // session while it is running.
+        loadMutex.withLock { scoreLoaded(request, expectedWordVariants, referenceAudio) }
+    }
+
+    private suspend fun scoreLoaded(
+        request: ScoreRequest,
+        expectedWordVariants: List<List<String>>,
+        referenceAudio: String?,
+    ): PronunciationFeedback {
         val active = recognizer ?: error("On-device scorer is not loaded")
         val expected = request.expectedIpa?.takeIf { it.isNotBlank() }
             ?: error("On-device scoring needs the reference pronunciation")
@@ -324,7 +355,7 @@ object OnDeviceScorer : OnDeviceScoring {
         // Nothing usable was heard: report a not-evaluated attempt instead of a
         // fabricated score, so the learner can simply try again.
         val analysis = active.analyze(audio, expected)
-            ?: return@withContext PronunciationFeedback(evaluated = false)
+            ?: return PronunciationFeedback(evaluated = false)
         val confidences = PhoneticComparator.phoneConfidencesOf(analysis.recognition.phones)
         // The same entry point as `/v1/score`, with the same inputs, so the cloud
         // and the device give the same score with the flag on or off.
@@ -346,7 +377,7 @@ object OnDeviceScorer : OnDeviceScoring {
             timings = analysis.timings.orEmpty(),
             referenceWords = PhoneticComparator.referenceWords(expected),
         )
-        FeedbackAssembler.assemble(
+        return FeedbackAssembler.assemble(
             text = request.text,
             expectedIpa = expected,
             result = result,

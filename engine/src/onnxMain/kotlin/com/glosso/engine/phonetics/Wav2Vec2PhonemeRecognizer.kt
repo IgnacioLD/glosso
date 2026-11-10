@@ -63,10 +63,14 @@ class Wav2Vec2PhonemeRecognizer(
                 return
             }
 
-            ortEnv = OrtEnvironment.getEnvironment()
+            val env = OrtEnvironment.getEnvironment()
+            ortEnv = env
             // Load straight from the file: createSession(String) avoids copying the
             // whole model into a ByteArray on the heap first.
-            ortSession = ortEnv?.createSession(modelFile.path)
+            ortSession = OrtSession.SessionOptions().use { options ->
+                memorySavingOptions(options)
+                env.createSession(modelFile.path, options)
+            }
             val vocab = Wav2Vec2Decoder.fromVocabJson(vocabFile.readText())
             decoder = vocab
             EngineLog.d(TAG, "Model initialized. Vocab size: ${vocab.vocabSize}")
@@ -136,6 +140,17 @@ class Wav2Vec2PhonemeRecognizer(
             EngineLog.e(TAG, "Model run failed", e)
             null
         }
+    }
+
+    /**
+     * Where tensors live, never what is computed, so scores are unchanged. Without
+     * the arena, the activations of a take are freed when its run ends instead of
+     * staying reserved at the size of the longest take for the life of the session;
+     * and the weights are allocated once, outside the arena, at load.
+     */
+    private fun memorySavingOptions(options: OrtSession.SessionOptions) {
+        options.setCPUArenaAllocator(false)
+        options.addConfigEntry("session.use_device_allocator_for_initializers", "1")
     }
 
     fun close() {
