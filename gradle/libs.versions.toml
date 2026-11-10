@@ -43,7 +43,7 @@ compose-bom = "2026.05.01"
 # Coil 3 is multiplatform (images in the shared UI). 3.5.0 is built on Compose
 # Multiplatform 1.11.1 (3.6 needs 1.12). Android keeps OkHttp 4.12 as the
 # network fetcher, iOS uses Ktor.
-coil = "3.5.0"
+coil = "3.6.3"
 # Multiplatform ViewModel and lifecycle for the shared UI, the versions Compose
 # Multiplatform 1.11.1 itself depends on. On Android they resolve to androidx.lifecycle.
 lifecycle-multiplatform = "2.9.6"
