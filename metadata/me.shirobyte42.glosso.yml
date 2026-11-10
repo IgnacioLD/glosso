@@ -1,0 +1,36 @@
+# Draft F-Droid build recipe, kept here as the reference for the merge request
+# to https://gitlab.com/fdroid/fdroiddata (where it lives as
+# metadata/me.shirobyte42.glosso.yml). See docs/FDROID.md for the reasoning
+# behind every field. Before submitting: tag the release, put its full commit
+# hash in `commit`, and check versionName/versionCode match androidApp/build.gradle.kts.
+AntiFeatures:
+  TetheredNet:
+    en-US: Lessons and cloud pronunciation scoring come from the developer's server.
+      Its source is free (AGPL, in the same repository) and self-hostable, but the
+      app has no setting to point it at another instance.
+Categories:
+  - Science & Education
+License: AGPL-3.0-or-later
+AuthorName: IgnacioLD
+SourceCode: https://github.com/IgnacioLD/glosso
+IssueTracker: https://github.com/IgnacioLD/glosso/issues
+
+AutoName: Glosso
+
+RepoType: git
+Repo: https://github.com/IgnacioLD/glosso.git
+
+Builds:
+  - versionName: 2.5.4
+    versionCode: 2226
+    commit: v2.5.4
+    subdir: androidApp
+    gradle:
+      - fdroid
+    gradleprops:
+      - glosso.ios=false
+
+AutoUpdateMode: Version
+UpdateCheckMode: Tags
+CurrentVersion: 2.5.4
+CurrentVersionCode: 2226

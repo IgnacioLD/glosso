@@ -1,0 +1,18 @@
+Glosso ist ein Sprachkurs, der deine Aussprache wirklich misst. Er hört jeden Versuch, erkennt die Laute, die du tatsächlich gesprochen hast, vergleicht sie mit den erwarteten und sagt dir genau, welchen Laut du verbessern solltest.
+
+Sprachen: Englisch (britisch und amerikanisch), Französisch, Deutsch und Russisch.
+
+<b>Was du bekommst</b>
+<ul>
+<li>Lektionen mit Dialogen, Geschichten, Wortschatz und Übungen, mit Audio.</li>
+<li>Rückmeldung zur Aussprache für jeden Laut: perfekt, knapp oder verfehlt, mit deinem Laut neben dem erwarteten.</li>
+<li>Verteilte Wiederholung der Wörter und Laute, die dir am schwersten fallen.</li>
+<li>Optionale Offline-Bewertung: Lade das Modell herunter (etwa 350 MB) oder importiere es aus einer Datei, dann wird jeder Versuch auf dem Handy mit derselben Engine bewertet, die auch der Server nutzt.</li>
+<li>Lektionen herunterladen und ohne Verbindung lernen.</li>
+</ul>
+
+<b>Kostenlos und Open Source</b>
+Glosso ist für alle kostenlos, ohne Bezahlversion und ohne Werbung. Die App und ihr Server sind freie Software unter der GNU AGPL v3 oder neuer. Unterstützung ist eine freiwillige Spende.
+
+<b>Netzwerk und Datenschutz</b>
+Die Lektionen und, ohne das Offline-Modell, die Bewertung der Aussprache kommen vom Glosso-Server, dessen Quellcode im selben Repository liegt und selbst gehostet werden kann. In dieser Version sind Nutzungsstatistiken aus, bis du sie in den Einstellungen einschaltest; dann gehen sie nur an den Glosso-Server, ohne SDKs von Dritten. Die F-Droid-Version enthält keine Google-Bibliotheken.

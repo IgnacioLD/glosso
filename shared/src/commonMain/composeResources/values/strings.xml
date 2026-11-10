@@ -628,4 +628,10 @@
     <string name="settings_usage_erase">Delete my usage data</string>
     <string name="settings_usage_erased">Your usage data has been deleted.</string>
     <string name="settings_usage_erase_failed">Could not delete it now. Try again with a connection.</string>
+    <string name="import_model_cta">Import from a file</string>
+    <string name="import_model_progress">Checking and installing the model…</string>
+    <string name="import_model_incomplete">Part of the pack is still missing. Pick both files: the model (.onnx) and phoneme_vocab.json.</string>
+    <string name="import_model_rejected">A file is not part of the Glosso scoring model, or it is damaged. Pick the model (.onnx) and phoneme_vocab.json.</string>
+    <string name="import_model_failed">Could not read that file. Try again.</string>
+    <string name="onboarding_analytics_notice_off">Usage statistics are off. To help improve the course, you can turn them on in Settings: they go only to our own servers (no ads, no third parties), linked to a random installation id.</string>
 </resources>

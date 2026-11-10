@@ -31,6 +31,7 @@ import com.glosso.app.designsystem.Sizes
 import com.glosso.app.designsystem.Space
 import com.glosso.app.download.DownloadItemState
 import com.glosso.app.download.DownloadStatus
+import com.glosso.app.platform.rememberFilePicker
 import com.glosso.app.resources.*
 import org.jetbrains.compose.resources.stringResource
 
@@ -91,6 +92,8 @@ internal fun OnDevicePackControl(
     onRemove: (() -> Unit)?,
 ) {
     var confirmRemove by remember { mutableStateOf(false) }
+    val onDevice = LocalAppServices.current.onDevice
+    val pickFiles = rememberFilePicker { files -> onDevice.importPack(files) }
     if (confirmRemove && onRemove != null) {
         AlertDialog(
             onDismissRequest = { confirmRemove = false },
@@ -130,6 +133,12 @@ internal fun OnDevicePackControl(
                 DownloadControls(item)
             }
         }
+
+        state.importing -> Text(
+            text = stringResource(Res.string.import_model_progress),
+            style = MaterialTheme.typography.bodyMedium,
+            color = GlossoColors.accentText,
+        )
 
         state.preparing -> Text(
             text = stringResource(Res.string.settings_preparing),
@@ -173,6 +182,18 @@ internal fun OnDevicePackControl(
                     text = stringResource(Res.string.settings_download_model, sizeText),
                     style = MaterialTheme.typography.labelLarge,
                 )
+            }
+            // The same pack from files fetched elsewhere, for a phone that cannot
+            // or should not download it; verified like a download.
+            if (pickFiles != null) {
+                Spacer(Modifier.height(Space.x4))
+                TextButton(
+                    colors = accentTextButtonColors(),
+                    onClick = pickFiles,
+                    modifier = Modifier.fillMaxWidth(),
+                ) {
+                    Text(stringResource(Res.string.import_model_cta), style = MaterialTheme.typography.labelLarge)
+                }
             }
         }
     }

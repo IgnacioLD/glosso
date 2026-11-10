@@ -101,7 +101,7 @@ class PracticeEngineRecordingTest {
     fun `clearResult cancels a score still in flight so it cannot land later`() {
         // debugInjectTake is inert in release (BuildConfig.DEBUG is false), so the
         // in-flight score it sets up can only be exercised in the debug unit test
-        // variant. Skip, do not fail, in testReleaseUnitTest.
+        // variant. Skip, do not fail, in the release unit tests.
         assumeTrue("needs the debug-only take injector", BuildConfig.DEBUG)
         val scope = CoroutineScope(Dispatchers.Unconfined)
         val recorder = FakeRecorder()

@@ -67,5 +67,5 @@ if [[ "$CLEAR" == 1 ]]; then
 fi
 
 echo "Running ScoreParityTest on $SERIAL"
-ANDROID_SERIAL="$SERIAL" "$ROOT/gradlew" -p "$ROOT" :androidApp:connectedDebugAndroidTest \
+ANDROID_SERIAL="$SERIAL" "$ROOT/gradlew" -p "$ROOT" :androidApp:connectedPlaystoreDebugAndroidTest \
     -Pandroid.testInstrumentationRunnerArguments.class=com.glosso.app.ScoreParityTest

@@ -1,0 +1,4 @@
+Primera versión en F-Droid.
+- Sin bibliotecas de Google: sin servicios de Play ni inicio de sesión con Google ("Cambiar de móvil" no está disponible).
+- Las estadísticas de uso empiezan desactivadas; puedes activarlas en Ajustes.
+- Importa el modelo de puntuación sin conexión desde un archivo, verificado antes de instalarlo.

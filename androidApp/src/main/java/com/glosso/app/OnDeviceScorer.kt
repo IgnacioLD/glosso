@@ -13,6 +13,7 @@ import com.glosso.app.download.DownloadItemState
 import com.glosso.app.download.DownloadKind
 import com.glosso.app.download.DownloadManager
 import com.glosso.app.download.DownloadPriority
+import com.glosso.app.platform.PickedFile
 import com.glosso.app.resources.*
 import com.glosso.engine.accent.AccentScoring
 import com.glosso.engine.accent.AccentTarget
@@ -40,6 +41,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
+import kotlinx.coroutines.withTimeoutOrNull
 import org.jetbrains.compose.resources.getString
 
 /**
@@ -143,6 +145,49 @@ object OnDeviceScorer : OnDeviceScoring {
             )
         }
     }
+
+    /**
+     * Installs the pack from picked files. A file is accepted when its SHA-256 is
+     * the one pinned below (the deployed pack, so this works with no connection)
+     * or the one the server publishes now, the digest a download is checked
+     * against.
+     */
+    override fun importPack(files: List<PickedFile>) {
+        val current = _state.value
+        if (current.downloading || current.importing || files.isEmpty()) return
+        _state.value = current.copy(importing = true, error = null)
+        scope.launch {
+            val error = try {
+                when (ModelPackImport.install(root, files, acceptedDigests())) {
+                    ModelPackImport.Outcome.COMPLETE -> null
+                    ModelPackImport.Outcome.INCOMPLETE -> getString(Res.string.import_model_incomplete)
+                    ModelPackImport.Outcome.REJECTED -> getString(Res.string.import_model_rejected)
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                android.util.Log.w("GlossoScorer", "scoring pack import failed", e)
+                getString(Res.string.import_model_failed)
+            }
+            if (error == null) OfflineModelHint.markSeen(appContext)
+            refresh()
+            _state.value = _state.value.copy(importing = false, error = error)
+        }
+    }
+
+    private suspend fun acceptedDigests(): Map<String, Set<String>> =
+        PINNED_SHA256.mapValues { (name, pinned) ->
+            val served = withTimeoutOrNull(PUBLISHED_DIGEST_TIMEOUT_MS) { appApi.sharedAssetSha256(name) }
+            setOfNotNull(pinned, served?.lowercase())
+        }
+
+    /** SHA-256 of the pack the app was released with (`<asset>.sha256` on the server). */
+    private val PINNED_SHA256 = mapOf(
+        PhonemeModelConfig.MODEL_FILE to "f3a768be3f4f1918a0cd52f51798dc50db307167d6b6dd12d0fa8ce6de1e258a",
+        PhonemeModelConfig.VOCAB_FILE to "d732ab2456c0c017930001dc9af0b41b3b93d25b2eb9740bf9d925508d7d87d0",
+    )
+
+    private const val PUBLISHED_DIGEST_TIMEOUT_MS = 5_000L
 
     /** Mirrors the shared queue's model item into this scorer's state. */
     internal fun onQueueState(item: DownloadItemState?) {

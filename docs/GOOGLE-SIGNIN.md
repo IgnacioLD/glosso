@@ -91,7 +91,7 @@ Google Cloud del proyecto de Play (o uno nuevo del mismo propietario):
 
 - Tests: `./gradlew :server:test` (`GoogleSignInRouteTest`,
   `AccountServiceGoogleTest`, `NimbusGoogleIdTokenVerifierTest`,
-  `JdbcAccountStorePostgresTest`) y `./gradlew :androidApp:testDebugUnitTest`
+  `JdbcAccountStorePostgresTest`) y `./gradlew :androidApp:testPlaystoreDebugUnitTest`
   (`GlossoApiGoogleSignInTest`).
 - E2E real (solo con la configuracion hecha): en un emulador con una cuenta de
   Google anadida, Ajustes > Cuenta > Cambiar de movil > Entrar con Google, elegir

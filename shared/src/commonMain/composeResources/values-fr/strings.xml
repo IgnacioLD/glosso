@@ -603,4 +603,10 @@
     <string name="settings_usage_erase">Supprimer mes données d'utilisation</string>
     <string name="settings_usage_erased">Vos données d'utilisation ont été supprimées.</string>
     <string name="settings_usage_erase_failed">Suppression impossible pour l'instant. Réessayez avec une connexion.</string>
+    <string name="import_model_cta">Importer depuis un fichier</string>
+    <string name="import_model_progress">Vérification et installation du modèle…</string>
+    <string name="import_model_incomplete">Une partie du pack manque encore. Choisissez les deux fichiers : le modèle (.onnx) et phoneme_vocab.json.</string>
+    <string name="import_model_rejected">Un fichier ne fait pas partie du modèle d'évaluation de Glosso ou il est endommagé. Choisissez le modèle (.onnx) et phoneme_vocab.json.</string>
+    <string name="import_model_failed">Impossible de lire ce fichier. Réessayez.</string>
+    <string name="onboarding_analytics_notice_off">Les statistiques d'utilisation sont désactivées. Pour aider à améliorer le cours, vous pouvez les activer dans les Réglages : elles ne vont qu'à nos propres serveurs (sans publicité ni tiers), liées à un identifiant d'installation aléatoire.</string>
 </resources>

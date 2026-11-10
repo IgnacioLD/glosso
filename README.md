@@ -17,7 +17,7 @@ Glosso is free for everyone, with no paid tier. Support is a voluntary donation.
 | `:engine` | Kotlin Multiplatform phonetic engine: G2P, wav2vec2 phoneme recognition (ONNX), speech gate, phonetic comparison and feedback. The only place a score is computed. |
 | `:server` | Ktor API (`/v1/score`, content, assets, product config, accounts). Reuses `:engine`. |
 | `:shared` | The app itself in Compose Multiplatform (screens, view models, stores, API client), shared by Android and iOS. |
-| `:androidApp` | Android shell: activity, on-device scorer, download service. |
+| `:androidApp` | Android shell: activity, on-device scorer, download service. Two flavors: `playstore` and `fdroid` (no Google libraries). |
 | `iosApp/` | Xcode project that runs the shared app on iOS. |
 | `deploy/` | Dockerfile, Compose stack, Caddy and monitoring config for self-hosting the server. |
 | `tools/` | Asset download, scoring bench, score parity, content pipeline and license tooling. |
@@ -45,14 +45,23 @@ tools/fetch-assets.sh
 # Tests
 ./gradlew :engine:jvmTest
 ./gradlew :server:test
-./gradlew :androidApp:testDebugUnitTest
+./gradlew :androidApp:testFdroidDebugUnitTest :androidApp:testPlaystoreDebugUnitTest
 
 # Run the server locally on :8080 (serves data/assets)
 ./gradlew :server:run
 
 # Build the Android app against the local server (from the emulator)
-./gradlew :androidApp:assembleDebug -PglossoApiBase=http://10.0.2.2:8080
+./gradlew :androidApp:assembleFdroidDebug -PglossoApiBase=http://10.0.2.2:8080
+
+# Release builds of each flavor (unsigned without a keystore)
+./gradlew :androidApp:assembleFdroidRelease      # F-Droid: no Google libraries
+./gradlew :androidApp:bundlePlaystoreRelease     # Google Play
 ```
+
+The app has two flavors. `fdroid` contains no non-free library: no Google Play
+services and no Sign in with Google (so "Change phone" is hidden), and usage
+statistics start off. `playstore` is the Google Play build with Sign in with
+Google. See `docs/FDROID.md`.
 
 Without `-PglossoApiBase` the app talks to the public Glosso API. Build inputs are Gradle
 properties documented in `androidApp/build.gradle.kts`. The server runs with only the assets on
@@ -76,6 +85,7 @@ that are not part of the public repository.
 - `docs/PRODUCT-CONFIG-CONTRACT.md`, `docs/GOOGLE-SIGNIN.md` - product config and accounts
 - `docs/BILLING.md` - why there is no paid tier
 - `docs/IOS-DEV.md`, `docs/IOS-ENGINE.md` - iOS
+- `docs/FDROID.md` - the F-Droid flavor and the rules it follows
 - `docs/PRIVACY.md`, `docs/LICENSING.md` - privacy and third-party licensing
 
 ## Contributing
@@ -87,6 +97,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md).
 Glosso is free software under the **GNU Affero General Public License v3.0 or later**
 ([LICENSE](LICENSE)). If you run a modified version of the server for others, you must offer
 them its source. [NOTICE](NOTICE) lists the third-party components and their licenses, and an
-additional permission for linking with the Google Play libraries the Android app uses.
+additional permission for linking with the Google Play libraries the `playstore` build uses.
 
 The Glosso name and logo are not covered by the license: forks must use their own.

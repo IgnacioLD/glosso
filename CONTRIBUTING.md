@@ -5,8 +5,8 @@ Thanks for helping. Bug reports and pull requests are welcome.
 ## Before you open a pull request
 
 - Run the tests for the modules you touched:
-  `./gradlew :engine:jvmTest`, `./gradlew :server:test`, `./gradlew :androidApp:testDebugUnitTest`
-  and `./gradlew :androidApp:lintDebug`.
+  `./gradlew :engine:jvmTest`, `./gradlew :server:test`, `./gradlew :androidApp:testFdroidDebugUnitTest :androidApp:testPlaystoreDebugUnitTest`
+  and `./gradlew :androidApp:lintFdroidDebug :androidApp:lintPlaystoreDebug`.
 - Keep a pull request to one fix or feature.
 - Commit messages follow `type(scope): description`, for example `fix(engine): keep schwa in unstressed syllables`.
 - Write everything in English: commit messages, pull requests, issues, docs and code comments.

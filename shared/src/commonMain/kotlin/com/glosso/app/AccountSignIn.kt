@@ -50,5 +50,16 @@ interface AccountSignIn {
     suspend fun pickAccount(context: PlatformContext, nonce: String): AccountPick
 }
 
-/** This platform's [AccountSignIn]. */
-expect val accountSignIn: AccountSignIn
+/**
+ * The build's [AccountSignIn], installed by the platform shell at startup. The
+ * default is [UnavailableSignIn]: iOS has no sign-in yet, and the Android F-Droid
+ * build ships no Google libraries, so "Change phone" stays hidden there.
+ */
+var accountSignIn: AccountSignIn = UnavailableSignIn
+
+/** No sign-in in this build: the option stays hidden. */
+object UnavailableSignIn : AccountSignIn {
+    override val isConfigured: Boolean = false
+
+    override suspend fun pickAccount(context: PlatformContext, nonce: String): AccountPick = AccountPick.Cancelled
+}
