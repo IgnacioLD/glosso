@@ -6,11 +6,9 @@
 # missing rule only ever shows up here, in a release run.
 
 # Readable release stack traces: R8 writes mapping.txt next to the APK and these
-# attributes let `retrace` map an obfuscated frame back to the source line.
+# attributes let `retrace` map an obfuscated frame back to the source line (R8
+# replaces the file name with the mapping's id).
 -keepattributes SourceFile,LineNumberTable
--renamesourcefileattribute SourceFile
-# kotlinx.serialization reads @Serializable and @SerialName from annotations.
--keepattributes RuntimeVisibleAnnotations,AnnotationDefault
 
 # --- ONNX Runtime ---
 # ai.onnxruntime.** mirrors the ONNX C++ objects. The runtime is reached from
@@ -18,51 +16,9 @@
 # and TensorInfo/OrtUtil use reflection. Renaming or stripping any of it makes
 # the acoustic model fail to load (or crash) the moment the recognizer is
 # initialized, which is exactly the offline scoring path. onnxruntime-android
-# ships no consumer rules, so this is the whole contract.
+# only ships rules for its telemetry classes, so this is the whole contract. The
+# names of every `native` method are kept by proguard-android-optimize.txt.
 -keep class ai.onnxruntime.** { *; }
--keepclasseswithmembers class * {
-    native <methods>;
-}
--dontwarn ai.onnxruntime.**
-
-# --- kotlinx.serialization ---
-# Every @Serializable model (engine + app) carries a generated `$$serializer` and
-# a `Companion.serializer()`; the runtime looks those up by shape, not by name.
--dontwarn kotlinx.serialization.**
--if @kotlinx.serialization.Serializable class **
--keepclassmembers class <1> {
-    static <1>$Companion Companion;
-}
--if @kotlinx.serialization.Serializable class ** {
-    static **$* *;
-}
--keepclassmembers class <2>$<3> {
-    kotlinx.serialization.KSerializer serializer(...);
-}
--if @kotlinx.serialization.Serializable class ** {
-    public static ** INSTANCE;
-}
--keepclassmembers class <1> {
-    public static <1> INSTANCE;
-    kotlinx.serialization.KSerializer serializer(...);
-}
-
-# --- Coil + SVG ---
-# The image loader is built explicitly (see ImageLoading.kt) and Coil sniffs the
-# bytes to pick a decoder, so the SvgDecoder is only reachable through Coil's
-# component registry. Keep it, and silence the optional integrations Coil and the
-# SVG parser reference but the app does not ship.
--keep class coil.decode.SvgDecoder { *; }
--dontwarn coil.**
--dontwarn com.caverock.androidsvg.**
-
-# --- Networking and coroutines ---
--dontwarn io.ktor.**
--dontwarn kotlinx.coroutines.**
--dontwarn org.slf4j.**
--dontwarn org.conscrypt.**
--dontwarn org.bouncycastle.**
--dontwarn org.openjsse.**
 
 # --- Release logging (OWASP M8/M9) ---
 # Release keeps only warnings and errors in logcat, which carry no learner data
@@ -72,12 +28,4 @@
     public static int v(...);
     public static int d(...);
     public static int i(...);
-}
-
-# --- Credential Manager (Sign in with Google) ---
-# CredentialManager finds its Play Services provider by reflection; stripping
-# or renaming it makes getCredential fail with "no provider" only in release.
--if class androidx.credentials.CredentialManager
--keep class androidx.credentials.playservices.** {
-  *;
 }
