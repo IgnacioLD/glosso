@@ -9,6 +9,8 @@ Thanks for helping. Bug reports and pull requests are welcome.
   and `./gradlew :androidApp:lintDebug`.
 - Keep a pull request to one fix or feature.
 - Commit messages follow `type(scope): description`, for example `fix(engine): keep schwa in unstressed syllables`.
+- Write everything in English: commit messages, pull requests, issues, docs and code comments.
+  UI text is translated per locale under `shared/src/commonMain/composeResources/values*/`.
 
 ## Things to know
 

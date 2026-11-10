@@ -1,14 +1,13 @@
-# Configuracion de gitleaks para Glosso. Usa las reglas por defecto y anade
-# exclusiones SOLO por ruta y por patron de relleno. Nunca se mete el valor de un
-# secreto real aqui.
+# gitleaks configuration for Glosso. Uses the default rules and adds exclusions
+# ONLY by path and by placeholder pattern. Never put a real secret value here.
 title = "Glosso gitleaks"
 
 [extend]
 useDefault = true
 
 [[allowlists]]
-description = "Falsos positivos conocidos: placeholders de .env, fixtures de test y auditorias ya redactadas"
-# Rutas donde un valor con pinta de clave es de relleno por construccion.
+description = "Known false positives: .env placeholders, test fixtures and redacted docs"
+# Paths where a key-looking value is a placeholder by construction.
 paths = [
   '''deploy/\.env\.example''',
   '''server/src/test/''',
@@ -17,7 +16,7 @@ paths = [
   '''NOTICE''',
 ]
 regexTarget = "match"
-# Patrones de relleno, no valores reales.
+# Placeholder patterns, not real values.
 regexes = [
   '''(?i)CHANGE_ME''',
   '''(?i)placeholder''',
