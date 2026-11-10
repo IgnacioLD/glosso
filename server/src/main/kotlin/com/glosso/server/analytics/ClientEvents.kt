@@ -61,7 +61,7 @@ object ClientEvents {
     /** The app's screens and sheets, as `screen_view` names them. */
     val SCREENS = setOf(
         "today", "lessons", "you", "library", "lesson", "practice", "stories", "story", "word",
-        "exercises", "offline", "settings", "about", "privacy", "licenses", "recovery", "paywall",
+        "exercises", "offline", "settings", "about", "privacy", "licenses", "recovery",
         "onboarding", "level_picker", "download_sheet",
     )
     private val SCREEN = OneOf(SCREENS)
@@ -104,10 +104,6 @@ object ClientEvents {
         ),
         "flow_abandoned" to mapOf("flow" to Id, "step" to Id, "reason" to Id),
         "mic_permission_denied" to mapOf("flow" to Id),
-        "paywall_viewed" to mapOf("source" to Id),
-        "pro_cta_tapped" to mapOf("source" to Id),
-        "purchase_started" to mapOf("product_id" to Id, "plan" to Id),
-        "purchase_failed" to mapOf("product_id" to Id, "reason" to Id),
         "screen_view" to mapOf("screen" to SCREEN),
         "lesson_step" to mapOf("lesson_id" to Id, "step" to LESSON_STEP),
         "audio_played" to mapOf(

@@ -34,7 +34,7 @@ class GlossoApiGoogleSignInTest {
             } else {
                 body = (request.body as? TextContent)?.text
                 respond(
-                    """{"plan":"PRO","status":"NONE","betaFounder":true,"planSource":"LIFETIME"}""",
+                    """{"linkedAccounts":["google"]}""",
                     headers = headersOf(HttpHeaders.ContentType, "application/json"),
                 )
             }
@@ -47,7 +47,7 @@ class GlossoApiGoogleSignInTest {
         assertEquals(listOf("/v1/auth/google/nonce", "/v1/auth/google"), calls)
         assertEquals("device-9", device)
         assertTrue(body ?: "no body", body?.contains("\"idToken\":\"header.payload.signature\"") == true)
-        assertEquals(true, identity.betaFounder)
+        assertEquals(listOf("google"), identity.linkedAccounts)
     }
 
     @Test

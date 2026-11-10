@@ -16,19 +16,11 @@ actual fun currentUiLanguage(): String = remember { platformInfo(PlatformContext
 @Composable
 actual fun rememberReduceMotion(): Boolean = remember { UIAccessibilityIsReduceMotionEnabled() }
 
-// TODO(iOS phase 4): hide the paywall from the app switcher snapshot. iOS cannot
-// block screenshots; there is no paywall on iOS during the beta.
-@Composable
-actual fun ScreenshotProtection() = Unit
-
 @Composable
 actual fun rememberPlatformActions(): PlatformActions = remember { IosPlatformActions }
 
 private object IosPlatformActions : PlatformActions {
     override fun openAppSettings() = open(UIApplicationOpenSettingsURLString)
-
-    override fun openSubscriptionManagement(productId: String) =
-        open("https://apps.apple.com/account/subscriptions")
 
     // iOS keeps the per-app language in the Settings app, not in an API the app sets.
     override val appLocaleSupported: Boolean get() = false
@@ -45,9 +37,3 @@ private object IosPlatformActions : PlatformActions {
         UIApplication.sharedApplication.openURL(target, emptyMap<Any?, Any?>(), null)
     }
 }
-
-/** No purchase flow on iOS during the beta (docs/IOS-KMP-PLAN.md, decision 4). */
-actual open class PlatformActivity
-
-@Composable
-actual fun currentPlatformActivity(): PlatformActivity? = null

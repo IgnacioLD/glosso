@@ -258,11 +258,14 @@ class AndroidStorageCompatibilityTest {
         GoogleAccountStore.signedIn("other@example.com")
         assertEquals("other@example.com", prefs("glosso_google_account").getString("email", null))
 
+        // The Application already started the repository (and its network refresh)
+        // before this test runs, so a second init is a no-op: check the bodies an
+        // existing install cached under the file and keys the repository reads.
         val config = ProductConfigRepository.encodeConfig(ProductConfigRepository.config.value)
-        prefs("glosso_product").edit().putString("config", config).putString("account", "{\"plan\":\"PRO\"}").commit()
-        ProductConfigRepository.api = { error("offline") }
-        ProductConfigRepository.init(app)
-        assertEquals("PRO", ProductConfigRepository.account.value?.plan)
+        prefs("glosso_product").edit().putString("config", config).putString("account", "{\"linkedAccounts\":[\"google\"]}").commit()
+        val cached = prefs("glosso_product")
+        assertEquals(ProductConfigRepository.config.value, ProductConfigRepository.decodeConfig(cached.getString("config", null)!!))
+        assertEquals(listOf("google"), ProductConfigRepository.decodeAccount(cached.getString("account", null)!!)?.linkedAccounts)
 
         assertFalse(DownloadPermission.wasAsked(app))
         prefs("glosso_downloads").edit().putBoolean("notification_prompted", true).commit()

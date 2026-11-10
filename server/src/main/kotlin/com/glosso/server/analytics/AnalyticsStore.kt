@@ -467,8 +467,6 @@ class AnalyticsStore(private val dataSource: HikariDataSource) : AutoCloseable {
             "onboarding_completed",
             "lesson_started",
             "lesson_completed",
-            "paywall_viewed",
-            "purchase_started",
         )
 
         /**

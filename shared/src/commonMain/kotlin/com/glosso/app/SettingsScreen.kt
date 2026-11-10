@@ -97,7 +97,7 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
     if (showRecovery) {
         TrackScreen("recovery")
         PlatformBackHandler { showRecovery = false }
-        FounderRecoveryScreen(onBack = { showRecovery = false })
+        ChangePhoneScreen(onBack = { showRecovery = false })
         return
     }
 

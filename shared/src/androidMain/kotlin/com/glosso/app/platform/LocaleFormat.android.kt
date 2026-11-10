@@ -5,11 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalConfiguration
 import java.text.NumberFormat
 import java.time.DayOfWeek
-import java.time.Instant
 import java.time.LocalDate
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.time.format.TextStyle
 import java.util.Locale
 
@@ -24,12 +21,6 @@ actual fun formatDecimal(value: Double, decimals: Int, languageTag: String?): St
     }.format(value)
 
 actual fun localeLanguage(languageTag: String?): String = localeOf(languageTag).language
-
-actual fun formatLongUtcDate(iso: String): String? = runCatching {
-    val instant = Instant.parse(iso)
-    val formatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
-    instant.atZone(ZoneOffset.UTC).toLocalDate().format(formatter)
-}.getOrNull()
 
 actual fun formatWeekdayDayMonth(epochDay: Long, languageTag: String): String {
     val locale = Locale.forLanguageTag(languageTag)

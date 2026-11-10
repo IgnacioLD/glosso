@@ -22,16 +22,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.glosso.app.billing.AccessPolicy
+import androidx.compose.ui.platform.LocalUriHandler
 import com.glosso.app.designsystem.GlossoColors
 import com.glosso.app.designsystem.Space
 import com.glosso.app.product.ProductConfigRepository
+import com.glosso.app.product.VersionNotice
 import com.glosso.app.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 /**
- * Settings > About. Version, the product's privacy stance and the full licence
- * catalogue. Both the privacy policy and the attributions are rendered from
+ * Settings > About. Version, the voluntary support link, the product's privacy
+ * stance and the full licence catalogue. Both the privacy policy and the attributions are rendered from
  * assets bundled in the APK, so nothing points at the private repository.
  */
 @Composable
@@ -39,7 +40,6 @@ fun AboutScreen(onBack: () -> Unit) {
     var showLicenses by rememberSaveable { mutableStateOf(false) }
     var showPrivacy by rememberSaveable { mutableStateOf(false) }
     val config by ProductConfigRepository.config.collectAsState()
-    val account by ProductConfigRepository.account.collectAsState()
     val appConfig = LocalAppConfig.current
 
     if (showLicenses) {
@@ -74,22 +74,17 @@ fun AboutScreen(onBack: () -> Unit) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
 
-            if (config.isBeta || config.beta.active) {
+            if (VersionNotice.from(config, appConfig.versionCode).visible) {
                 Spacer(Modifier.height(Space.x32))
-                SectionLabel(stringResource(Res.string.about_beta_title))
-                Spacer(Modifier.height(Space.x12))
-                BetaBanner(config = config, account = account)
-            } else {
-                val notice = AccessPolicy.versionNotice(config, appConfig.versionCode)
-                if (notice.visible) {
-                    Spacer(Modifier.height(Space.x32))
-                    Text(
-                        text = stringResource(Res.string.update_notice),
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                    )
-                }
+                Text(
+                    text = stringResource(Res.string.update_notice),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
             }
+
+            val uriHandler = LocalUriHandler.current
+            SupportGlossoSection(onOpen = { runCatching { uriHandler.openUri(it) } })
 
             Spacer(Modifier.height(Space.x32))
             SectionLabel(stringResource(Res.string.about_privacy_title))
@@ -118,7 +113,7 @@ fun AboutScreen(onBack: () -> Unit) {
 }
 
 @Composable
-private fun AboutLink(text: String, onClick: () -> Unit) {
+internal fun AboutLink(text: String, onClick: () -> Unit) {
     Text(
         text = text,
         style = MaterialTheme.typography.bodyLarge,

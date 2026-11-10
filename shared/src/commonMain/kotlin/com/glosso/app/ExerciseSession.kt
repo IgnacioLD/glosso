@@ -110,7 +110,6 @@ internal fun ExerciseRunner(
     modifier: Modifier = Modifier,
     onComplete: (() -> Unit)? = null,
     contentPadding: PaddingValues = PaddingValues(horizontal = Space.gutter),
-    footer: (@Composable () -> Unit)? = null,
     embedded: Boolean = false,
     /**
      * Names the base each exercise answers from, when the surrounding screen
@@ -187,10 +186,6 @@ internal fun ExerciseRunner(
                         )
                     },
                 )
-            }
-            footer?.let {
-                Spacer(Modifier.height(Space.x24))
-                it()
             }
             Spacer(Modifier.height(Space.x24))
         } else {

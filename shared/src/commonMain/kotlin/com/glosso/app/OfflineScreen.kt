@@ -44,9 +44,7 @@ import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 /**
  * The offline drawer: what is on the device, how much room it takes, and the one
- * place to free it. Downloads follow the content frontier - free lessons for a
- * free learner, any lesson with a subscription - so this screen never assumes the
- * learner is Pro. The gate lives on each lesson's download control.
+ * place to free it. Each lesson is downloaded from its own download control.
  */
 @Composable
 fun OfflineScreen(

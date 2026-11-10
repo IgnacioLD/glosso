@@ -4,8 +4,6 @@ import com.glosso.app.GoogleAccountStore
 import com.glosso.app.api.AccountState
 import com.glosso.app.api.ProductConfig
 import com.glosso.app.api.GlossoApi
-import com.glosso.app.billing.AccessPolicy
-import com.glosso.app.billing.ProductAccess
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -26,15 +24,10 @@ import kotlin.concurrent.Volatile
 /**
  * The app's single view of `/v1/config` and `/v1/me`.
  *
- * It is fail-open by design. It starts on [ProductConfig.BetaFallback] (the beta
- * is open, nothing is locked, nothing is sold) and only ever moves to what the
- * server actually says. When the server cannot be reached it keeps the last good
- * body it persisted, so a cold, offline start still knows the beta is on and
- * shows the real end date; it never invents a wall or a price.
- *
- * It refreshes once on start and then periodically, and recomputes the derived
- * [access] and [versionNotice] on every change. The server stays the authority:
- * the plan, the flags, the prices and the versions all come from here.
+ * It starts on an empty [ProductConfig] and only ever moves to what the server
+ * actually says. When the server cannot be reached it keeps the last good body
+ * it persisted. It refreshes once on start and then periodically. The server
+ * stays the authority on the flags and the version policy.
  */
 object ProductConfigRepository {
 
@@ -64,14 +57,11 @@ object ProductConfigRepository {
     @Volatile
     private var refreshing = false
 
-    private val _config = MutableStateFlow(ProductConfig.BetaFallback)
+    private val _config = MutableStateFlow(ProductConfig())
     val config: StateFlow<ProductConfig> = _config.asStateFlow()
 
     private val _account = MutableStateFlow<AccountState?>(null)
     val account: StateFlow<AccountState?> = _account.asStateFlow()
-
-    private val _access = MutableStateFlow(AccessPolicy.productAccess(ProductConfig.BetaFallback, null))
-    val access: StateFlow<ProductAccess> = _access.asStateFlow()
 
     /**
      * Reads the cached bodies (if any) and starts the refresh loop. Safe to call
@@ -109,7 +99,6 @@ object ProductConfigRepository {
                 persist(KEY_ACCOUNT, encodeAccount(fetched))
                 GoogleAccountStore.reconcile(fetched.linkedAccounts)
             }
-            recompute()
         } finally {
             refreshing = false
         }
@@ -122,11 +111,6 @@ object ProductConfigRepository {
         prefs?.getString(KEY_ACCOUNT)?.let { cached ->
             decodeAccount(cached)?.let { _account.value = it }
         }
-        recompute()
-    }
-
-    private fun recompute() {
-        _access.value = AccessPolicy.productAccess(_config.value, _account.value)
     }
 
     private fun persist(key: String, value: String) {

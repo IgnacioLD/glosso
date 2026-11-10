@@ -1,5 +1,4 @@
 import java.util.Properties
-import java.util.zip.ZipFile
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
@@ -99,14 +98,6 @@ android {
         // carry every AndroidX/Play Services translation.
         resourceConfigurations += listOf("en", "es", "fr", "de")
 
-        // The subscription product id is a build input because it only exists once
-        // the app is configured in Play Console. It follows the published
-        // applicationId so the listing, the package and the product agree:
-        //   ./gradlew :androidApp:assembleDebug -PglossoSubscriptionId=me.shirobyte42.glosso.pro
-        val subscriptionId = providers.gradleProperty("glossoSubscriptionId")
-            .getOrElse("me.shirobyte42.glosso.pro")
-        buildConfigField("String", "SUBSCRIPTION_PRODUCT_ID", "\"$subscriptionId\"")
-
         // Extra points for rhythm and intonation (engine ProsodyBonus), computed
         // on-device against the item's reference audio. Off by default, like
         // ProsodyBonus.ENABLED_BY_DEFAULT; switch it on for a build with
@@ -154,13 +145,6 @@ android {
 
     buildTypes {
         debug {
-            // Debug builds use the deterministic fake repository by default, so the
-            // whole flow can be exercised without Play Console. Point at the real
-            // Play Billing client with -PglossoBilling=real once a license tester
-            // build is installed from a Play testing track.
-            val fake = providers.gradleProperty("glossoBilling").getOrElse("fake") != "real"
-            buildConfigField("boolean", "BILLING_FAKE", fake.toString())
-
             // Upgrade testing: sign the debuggable build with the published release
             // key so it can be installed *over* glosso-studio and inspected with
             // `run-as me.shirobyte42.glosso`. Off by default so ordinary debug
@@ -186,8 +170,6 @@ android {
             )
             // Unsigned when no keystore is configured, so a clean clone still builds.
             if (releaseSigning != null) signingConfig = releaseSigning
-            // A release build is never allowed to fall back to the fake.
-            buildConfigField("boolean", "BILLING_FAKE", "false")
         }
     }
 }
@@ -229,7 +211,6 @@ dependencies {
     implementation(libs.compose.ui.tooling.preview)
     implementation(libs.compose.material.icons.extended)
     // Coil 3 (images, SVG) comes with :shared, which owns the image loader.
-    implementation(libs.billing)
     // Google sign-in (Credential Manager, googleid) comes with :shared's androidMain.
     debugImplementation(libs.compose.ui.tooling)
 
@@ -251,7 +232,7 @@ dependencies {
 
 // --- Licensing -----------------------------------------------------------------
 // The APK must attribute everything it actually ships, including transitive
-// dependencies (Play Services/Firebase arrive through the billing library). The
+// dependencies (Play Services arrives through Google sign-in). The
 // declared-dependency list is not enough, so these tasks resolve the real debug
 // runtime graph and keep a committed lock for tools/licensing/collect.py, which
 // reads each artifact's POM for its licence.
@@ -356,98 +337,3 @@ val licensesCatalogueCheck by tasks.registering {
 }
 
 tasks.named("preBuild") { dependsOn(licensesRuntimeClasspathCheck, licensesCatalogueCheck) }
-
-// --- Release entitlement guard -------------------------------------------------
-// The debug build ships FakeSubscriptionRepository, which starts Glosso Pro
-// unlocked. That class lives only in src/debug, so it must be absent from every
-// release artifact that can reach a device: the APK and the AAB, which is what
-// Play actually publishes. Source audits (:androidApp:test) are weaker than
-// looking at the binary, so these tasks unzip the packaged artifact and fail if
-// the fake ever leaks into a dex. Each runs right after its packaging task, so
-// `assembleRelease` guards the APK and `bundleRelease` guards the AAB. This pins
-// that release never carries a client-side unlock; it is not the anti-tamper
-// defence, because the client does not consult server verification yet (the
-// entitlement limitation is tracked in docs/BILLING.md).
-val releaseEntitlementForbidden = "FakeSubscriptionRepository"
-
-fun ByteArray.containsSequence(pattern: ByteArray): Boolean {
-    if (pattern.isEmpty() || pattern.size > size) return pattern.isEmpty()
-    outer@ for (i in 0..(size - pattern.size)) {
-        for (j in pattern.indices) if (this[i + j] != pattern[j]) continue@outer
-        return true
-    }
-    return false
-}
-
-/** Dex entry names of [artifact] that carry [forbidden] as a raw string. */
-fun dexHitsFor(artifact: File, forbidden: String): List<String> {
-    val marker = forbidden.toByteArray(Charsets.UTF_8)
-    val hits = mutableListOf<String>()
-    ZipFile(artifact).use { zip ->
-        val entries = zip.entries()
-        while (entries.hasMoreElements()) {
-            val entry = entries.nextElement()
-            if (!entry.name.endsWith(".dex")) continue
-            val bytes = zip.getInputStream(entry).use { it.readBytes() }
-            if (bytes.containsSequence(marker)) hits += entry.name
-        }
-    }
-    return hits
-}
-
-val verifyReleaseApkEntitlement by tasks.registering {
-    group = "verification"
-    description = "Fail if the release APK contains the debug fake billing repository"
-    dependsOn("packageRelease")
-    val artifactDir = layout.buildDirectory.dir("outputs/apk/release")
-    inputs.dir(artifactDir).withPropertyName("releaseApkDir")
-    outputs.upToDateWhen { false }
-    doLast {
-        val dir = artifactDir.get().asFile
-        val apk = dir.listFiles { file -> file.isFile && file.extension == "apk" }?.firstOrNull()
-            ?: throw GradleException("release entitlement guard: no APK in $dir")
-        val hits = dexHitsFor(apk, releaseEntitlementForbidden)
-        if (hits.isNotEmpty()) {
-            throw GradleException(
-                "release entitlement guard: ${apk.name} contains the debug fake " +
-                    "($releaseEntitlementForbidden in ${hits.joinToString()}). Debug-only billing " +
-                    "must never reach release.",
-            )
-        }
-        logger.lifecycle("release entitlement guard: ${apk.name} carries no debug billing code")
-    }
-}
-
-val verifyReleaseBundleEntitlement by tasks.registering {
-    group = "verification"
-    description = "Fail if the release AAB (what Play publishes) contains the debug fake billing repository"
-    dependsOn("bundleRelease")
-    val artifactDir = layout.buildDirectory.dir("outputs/bundle/release")
-    inputs.dir(artifactDir).withPropertyName("releaseBundleDir")
-    outputs.upToDateWhen { false }
-    doLast {
-        val dir = artifactDir.get().asFile
-        val aab = dir.listFiles { file -> file.isFile && file.extension == "aab" }?.firstOrNull()
-            ?: throw GradleException("release entitlement guard: no AAB in $dir")
-        val hits = dexHitsFor(aab, releaseEntitlementForbidden)
-        if (hits.isNotEmpty()) {
-            throw GradleException(
-                "release entitlement guard: ${aab.name} contains the debug fake " +
-                    "($releaseEntitlementForbidden in ${hits.joinToString()}). Debug-only billing " +
-                    "must never reach release.",
-            )
-        }
-        logger.lifecycle("release entitlement guard: ${aab.name} carries no debug billing code")
-    }
-}
-
-// Both artifacts in one command; the per-variant guards above are what CI and the
-// packaging tasks actually run.
-val verifyReleaseEntitlement by tasks.registering {
-    group = "verification"
-    description = "Fail if any release artifact (APK or AAB) contains the debug fake billing repository"
-    dependsOn(verifyReleaseApkEntitlement, verifyReleaseBundleEntitlement)
-}
-
-tasks.matching { it.name == "assembleRelease" }.configureEach { finalizedBy(verifyReleaseApkEntitlement) }
-tasks.matching { it.name == "bundleRelease" }.configureEach { finalizedBy(verifyReleaseBundleEntitlement) }

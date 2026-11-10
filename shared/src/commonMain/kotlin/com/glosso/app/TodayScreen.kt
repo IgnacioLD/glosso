@@ -20,7 +20,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
-import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -37,7 +36,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.dp
-import com.glosso.app.billing.TodayPlan
 import com.glosso.app.designsystem.Radius
 import com.glosso.app.designsystem.Sizes
 import com.glosso.app.designsystem.Space
@@ -67,8 +65,6 @@ fun TodayScreen(
     onBrowseLessons: () -> Unit,
     onReviewSounds: () -> Unit,
     onSettings: () -> Unit,
-    soundsLocked: Boolean = false,
-    onUnlockSounds: () -> Unit = {},
     offline: Boolean = false,
     error: String? = null,
     onRetry: () -> Unit = {},
@@ -116,7 +112,6 @@ fun TodayScreen(
                         loading = loading,
                         canResume = plan.resumable,
                         step = step,
-                        locked = plan.locked,
                         hasLessons = hasLessons,
                         onStart = onStartLesson,
                         onBrowse = onBrowseLessons,
@@ -132,9 +127,7 @@ fun TodayScreen(
                     SoundsSection(
                         weak = weak,
                         hasProfile = hasProfile,
-                        locked = soundsLocked,
                         onReview = onReviewSounds,
-                        onUnlock = onUnlockSounds,
                     )
                 }
             }
@@ -173,7 +166,6 @@ private fun LessonCard(
     loading: Boolean,
     canResume: Boolean,
     step: LessonStep?,
-    locked: Boolean,
     hasLessons: Boolean,
     onStart: () -> Unit,
     onBrowse: () -> Unit,
@@ -181,7 +173,7 @@ private fun LessonCard(
     LessonHeroSurface(
         kicker = stringResource(Res.string.today_lesson),
         tags = if (lesson != null) {
-            { GlossoTag(if (locked) "Pro" else baseLabel(lesson)) }
+            { GlossoTag(baseLabel(lesson)) }
         } else {
             null
         },
@@ -219,13 +211,7 @@ private fun LessonCard(
                 }
                 Spacer(Modifier.height(Space.x24))
                 PrimaryButton(
-                    text = stringResource(
-                        when {
-                            locked -> Res.string.lessons_unlock_with_pro
-                            canResume -> Res.string.today_continue
-                            else -> Res.string.today_start
-                        },
-                    ),
+                    text = stringResource(if (canResume) Res.string.today_continue else Res.string.today_start),
                     onClick = onStart,
                 )
                 if (hasLessons) {
@@ -260,33 +246,10 @@ private fun LessonCard(
 private fun SoundsSection(
     weak: List<PhonemeStatModel>,
     hasProfile: Boolean,
-    locked: Boolean,
     onReview: () -> Unit,
-    onUnlock: () -> Unit,
 ) {
     val showPhonetics by PhoneticsPreferences.visible.collectAsState()
-    // The weak sounds are the phonetic profile, which is Pro. A free learner sees
-    // the same wall the profile shows, kept quiet so it does not compete with the
-    // lesson action.
     when {
-        locked -> Row(verticalAlignment = Alignment.CenterVertically) {
-            Icon(
-                imageVector = Icons.Outlined.Lock,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.size(Sizes.icon),
-            )
-            Spacer(Modifier.width(Space.x12))
-            Text(
-                text = stringResource(Res.string.today_sounds_locked),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                modifier = Modifier.weight(1f),
-            )
-            Spacer(Modifier.width(Space.x8))
-            QuietTextButton(stringResource(Res.string.today_sounds_unlock), onClick = onUnlock)
-        }
-
         !hasProfile -> Text(
             text = stringResource(Res.string.today_sounds_no_profile),
             style = MaterialTheme.typography.bodyMedium,

@@ -109,20 +109,15 @@ import com.glosso.server.analytics.StackFrame
 import com.glosso.server.analytics.StoredCrashTrace
 import com.glosso.server.analytics.UmamiMirror
 import com.glosso.server.analytics.ProductSummary
-import com.glosso.server.billing.BillingService
-import com.glosso.server.billing.RtdnOutcome
-import com.glosso.server.billing.VerifyOutcome
 import com.glosso.server.product.AccountChangedConcurrently
 import com.glosso.server.product.AccountSecret
-import com.glosso.server.product.EntitlementService
-import com.glosso.server.product.EntitlementStore
+import com.glosso.server.product.AccountService
+import com.glosso.server.product.AccountStore
 import com.glosso.server.product.GoogleIdTokenVerifier
 import com.glosso.server.product.GoogleSignInConfig
 import com.glosso.server.product.GoogleSignInResult
-import com.glosso.server.product.JdbcEntitlementStore
+import com.glosso.server.product.JdbcAccountStore
 import com.glosso.server.product.ProductConfig
-import com.glosso.server.product.StoredEntitlement
-import com.glosso.server.product.providerPlan
 import com.glosso.server.product.toResponse
 import com.glosso.server.content.ContentDb
 import com.glosso.server.api.AlignRequest
@@ -131,8 +126,6 @@ import com.glosso.server.api.AnalyticsDeleteResponse
 import com.glosso.server.api.AnalyticsEventDto
 import com.glosso.server.api.AnalyticsIngestRequest
 import com.glosso.server.api.AnalyticsIngestResponse
-import com.glosso.server.api.BillingVerifyRequest
-import com.glosso.server.api.BillingVerifyResponse
 import com.glosso.server.api.CrashCauseDto
 import com.glosso.server.api.CrashTraceDto
 import com.glosso.server.api.CrashTraceResponse
@@ -142,7 +135,6 @@ import com.glosso.server.api.ErrorResponse
 import com.glosso.server.api.HealthResponse
 import com.glosso.server.api.PhonemizeRequest
 import com.glosso.server.api.PhonemizeResponse
-import com.glosso.server.api.PubSubPushEnvelope
 import com.glosso.server.api.ContentPoolItemDto
 import com.glosso.server.api.ContentPoolResponse
 import com.glosso.server.api.DemandAggregateResponse
@@ -197,7 +189,7 @@ private val logger = KotlinLogging.logger("GlossoServer")
  * Failed credential checks by gate. Kept process-wide so the per-request guards
  * (which do not see the Prometheus registry) can report without threading it
  * through every call site. See A09 in docs/OWASP-BACKEND.md: a spike here is the
- * signal that someone is guessing admin, ingest, client or RTDN credentials.
+ * signal that someone is guessing admin, ingest or client credentials.
  */
 private val authFailureCounts = ConcurrentHashMap<String, AtomicInteger>()
 
@@ -625,7 +617,7 @@ fun Application.module(assetsDir: File) {
         controlStore = database?.controlStore,
         contentCatalog = catalog,
         controlDatabase = database,
-        entitlementStore = database?.let { JdbcEntitlementStore(it.dataSource) },
+        accountStore = database?.let { JdbcAccountStore(it.dataSource) },
         accountSecret = AccountSecret.fromEnv(),
         googleVerifier = GoogleSignInConfig.verifierFromEnv(),
     )
@@ -636,8 +628,6 @@ fun Application.module(assetsDir: File) {
  *   level databases. Injected so tests can point at a temp directory.
  * @param adminToken guards /metrics and the analytics admin views.
  * @param analytics first-party event store; null disables analytics cleanly.
- * @param billing Play purchase verification and RTDN; defaults to the
- *   environment-configured service so tests can inject a fake Play API.
  * @param apiKey shared client credential for the scoring oracle. When set,
  *   `/v1/score` requires the `X-Api-Key` header; null leaves it open for
  *   development builds and emulators (production sets `GLOSSO_API_KEY`).
@@ -655,10 +645,11 @@ fun Application.module(assetsDir: File) {
  *   component. Null disables generation cleanly.
  * @param generation assembled phase-2 runtime. Injected in tests; production
  *   builds it when Redis and a TTS provider are configured.
- * @param entitlementStore identity and entitlement persistence. Null disables
- *   `GET /v1/me` cleanly; `/v1/config` is served from [productConfig] regardless.
+ * @param accountStore device identity and linked accounts. Null disables
+ *   `GET /v1/me` and Sign in with Google cleanly; `/v1/config` is served from
+ *   [productConfig] regardless.
  * @param productConfig the product configuration served by `GET /v1/config`.
- *   Defaults to the environment; injected so tests can pin a phase and a date.
+ *   Defaults to the environment; injected so tests can pin flags and versions.
  * @param accountSecret server secret for sign-in nonces; production reads
  *   `GLOSSO_ACCOUNT_SECRET`. Null (the default, so a test never picks up the
  *   developer's environment) disables Sign in with Google with a 503.
@@ -671,7 +662,6 @@ fun Application.module(
     analytics: AnalyticsStore?,
     /** A dashboard copy of the stored events (Umami); null keeps Postgres only. */
     mirror: AnalyticsMirror? = null,
-    billing: BillingService = BillingService.fromEnv(),
     apiKey: String? = null,
     ingestToken: String? = null,
     recognizer: PhonemeRecognizer? = null,
@@ -679,7 +669,7 @@ fun Application.module(
     contentCatalog: ContentCatalog = EmptyContentCatalog,
     controlDatabase: ControlPlaneDatabase? = null,
     generation: GenerationRuntime? = null,
-    entitlementStore: EntitlementStore? = null,
+    accountStore: AccountStore? = null,
     productConfig: ProductConfig = ProductConfig.fromEnv(),
     multiAccent: MultiAccentConfig = MultiAccentConfig.fromEnv(),
     voiceIngest: VoiceIngestService? = null,
@@ -693,10 +683,9 @@ fun Application.module(
     )
     logger.info { "Multi-accent scoring: ${if (multiAccent.enabled) "on" else "off"}; voice fetcher=${voices.fetcher.name}" }
     val bootstrap = System.getenv("GLOSSO_BOOTSTRAP") == "1"
-    val entitlementService = entitlementStore?.let {
-        EntitlementService(
+    val accountService = accountStore?.let {
+        AccountService(
             it,
-            productConfig,
             accountSecret = accountSecret,
             googleVerifier = googleVerifier,
         )
@@ -865,7 +854,7 @@ fun Application.module(
     val serverErrors = prometheus.counter("glosso_server_errors_total")
     // A09: failed credential checks are alertable. One series per gate, fed from
     // the process-wide counter the request guards bump.
-    for (gate in listOf("admin", "ingest", "api_key", "rtdn")) {
+    for (gate in listOf("admin", "ingest", "api_key")) {
         io.micrometer.core.instrument.FunctionCounter
             .builder("glosso_auth_failures_total", authFailureCounts) { counts ->
                 counts[gate]?.get()?.toDouble() ?: 0.0
@@ -950,12 +939,6 @@ fun Application.module(
         // a misbehaving client from hammering PostgreSQL.
         register(RateLimitName("profiles")) {
             rateLimiter(limit = 120, refillPeriod = 60.seconds)
-            requestKey { call -> call.clientLimitKey() }
-        }
-        // Verification hits the Play API, so a client cannot turn the endpoint
-        // into an amplifier against Google.
-        register(RateLimitName("billing")) {
-            rateLimiter(limit = 30, refillPeriod = 60.seconds)
             requestKey { call -> call.clientLimitKey() }
         }
         // Config and identity are cheap but write a row per first sight; the same
@@ -1059,16 +1042,13 @@ fun Application.module(
                 accentRoutes(multiAccent, voices) { adminAuthorized(adminToken) }
             }
 
-            // Product configuration: the authority for phase, beta dates, plans,
-            // flags and the minimum client version. Served like the content
-            // manifest, with `no-cache` + ETag, so a warm client gets a 304 and
-            // only pays for the body when the config actually changes. Built per
-            // request because the phase follows the calendar: past the beta end
-            // date the body (and so the ETag) changes without a restart.
+            // Product configuration: flags and the client version policy. Served
+            // like the content manifest, with `no-cache` + ETag, so a warm client
+            // gets a 304 and only pays for the body when the config changes.
             // Contract: docs/PRODUCT-CONFIG-CONTRACT.md.
             rateLimit(RateLimitName("product")) {
                 get("/config") {
-                    val productConfigJson = productConfig.toJson(Instant.now())
+                    val productConfigJson = productConfig.toJson()
                     val productConfigEtag = "\"${sha256Hex(productConfigJson).take(16)}\""
                     call.response.header(HttpHeaders.CacheControl, "no-cache")
                     call.response.header(HttpHeaders.ETag, productConfigEtag)
@@ -1082,12 +1062,10 @@ fun Application.module(
                     }
                 }
 
-                // The server-computed identity snapshot for one device. The plan
-                // is decided here, never written by the client, and Beta Founder is
-                // an independent, permanent status. Contract: section 4 of
-                // docs/PRODUCT-CONFIG-CONTRACT.md.
+                // The server-computed identity snapshot for one device.
+                // Contract: section 4 of docs/PRODUCT-CONFIG-CONTRACT.md.
                 get("/me") {
-                    val service = entitlementService ?: return@get call.respond(
+                    val service = accountService ?: return@get call.respond(
                         HttpStatusCode.ServiceUnavailable,
                         ErrorResponse("Identity is not configured"),
                     )
@@ -1106,11 +1084,11 @@ fun Application.module(
 
             // Carry the account of this device to a new one, without any
             // personal data: `auth/google` signs in with a Google account
-            // chosen on the device and moves the account here, so the Beta
-            // Founder status and the lifetime PRO follow the person.
+            // chosen on the device and moves the account here, so the learner's
+            // profile follows the person.
             rateLimit(RateLimitName("account")) {
                 post("/auth/google/nonce") {
-                    val service = entitlementService?.takeIf { it.googleSignInEnabled }
+                    val service = accountService?.takeIf { it.googleSignInEnabled }
                         ?: return@post call.respond(
                             HttpStatusCode.ServiceUnavailable,
                             ErrorResponse("Google sign-in is not configured"),
@@ -1125,7 +1103,7 @@ fun Application.module(
                 }
 
                 post("/auth/google") {
-                    val service = entitlementService?.takeIf { it.googleSignInEnabled }
+                    val service = accountService?.takeIf { it.googleSignInEnabled }
                         ?: return@post call.respond(
                             HttpStatusCode.ServiceUnavailable,
                             ErrorResponse("Google sign-in is not configured"),
@@ -1734,7 +1712,7 @@ fun Application.module(
                 }
 
                 // "Delete my usage data": every event of this install goes. The
-                // install id is also the user's identity (plan, Beta Founder),
+                // install id is also the user's identity,
                 // so it is erased from analytics instead of being regenerated.
                 delete("/events") {
                     val store = analytics ?: return@delete call.respond(
@@ -2144,83 +2122,6 @@ fun Application.module(
                 }
                 call.respond(ContentPoolResponse(items))
             }
-
-            // Server-side purchase verification. The client sends the Play
-            // purchase token; the server validates it against the Google Play
-            // Developer API (Android Publisher) with a service account and caches
-            // the verdict. A client alone cannot be the source of truth for
-            // entitlement, so if the server cannot verify it answers 503 and
-            // never grants Pro. Contract: BillingVerifyRequest /
-            // BillingVerifyResponse. See docs/BILLING-E2E.md.
-            rateLimit(RateLimitName("billing")) {
-                post("/billing/verify") {
-                    val request = try {
-                        call.receive<BillingVerifyRequest>()
-                    } catch (e: Exception) {
-                        return@post call.respond(
-                            HttpStatusCode.BadRequest,
-                            ErrorResponse("Invalid verification request body"),
-                        )
-                    }
-                    when (val outcome = billing.verify(request)) {
-                        is VerifyOutcome.Verdict -> {
-                            persistEntitlement(
-                                call,
-                                request,
-                                outcome.response,
-                                outcome.autoRenew,
-                                entitlementStore,
-                            )
-                            call.respond(outcome.response)
-                        }
-                        is VerifyOutcome.Invalid ->
-                            call.respond(HttpStatusCode.BadRequest, ErrorResponse(outcome.message))
-                        is VerifyOutcome.Unavailable ->
-                            call.respond(HttpStatusCode.ServiceUnavailable, ErrorResponse(outcome.message))
-                    }
-                }
-            }
-
-            // Real-time Developer Notifications. Google pushes a PubSubPushEnvelope
-            // here on renewals, holds, grace, cancellations and refunds; the server
-            // decodes its base64 DeveloperNotification, invalidates the cached
-            // verdict and refreshes the state from Play. Protected by a shared
-            // secret Pub/Sub must present, and optionally pinned to one push
-            // subscription. Contract: PubSubPushEnvelope. See docs/BILLING-E2E.md.
-            post("/billing/rtdn") {
-                if (!billing.rtdnEnabled) {
-                    return@post call.respond(
-                        HttpStatusCode.ServiceUnavailable,
-                        ErrorResponse("RTDN webhook is not configured. See docs/BILLING-E2E.md."),
-                    )
-                }
-                // Header only. A shared secret in the query string is written
-                // verbatim by every proxy's access log (SEC-08), so the query
-                // form is gone: Pub/Sub pushes its OIDC token in the
-                // `Authorization: Bearer` header. Any `?token=` is ignored, not
-                // silently accepted.
-                val provided = call.bearerToken()
-                if (!billing.rtdnAuthorized(provided)) {
-                    recordAuthFailure("rtdn")
-                    return@post call.respond(HttpStatusCode.Unauthorized, ErrorResponse("Unauthorized"))
-                }
-                val envelope = try {
-                    call.receive<PubSubPushEnvelope>()
-                } catch (e: Exception) {
-                    return@post call.respond(
-                        HttpStatusCode.BadRequest,
-                        ErrorResponse("Invalid Pub/Sub envelope"),
-                    )
-                }
-                when (val outcome = billing.handleRtdn(envelope)) {
-                    is RtdnOutcome.Accepted -> {
-                        persistRtdnEntitlement(outcome, entitlementStore)
-                        call.respond(HttpStatusCode.OK, mapOf("accepted" to true))
-                    }
-                    is RtdnOutcome.Rejected ->
-                        call.respond(HttpStatusCode.BadRequest, ErrorResponse(outcome.message))
-                }
-            }
         }
 
         // Human-readable product analytics page (token protected). This one page
@@ -2374,15 +2275,6 @@ private fun sha256Hex(text: String): String =
         .digest(text.toByteArray(Charsets.UTF_8))
         .joinToString("") { "%02x".format(it) }
 
-/**
- * The hash stored and looked up for a Play purchase token. [BillingService]
- * validates and caches `purchaseToken.trim()`, so the hash must normalize the
- * same way: hashing the raw request would let a token with surrounding spaces
- * grant Pro while storing a hash the RTDN lookup can never match, breaking the
- * refund fail-closed path.
- */
-private fun purchaseTokenHash(token: String): String = sha256Hex(token.trim())
-
 internal data class ByteRange(val start: Long, val endInclusive: Long)
 
 private suspend fun io.ktor.server.application.ApplicationCall.respondAssetFile(file: File) {
@@ -2491,84 +2383,6 @@ private fun io.ktor.server.application.ApplicationCall.adminAuthorized(
 private fun io.ktor.server.application.ApplicationCall.bearerToken(): String? =
     request.headers[HttpHeaders.Authorization]
         ?.removePrefix("Bearer ")?.trim()?.takeIf { it.isNotEmpty() }
-
-/**
- * Persists the Play verdict in `glosso.entitlements`, attributed to the device
- * that sent the token. Best-effort: a database hiccup must never change the
- * verdict the caller already earned, so the write runs in [runCatching] and a
- * failure is logged, not surfaced.
- */
-private suspend fun persistEntitlement(
-    call: io.ktor.server.application.ApplicationCall,
-    request: BillingVerifyRequest,
-    response: BillingVerifyResponse,
-    autoRenew: Boolean,
-    store: EntitlementStore?,
-) {
-    if (store == null) return
-    val deviceId = (request.deviceId ?: call.request.headers["X-Device-Id"])
-        ?.trim()
-        ?.takeIf { it.isNotEmpty() && it.length <= MAX_ID }
-        ?: return
-    runCatching {
-        withContext(Dispatchers.IO) {
-            val now = Instant.now()
-            val user = store.upsertUser(deviceId, now).identity
-            val existing = store.entitlement(user.id)
-            val tokenHash = purchaseTokenHash(request.purchaseToken)
-            // A PERSONALIZED plan is granted outside Play. A non-entitled Play
-            // verdict for a different purchase must not take it away; only the
-            // purchase this row already records may revoke it. Without this,
-            // any expired or foreign token would wipe a manual grant.
-            if (!response.entitled &&
-                existing?.plan == "PERSONALIZED" &&
-                existing.providerTokenHash != tokenHash
-            ) {
-                return@withContext
-            }
-            store.upsertEntitlement(
-                StoredEntitlement(
-                    userId = user.id,
-                    // A paid verdict must not downgrade a PERSONALIZED plan.
-                    plan = if (response.entitled) existing?.providerPlan() ?: "PRO" else "FREE",
-                    status = response.status,
-                    source = "play",
-                    expiresAt = response.expiresAtMillis?.let(Instant::ofEpochMilli),
-                    // A repeated verify records the subscription's start, not
-                    // the moment of the last lookup.
-                    startedAt = existing?.startedAt ?: now,
-                    autoRenew = autoRenew,
-                    provider = "google_play",
-                    providerTokenHash = tokenHash,
-                ),
-            )
-        }
-    }.onFailure { logger.warn(it) { "billing entitlement persistence failed" } }
-}
-
-/**
- * Persists an RTDN verdict for the user who verified that purchase. RTDN carries
- * no device id, so the row is matched by the hash of the purchase token stored at
- * verification time. A revoked or voided refund therefore denies entitlement in
- * the table at once, not only in the cache. Best-effort, like
- * [persistEntitlement]: the webhook is already acknowledged to Pub/Sub.
- */
-private suspend fun persistRtdnEntitlement(outcome: RtdnOutcome.Accepted, store: EntitlementStore?) {
-    val token = outcome.purchaseToken ?: return
-    val verdict = outcome.entitlement ?: return
-    if (store == null) return
-    runCatching {
-        withContext(Dispatchers.IO) {
-            store.updateEntitlementsByProviderTokenHash(
-                providerTokenHash = purchaseTokenHash(token),
-                entitled = verdict.entitled,
-                status = verdict.status.name,
-                expiresAt = verdict.expiresAtMillis?.let(Instant::ofEpochMilli),
-                autoRenew = verdict.autoRenew,
-            )
-        }
-    }.onFailure { logger.warn(it) { "rtdn entitlement persistence failed" } }
-}
 
 /**
  * True when the request reached us over TLS. Caddy terminates TLS and forwards

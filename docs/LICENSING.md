@@ -181,8 +181,8 @@ completa viaja en el APK:
 
 - `shared/src/commonMain/composeResources/files/licenses.json`: cada componente con nombre, autor,
   licencia y texto. Cubre las dependencias del **runtime classpath resuelto**
-  (no solo lo declarado a mano): Play Services/Firebase entran por la billing
-  library y se distribuyen, luego se atribuyen. Las 4 fuentes llevan **su propia
+  (no solo lo declarado a mano): Play Services arrives transitively through
+  Google sign-in and ships, so it is attributed. Las 4 fuentes llevan **su propia
   OFL** (cada una con su copyright).
 - `shared/src/commonMain/composeResources/files/privacy/privacy-<lang>.md`: politica de privacidad
   por idioma de interfaz (en/es/fr/de); `PrivacyScreen` elige la activa.

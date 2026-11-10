@@ -35,9 +35,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.font.FontWeight
-import com.glosso.app.billing.AccessController
-import com.glosso.app.billing.ProductAccess
-import com.glosso.app.billing.SubscriptionStatus
 import com.glosso.app.designsystem.Motion
 import com.glosso.app.designsystem.Radius
 import com.glosso.app.designsystem.Sizes
@@ -48,9 +45,6 @@ import org.jetbrains.compose.resources.stringResource
 @Composable
 fun ExercisesScreen(
     vm: ExercisesViewModel = exercisesViewModel(),
-    subscription: SubscriptionStatus = SubscriptionStatus.NONE,
-    productAccess: ProductAccess = ProductAccess.Unknown,
-    onShowPaywall: (String?) -> Unit = {},
     onOpenSource: (ExerciseSource) -> Unit,
     onBack: () -> Unit,
 ) {
@@ -58,9 +52,6 @@ fun ExercisesScreen(
     var theme by rememberSaveable { mutableStateOf<String?>(null) }
     val themes = remember(state.exercises) { state.exercises.map { it.theme }.distinct().sorted() }
     val visible = theme?.let { t -> state.exercises.filter { it.theme == t } } ?: state.exercises
-    // One gate for the screen: the controller decides per exercise, from the same
-    // CEFR frontier the lessons use. A free learner only ever runs A1.
-    val access = remember(subscription, productAccess) { AccessController(subscription, productAccess = productAccess) }
 
     Column(Modifier.fillMaxSize().statusBarsPadding()) {
         SubHeader(title = stringResource(Res.string.exercises_title), onBack = onBack)
@@ -96,38 +87,13 @@ fun ExercisesScreen(
                     }
                     Spacer(Modifier.height(Space.x8))
                 }
-                val runnable = visible.filterNot { access.isLocked(it) }
-                val lockedSample = visible.firstOrNull { access.isLocked(it) }
-                if (runnable.isNotEmpty()) {
+                if (visible.isNotEmpty()) {
                     ExerciseRunner(
-                        exercises = runnable,
+                        exercises = visible,
                         modifier = Modifier.fillMaxWidth().weight(1f),
                         sourceOf = vm::sourceOf,
                         onOpenSource = onOpenSource,
-                        footer = lockedSample?.let { locked ->
-                            {
-                                ProLockedCard(
-                                    title = stringResource(Res.string.pro_locked_title),
-                                    message = stringResource(Res.string.pro_locked_message),
-                                    onUnlock = { onShowPaywall(locked.level) },
-                                )
-                            }
-                        },
                     )
-                } else if (lockedSample != null) {
-                    Column(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .weight(1f)
-                            .verticalScroll(rememberScrollState())
-                            .padding(horizontal = Space.gutter),
-                    ) {
-                        ProLockedCard(
-                            title = stringResource(Res.string.pro_locked_title),
-                            message = stringResource(Res.string.pro_locked_message),
-                            onUnlock = { onShowPaywall(lockedSample.level) },
-                        )
-                    }
                 }
             }
         }

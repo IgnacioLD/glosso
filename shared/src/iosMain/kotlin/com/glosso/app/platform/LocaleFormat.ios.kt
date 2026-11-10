@@ -2,12 +2,9 @@ package com.glosso.app.platform
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
-import kotlin.time.Instant
 import platform.Foundation.NSCalendar
 import platform.Foundation.NSDate
 import platform.Foundation.NSDateFormatter
-import platform.Foundation.NSDateFormatterLongStyle
-import platform.Foundation.NSDateFormatterNoStyle
 import platform.Foundation.NSLocale
 import platform.Foundation.NSNumber
 import platform.Foundation.NSNumberFormatter
@@ -48,15 +45,6 @@ actual fun formatDecimal(value: Double, decimals: Int, languageTag: String?): St
 
 actual fun localeLanguage(languageTag: String?): String =
     localeOf(languageTag).languageCode
-
-actual fun formatLongUtcDate(iso: String): String? {
-    val instant = runCatching { Instant.parse(iso) }.getOrNull() ?: return null
-    val epochDay = instant.epochSeconds.floorDiv(86_400L)
-    return utcFormatter(NSLocale.currentLocale).apply {
-        dateStyle = NSDateFormatterLongStyle
-        timeStyle = NSDateFormatterNoStyle
-    }.stringFromDate(dateOf(epochDay))
-}
 
 actual fun formatWeekdayDayMonth(epochDay: Long, languageTag: String): String {
     val locale = localeOf(languageTag)

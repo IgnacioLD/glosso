@@ -176,7 +176,7 @@ if (androidEnabled) {
 
 // Strings, fonts and images shared by the Android and iOS UI live in
 // src/commonMain/composeResources. Android-only resources (manifest label, launcher
-// icon, splash theme, notifications, Play Billing errors) stay in androidApp/res.
+// icon, splash theme, notifications) stay in androidApp/res.
 compose.resources {
     publicResClass = true
     packageOfResClass = "com.glosso.app.resources"

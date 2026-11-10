@@ -74,11 +74,7 @@ data class LessonState(
     val levels: List<String> = emptyList(),
     /** Theme display names, straight from the manifest. */
     val themeLabels: Map<String, String> = emptyMap(),
-    /**
-     * The teaching order of the theme blocks, straight from the manifest. The
-     * free frontier is the first block of this order, never the alphabetically
-     * first theme, so the lesson list and the paywall agree on where "free" ends.
-     */
+    /** The teaching order of the theme blocks, straight from the manifest. */
     val themeOrder: List<String> = emptyList(),
     val active: LessonModel? = null,
     val step: LessonStep = LessonStep.BASE,

@@ -5,10 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.glosso.app.api.DrillPlanRequest
 import com.glosso.app.api.GlossoApi
-import com.glosso.app.billing.AccessController
-import com.glosso.app.billing.AccessPolicy
-import com.glosso.app.billing.ProductAccess
-import com.glosso.app.billing.SubscriptionStatus
 import com.glosso.engine.drills.DrillPlanner
 import com.glosso.engine.model.DrillModel
 import com.glosso.engine.model.PhonemeErrorModel
@@ -114,29 +110,6 @@ class PracticeViewModel(private val services: AppServices) : ViewModel() {
     private val _state = MutableStateFlow(PracticeState())
     val state: StateFlow<PracticeState> = _state.asStateFlow()
 
-    /**
-     * The subscription the gate reads. Free learners only ever get the general A1
-     * bank (the "try anything" hook); Pro learners get the plan built from their
-     * profile. Set from the screen so the same [AccessController] decides, not a
-     * boolean re-derived in the UI.
-     */
-    private var status: SubscriptionStatus = SubscriptionStatus.NONE
-
-    /** The server's product access (open beta, plan); set alongside [status]. */
-    private var productAccess: ProductAccess = ProductAccess.Unknown
-
-    /**
-     * Called when the practice screen is (re)entered with the current status. It
-     * always re-resolves the plan, so a profile recorded since the last visit
-     * turns the free bank into the personalised one (and a lapsed subscription
-     * turns it back, still A1-only).
-     */
-    fun setAccess(status: SubscriptionStatus, productAccess: ProductAccess = ProductAccess.Unknown) {
-        this.status = status
-        this.productAccess = productAccess
-        load()
-    }
-
     init {
         engine.onScored = { feedback ->
             val previous = AttemptHistory.recordTake(_state.value.drill?.id, feedback.score)
@@ -162,25 +135,20 @@ class PracticeViewModel(private val services: AppServices) : ViewModel() {
         viewModelScope.launch {
             _state.value = _state.value.copy(loading = true, error = null)
             profiles.await()
-            // Personalisation is Pro: a free learner gets the general bank, and
-            // whatever the bank returns is still filtered item by item, so no A2+
-            // drill can slip into a free session.
-            val access = AccessController(status, productAccess = productAccess)
-            val profile = if (access.entitled) profiles.current?.takeIf { it.stats.isNotEmpty() } else null
-            val bankLevel = if (access.entitled) null else AccessPolicy.FREE_LEVEL
+            val profile = profiles.current?.takeIf { it.stats.isNotEmpty() }
             runCatching {
                 planPractice(
                     profile = profile,
                     plan = { active ->
                         api.drillPlan(DrillPlanRequest(profile = active, limit = PRACTICE_SIZE)).drills
                     },
-                    fallback = { api.drills(limit = PRACTICE_SIZE, level = bankLevel) },
+                    fallback = { api.drills(limit = PRACTICE_SIZE) },
                 )
             }
                 .onSuccess { (drills, source) ->
                     _state.value = _state.value.copy(
                         loading = false,
-                        drills = drills.filterNot { access.isLocked(it) },
+                        drills = drills,
                         index = 0,
                         source = source,
                         focus = null,
@@ -234,24 +202,12 @@ class PracticeViewModel(private val services: AppServices) : ViewModel() {
     fun practiceError(error: PhonemeErrorModel) {
         viewModelScope.launch {
             val currentId = _state.value.drill?.id
-            val access = AccessController(status, productAccess = productAccess)
             // Prefer a different drill from the reviewed bank, so the learner
-            // generalises the sound instead of replaying the same sentence. The
-            // bank is filtered through the gate too, so a free learner is never
-            // handed an A2+ drill by the "practise this sound" shortcut.
-            val bank = runCatching {
-                api.drills(
-                    limit = DRILL_BANK,
-                    level = if (access.entitled) null else AccessPolicy.FREE_LEVEL,
-                )
-            }.getOrDefault(emptyList())
-            val pool = (bank + _state.value.drills)
-                .filter { it.id != currentId && !access.isLocked(it) }
+            // generalises the sound instead of replaying the same sentence.
+            val bank = runCatching { api.drills(limit = DRILL_BANK) }.getOrDefault(emptyList())
+            val pool = (bank + _state.value.drills).filter { it.id != currentId }
             val drill = DrillPlanner.drillForError(error, pool)
-                ?: DrillPlanner.drillForError(
-                    error,
-                    _state.value.drills.filterNot { access.isLocked(it) },
-                )
+                ?: DrillPlanner.drillForError(error, _state.value.drills)
                 ?: run {
                     // No drill trains this sound right now (offline bank or a sound
                     // the bank does not cover). Say so instead of a dead tap.

@@ -4,9 +4,8 @@ import androidx.compose.runtime.staticCompositionLocalOf
 
 /**
  * What the build decides and the shared code reads: the debug tools, the store
- * capture mode, the experimental rhythm bonus, the version and the product the
- * paywall manages. Android fills it from `BuildConfig`; iOS will from its bundle
- * and build settings. Screens read [LocalAppConfig]; ViewModels get the fields
+ * capture mode, the experimental rhythm bonus and the version. Android fills it
+ * from `BuildConfig`; iOS will from its bundle and build settings. Screens read [LocalAppConfig]; ViewModels get the fields
  * they need in their constructor.
  */
 data class AppConfig(
@@ -18,8 +17,6 @@ data class AppConfig(
     val prosodyBonus: Boolean = false,
     val versionName: String = "",
     val versionCode: Int = 0,
-    /** The subscription the paywall manages when the store returned no offer. */
-    val subscriptionProductId: String = "",
     /**
      * The usage statistics section of Settings. Off on iOS, where analytics stay
      * uninitialised until the privacy policy and the App Store forms cover it

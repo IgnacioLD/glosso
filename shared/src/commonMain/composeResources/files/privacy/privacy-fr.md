@@ -34,8 +34,7 @@ sans audio.
 
 ## Compte : continuer avec Google (facultatif)
 
-Il permet d'emporter le compte (et le statut Beta Founder) sur un nouveau
-téléphone. Il est facultatif ; l'app fonctionne de la même façon sans lui.
+Il permet d'emporter le compte sur un nouveau téléphone. Il est facultatif ; l'app fonctionne de la même façon sans lui.
 
 - **Continuer avec Google** : l'utilisateur choisit un compte Google du
   téléphone (Android Credential Manager). Seule l'identité est demandée : le
@@ -88,8 +87,7 @@ téléphone. Il est facultatif ; l'app fonctionne de la même façon sans lui.
   commencé et terminé, leçon commencée, terminée ou quittée, exercice terminé
   (type, tranche de note de 10 points, maîtrisé ou non), essai de prononciation
   noté sur le téléphone (tranche de note, maîtrisé ou non, identifiants des
-  règles d'erreur), micro refusé, offre Pro vue, bouton Pro touché et achat
-  commencé ou échoué.
+  règles d'erreur) et micro refusé.
 
 À partir de l'app 2.5.4, l'app envoie aussi :
 

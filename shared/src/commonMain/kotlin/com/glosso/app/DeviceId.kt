@@ -34,9 +34,8 @@ object DeviceId {
      *
      * The first write is a synchronous `commit`, not `apply`: a process killed
      * right after the first launch must still find its id on the next one, or a
-     * fresh UUID would look like a new user (and a new Beta Founder) to the
-     * server. [init] holds a lock so two entry points cannot each generate
-     * one.
+     * fresh UUID would look like a new user to the server. [init] holds a lock
+     * so two entry points cannot each generate one.
      */
     @OptIn(ExperimentalUuidApi::class)
     fun init(context: PlatformContext) = lock.withLock {

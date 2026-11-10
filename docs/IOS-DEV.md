@@ -74,7 +74,7 @@ Se pasan en el entorno de lanzamiento con el prefijo `SIMCTL_CHILD_`; una build 
 
 - Analitica y crash reporter **apagados** (fase 6): `Analytics` nunca se inicializa, Ajustes no
   muestra la seccion de estadisticas y los ganchos de primer/segundo plano no registran ni envian
-  nada. No hay compras (`NoSubscriptions`) ni inicio de sesion (fase 5).
+  nada. No sign-in yet (phase 5).
 - Puntuacion solo en la nube (`NoOnDeviceScoring`); las pantallas no ofrecen el modelo.
 - Descargas de lecciones en primer plano (`ForegroundDownloader`); faltan las de `URLSession` en
   segundo plano.

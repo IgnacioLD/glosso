@@ -6,7 +6,6 @@ import coil3.PlatformContext
 import coil3.SingletonImageLoader
 import com.glosso.app.api.ApiCache
 import com.glosso.app.api.GlossoApi
-import com.glosso.app.billing.BillingProvider
 import com.glosso.app.download.DownloadManager
 import com.glosso.app.platform.platformConnectivity
 import com.glosso.app.migration.StudioImport
@@ -74,13 +73,11 @@ class GlossoApplication : Application(), SingletonImageLoader.Factory {
                 prosodyBonus = BuildConfig.PROSODY_BONUS,
                 versionName = BuildConfig.VERSION_NAME,
                 versionCode = BuildConfig.VERSION_CODE,
-                subscriptionProductId = BuildConfig.SUBSCRIPTION_PRODUCT_ID,
             ),
             connectivity = platformConnectivity(this),
             onDevice = OnDeviceScorer,
             downloader = DownloadManager,
             newApi = { GlossoApi() },
-            subscriptions = { BillingProvider.get(this) },
         )
     }
 }

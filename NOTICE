@@ -13,9 +13,8 @@ details.
 
 Additional permission under GNU AGPL version 3 section 7:
 If you modify this program, or any covered work, by linking or combining it
-with the Google Play Billing Library, Google Play services, the Google Play
-In-App Review library, the Google Identity (googleid) library or JUnit (or
-modified versions of those libraries), containing parts covered by the terms
+with Google Play services, the Google Identity (googleid) library or JUnit
+(or modified versions of those libraries), containing parts covered by the terms
 of their respective licenses, the licensors of this program grant you
 additional permission to convey the resulting work.
 
@@ -188,19 +187,14 @@ Coil (io.coil-kt:coil-compose)
   Copyright:   Coil Contributors
   License:     Apache-2.0 (see licenses/Apache-2.0.txt)
 
-Google Play Billing Library (com.android.billingclient:billing)
+Google Play services (com.google.android.gms:play-services-*) and Google
+Identity (com.google.android.libraries.identity.googleid:googleid)
   Copyright:   Google LLC
   License:     Android Software Development Kit License
                (https://developer.android.com/studio/terms.html)
-  Used as:     in-app subscriptions. This SDK is NOT Apache-2.0; its use is
-               governed by the Android SDK License.
-
-Google Play In-App Review (com.google.android.play:review-ktx)
-  Copyright:   Google LLC
-  License:     Play Core Software Development Kit Terms of Service
-               (https://developer.android.com/guide/playcore/in-app-review)
-  Used as:     in-app review prompt. This SDK is NOT Apache-2.0; its use is
-               governed by the Play Core SDK Terms of Service.
+  Used as:     optional Sign in with Google, to carry an account to a new
+               phone. These SDKs are NOT Apache-2.0; their use is governed by
+               the Android SDK License.
 
 Test-only libraries (not distributed in the app):
 JUnit 4 (junit:junit)
@@ -237,7 +231,7 @@ CHANGES
 
 The wav2vec2 model is used unmodified except for the standard fp16 ONNX
 conversion performed by onnx-community. No third-party component is modified
-by Glosso Pro.
+by Glosso.
 
 This NOTICE is a summary. The app itself ships the machine-readable catalogue at
 assets/licenses.json, generated from the **resolved runtime classpath** (not only

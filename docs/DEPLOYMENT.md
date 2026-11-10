@@ -75,16 +75,6 @@ sudo systemctl enable --now glosso-server
 | `GLOSSO_DB_PASSWORD` | (vacio) | Password de la base de datos |
 | `GLOSSO_ANALYTICS_RETENTION_DAYS` | `180` | Dias de retencion de eventos (se purga al arrancar) |
 | `GLOSSO_CORS_ORIGINS` | (vacio) | Lista de origenes permitidos (web). Vacio = sin CORS (app nativa no lo necesita) |
-| `GLOSSO_PLAY_SERVICE_ACCOUNT_JSON` | (vacio) | Ruta al JSON de la cuenta de servicio de Play. Sin ella, verificacion de compras desactivada |
-| `GLOSSO_PLAY_SERVICE_ACCOUNT_JSON_BASE64` | (vacio) | Alternativa al fichero: el JSON en base64 |
-| `GLOSSO_PLAY_PACKAGE` | `me.shirobyte42.glosso` | Paquete de Play que se valida |
-| `GLOSSO_PLAY_PRODUCT_ID` | `com.glosso.app.pro` | Suscripcion Pro que concede entitlement |
-| `GLOSSO_PLAY_TRIAL_OFFER_ID` | (vacio) | Id de la oferta de prueba para reportar `TRIAL` (si no, `ACTIVE`) |
-| `GLOSSO_BILLING_CACHE_TTL_SECONDS` | `600` | TTL de la cache de verificaciones (0 = sin cache) |
-| `GLOSSO_RTDN_SECRET` | (vacio) | Secreto compartido que Pub/Sub presenta en `/v1/billing/rtdn`. Sin el, webhook cerrado |
-| `GLOSSO_RTDN_SUBSCRIPTION` | (vacio) | Subscription push esperada; si se define, se comprueba el sobre |
-
-Detalle y pasos exactos de Play/Pub/Sub: `docs/BILLING-E2E.md`.
 
 ## 6. Endpoints
 
@@ -99,8 +89,6 @@ Detalle y pasos exactos de Play/Pub/Sub: `docs/BILLING-E2E.md`.
 | GET | `/v1/events/product` | Rollup de producto: notas, mastery, top errores (requiere token) |
 | GET | `/v1/content/manifest?language=<code>` | Catalogo descargable del idioma (por defecto `en`) |
 | GET | `/v1/content/{kind}?language=<code>` | Contenido del idioma (`DRILL`, `WORD`, `STORY`, `DIALOGUE`, `ARTICLE`, `EXERCISE`, `LESSON`) |
-| POST | `/v1/billing/verify` | Valida un `purchaseToken` contra la Play Developer API; `503` si no hay cuenta de servicio |
-| POST | `/v1/billing/rtdn` | Webhook de Real-time Developer Notifications (Pub/Sub), protegido por `GLOSSO_RTDN_SECRET` |
 | GET | `/admin/events` | Pagina HTML de analitica (requiere token) |
 | GET | `/stats` | Ocupacion del gate de inferencia (requiere token) |
 | GET | `/assets/content/<code>/{file}` | Ficheros estaticos por idioma (si `GLOSSO_ASSETS_DIR` existe) |
@@ -203,13 +191,12 @@ vez, sin purgas manuales.
   `caddy`), asi que se edita, se sincroniza al VPS y se recarga sin reiniciar:
   `docker compose -f deploy/docker-compose.yml exec caddy caddy reload --config /etc/caddy/Caddyfile`
   (o `docker compose -f deploy/docker-compose.yml restart caddy`).
-- Backups: de `GLOSSO_ASSETS_DIR` (assets re-generables) y, cuando existan, de la
-  base de datos de cuentas/entitlement.
+- Backups: `GLOSSO_ASSETS_DIR` (regenerable assets) and the PostgreSQL database
+  (accounts, profiles, analytics).
 - Monitorizacion de CPU/RAM/ancho de banda desde el panel del proveedor.
 
 ## 9. Pendiente (fases siguientes)
 
 - Subida y reconocimiento de audio en el servidor (ONNX JVM).
-- Cuentas, entitlement firmado y verificacion de Play Billing.
 - Rate limiting, Play Integrity, cola del LLM gratuito.
 - CDN para assets cuando crezca el trafico.

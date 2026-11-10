@@ -56,7 +56,6 @@ navigationevent-multiplatform = "1.0.1"
 # androidx icons the BOM already brings.
 compose-material3-multiplatform = "1.9.0"
 compose-material-icons-multiplatform = "1.7.3"
-billing = "9.1.0"
 androidx-credentials = "1.5.0"
 googleid = "1.1.1"
 junit = "4.13.2"
@@ -138,7 +137,6 @@ lifecycle-viewmodel-compose-multiplatform = { module = "org.jetbrains.androidx.l
 lifecycle-runtime-compose-multiplatform = { module = "org.jetbrains.androidx.lifecycle:lifecycle-runtime-compose", version.ref = "lifecycle-multiplatform" }
 compose-multiplatform-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "compose-material3-multiplatform" }
 compose-multiplatform-material-icons-extended = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "compose-material-icons-multiplatform" }
-billing = { module = "com.android.billingclient:billing", version.ref = "billing" }
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "androidx-credentials" }
 androidx-credentials-play-services-auth = { module = "androidx.credentials:credentials-play-services-auth", version.ref = "androidx-credentials" }
 googleid = { module = "com.google.android.libraries.identity.googleid:googleid", version.ref = "googleid" }

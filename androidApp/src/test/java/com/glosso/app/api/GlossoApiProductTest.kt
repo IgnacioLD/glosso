@@ -21,12 +21,12 @@ class GlossoApiProductTest {
         onRequest(request.headers["X-Device-Id"], request.url.encodedPath)
         when (request.url.encodedPath) {
             "/v1/config" -> respond(
-                """{"schema":1,"mode":"BETA","beta":{"active":true,"endDate":"2026-12-31T23:59:59Z"},"limits":null,"pricing":null,"flags":{"pro":false}}""",
+                """{"schema":1,"flags":{"accounts":true},"client":{"recommendedVersion":2219}}""",
                 headers = headersOf(HttpHeaders.ContentType, "application/json"),
             )
 
             "/v1/me" -> respond(
-                """{"plan":"FREE","status":"NONE","betaFounder":true,"betaFounderBenefit":"Ventaja Beta Founder"}""",
+                """{"linkedAccounts":["google"]}""",
                 headers = headersOf(HttpHeaders.ContentType, "application/json"),
             )
 
@@ -55,10 +55,9 @@ class GlossoApiProductTest {
 
         assertEquals("device-123", configDevice)
         assertEquals("device-123", meDevice)
-        assertEquals("BETA", config.mode)
-        assertEquals("2026-12-31T23:59:59Z", config.beta.endDate)
-        assertEquals("FREE", me.plan)
-        assertEquals(true, me.betaFounder)
+        assertEquals(true, config.flag("accounts"))
+        assertEquals(2219, config.client.recommendedVersion)
+        assertEquals(listOf("google"), me.linkedAccounts)
     }
 
     @Test

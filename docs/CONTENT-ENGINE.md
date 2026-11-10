@@ -161,12 +161,11 @@ Por cada pieza del pool, medir:
 El ejercicio que funciona **sube**; el que no mejora al alumno, **baja o se
 descarta**.
 
-## 10. Control de coste por tier
+## 10. Cost control
 
-- **Gratis**: pool existente + contenido cacheado. Cero generacion nueva.
-- **Pro**: pool + personalizacion + long tail + generacion nueva si hace falta.
-
-Asi no se gasta GPU generando contenido exclusivo para quien no paga.
+Glosso is free for everyone, so there is no tier to price against. Cost is
+controlled by demand instead: the existing pool and cached content first, and new
+generation only when the measured gap for a Need Class justifies it.
 
 ## 11. Economia (numeros medidos en el proyecto)
 

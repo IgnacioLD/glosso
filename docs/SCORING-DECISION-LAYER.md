@@ -166,5 +166,4 @@ ausencia de alineacion.
 
 ## Lo que no se toca
 
-Identidad (`me.shirobyte42.glosso`), billing, `AccessPolicy`, la frontera A1
-gratis / A2 muro y el modelo acustico. Sin dependencias nuevas.
+Identity (`me.shirobyte42.glosso`) and the acoustic model. No new dependencies.
