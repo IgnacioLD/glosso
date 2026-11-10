@@ -1,11 +1,13 @@
 [versions]
 kotlin = "2.4.20"
 # Compose Multiplatform (plugin + runtime) for the :shared module. Kept on the line
-# whose Android artifacts fit AGP 8.9 and compileSdk 36: CMP 1.11.1 maps onto
-# androidx.compose 1.11.2 (1.12 needs AGP 9.1 and compileSdk 37). compose-bom below
-# is the androidx BOM with that same Compose (1.11.2), so the app and :shared agree.
+# whose Android artifacts fit compileSdk 36: CMP 1.11.1 maps onto androidx.compose
+# 1.11.2 (1.12 needs compileSdk 37). compose-bom below is the androidx BOM with that
+# same Compose (1.11.2), so the app and :shared agree.
 compose-multiplatform = "1.11.1"
-agp = "8.9.1"
+# The newest AGP inside Kotlin 2.4.20's tested range (AGP 8.5.2-9.3.1, Gradle up to
+# 9.7.0; 9.3.3 and Gradle 9.7.1 are patch releases of those). AGP 9.3 needs Gradle 9.5+.
+agp = "9.3.3"
 ktor = "3.0.3"
 # Ktor on iOS: Coil's Ktor fetcher (coil-network-ktor3 3.5.0) lifts ktor-client-core
 # to 3.1.0 there, and Kotlin/Native needs every Ktor module on that same version (a
@@ -150,8 +152,7 @@ androidx-test-ext-junit = { module = "androidx.test.ext:junit", version.ref = "a
 kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-android-library = { id = "com.android.library", version.ref = "agp" }
+android-kotlin-multiplatform-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 compose-multiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }

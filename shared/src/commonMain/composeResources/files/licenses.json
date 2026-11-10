@@ -3236,6 +3236,19 @@
       "notice": null
     },
     {
+      "id": "org.jetbrains.kotlin:kotlin-stdlib-common",
+      "name": "kotlin-stdlib-common",
+      "author": "JetBrains s.r.o.",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
       "id": "org.jetbrains.kotlin:kotlin-stdlib-jdk7",
       "name": "kotlin-stdlib-jdk7",
       "author": "JetBrains s.r.o.",

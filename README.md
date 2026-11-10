@@ -45,6 +45,7 @@ tools/fetch-assets.sh
 # Tests
 ./gradlew :engine:jvmTest
 ./gradlew :server:test
+./gradlew :shared:testAndroidHostTest           # shared UI, Robolectric
 ./gradlew :androidApp:testFdroidDebugUnitTest :androidApp:testPlaystoreDebugUnitTest
 
 # Run the server locally on :8080 (serves data/assets)

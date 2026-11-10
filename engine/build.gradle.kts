@@ -39,7 +39,7 @@ val ortIosDir: File by lazy {
 }
 
 if (androidEnabled) {
-    apply(plugin = "com.android.library")
+    apply(plugin = "com.android.kotlin.multiplatform.library")
 }
 
 kotlin {
@@ -47,7 +47,11 @@ kotlin {
         compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
     }
     if (androidEnabled) {
-        androidTarget {
+        // The plugin is applied imperatively above, so there is no generated `android {}` accessor.
+        extensions.configure<com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget>("android") {
+            namespace = "com.glosso.engine"
+            compileSdk = 35
+            minSdk = 26
             compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
         }
     }
@@ -62,12 +66,12 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        val commonMain = getByName("commonMain") {
             dependencies {
                 implementation(libs.kotlinx.serialization.json)
             }
         }
-        val commonTest by getting {
+        val commonTest = getByName("commonTest") {
             dependencies {
                 implementation(kotlin("test"))
             }
@@ -76,10 +80,10 @@ kotlin {
         // ONNX Runtime has the same Java API on JVM and Android, so the acoustic
         // recognizer is written once here and shared; only the artifact differs
         // (onnxruntime vs onnxruntime-android).
-        val onnxMain by creating {
+        val onnxMain = create("onnxMain") {
             dependsOn(commonMain)
         }
-        val jvmMain by getting {
+        val jvmMain = getByName("jvmMain") {
             dependsOn(onnxMain)
             dependencies {
                 implementation(libs.onnxruntime)
@@ -92,12 +96,12 @@ kotlin {
             }
         }
         if (iosEnabled) {
-            val iosMain by creating {
+            val iosMain = create("iosMain") {
                 dependsOn(commonMain)
             }
             getByName("iosArm64Main").dependsOn(iosMain)
             getByName("iosSimulatorArm64Main").dependsOn(iosMain)
-            val iosTest by creating {
+            val iosTest = create("iosTest") {
                 dependsOn(commonTest)
             }
             getByName("iosArm64Test").dependsOn(iosTest)
@@ -106,22 +110,8 @@ kotlin {
     }
 }
 
-if (androidEnabled) {
-    extensions.configure<com.android.build.gradle.LibraryExtension>("android") {
-        namespace = "com.glosso.engine"
-        compileSdk = 35
-        defaultConfig {
-            minSdk = 26
-        }
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
-        }
-    }
-}
-
 if (iosEnabled) {
-    val fetchOnnxRuntimeIos by tasks.registering(Exec::class) {
+    val fetchOnnxRuntimeIos = tasks.register<Exec>("fetchOnnxRuntimeIos") {
         description = "Downloads the pinned ONNX Runtime iOS build (no-op when already present)."
         inputs.file(ortIosScript)
         outputs.dir(ortIosDir)

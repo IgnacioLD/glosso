@@ -9,11 +9,13 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
-import coil.request.ImageRequest
+import coil3.SingletonImageLoader
+import coil3.request.ImageRequest
 import com.glosso.app.designsystem.GlossoTheme
 import kotlin.math.abs
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -34,8 +36,15 @@ class GlossoArtworkTest {
 
     private val context get() = InstrumentationRegistry.getInstrumentation().context
 
+    // What GlossoApplication installs as Coil's singleton in the app.
+    @Before
+    fun installAppImageLoader() {
+        SingletonImageLoader.setUnsafe(glossoImageLoader(context))
+    }
+
     private fun fixture(name: String): ByteArray =
-        context.assets.open("fixtures/$name").use { it.readBytes() }
+        requireNotNull(javaClass.getResourceAsStream("/fixtures/$name")) { "missing fixture $name" }
+            .use { it.readBytes() }
 
     @Test
     fun realSvgReplacesTheFallbackInsideTheSixteenByNineFrame() {
