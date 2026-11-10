@@ -1,5 +1,6 @@
 package com.glosso.app.download
 
+import com.glosso.app.IosOnDeviceScorer
 import com.glosso.app.OfflineStore
 import com.glosso.app.platform.Connectivity
 import kotlinx.coroutines.CoroutineScope
@@ -12,12 +13,11 @@ import okio.FileSystem
 
 /**
  * The iOS [Downloader] until phase 3: the shared [DownloadEngine] run in the
- * app's process, so lesson packs download while the app is open, with the same
- * queue and Wi-Fi rule as Android. There is no model pack on iOS yet
- * (`NoOnDeviceScoring`), so only lessons go through it.
+ * app's process, so lesson packs and the model pack download while the app is
+ * open, with the same queue and Wi-Fi rule as Android.
  *
  * TODO(ios phase 3): a background `URLSession` so a download survives leaving
- * the app, and the files excluded from the iCloud backup.
+ * the app. Only the transport changes: [DownloadFile.fetch] is the seam.
  */
 internal class ForegroundDownloader(private val connectivity: Connectivity) : Downloader {
 
@@ -25,13 +25,20 @@ internal class ForegroundDownloader(private val connectivity: Connectivity) : Do
         scope = CoroutineScope(SupervisorJob() + Dispatchers.IO),
         fileSystem = FileSystem.SYSTEM,
         onChanged = { snapshot ->
+            IosOnDeviceScorer.onQueueState(snapshot.item(DownloadIds.MODEL))
             OfflineStore.onQueueState(snapshot.active.firstOrNull { it.kind == DownloadKind.LESSON })
         },
         onCompleted = { item ->
-            if (item.kind == DownloadKind.LESSON) OfflineStore.commitDownload(DownloadIds.lessonIdOf(item.id))
+            when (item.kind) {
+                DownloadKind.MODEL -> IosOnDeviceScorer.onDownloadFinished()
+                DownloadKind.LESSON -> OfflineStore.commitDownload(DownloadIds.lessonIdOf(item.id))
+            }
         },
         onFailed = { item, failure ->
-            if (item.kind == DownloadKind.LESSON) OfflineStore.onDownloadFailed(DownloadIds.lessonIdOf(item.id), failure)
+            when (item.kind) {
+                DownloadKind.MODEL -> IosOnDeviceScorer.onDownloadFailed(failure)
+                DownloadKind.LESSON -> OfflineStore.onDownloadFailed(DownloadIds.lessonIdOf(item.id), failure)
+            }
         },
         networkAllowed = ::networkAllowed,
     )

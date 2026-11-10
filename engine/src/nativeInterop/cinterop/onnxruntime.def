@@ -11,9 +11,9 @@ linkerOpts = -lc++ -framework Foundation -framework CoreML -framework Network
 
 /*
  * The few ONNX Runtime calls the recognizer needs, wrapped so Kotlin does not
- * have to walk the OrtApi function-pointer table. The session is created with
- * default options, exactly like OrtEnvironment.createSession(path) on the
- * JVM/Android side, so the CPU kernels and graph optimisations are the same.
+ * have to walk the OrtApi function-pointer table. The session options match the
+ * JVM/Android recognizer's: default CPU kernels and graph optimisations, plus
+ * its two memory-saving settings, which change only where tensors are allocated.
  * Every function returns NULL or 0 on success and a malloc'ed error message
  * otherwise (free it with glosso_ort_free_error).
  */
@@ -67,6 +67,9 @@ static inline GlossoOrtSession* glosso_ort_open(const char* model_path, char** e
     char* name = NULL;
     char* err = glosso_ort_take_error(api, api->CreateEnv(ORT_LOGGING_LEVEL_WARNING, "glosso", &s->env));
     if (err == NULL) err = glosso_ort_take_error(api, api->CreateSessionOptions(&options));
+    if (err == NULL) err = glosso_ort_take_error(api, api->DisableCpuMemArena(options));
+    if (err == NULL) err = glosso_ort_take_error(api, api->AddSessionConfigEntry(
+        options, "session.use_device_allocator_for_initializers", "1"));
     if (err == NULL) err = glosso_ort_take_error(api, api->CreateSession(s->env, model_path, options, &s->session));
     if (options != NULL) api->ReleaseSessionOptions(options);
     if (err == NULL) err = glosso_ort_take_error(api, api->CreateCpuMemoryInfo(OrtArenaAllocator, OrtMemTypeDefault, &s->cpu));

@@ -75,9 +75,12 @@ Se pasan en el entorno de lanzamiento con el prefijo `SIMCTL_CHILD_`; una build 
 - Analitica y crash reporter **apagados** (fase 6): `Analytics` nunca se inicializa, Ajustes no
   muestra la seccion de estadisticas y los ganchos de primer/segundo plano no registran ni envian
   nada. No sign-in yet (phase 5).
-- Puntuacion solo en la nube (`NoOnDeviceScoring`); las pantallas no ofrecen el modelo.
-- Descargas de lecciones en primer plano (`ForegroundDownloader`); faltan las de `URLSession` en
-  segundo plano.
+- On-device scoring as on Android (`IosOnDeviceScorer`, see `docs/IOS-ENGINE.md`): the screens offer
+  the model pack, download it or import it from Files, and score offline with the same result as
+  the server. `GLOSSO_OFFLINE=1` only fakes connectivity: a reachable server still scores the take
+  when the pack is missing.
+- Descargas de lecciones y del modelo en primer plano (`ForegroundDownloader`); faltan las de
+  `URLSession` en segundo plano.
 - El audio del contenido es Ogg Vorbis, que AVFoundation no reproduce: `AudioDevice.ios.kt` lo
   decodifica con stb_vorbis (vendorizado en `shared/src/nativeInterop/stb_vorbis/`, ver su README) a
   WAV de 16 bits con la frecuencia y los canales del clip, fuera del hilo principal, y lo reproduce
