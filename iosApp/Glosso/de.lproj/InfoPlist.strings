@@ -1,0 +1,3 @@
+/* Shown by iOS when the app first asks for the microphone. Same text as the
+   in-app rationale practice_mic_permission (shared/src/commonMain/composeResources). */
+"NSMicrophoneUsageDescription" = "Glosso braucht das Mikrofon, um deine Aussprache zu bewerten.";

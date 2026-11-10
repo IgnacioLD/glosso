@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		16B888F4B65F81975810B51B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1710C17CE48546F87CB16AB4 /* Assets.xcassets */; };
+		57EA3517EB728435656F231F /* GlossoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00E313C12051296365B87D /* GlossoApp.swift */; };
+		5C48DFD4F271929874B02005 /* feedback_wrong.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7F93A32271977271A6AEAB9 /* feedback_wrong.wav */; };
+		6984419D0392BCBF885689D4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85602AE4A81871D00E173504 /* InfoPlist.strings */; };
+		DACE2475D4A7216AB24D73EC /* feedback_correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = E50D027BE53C25D0968E7F6E /* feedback_correct.wav */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1710C17CE48546F87CB16AB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2C846B35EC361723B1F178C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2DCA6E830AB1B85E58DD06F9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7575A080657F8079D31AE601 /* Glosso.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Glosso.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9429EE506615E286177826C7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A4612224C469C3EDA918DBDD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		AEDDF511B972F243238FAA08 /* Glosso.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Glosso.xcconfig; sourceTree = "<group>"; };
+		C7F93A32271977271A6AEAB9 /* feedback_wrong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = feedback_wrong.wav; path = ../../shared/src/androidMain/res/raw/feedback_wrong.wav; sourceTree = "<group>"; };
+		E50D027BE53C25D0968E7F6E /* feedback_correct.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = feedback_correct.wav; path = ../../shared/src/androidMain/res/raw/feedback_correct.wav; sourceTree = "<group>"; };
+		FA00E313C12051296365B87D /* GlossoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlossoApp.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		168280DC670EE78D13CC09A3 /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				AEDDF511B972F243238FAA08 /* Glosso.xcconfig */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		217FDE92377745A96D34CDB4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7575A080657F8079D31AE601 /* Glosso.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		80617E1F570E6CF7F5FD7DEB /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E50D027BE53C25D0968E7F6E /* feedback_correct.wav */,
+				C7F93A32271977271A6AEAB9 /* feedback_wrong.wav */,
+			);
+			name = Sounds;
+			sourceTree = "<group>";
+		};
+		B88B3876102E020FD90E4036 /* Glosso */ = {
+			isa = PBXGroup;
+			children = (
+				1710C17CE48546F87CB16AB4 /* Assets.xcassets */,
+				FA00E313C12051296365B87D /* GlossoApp.swift */,
+				85602AE4A81871D00E173504 /* InfoPlist.strings */,
+				80617E1F570E6CF7F5FD7DEB /* Sounds */,
+			);
+			path = Glosso;
+			sourceTree = "<group>";
+		};
+		DE1514309CB0AD41FCC9FB88 = {
+			isa = PBXGroup;
+			children = (
+				168280DC670EE78D13CC09A3 /* Configuration */,
+				B88B3876102E020FD90E4036 /* Glosso */,
+				217FDE92377745A96D34CDB4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64D197ABDF5BD72070084A67 /* Glosso */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F94B818A2A89432E92400DCD /* Build configuration list for PBXNativeTarget "Glosso" */;
+			buildPhases = (
+				BD66FAD03DB64C4F1CF80D58 /* Build Shared.framework */,
+				25DE309D55DE9F9E8B2F5C8F /* Sources */,
+				85C39E8A869D9521E23DF29E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Glosso;
+			packageProductDependencies = (
+			);
+			productName = Glosso;
+			productReference = 7575A080657F8079D31AE601 /* Glosso.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BEBB910121D61C5F9E4C2912 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					64D197ABDF5BD72070084A67 = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 4290A6FA314CDBCDE34BE5B2 /* Build configuration list for PBXProject "Glosso" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				de,
+				en,
+				es,
+				fr,
+			);
+			mainGroup = DE1514309CB0AD41FCC9FB88;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 217FDE92377745A96D34CDB4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64D197ABDF5BD72070084A67 /* Glosso */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		85C39E8A869D9521E23DF29E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				16B888F4B65F81975810B51B /* Assets.xcassets in Resources */,
+				6984419D0392BCBF885689D4 /* InfoPlist.strings in Resources */,
+				DACE2475D4A7216AB24D73EC /* feedback_correct.wav in Resources */,
+				5C48DFD4F271929874B02005 /* feedback_wrong.wav in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		BD66FAD03DB64C4F1CF80D58 /* Build Shared.framework */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Build Shared.framework";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/build-shared.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		25DE309D55DE9F9E8B2F5C8F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				57EA3517EB728435656F231F /* GlossoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		85602AE4A81871D00E173504 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9429EE506615E286177826C7 /* de */,
+				2C846B35EC361723B1F178C7 /* en */,
+				2DCA6E830AB1B85E58DD06F9 /* es */,
+				A4612224C469C3EDA918DBDD /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		5BB7BC8398A6A91E46525E04 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEDDF511B972F243238FAA08 /* Glosso.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Glosso/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = "$(inherited) -framework Shared";
+				PRODUCT_NAME = Glosso;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		73EE8FC85C974362CF07A9E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		7CDD39253F45587ADAD2E776 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		C46D173FA583B09E419F2ED0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = AEDDF511B972F243238FAA08 /* Glosso.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Glosso/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				OTHER_LDFLAGS = "$(inherited) -framework Shared";
+				PRODUCT_NAME = Glosso;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		4290A6FA314CDBCDE34BE5B2 /* Build configuration list for PBXProject "Glosso" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				73EE8FC85C974362CF07A9E7 /* Debug */,
+				7CDD39253F45587ADAD2E776 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		F94B818A2A89432E92400DCD /* Build configuration list for PBXNativeTarget "Glosso" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5BB7BC8398A6A91E46525E04 /* Debug */,
+				C46D173FA583B09E419F2ED0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BEBB910121D61C5F9E4C2912 /* Project object */;
+}

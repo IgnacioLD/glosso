@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--
+    Only what Android itself or Android-only code reads lives here: the manifest
+    label, the download notification channel (the system shows its name in Settings)
+    and Play Billing errors. Every other string, including the download notification's
+    own text, is a Compose Multiplatform resource in shared/src/commonMain/composeResources.
+    -->
+
+    <!-- Brand: not translated. -->
+    <string name="app_name" translatable="false">Glosso</string>
+
+    <!-- Downloads (background service and its notification) -->
+    <string name="download_channel_name">Downloads</string>
+    <string name="download_channel_description">Keeps downloads going when you leave the app.</string>
+
+    <!-- Billing error messages (shown on the paywall) -->
+    <string name="billing_error_offline">No connection to Google Play. It will retry.</string>
+    <string name="billing_error_reconnect">Could not connect to Google Play.</string>
+    <string name="billing_error_connecting">Still connecting to Google Play. Try again in a moment.</string>
+    <string name="billing_error_not_configured">The subscription is not configured in Google Play.</string>
+    <string name="billing_error_no_offers">The subscription has no active offers.</string>
+    <string name="billing_error_not_available_yet">The subscription is not available yet.</string>
+    <string name="billing_error_confirm">The purchase could not be confirmed. It will retry.</string>
+    <string name="billing_error_network">No connection. Check your network and try again.</string>
+    <string name="billing_error_service_unavailable">Google Play is not available right now.</string>
+    <string name="billing_error_service_disconnected">The connection to Google Play was lost.</string>
+    <string name="billing_error_unavailable">Purchases are not available on this device or account.</string>
+    <string name="billing_error_item_unavailable">The subscription is not available in this country or account.</string>
+    <string name="billing_error_developer">Purchase configuration error. Check Play Console.</string>
+    <string name="billing_error_already_owned">You already have this subscription.</string>
+    <string name="billing_error_generic">The operation with Google Play could not be completed.</string>
+</resources>

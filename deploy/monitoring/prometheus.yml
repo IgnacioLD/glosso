@@ -1,0 +1,31 @@
+# Prometheus - scrape minimo de Glosso Pro.
+#
+# El API expone /metrics (Micrometer) protegido con GLOSSO_ADMIN_TOKEN. El token
+# lo escribe deploy.sh en ${GLOSSO_SECRETS_DIR}/prometheus_admin_token y se monta
+# como credentials_file.
+#
+# Alertas: la disponibilidad la cubre Uptime Kuma; las condiciones de 5xx y de
+# auth fallida se evaluan aqui (deploy/monitoring/glosso-alerts.yml) y se ven en
+# la UI de Prometheus. Alertmanager queda fuera del arranque (no anadir
+# servicios que no se usen); el operador lo conecta a su canal cuando quiera.
+
+global:
+  scrape_interval: 30s
+  scrape_timeout: 10s
+
+rule_files:
+  - /etc/prometheus/glosso-alerts.yml
+
+scrape_configs:
+  - job_name: glosso-server
+    metrics_path: /metrics
+    scheme: http
+    authorization:
+      type: Bearer
+      credentials_file: /etc/prometheus/admin_token
+    static_configs:
+      - targets: ["glosso-server:8080"]
+
+  - job_name: prometheus
+    static_configs:
+      - targets: ["localhost:9090"]

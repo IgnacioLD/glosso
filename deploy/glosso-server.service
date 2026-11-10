@@ -1,0 +1,15 @@
+[Unit]
+Description=Glosso Pro API
+After=network.target
+
+[Service]
+User=glosso
+WorkingDirectory=/opt/glosso
+Environment=PORT=8080
+Environment=GLOSSO_ASSETS_DIR=/srv/glosso/assets
+ExecStart=/usr/bin/java -jar /opt/glosso/server.jar
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target

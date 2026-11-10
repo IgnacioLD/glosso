@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Glosso palette, mirrored from designsystem/GlossoColor.kt so the
+         launcher icon, splash and system chrome stay on brand before Compose
+         draws. Only the roles the XML chrome actually reads live here; the rest
+         of the palette is Compose-only. -->
+    <color name="glosso_ink">#FF0B0B0E</color>
+    <color name="glosso_paper">#FFF3F3F6</color>
+
+    <!-- The launcher icon is always the dark brand mark. -->
+    <color name="ic_launcher_background">#FF0B0B0E</color>
+
+    <!-- Window chrome follows the system theme: paper in the day, ink at night. -->
+    <color name="glosso_splash_bg">@color/glosso_paper</color>
+    <color name="glosso_color_background">@color/glosso_paper</color>
+
+    <!-- The first bubble of the mark: the theme's text colour. -->
+    <color name="glosso_logo_ink">#FF0B0B0E</color>
+
+    <!-- The download notification accent. The brand cobalt (BrandNight.Cobalt). -->
+    <color name="glosso_color_notification">#FF3D51E0</color>
+</resources>

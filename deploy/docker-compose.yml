@@ -1,0 +1,457 @@
+# Glosso Pro - stack de produccion (Ubuntu 24.04, Docker Compose).
+#
+# Maquina compartida (2 vCPU / 7,8 GB): este stack declara LIMITES, nunca
+# reservas, y deja margen para los otros proyectos del VPS.
+#
+# Uso normal (recomendado):
+#   tools/infra/deploy.sh
+# Manual:
+#   cd deploy && cp .env.example .env   # editar secretos
+#   mkdir -p /srv/glosso/secrets && printf '%s' "$GLOSSO_ADMIN_TOKEN" > /srv/glosso/secrets/prometheus_admin_token
+#   docker compose up -d --build
+# (deploy.sh crea directorios, secretos y aplica migraciones por ti.)
+#
+# Servicios base (se levantan siempre): postgres, redis, glosso-server, caddy,
+# prometheus, uptime-kuma, umami (analitica web).
+# Plano de generacion (perfil "generation"): glosso-worker, glosso-scheduler.
+# Se definen aqui, pero solo arrancan cuando exista deploy/Dockerfile.worker
+# (Fase 3). Hasta entonces el perfil se ignora y la base funciona igual.
+
+name: glosso
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${GLOSSO_DB_NAME:-glosso}
+      POSTGRES_USER: ${GLOSSO_DB_USER:-glosso}
+      POSTGRES_PASSWORD: ${GLOSSO_DB_PASSWORD:?definir GLOSSO_DB_PASSWORD en deploy/.env}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - glosso_pgdata:/var/lib/postgresql/data
+      - ./migrations:/migrations:ro
+    # Sin "ports": Postgres nunca se publica a Internet.
+    expose:
+      - "5432"
+    networks:
+      - glosso
+    restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.75"
+          memory: 768M
+
+  redis:
+    image: redis:7-alpine
+    command:
+      - redis-server
+      - --appendonly
+      - "yes"
+      - --maxmemory
+      - 256mb
+      - --maxmemory-policy
+      - noeviction
+    volumes:
+      - glosso_redisdata:/data
+    # Sin "ports": Redis nunca se publica a Internet.
+    expose:
+      - "6379"
+    networks:
+      - glosso
+    restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 384M
+
+  glosso-server:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    environment:
+      PORT: "8080"
+      GLOSSO_ASSETS_DIR: /assets
+      # Registro de voces (POST /v1/admin/voices). Apunta al volumen escribible
+      # de abajo: /assets va montado :ro y ahi no se puede escribir.
+      GLOSSO_VOICES_DIR: /voices
+      GLOSSO_MODEL_FILE: ${GLOSSO_MODEL_FILE:-wav2vec2_phoneme_int8_dyn_pertensor.onnx}
+      # Modelo por idioma ("ru=fichero.onnx,de=fichero.onnx", dentro de /assets)
+      # para los idiomas que no puntua bien el modelo por defecto. Vacio: un solo
+      # modelo para todo. Ver docs/ADD_LANGUAGE.md.
+      GLOSSO_MODEL_FILES: ${GLOSSO_MODEL_FILES:-}
+      # Puntuar tambien contra la referencia por acento (docs/MULTI-ACCENT.md).
+      # Vacio o 0: apagado, como hasta ahora. 1 para encenderlo.
+      GLOSSO_MULTI_ACCENT: ${GLOSSO_MULTI_ACCENT:-}
+      GLOSSO_DB_URL: jdbc:postgresql://postgres:5432/${GLOSSO_DB_NAME:-glosso}
+      GLOSSO_DB_USER: ${GLOSSO_DB_USER:-glosso}
+      GLOSSO_DB_PASSWORD: ${GLOSSO_DB_PASSWORD:?definir GLOSSO_DB_PASSWORD en deploy/.env}
+      GLOSSO_ADMIN_TOKEN: ${GLOSSO_ADMIN_TOKEN:?definir GLOSSO_ADMIN_TOKEN en deploy/.env}
+      GLOSSO_API_KEY: ${GLOSSO_API_KEY:-}
+      GLOSSO_INGEST_TOKEN: ${GLOSSO_INGEST_TOKEN:-}
+      GLOSSO_BOOTSTRAP: ${GLOSSO_BOOTSTRAP:-}
+      GLOSSO_MAX_CONCURRENT: ${GLOSSO_MAX_CONCURRENT:-1}
+      GLOSSO_QUEUE_WAIT_MS: ${GLOSSO_QUEUE_WAIT_MS:-30000}
+      GLOSSO_DEBUG: ${GLOSSO_DEBUG:-}
+      GLOSSO_ANALYTICS_RETENTION_DAYS: ${GLOSSO_ANALYTICS_RETENTION_DAYS:-180}
+      # Copia de los eventos de la app en umami (docs/ANALYTICS-BETA.md). Vacio
+      # GLOSSO_UMAMI_APP_WEBSITE_ID: apagado, solo Postgres. La base de umami hace
+      # falta para que "Borrar mis datos de uso" tambien borre la copia.
+      GLOSSO_UMAMI_URL: ${GLOSSO_UMAMI_URL:-http://umami:3000}
+      GLOSSO_UMAMI_APP_WEBSITE_ID: ${GLOSSO_UMAMI_APP_WEBSITE_ID:-}
+      GLOSSO_UMAMI_DB_URL: jdbc:postgresql://postgres:5432/${GLOSSO_UMAMI_DB_NAME:-umami}
+      GLOSSO_UMAMI_DB_USER: ${GLOSSO_UMAMI_DB_USER:-umami}
+      GLOSSO_UMAMI_DB_PASSWORD: ${GLOSSO_UMAMI_DB_PASSWORD:-}
+      GLOSSO_CORS_ORIGINS: ${GLOSSO_CORS_ORIGINS:-}
+      GLOSSO_REDIS_URL: redis://redis:6379/0
+      # TTS desacoplado (Cartesia/ElevenLabs). El codigo canjea CARTESIA_API_KEY
+      # por un access token; aqui solo se inyecta la credencial. CARTESIA_VERSION
+      # es la version de API obligatoria.
+      CARTESIA_API_KEY: ${CARTESIA_API_KEY:-}
+      CARTESIA_VERSION: ${CARTESIA_VERSION:-2026-08-14}
+      CARTESIA_DEFAULT_VOICE: ${CARTESIA_DEFAULT_VOICE:-}
+      # Billing Play (ver docs/BILLING-E2E.md). Preferir base64 en Docker.
+      GLOSSO_PLAY_SERVICE_ACCOUNT_JSON_BASE64: ${GLOSSO_PLAY_SERVICE_ACCOUNT_JSON_BASE64:-}
+      GLOSSO_PLAY_PACKAGE: ${GLOSSO_PLAY_PACKAGE:-me.shirobyte42.glosso}
+      GLOSSO_PLAY_PRODUCT_ID: ${GLOSSO_PLAY_PRODUCT_ID:-me.shirobyte42.glosso.pro}
+      GLOSSO_PLAY_TRIAL_OFFER_ID: ${GLOSSO_PLAY_TRIAL_OFFER_ID:-}
+      GLOSSO_BILLING_CACHE_TTL_SECONDS: ${GLOSSO_BILLING_CACHE_TTL_SECONDS:-600}
+      GLOSSO_RTDN_SECRET: ${GLOSSO_RTDN_SECRET:-}
+      # Llevar la cuenta a otro movil entrando con Google (docs/BETA-RUNBOOK.md
+      # 6.1, docs/GOOGLE-SIGNIN.md). Sin secreto o sin client id responde 503.
+      GLOSSO_ACCOUNT_SECRET: ${GLOSSO_ACCOUNT_SECRET:-}
+      GLOSSO_GOOGLE_CLIENT_ID: ${GLOSSO_GOOGLE_CLIENT_ID:-}
+      GLOSSO_RTDN_SUBSCRIPTION: ${GLOSSO_RTDN_SUBSCRIPTION:-}
+      # Config de producto (docs/PRODUCT-CONFIG.md). Vacio = el default seguro
+      # del servidor (ProductConfig.fromEnv), asi que ninguna fecha ni precio se
+      # fija aqui. Un flag nuevo GLOSSO_FLAG_<NOMBRE> se anade a esta lista.
+      GLOSSO_PRODUCT_MODE: ${GLOSSO_PRODUCT_MODE:-}
+      GLOSSO_BETA_END_DATE: ${GLOSSO_BETA_END_DATE:-}
+      GLOSSO_BETA_FOUNDER_ENABLED: ${GLOSSO_BETA_FOUNDER_ENABLED:-}
+      GLOSSO_BETA_FOUNDER_UNTIL: ${GLOSSO_BETA_FOUNDER_UNTIL:-}
+      GLOSSO_BETA_FOUNDER_BENEFIT_KIND: ${GLOSSO_BETA_FOUNDER_BENEFIT_KIND:-}
+      GLOSSO_BETA_FOUNDER_BENEFIT_VALUE: ${GLOSSO_BETA_FOUNDER_BENEFIT_VALUE:-}
+      GLOSSO_BETA_FOUNDER_BENEFIT_LABEL: ${GLOSSO_BETA_FOUNDER_BENEFIT_LABEL:-}
+      GLOSSO_MIN_CLIENT_VERSION: ${GLOSSO_MIN_CLIENT_VERSION:-}
+      GLOSSO_RECOMMENDED_CLIENT_VERSION: ${GLOSSO_RECOMMENDED_CLIENT_VERSION:-}
+      GLOSSO_FORCE_UPDATE: ${GLOSSO_FORCE_UPDATE:-}
+      GLOSSO_PLANS_JSON: ${GLOSSO_PLANS_JSON:-}
+      GLOSSO_LIMITS_JSON: ${GLOSSO_LIMITS_JSON:-}
+      GLOSSO_PRICING_JSON: ${GLOSSO_PRICING_JSON:-}
+      GLOSSO_FLAG_BETA_BANNER: ${GLOSSO_FLAG_BETA_BANNER:-}
+      GLOSSO_FLAG_PRO: ${GLOSSO_FLAG_PRO:-}
+      GLOSSO_FLAG_PERSONALIZED: ${GLOSSO_FLAG_PERSONALIZED:-}
+      GLOSSO_FLAG_ACCOUNTS: ${GLOSSO_FLAG_ACCOUNTS:-}
+      GLOSSO_FLAG_ADAPTIVE_EXERCISES: ${GLOSSO_FLAG_ADAPTIVE_EXERCISES:-}
+      GLOSSO_FLAG_ADVANCED_ANALYTICS: ${GLOSSO_FLAG_ADVANCED_ANALYTICS:-}
+      JAVA_OPTS: "${GLOSSO_JAVA_OPTS:--Xms128m -Xmx1536m}"
+    # Endurecimiento del contenedor (A05): sin root, raiz de solo lectura. Los
+    # assets van montados :ro, PostgreSQL va por red y el registro de voces tiene
+    # su propio volumen escribible; los unicos sitios donde el proceso escribe son
+    # /tmp y /voices. Si se usa GLOSSO_BOOTSTRAP=1 hay que montar el volumen de
+    # assets :rw (el aprovisionamiento normal lo hace tools/fetch-assets.sh en el
+    # host).
+    user: "10001:10001"
+    read_only: true
+    # /tmp es efimero (no persistente). `exec` explicito: SQLite y ONNX Runtime
+    # extraen y cargan sus librerias nativas ahi (System.load exige exec).
+    tmpfs:
+      - /tmp:size=256m,mode=1777,exec
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    volumes:
+      - ${GLOSSO_ASSETS_DIR:-/srv/glosso/assets}:/assets:ro
+      # Voces de referencia: escribible y persistente. El directorio del host debe
+      # pertenecer al uid del contenedor (10001:10001) para que el server pueda
+      # escribir; deploy.sh lo crea con ese dueno.
+      - ${GLOSSO_VOICES_HOST_DIR:-/srv/glosso/voices}:/voices
+    expose:
+      - "8080"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - glosso
+    restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.00"
+          # Un modelo acustico cabe en 2304M. Cada modelo extra de
+          # GLOSSO_MODEL_FILES suma memoria: con el int8 multilingue del ruso el
+          # servidor necesita 3072M (medido; ver docs/ADD_LANGUAGE.md).
+          memory: ${GLOSSO_SERVER_MEMORY:-2304M}
+
+  # --------------------------------------------------------------------------
+  # Plano de generacion. Perfil "generation": no arranca por defecto.
+  # Requiere deploy/Dockerfile.worker, que se anade con el worker (Fase 3).
+  # Los workers nacen stateless: sin volumenes persistentes propios.
+  # --------------------------------------------------------------------------
+  glosso-worker:
+    profiles: ["generation"]
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.worker
+    command: ["--queues", "text,validate,tts,image"]
+    environment:
+      GLOSSO_DB_URL: jdbc:postgresql://postgres:5432/${GLOSSO_DB_NAME:-glosso}
+      GLOSSO_DB_USER: ${GLOSSO_DB_USER:-glosso}
+      GLOSSO_DB_PASSWORD: ${GLOSSO_DB_PASSWORD:?definir GLOSSO_DB_PASSWORD en deploy/.env}
+      GLOSSO_REDIS_URL: redis://redis:6379/0
+      CARTESIA_API_KEY: ${CARTESIA_API_KEY:-}
+      CARTESIA_VERSION: ${CARTESIA_VERSION:-2026-08-14}
+      CARTESIA_DEFAULT_VOICE: ${CARTESIA_DEFAULT_VOICE:-}
+      GLOSSO_R2_ENDPOINT: ${GLOSSO_R2_ENDPOINT:-}
+      GLOSSO_R2_BUCKET: ${GLOSSO_R2_BUCKET:-}
+      GLOSSO_R2_ACCESS_KEY: ${GLOSSO_R2_ACCESS_KEY:-}
+      GLOSSO_R2_SECRET_KEY: ${GLOSSO_R2_SECRET_KEY:-}
+      GLOSSO_PROVIDER_CONFIG: ${GLOSSO_PROVIDER_CONFIG:-/etc/glosso/providers.yaml}
+      GLOSSO_TTS_CACHE_DIR: /tts-cache
+    volumes:
+      - ${GLOSSO_ASSETS_DIR:-/srv/glosso/assets}:/assets:ro
+      - ${GLOSSO_TTS_CACHE_DIR:-/srv/glosso/tts-cache}:/tts-cache
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - glosso
+    restart: unless-stopped
+    logging: *logging
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.75"
+          memory: 1024M
+
+  glosso-scheduler:
+    profiles: ["generation"]
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile.worker
+    command: ["--scheduler"]
+    environment:
+      GLOSSO_DB_URL: jdbc:postgresql://postgres:5432/${GLOSSO_DB_NAME:-glosso}
+      GLOSSO_DB_USER: ${GLOSSO_DB_USER:-glosso}
+      GLOSSO_DB_PASSWORD: ${GLOSSO_DB_PASSWORD:?definir GLOSSO_DB_PASSWORD en deploy/.env}
+      GLOSSO_REDIS_URL: redis://redis:6379/0
+      GLOSSO_SCHEDULE_HOURS: ${GLOSSO_SCHEDULE_HOURS:-6}
+      GLOSSO_POOL_MIN: ${GLOSSO_POOL_MIN:-20}
+      GLOSSO_POOL_TARGET: ${GLOSSO_POOL_TARGET:-50}
+      GLOSSO_POOL_MAX: ${GLOSSO_POOL_MAX:-100}
+      GLOSSO_MAX_COST_PER_JOB: ${GLOSSO_MAX_COST_PER_JOB:-}
+      GLOSSO_MAX_COST_PER_BATCH: ${GLOSSO_MAX_COST_PER_BATCH:-}
+    volumes:
+      - ${GLOSSO_ASSETS_DIR:-/srv/glosso/assets}:/assets:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - glosso
+    restart: unless-stopped
+    logging: *logging
+    deploy:
+      replicas: 1
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 512M
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --storage.tsdb.path=/prometheus
+      - --storage.tsdb.retention.time=15d
+      - --web.enable-lifecycle
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/glosso-alerts.yml:/etc/prometheus/glosso-alerts.yml:ro
+      - ${GLOSSO_SECRETS_DIR:-/srv/glosso/secrets}/prometheus_admin_token:/etc/prometheus/admin_token:ro
+      - glosso_prometheus:/prometheus
+    # UI solo en loopback: se accede por tunel SSH (ver docs/INFRA-DEPLOY.md).
+    ports:
+      - "127.0.0.1:9090:9090"
+    depends_on:
+      glosso-server:
+        condition: service_started
+    networks:
+      - glosso
+    restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:9090/-/healthy"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 512M
+
+  uptime-kuma:
+    image: louislam/uptime-kuma:1
+    volumes:
+      - glosso_uptimekuma:/app/data
+    # UI solo en loopback: se accede por tunel SSH (ver docs/INFRA-DEPLOY.md).
+    ports:
+      - "127.0.0.1:3001:3001"
+    networks:
+      - glosso
+    restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      test: ["CMD", "extra/healthcheck"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 384M
+
+  # Analitica web self-hosted (umami, version fijada). Usa el PostgreSQL que ya
+  # existe con base y usuario DEDICADOS (no la de glosso); no monta volumen propio
+  # porque todo su estado vive en Postgres. Caddy lo publica en
+  # GLOSSO_UMAMI_DOMAIN. Imagen oficial de ghcr.io; para subir de version, cambiar
+  # el tag (ver releases de umami-software/umami).
+  umami:
+    image: ghcr.io/umami-software/umami:3.4.0
+    init: true
+    environment:
+      # Sin valores en el fichero: salen de deploy/.env. El password va dentro de
+      # la URL, asi que conviene generarlo en hex (sin caracteres que la rompan).
+      DATABASE_URL: "postgresql://${GLOSSO_UMAMI_DB_USER:-umami}:${GLOSSO_UMAMI_DB_PASSWORD:?definir GLOSSO_UMAMI_DB_PASSWORD en deploy/.env}@postgres:5432/${GLOSSO_UMAMI_DB_NAME:-umami}"
+      APP_SECRET: "${GLOSSO_UMAMI_APP_SECRET:?definir GLOSSO_UMAMI_APP_SECRET en deploy/.env}"
+    expose:
+      - "3000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - glosso
+    restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:3000/api/heartbeat"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.50"
+          memory: 512M
+
+  caddy:
+    image: caddy:2-alpine
+    environment:
+      GLOSSO_DOMAIN: ${GLOSSO_DOMAIN:-api.glossopro.example}
+      GLOSSO_UMAMI_DOMAIN: ${GLOSSO_UMAMI_DOMAIN:-umami.glossostudio.com}
+      GLOSSO_STATUS_DOMAIN: ${GLOSSO_STATUS_DOMAIN:-status.glossostudio.com}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      # Un solo fichero montado: si se SUSTITUYE el Caddyfile del host (rsync, mv,
+      # editor que reescribe), el contenedor sigue viendo el viejo hasta
+      # `docker compose up -d --no-deps --force-recreate caddy`; un `caddy reload`
+      # no basta. Paso hasta el 2026-10-05 sin que nadie lo viera.
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      glosso-server:
+        condition: service_started
+    networks:
+      - glosso
+    restart: unless-stopped
+    logging: *logging
+    healthcheck:
+      # 127.0.0.1 explicito: "localhost" resuelve a ::1 en el contenedor y el
+      # admin de Caddy escucha solo en IPv4, lo que daba unhealthy falso.
+      test: ["CMD", "wget", "-q", "--spider", "http://127.0.0.1:2019/config/"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.25"
+          memory: 128M
+
+networks:
+  glosso:
+    driver: bridge
+
+volumes:
+  # Volumenes nombrados respaldados por las rutas del doc (docs/INFRASTRUCTURE.md
+  # sec. 2). deploy.sh crea los directorios antes de arrancar.
+  glosso_pgdata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${GLOSSO_DATA_DIR:-/srv/glosso/data}/postgres
+  glosso_redisdata:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${GLOSSO_DATA_DIR:-/srv/glosso/data}/redis
+  glosso_prometheus:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${GLOSSO_DATA_DIR:-/srv/glosso/data}/prometheus
+  glosso_uptimekuma:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${GLOSSO_DATA_DIR:-/srv/glosso/data}/uptime-kuma
+  caddy_data:
+  caddy_config:

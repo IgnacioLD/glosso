@@ -1,0 +1,189 @@
+name: security
+
+# Escaneos de seguridad del backend y de la imagen. Bloquea el merge si:
+#   - aparece un secreto en el repo o en su historia (gitleaks),
+#   - una dependencia JVM o de tools/ tiene una vulnerabilidad alta/critica con
+#     arreglo disponible (trivy),
+#   - la imagen del contenedor arrastra una vulnerabilidad alta/critica con
+#     arreglo disponible (trivy),
+#   - los tests del servidor (`:server:test`) fallan, incluidos los de la
+#     migracion V4 y los entitlements.
+# Las vulnerabilidades aceptadas temporalmente van por ID de CVE en
+# .github/trivyignore (nunca comodines): una NUEVA sigue fallando el build.
+# Las acciones van pinneadas por SHA (integridad de la cadena de CI, A08) y trivy
+# corre desde su imagen oficial pinneada por version. El bot dependabot actualiza
+# acciones y dependencias. Ver docs/OWASP-BACKEND.md.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: security-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  secrets:
+    name: secretos (gitleaks)
+    runs-on: ubuntu-latest
+    # Solo lo justo: leer el repo (checkout) y, en PRs, publicar el resultado.
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: checkout (historia completa)
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@e0c47f4f8be36e29cdc102c57e68cb5cbf0e8d1e # v3
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .github/gitleaks.toml
+
+  dependencies:
+    name: dependencias (trivy)
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: JDK 21
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Gradle
+        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+      - name: Distribucion del servidor (resuelve todas las dependencias)
+        run: ./gradlew :server:installDist --no-daemon --console=plain
+      # rootfs, no fs: trivy solo reconoce los JARs como paquetes Java cuando
+      # escanea un arbol raiz. Comprobado en local; con fs no encuentra nada.
+      - name: Trivy rootfs (JARs resueltos del servidor)
+        run: |
+          set +e
+          docker run --rm -v "$PWD":/work -w /work aquasec/trivy:0.74.0 \
+            rootfs --scanners vuln --pkg-types library \
+            --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 \
+            --ignorefile /work/.github/trivyignore \
+            --format table --output /work/trivy-deps.txt \
+            server/build/install/server
+          code=$?
+          cat trivy-deps.txt 2>/dev/null || true
+          exit $code
+      - name: Trivy (manifiestos de tools/, si hay)
+        run: |
+          set +e
+          docker run --rm -v "$PWD":/work -w /work aquasec/trivy:0.74.0 \
+            fs --scanners vuln \
+            --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 \
+            --ignorefile /work/.github/trivyignore \
+            --format table --output /work/trivy-tools.txt \
+            tools
+          code=$?
+          cat trivy-tools.txt 2>/dev/null || true
+          exit $code
+      - name: Artefacto del informe de dependencias
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: trivy-dependencies
+          path: trivy-*.txt
+          if-no-files-found: ignore
+
+  server-tests:
+    name: tests del servidor
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: JDK 21
+        uses: actions/setup-java@de7274f081f381c8f8158605e0321c36c376e2e6 # v6.0.1
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Gradle
+        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+      # Los tests de Postgres/Redis embebidos lanzan procesos locales; initdb
+      # exige un locale valido y en el runner el default puede no existir.
+      - name: Tests del servidor
+        env:
+          LC_ALL: C.UTF-8
+        run: ./gradlew :server:test --no-daemon --console=plain
+
+  image:
+    name: imagen (trivy)
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Construir la imagen
+        run: docker build -f deploy/Dockerfile -t glosso-server:ci .
+      # Reproduce la config de produccion (no-root, raiz de solo lectura, /tmp
+      # tmpfs, assets :ro) y comprueba que el servidor arranca Y carga el
+      # catalogo SQLite. Asi un read_only que rompa la lectura de content.db
+      # falla aqui, no en produccion.
+      - name: "Smoke: no-root, read-only y catalogo"
+        run: |
+          echo "USER de la imagen: $(docker inspect -f '{{.Config.User}}' glosso-server:ci)"
+          test "$(docker inspect -f '{{.Config.User}}' glosso-server:ci)" != "root"
+          rm -rf /tmp/glosso-assets && mkdir -p /tmp/glosso-assets/content/en
+          python3 - <<'PY'
+          import sqlite3
+          db = sqlite3.connect('/tmp/glosso-assets/content/en/content.db')
+          db.execute("create table content (id text primary key, kind text not null, language text not null, level text, theme text, text text not null, ref text, data text not null)")
+          db.execute("create table theme (id text primary key, labels text)")
+          db.execute("insert into content values ('w1','WORD','en','A1','animals','cat','kæt','{\"target\":\"k\"}')")
+          db.commit()
+          db.close()
+          PY
+          chmod -R a+rX /tmp/glosso-assets
+          # Diagnostico: /tmp debe ser tmpfs escribible y con exec (la nativa de
+          # SQLite se extrae ahi y se carga con System.load).
+          docker run --rm --read-only --tmpfs /tmp:size=256m,mode=1777,exec \
+            --user 10001:10001 --cap-drop ALL --security-opt no-new-privileges \
+            --entrypoint /bin/sh glosso-server:ci -c \
+            'id; echo "TMPDIR=$TMPDIR tmpdir=$(ls -ld /tmp)"; mount | grep -E " /tmp "; touch /tmp/_w && echo "tmp write: OK"'
+          docker run -d --name glosso-ci \
+            --read-only --tmpfs /tmp:size=256m,mode=1777,exec \
+            --user 10001:10001 --cap-drop ALL --security-opt no-new-privileges \
+            -e TMPDIR=/tmp -e JAVA_TOOL_OPTIONS=-Dorg.sqlite.tmpdir=/tmp \
+            -e GLOSSO_ADMIN_TOKEN=ci -e PORT=8080 -e GLOSSO_ASSETS_DIR=/assets \
+            -v /tmp/glosso-assets:/assets:ro \
+            -p 18080:8080 glosso-server:ci
+          ok=""
+          for i in $(seq 1 30); do
+            sleep 1
+            if curl -fsS http://localhost:18080/health; then ok=1; break; fi
+          done
+          docker logs glosso-ci > /tmp/glosso-ci.log 2>&1 || true
+          docker rm -f glosso-ci >/dev/null 2>&1 || true
+          cat /tmp/glosso-ci.log || true
+          test -n "$ok" || { echo "el contenedor no respondio /health"; exit 1; }
+          grep -q 'Content \[en\] loaded' /tmp/glosso-ci.log || { echo "el contenedor no cargo el catalogo"; exit 1; }
+      - name: Trivy image (HIGH/CRITICAL)
+        run: |
+          set +e
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v "$PWD":/work -w /work \
+            aquasec/trivy:0.74.0 image \
+            --scanners vuln --pkg-types os,library \
+            --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 \
+            --ignorefile /work/.github/trivyignore \
+            --format table --output /work/trivy-image.txt \
+            glosso-server:ci
+          code=$?
+          cat trivy-image.txt 2>/dev/null || true
+          exit $code
+      - name: Artefacto del informe de la imagen
+        if: always()
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: trivy-image
+          path: trivy-image.txt
+          if-no-files-found: ignore

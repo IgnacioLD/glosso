@@ -1,0 +1,22 @@
+// Build settings of the Glosso iOS app, shared by Debug and Release.
+// Machine-local values (the API key) live in the gitignored Secrets.xcconfig;
+// see docs/IOS-DEV.md.
+
+// Placeholder until the Apple Developer account exists; the final id comes with it.
+PRODUCT_BUNDLE_IDENTIFIER = com.glossostudio.glosso
+
+// Same version as the Android app (androidApp/build.gradle.kts). The build number
+// follows the Android versionCode because /v1/config compares the client version
+// against one minimumSupportedVersion for every platform.
+MARKETING_VERSION = 2.5.4
+CURRENT_PROJECT_VERSION = 2226
+
+// The API the app talks to. A local server for testing:
+// GLOSSO_API_BASE = http:/$()/localhost:8080 in Secrets.xcconfig.
+GLOSSO_API_BASE = https:/$()/api.glossostudio.com
+
+// The /v1/score client key, empty unless Secrets.xcconfig sets it: the app then
+// sends no header, as the Android build does without glosso.apiKey.
+GLOSSO_API_KEY =
+
+#include? "Secrets.xcconfig"

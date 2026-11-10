@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="practice_work_on_count_plain">
+        <item quantity="one">%1$d Laut braucht Übung</item>
+        <item quantity="other">%1$d Laute brauchen Übung</item>
+    </plurals>
+    <string name="practice_work_on_many">%1$d Laute brauchen Übung: %2$s</string>
+    <string name="practice_tap_example">Tippe ein Wort an, um es zu hören</string>
+    <string name="practice_error_in_word">In „%1$s“</string>
+    <string name="practice_example_wrong">Klang wie</string>
+    <string name="practice_example_right">Soll klingen</string>
+    <string name="practice_progress_up">Wird besser</string>
+    <string name="practice_progress_up_detail">+%1$d gegenüber deinem letzten Versuch</string>
+    <string name="practice_progress_same">Ungefähr wie dein letzter Versuch</string>
+    <string name="practice_progress_down">Übe weiter</string>
+    <string name="practice_progress_down_detail">%1$d unter deinem letzten Versuch. Jede Wiederholung zählt.</string>
+    <string name="sound_guide_theta">Das „th“ in „think“: Zungenspitze zwischen die Zähne legen und sanft ausblasen.</string>
+    <string name="sound_guide_eth">Das stimmhafte „th“ in „this“: Zunge zwischen den Zähnen, mit Stimme.</string>
+    <string name="sound_guide_s">Das „s“ in „sun“: Zunge direkt hinter den Zähnen, ein gleichmäßiges Zischen.</string>
+    <string name="sound_guide_z">Das „z“ in „zoo“: wie „s“, aber mit Stimme.</string>
+    <string name="sound_guide_sh">Das „sh“ in „she“: Zunge etwas zurück, Lippen leicht gerundet, ein sanftes Zischen.</string>
+    <string name="sound_guide_ch">Das „ch“ in „cheap“: ein schnelles „t“, dann „sh“.</string>
+    <string name="sound_guide_j">Das „j“ in „jeep“: ein schnelles „d“, dann das stimmhafte „sh“.</string>
+    <string name="sound_guide_r">Das „r“ in „right“: Zunge nach hinten wölben, ohne den Gaumen zu berühren.</string>
+    <string name="sound_guide_l">Das „l“ in „light“: Zungenspitze hinter den Zähnen an den Gaumen legen.</string>
+    <string name="sound_guide_w">Das „w“ in „west“: Lippen runden, wie ein schnelles „u“.</string>
+    <string name="sound_guide_v">Das „v“ in „vest“: Unterlippe an die oberen Zähne, mit Stimme.</string>
+    <string name="sound_guide_b">Das „b“ in „best“: beide Lippen schließen und mit Stimme lösen.</string>
+    <string name="sound_guide_ng">Das „ng“ in „sing“: der Zungenrücken hebt sich zum weichen Gaumen, Luft durch die Nase.</string>
+    <string name="sound_guide_n">Das „n“ in „sin“: Zungenspitze hinter den Zähnen, Luft durch die Nase.</string>
+    <string name="sound_guide_ih">Das kurze „i“ in „ship“: entspannt und kurz.</string>
+    <string name="sound_guide_iy">Das lange „i“ in „sheep“: dehnen und lächeln.</string>
+    <string name="sound_guide_ae">Das „a“ in „bad“: Kiefer weit öffnen, Lippen entspannt.</string>
+    <string name="sound_guide_eh">Das „e“ in „bed“: Kiefer leicht offen, Lippen entspannt.</string>
+    <string name="sound_guide_ah">Das „u“ in „cup“: kurz, zentral, entspannt.</string>
+    <string name="sound_guide_aa">Das „o“ in „cop“: Mund weit offen, Klang hinten.</string>
+    <string name="sound_guide_uh">Das kurze „oo“ in „pull“: kurz und entspannt, Lippen leicht gerundet.</string>
+    <string name="sound_guide_uw">Das lange „oo“ in „pool“: Lippen fest runden und dehnen.</string>
+    <string name="sound_guide_ao">Das „aw“ in „bought“: offen und gerundet, aus dem hinteren Mundraum.</string>
+    <string name="sound_guide_ow">Das „o“ in „boat“: von „o“ zu „u“ gleiten.</string>
+    <string name="sound_guide_ey">Das „a“ in „late“: von „e“ zu „i“ gleiten.</string>
+    <string name="sound_guide_h">Das „h“ in „house“: vor dem Vokal ausatmen.</string>
+    <string name="sound_guide_an">Das nasale „an“ in „dans“: offen, ungerundet, Luft durch die Nase.</string>
+    <string name="sound_guide_on">Das nasale „on“ in „bon“: Lippen gerundet, Luft durch die Nase.</string>
+    <string name="sound_guide_in">Das nasale „in“ in „vin“: Zunge vorn, ungerundet, Luft durch die Nase.</string>
+    <string name="sound_guide_un">Das nasale „un“ in „brun“: Lippen gerundet, Zunge vorn, Luft durch die Nase.</string>
+    <string name="sound_guide_y">Das französische „u“ in „tu“: „i“ sagen und die Lippen runden.</string>
+    <string name="sound_guide_eu_closed">Das geschlossene „eu“ in „peu“: Lippen runden, während Sie „e“ sagen.</string>
+    <string name="sound_guide_eu_open">Das offene „eu“ in „peur“: Lippen gerundet, Kiefer etwas tiefer.</string>
+    <string name="sound_guide_r_fr">Das französische „r“ in „rue“: ein sanftes Reiben hinten im Hals, nicht gerollt.</string>
+    <string name="sound_guide_zh">Das „j“ in „je“: wie „sch“, aber mit Stimme.</string>
+    <string name="sound_guide_gn">Das „gn“ in „agneau“: die Zungenmitte am Gaumen.</string>
+    <string name="sound_guide_ui">Das „ui“ in „nuit“: ein schneller Gleitlaut von gerundet nach vorn.</string>
+    <string name="sound_guide_schwa">Das leichte „e“ in „petit“: ein sanftes „ö“, schnell gesprochen.</string>
+</resources>

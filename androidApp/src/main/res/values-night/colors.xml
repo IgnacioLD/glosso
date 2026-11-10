@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Night chrome is ink, the brand default. -->
+    <color name="glosso_splash_bg">@color/glosso_ink</color>
+    <color name="glosso_color_background">@color/glosso_ink</color>
+    <color name="glosso_logo_ink">#FFF4F4F6</color>
+</resources>

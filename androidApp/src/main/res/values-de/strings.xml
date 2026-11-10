@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Downloads (background service and its notification) -->
+    <string name="download_channel_name">Downloads</string>
+    <string name="download_channel_description">Lädt weiter, wenn du die App verlässt.</string>
+
+    <!-- Fehlermeldungen zur Abrechnung (im Paywall sichtbar) -->
+    <string name="billing_error_offline">Keine Verbindung zu Google Play. Es wird erneut versucht.</string>
+    <string name="billing_error_reconnect">Verbindung zu Google Play nicht möglich.</string>
+    <string name="billing_error_connecting">Die Verbindung zu Google Play läuft noch. Versuch es gleich erneut.</string>
+    <string name="billing_error_not_configured">Das Abo ist in Google Play nicht konfiguriert.</string>
+    <string name="billing_error_no_offers">Das Abo hat keine aktiven Angebote.</string>
+    <string name="billing_error_not_available_yet">Das Abo ist noch nicht verfügbar.</string>
+    <string name="billing_error_confirm">Der Kauf konnte nicht bestätigt werden. Es wird erneut versucht.</string>
+    <string name="billing_error_network">Keine Verbindung. Prüfe dein Netzwerk und versuch es erneut.</string>
+    <string name="billing_error_service_unavailable">Google Play ist gerade nicht verfügbar.</string>
+    <string name="billing_error_service_disconnected">Die Verbindung zu Google Play wurde unterbrochen.</string>
+    <string name="billing_error_unavailable">Käufe sind auf diesem Gerät oder Konto nicht verfügbar.</string>
+    <string name="billing_error_item_unavailable">Das Abo ist in diesem Land oder Konto nicht verfügbar.</string>
+    <string name="billing_error_developer">Fehler in der Kaufkonfiguration. Prüfe die Play Console.</string>
+    <string name="billing_error_already_owned">Du hast dieses Abo bereits.</string>
+    <string name="billing_error_generic">Der Vorgang mit Google Play konnte nicht abgeschlossen werden.</string>
+</resources>

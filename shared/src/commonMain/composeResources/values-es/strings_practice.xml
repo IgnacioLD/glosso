@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="practice_work_on_count_plain">
+        <item quantity="one">%1$d sonido necesita trabajo</item>
+        <item quantity="other">%1$d sonidos necesitan trabajo</item>
+    </plurals>
+    <string name="practice_work_on_many">%1$d sonidos necesitan trabajo: %2$s</string>
+    <string name="practice_tap_example">Pulsa una palabra para oírla</string>
+    <string name="practice_error_in_word">En «%1$s»</string>
+    <string name="practice_example_wrong">Sonó como</string>
+    <string name="practice_example_right">Debe sonar</string>
+    <string name="practice_progress_up">Mejorando</string>
+    <string name="practice_progress_up_detail">+%1$d respecto a tu intento anterior</string>
+    <string name="practice_progress_same">Más o menos igual que tu intento anterior</string>
+    <string name="practice_progress_down">Sigue practicando</string>
+    <string name="practice_progress_down_detail">%1$d por debajo de tu intento anterior. Cada repetición sigue contando.</string>
+    <string name="sound_guide_theta">La «th» de «think»: pon la punta de la lengua entre los dientes y sopla suave.</string>
+    <string name="sound_guide_eth">La «th» sonora de «this»: lengua entre los dientes, con voz.</string>
+    <string name="sound_guide_s">La «s» de «sun»: lengua justo detrás de los dientes, un siseo constante.</string>
+    <string name="sound_guide_z">La «z» de «zoo»: como la «s», pero con voz.</string>
+    <string name="sound_guide_sh">La «sh» de «she»: lengua un poco atrás, labios algo redondeados, siseo suave.</string>
+    <string name="sound_guide_ch">La «ch» de «cheap»: una «t» rápida seguida de «sh».</string>
+    <string name="sound_guide_j">La «j» de «jeep»: una «d» rápida seguida de «sh» sonora.</string>
+    <string name="sound_guide_r">La «r» de «right»: curva la lengua hacia atrás sin tocar el paladar.</string>
+    <string name="sound_guide_l">La «l» de «light»: toca el paladar tras los dientes con la punta de la lengua.</string>
+    <string name="sound_guide_w">La «w» de «west»: redondea los labios, como una «u» rápida.</string>
+    <string name="sound_guide_v">La «v» de «vest»: labio inferior contra los dientes de arriba, con voz.</string>
+    <string name="sound_guide_b">La «b» de «best»: junta los dos labios y suéltalos con voz.</string>
+    <string name="sound_guide_ng">La «ng» de «sing»: la parte de atrás de la lengua sube al velo del paladar y el aire sale por la nariz.</string>
+    <string name="sound_guide_n">La «n» de «sin»: punta de la lengua tras los dientes, aire por la nariz.</string>
+    <string name="sound_guide_ih">La «i» corta de «ship»: relajada y breve.</string>
+    <string name="sound_guide_iy">La «i» larga de «sheep»: estírala y sonríe.</string>
+    <string name="sound_guide_ae">La «a» de «bad»: abre bien la mandíbula, labios relajados.</string>
+    <string name="sound_guide_eh">La «e» de «bed»: mandíbula algo abierta, labios relajados.</string>
+    <string name="sound_guide_ah">La «u» de «cup»: corta, central, relajada.</string>
+    <string name="sound_guide_aa">La «o» de «cop»: boca bien abierta, sonido al fondo.</string>
+    <string name="sound_guide_uh">La «u» corta de «pull»: breve y relajada, labios algo redondeados.</string>
+    <string name="sound_guide_uw">La «u» larga de «pool»: redondea bien los labios y estírala.</string>
+    <string name="sound_guide_ao">La «o» abierta de «bought»: abierta y redondeada, desde el fondo.</string>
+    <string name="sound_guide_ow">La «o» de «boat»: desliza de «o» a «u».</string>
+    <string name="sound_guide_ey">La «a» de «late»: desliza de «e» a «i».</string>
+    <string name="sound_guide_h">La «h» de «house»: espira antes de la vocal.</string>
+    <string name="sound_guide_an">La nasal «an» de «dans»: abierta, sin redondear, aire por la nariz.</string>
+    <string name="sound_guide_on">La nasal «on» de «bon»: labios redondeados, aire por la nariz.</string>
+    <string name="sound_guide_in">La nasal «in» de «vin»: lengua adelante, sin redondear, aire por la nariz.</string>
+    <string name="sound_guide_un">La nasal «un» de «brun»: labios redondeados, lengua adelante, aire por la nariz.</string>
+    <string name="sound_guide_y">La «u» francesa de «tu»: di «i» y redondea los labios.</string>
+    <string name="sound_guide_eu_closed">La «eu» cerrada de «peu»: redondea los labios diciendo «e».</string>
+    <string name="sound_guide_eu_open">La «eu» abierta de «peur»: labios redondeados, mandíbula algo caída.</string>
+    <string name="sound_guide_r_fr">La «r» francesa de «rue»: un roce suave al fondo de la garganta, sin vibrar.</string>
+    <string name="sound_guide_zh">La «j» de «je»: como «sh», pero con voz.</string>
+    <string name="sound_guide_gn">La «gn» de «agneau»: el centro de la lengua contra el paladar.</string>
+    <string name="sound_guide_ui">La «ui» de «nuit»: un deslizamiento rápido de redondeada a anterior.</string>
+    <string name="sound_guide_schwa">La «e» ligera de «petit»: un «uh» suave, dicho de pasada.</string>
+</resources>

@@ -1,0 +1,62 @@
+# The owner's metric set: native reference clips that must reach >=98.
+#
+# "Lo importante es que un nativo vaya bien, le de 98 como minimo." The metric
+# that decides is the share of these clips that reach 98. This is the TTS
+# reference audio (the most native-sounding we have; real native recordings are
+# not in the repo), a deterministic broad sample across words, drills and
+# dialogue turns. Unlike golden-ids.txt this list is NOT curated to pass: it
+# keeps the clips the acoustic model mis-hears, because the point is to bring
+# the failure rate down (the 2026-09-24 baseline was 28 of 45 reaching 98), not
+# to hide behind a set that already passes.
+#
+# Built with tools/reference-selfscore/make_samples.py from the published
+# content.db (seed 20260923); the ids are frozen here so the set is fixed and
+# versioned. The WAVs are content and are not committed; see README.md.
+#
+# Today (2026-09-24, post-#93) only 28/45 reach 98, so this gate is RED until
+# the natural-speech fix lands. The threshold is >90% (target 95%).
+en.dialogue.feelings.002.t6
+en.dialogue.food.005.t9
+en.dialogue.health.006.t2
+en.dialogue.movies.003.t6
+en.dialogue.opinions.001.t2
+en.dialogue.opinions.002.t10
+en.dialogue.shopping.001.t4
+en.dialogue.sports.002.t5
+en.dialogue.storytelling.002.t8
+en.dialogue.work.006.t0
+en.ah.ae.pets.002
+en.ch.j.money.016
+en.dh.d.news-environment.003
+en.ih.iy.movies.001
+en.l.r.reading.005
+en.r.l.transport.001
+en.s.th.complaints.001
+en.s.th.friends.002
+en.s.th.news-entertainment.002
+en.s.th.news-history.002
+en.s.th.phone-calls.001
+en.th.f.clothes.002
+en.th.f.email.002
+en.th.f.news-entertainment.001
+en.th.f.office.001
+en.th.f.phone-calls.002
+en.th.f.shopping.002
+en.th.f.technology.008
+en.th.fronting.news-technology.001
+en.uw.uh.holidays.004
+en.word.city.006
+en.word.city.008
+en.word.directions.001
+en.word.email.004
+en.word.family.023
+en.word.food.007
+en.word.health.003
+en.word.health.026
+en.word.hobbies.006
+en.word.nature.018
+en.word.opinions.007
+en.word.reading.013
+en.word.transport.006
+en.word.university.003
+en.word.work.004

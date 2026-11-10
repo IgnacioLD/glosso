@@ -1,0 +1,24 @@
+# Mantiene al dia dependencias y acciones (A06): los avisos de dependencia
+# llegan solos y el escaneo de CI (security.yml) gatea. Ver docs/OWASP-BACKEND.md.
+version: 2
+updates:
+  - package-ecosystem: gradle
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+
+  - package-ecosystem: docker
+    directory: "/deploy"
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5

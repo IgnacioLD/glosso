@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="practice_work_on_count_plain">
+        <item quantity="one">%1$d son à travailler</item>
+        <item quantity="other">%1$d sons à travailler</item>
+    </plurals>
+    <string name="practice_work_on_many">%1$d sons à travailler : %2$s</string>
+    <string name="practice_tap_example">Touchez un mot pour l'écouter</string>
+    <string name="practice_error_in_word">Dans « %1$s »</string>
+    <string name="practice_example_wrong">Rendu comme</string>
+    <string name="practice_example_right">Doit sonner</string>
+    <string name="practice_progress_up">En progrès</string>
+    <string name="practice_progress_up_detail">+%1$d par rapport à ta dernière prise</string>
+    <string name="practice_progress_same">À peu près comme ta dernière prise</string>
+    <string name="practice_progress_down">Continue à t'entraîner</string>
+    <string name="practice_progress_down_detail">%1$d de moins que ta dernière prise. Chaque répétition compte.</string>
+    <string name="sound_guide_theta">Le « th » de « think » : placez la pointe de la langue entre les dents et soufflez doucement.</string>
+    <string name="sound_guide_eth">Le « th » sonore de « this » : langue entre les dents, avec la voix.</string>
+    <string name="sound_guide_s">Le « s » de « sun » : langue juste derrière les dents, un sifflement régulier.</string>
+    <string name="sound_guide_z">Le « z » de « zoo » : comme « s », mais avec la voix.</string>
+    <string name="sound_guide_sh">Le « sh » de « she » : langue un peu en arrière, lèvres légèrement arrondies, un sifflement doux.</string>
+    <string name="sound_guide_ch">Le « ch » de « cheap » : un « t » rapide suivi de « sh ».</string>
+    <string name="sound_guide_j">Le « j » de « jeep » : un « d » rapide suivi du « sh » sonore.</string>
+    <string name="sound_guide_r">Le « r » de « right » : recourbez la langue en arrière sans toucher le palais.</string>
+    <string name="sound_guide_l">Le « l » de « light » : la pointe de la langue touche le palais derrière les dents.</string>
+    <string name="sound_guide_w">Le « w » de « west » : arrondissez les lèvres, comme un « u » rapide.</string>
+    <string name="sound_guide_v">Le « v » de « vest » : lèvre inférieure contre les dents du haut, avec la voix.</string>
+    <string name="sound_guide_b">Le « b » de « best » : fermez les deux lèvres puis relâchez avec la voix.</string>
+    <string name="sound_guide_ng">Le « ng » de « sing » : le fond de la langue monte vers le voile du palais, l'air passe par le nez.</string>
+    <string name="sound_guide_n">Le « n » de « sin » : pointe de la langue derrière les dents, air par le nez.</string>
+    <string name="sound_guide_ih">Le « i » bref de « ship » : relâché et court.</string>
+    <string name="sound_guide_iy">Le « i » long de « sheep » : étirez-le en souriant.</string>
+    <string name="sound_guide_ae">Le « a » de « bad » : ouvrez grand la mâchoire, lèvres relâchées.</string>
+    <string name="sound_guide_eh">Le « e » de « bed » : mâchoire un peu ouverte, lèvres relâchées.</string>
+    <string name="sound_guide_ah">Le « u » de « cup » : bref, central, relâché.</string>
+    <string name="sound_guide_aa">Le « o » de « cop » : bouche grande ouverte, son au fond.</string>
+    <string name="sound_guide_uh">Le « oo » bref de « pull » : court et relâché, lèvres un peu arrondies.</string>
+    <string name="sound_guide_uw">Le « oo » long de « pool » : arrondissez bien les lèvres et étirez.</string>
+    <string name="sound_guide_ao">Le « aw » de « bought » : ouvert et arrondi, depuis le fond.</string>
+    <string name="sound_guide_ow">Le « o » de « boat » : glissez de « o » vers « ou ».</string>
+    <string name="sound_guide_ey">Le « a » de « late » : glissez de « é » vers « i ».</string>
+    <string name="sound_guide_h">Le « h » de « house » : soufflez avant la voyelle.</string>
+    <string name="sound_guide_an">Le « an » nasal de « dans » : ouvert, non arrondi, air par le nez.</string>
+    <string name="sound_guide_on">Le « on » nasal de « bon » : lèvres arrondies, air par le nez.</string>
+    <string name="sound_guide_in">Le « in » nasal de « vin » : langue en avant, non arrondie, air par le nez.</string>
+    <string name="sound_guide_un">Le « un » nasal de « brun » : lèvres arrondies, langue en avant, air par le nez.</string>
+    <string name="sound_guide_y">Le « u » français de « tu » : dites « i » en arrondissant les lèvres.</string>
+    <string name="sound_guide_eu_closed">Le « eu » fermé de « peu » : arrondissez les lèvres en disant « é ».</string>
+    <string name="sound_guide_eu_open">Le « eu » ouvert de « peur » : lèvres arrondies, mâchoire un peu baissée.</string>
+    <string name="sound_guide_r_fr">Le « r » français de « rue » : un frottement doux au fond de la gorge, sans rouler.</string>
+    <string name="sound_guide_zh">Le « j » de « je » : comme « ch », mais avec la voix.</string>
+    <string name="sound_guide_gn">Le « gn » de « agneau » : le milieu de la langue contre le palais.</string>
+    <string name="sound_guide_ui">Le « ui » de « nuit » : une glissade rapide d'arrondi vers l'avant.</string>
+    <string name="sound_guide_schwa">Le « e » léger de « petit » : un « euh » doux, dit rapidement.</string>
+</resources>

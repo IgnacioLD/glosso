@@ -1,0 +1,141 @@
+# Glosso Pro edge (Caddy). Serves only api.glossostudio.com, which is proxied
+# through Cloudflare. Two things in this file are security-critical and must not
+# be removed:
+#
+#   1. trusted_proxies: Caddy is the origin behind Cloudflare, so it must trust
+#      the CF-Connecting-IP that Cloudflare rewrites, and nothing else. Ranges
+#      are Cloudflare's published list; keep them in sync with the firewall
+#      (docs/ORIGIN-LOCKDOWN.md) when Cloudflare changes them.
+#   2. X-Real-Client-IP: the app keys every rate limit on this header, written
+#      here from {client_ip}. Never key on X-Forwarded-For: Cloudflare appends
+#      to it, so its leftmost value is whatever the caller sent.
+#
+# The origin firewall (stream ops/origin-lockdown, docs/ORIGIN-LOCKDOWN.md) is the
+# other half: it refuses 80 and 443 from anything but Cloudflare. Together they
+# make the per-IP limits trustworthy.
+{
+	servers {
+		# Cloudflare's published ranges; keep in sync with docs/ORIGIN-LOCKDOWN.md
+		trusted_proxies static 173.245.48.0/20 103.21.244.0/22 103.22.200.0/22 103.31.4.0/22 141.101.64.0/18 108.162.192.0/18 190.93.240.0/20 188.114.96.0/20 197.234.240.0/22 198.41.128.0/17 162.158.0.0/15 104.16.0.0/13 104.24.0.0/14 172.64.0.0/13 131.0.72.0/22 2400:cb00::/32 2606:4700::/32 2803:f800::/32 2405:b500::/32 2405:8100::/32 2a06:98c0::/29 2c0f:f248::/32
+		# Cloudflare and other CDNs append the real client to X-Forwarded-For, so
+		# the leftmost value is attacker-controlled; parse right-to-left.
+		trusted_proxies_strict
+		client_ip_headers CF-Connecting-IP X-Forwarded-For
+		# Bound slow clients (slowloris, stalled uploads). Large downloads are
+		# responses, so `read_body` does not touch them.
+		timeouts {
+			read_header 10s
+			read_body 30s
+			idle 2m
+		}
+	}
+}
+
+# Dominio real via GLOSSO_DOMAIN (deploy/.env); placeholder si no se define.
+# TLS automatico (Let's Encrypt), sin certbot. El DNS debe apuntar al VPS.
+{$GLOSSO_DOMAIN:api.glossopro.example} {
+	encode gzip
+
+	# Log de acceso con los secretos redactados. Dos cosas que no pueden
+	# desaparecer:
+	#   1. La query lleva `token`/`api_key`/`authorization` borrados: un secreto
+	#      en la URL es el vector que nos exploto (SEC-08).
+	#   2. `Authorization`, `X-Api-Key` y `X-Ingest-Token` se sustituyen por
+	#      REDACTED antes de escribir.
+	# Caddy ya redacta Authorization/Cookie por defecto; esto lo hace explicito y
+	# anade las cabeceras propias. Salida a stderr (docker json-file, con rotacion).
+	log {
+		format filter {
+			wrap json
+			fields {
+				request>uri query {
+					delete token
+					delete access_token
+					delete api_key
+					delete authorization
+				}
+				request>headers>Authorization replace REDACTED
+				request>headers>X-Api-Key replace REDACTED
+				request>headers>X-Ingest-Token replace REDACTED
+			}
+		}
+	}
+
+	# Assets (audio, imagenes, content.db, manifest): mientras el versionado de
+	# URLs (?v=<assetVersion>) no este desplegado, Cloudflare cachea por extension
+	# 4 horas y su token no permite purgar por API. Un TTL corto hace visible una
+	# actualizacion en un minuto sin desactivar el CDN (sigue cacheando).
+	# Cuando el versionado este desplegado, relajar a un TTL largo (p. ej.
+	# "public, max-age=31536000, immutable"): la version ya invalida por si sola.
+	@assets path /assets/*
+	header @assets Cache-Control "public, max-age=60, must-revalidate"
+
+	handle /robots.txt {
+		header Content-Type "text/plain; charset=utf-8"
+		respond <<ROBOTS
+User-agent: *
+Disallow: /admin/
+Disallow: /metrics
+Disallow: /stats
+ROBOTS
+	}
+
+	# API y assets.
+	handle {
+		# Reject an oversized upload at the edge, before it reaches the app or can
+		# be buffered (covers a chunked body with no Content-Length). The app keeps
+		# its own 9 MB backstop.
+		request_body {
+			max_size 10MB
+		}
+
+		# Security headers. The app sets its own too; this is the edge copy so a
+		# direct-to-origin response is never bare.
+		header {
+			# HSTS: el sitio solo sirve https (Caddy termina TLS), asi que la
+			# politica se emite aqui; 180 dias es largo pero reversible en una
+			# ventana de mantenimiento. La app emite su copia solo en https.
+			Strict-Transport-Security "max-age=15552000; includeSubDomains"
+			X-Content-Type-Options "nosniff"
+			X-Frame-Options "DENY"
+			Referrer-Policy "no-referrer"
+			Permissions-Policy "geolocation=(), microphone=(), camera=()"
+			Content-Security-Policy "default-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; frame-ancestors 'none'; base-uri 'none'; form-action 'none'"
+			# No version banner: neither Caddy nor the app advertises its build.
+			-Server
+		}
+
+		reverse_proxy glosso-server:8080 {
+			# The only value the app trusts for the client IP. {client_ip} is
+			# resolved against trusted_proxies above, so an untrusted caller
+			# cannot forge it; the header_up always overwrites any client value.
+			header_up X-Real-Client-IP {client_ip}
+			# A hung inference can hold a connection only so long.
+			transport http {
+				dial_timeout 5s
+				response_header_timeout 60s
+			}
+		}
+	}
+}
+
+# El comodin *.glossostudio.com apunta a este VPS, asi que www tambien llega
+# aqui. Sin un sitio propio no hay certificado para www y Cloudflare devuelve 525;
+# se sirve por redireccion permanente al apex, no como sitio propio. Revertir:
+# quitar este bloque, `caddy validate` y recargar (ver docs/INFRA-DEPLOY.md).
+www.glossostudio.com {
+	redir https://glossostudio.com{uri} permanent
+}
+
+# Analitica web self-hosted (umami). Caddy hace de proxy al contenedor; sin este
+# bloque, el subdominio cae en el comodin *.glossostudio.com y Cloudflare da 525.
+# Dominio configurable con GLOSSO_UMAMI_DOMAIN (deploy/.env).
+{$GLOSSO_UMAMI_DOMAIN:umami.glossostudio.com} {
+	reverse_proxy umami:3000
+}
+
+# Pagina de estado de uptime-kuma, que YA corre en el stack (su UI escucha en
+# loopback 3001 y se accede por tunel SSH). Aqui se sirve por su subdominio.
+{$GLOSSO_STATUS_DOMAIN:status.glossostudio.com} {
+	reverse_proxy uptime-kuma:3001
+}

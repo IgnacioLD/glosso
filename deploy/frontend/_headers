@@ -1,0 +1,30 @@
+# Security headers for the Glosso Studio website (glossostudio.com).
+#
+# This file is for Cloudflare Pages: copy it to the website repo's
+# `static/_headers` so Hugo publishes it at the site root. If the site is not on
+# Pages, the same values can live in a Cloudflare Transform Rule / "Response
+# Header" rule; keep them identical.
+#
+# Before enabling the CSP in production, test it (curl -I, browser console) on
+# the redesigned site and on the public demo. If anything is blocked, add the
+# exact origin to the relevant directive or run it as
+# `Content-Security-Policy-Report-Only` for a day first.
+#
+# The CSP is built for the site as it is today: self-hosted fonts and CSS
+# (fingerprinted with SRI), one self-hosted Umami script, and the public demo
+# calling https://api.glossostudio.com.
+
+/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  # geolocation and camera are never used; the microphone is granted only to the
+  # demo below, never site-wide.
+  Permissions-Policy: geolocation=(), camera=(), microphone=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://umami.glossostudio.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://umami.glossostudio.com https://api.glossostudio.com; media-src 'self' blob:; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+
+# Public demo of the scorer. Grant the microphone and allow the API call here.
+# Adjust the path if the demo ships under a different prefix.
+/demo/*
+  Permissions-Policy: geolocation=(), camera=(), microphone=(self)

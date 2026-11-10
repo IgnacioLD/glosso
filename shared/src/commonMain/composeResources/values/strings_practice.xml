@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Pronunciation-feedback strings, kept in their own file because the shared
+  strings.xml is edited by another in-flight branch. Resource names stay unique
+  across the folder, so the merge is a no-op either way.
+-->
+<resources>
+    <plurals name="practice_work_on_count_plain">
+        <item quantity="one">%1$d sound needs work</item>
+        <item quantity="other">%1$d sounds need work</item>
+    </plurals>
+    <string name="practice_work_on_many">%1$d sounds need work: %2$s</string>
+    <string name="practice_tap_example">Tap a word to hear it</string>
+    <string name="practice_error_in_word">In "%1$s"</string>
+    <string name="practice_example_wrong">Sounded like</string>
+    <string name="practice_example_right">Should sound</string>
+
+    <!--
+      This take against the previous one on the same item. The rising line names
+      the gain; a falling repeat encourages instead of blaming, because a worse
+      take is part of learning.
+    -->
+    <string name="practice_progress_up">Improving</string>
+    <string name="practice_progress_up_detail">+%1$d vs your last take</string>
+    <string name="practice_progress_same">About the same as your last take</string>
+    <string name="practice_progress_down">Keep going</string>
+    <string name="practice_progress_down_detail">%1$d below your last take. Each repeat still counts.</string>
+
+    <!--
+      Plain-language description of a target sound: what it is, how to articulate
+      it and an anchor word, so the feedback never leaves two bare IPA symbols
+      side by side. The IPA stays as a support line. Keyed by base phone.
+    -->
+    <string name="sound_guide_theta">The "th" in "think": put the tip of your tongue between your teeth and blow softly.</string>
+    <string name="sound_guide_eth">The voiced "th" in "this": tongue between the teeth, with your voice buzzing.</string>
+    <string name="sound_guide_s">The "s" in "sun": tongue just behind your teeth, a steady hiss.</string>
+    <string name="sound_guide_z">The "z" in "zoo": like "s" but with your voice buzzing.</string>
+    <string name="sound_guide_sh">The "sh" in "she": tongue a little back, lips slightly rounded, a soft hiss.</string>
+    <string name="sound_guide_ch">The "ch" in "cheap": a quick "t" followed by "sh".</string>
+    <string name="sound_guide_j">The "j" in "jeep": a quick "d" followed by the voiced "sh".</string>
+    <string name="sound_guide_r">The "r" in "right": curl or bunch your tongue back without touching the roof.</string>
+    <string name="sound_guide_l">The "l" in "light": touch the roof behind your teeth with the tongue tip.</string>
+    <string name="sound_guide_w">The "w" in "west": round your lips, like a quick "u".</string>
+    <string name="sound_guide_v">The "v" in "vest": lower lip against the upper teeth, with voice.</string>
+    <string name="sound_guide_b">The "b" in "best": press both lips together, then release with voice.</string>
+    <string name="sound_guide_ng">The "ng" in "sing": the back of your tongue rises to the soft palate, air through the nose.</string>
+    <string name="sound_guide_n">The "n" in "sin": tongue tip behind the teeth, air through the nose.</string>
+    <string name="sound_guide_ih">The short "i" in "ship": relaxed and quick.</string>
+    <string name="sound_guide_iy">The long "ee" in "sheep": stretch it and smile.</string>
+    <string name="sound_guide_ae">The "a" in "bad": jaw open wide, lips relaxed.</string>
+    <string name="sound_guide_eh">The "e" in "bed": jaw a little open, lips relaxed.</string>
+    <string name="sound_guide_ah">The "u" in "cup": short, central, relaxed.</string>
+    <string name="sound_guide_aa">The "o" in "cop": mouth open wide, sound at the back.</string>
+    <string name="sound_guide_uh">The short "oo" in "pull": short and relaxed, lips slightly rounded.</string>
+    <string name="sound_guide_uw">The long "oo" in "pool": round your lips firmly and stretch it.</string>
+    <string name="sound_guide_ao">The "aw" in "bought": open and rounded, from the back of the mouth.</string>
+    <string name="sound_guide_ow">The "o" in "boat": glide from "o" to "oo".</string>
+    <string name="sound_guide_ey">The "a" in "late": glide from "e" to "ee".</string>
+    <string name="sound_guide_h">The "h" in "house": breathe out before the vowel.</string>
+    <string name="sound_guide_an">The nasal "an" in "dans": open, unrounded, air through the nose.</string>
+    <string name="sound_guide_on">The nasal "on" in "bon": lips rounded, air through the nose.</string>
+    <string name="sound_guide_in">The nasal "in" in "vin": tongue forward, unrounded, air through the nose.</string>
+    <string name="sound_guide_un">The nasal "un" in "brun": lips rounded, tongue forward, air through the nose.</string>
+    <string name="sound_guide_y">The French "u" in "tu": say "ee" and round your lips.</string>
+    <string name="sound_guide_eu_closed">The closed "eu" in "peu": round your lips while saying "e".</string>
+    <string name="sound_guide_eu_open">The open "eu" in "peur": lips rounded, jaw dropped a little.</string>
+    <string name="sound_guide_r_fr">The French "r" in "rue": a soft rub at the back of the throat, not rolled.</string>
+    <string name="sound_guide_zh">The "j" in "je": like "sh" but with voice.</string>
+    <string name="sound_guide_gn">The "gn" in "agneau": the middle of your tongue against the palate.</string>
+    <string name="sound_guide_ui">The "ui" in "nuit": a quick glide from rounded to front.</string>
+    <string name="sound_guide_schwa">The light "e" in "petit": a soft "uh", passed over quickly.</string>
+</resources>

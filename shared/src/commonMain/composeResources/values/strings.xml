@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Brand: not translated. -->
+    <string name="glosso_wordmark" translatable="false">GLOSSO</string>
+    <string name="score_out_of" translatable="false">/ 100</string>
+    <string name="label_pair" translatable="false">%1$s · %2$s</string>
+    <string name="label_percent" translatable="false">%1$d%</string>
+    <string name="label_bullet" translatable="false">· %1$s</string>
+
+    <!-- Shared -->
+    <string name="back">Back</string>
+    <string name="close">Close</string>
+    <string name="retry">Retry</string>
+    <string name="cancel">Cancel</string>
+    <string name="delete">Delete</string>
+    <string name="error_load_title">Couldn't load</string>
+    <string name="error_load_message">Check your connection and try again.</string>
+    <string name="error_offline">No connection. Check your network and try again.</string>
+    <string name="error_server">Couldn't reach the server. Try again in a moment.</string>
+    <string name="offline_banner">No connection</string>
+    <string name="offline_nudge_body">You can keep practicing without a connection. Download the model once (about %1$s).</string>
+    <string name="offline_nudge_cta">Download model</string>
+    <string name="offline_nudge_hide">Hide this tip</string>
+    <string name="error_download">Couldn't download</string>
+    <string name="error_score">Couldn't score</string>
+    <string name="error_mic">Microphone unavailable</string>
+    <string name="error_model_load">Couldn't load the on-device model</string>
+    <string name="error_load_lesson">Couldn't load the lesson</string>
+    <string name="error_prepare_offline">Couldn't prepare this lesson for offline use.</string>
+    <string name="error_score_offline">Offline: scoring pronunciation needs the cloud. The rest of a downloaded lesson still works offline.</string>
+
+    <!-- Navigation -->
+    <string name="nav_today">Today</string>
+    <string name="nav_lessons">Lessons</string>
+    <string name="nav_you">You</string>
+    <string name="nav_library">Library</string>
+
+    <!-- Today (home) -->
+    <string name="today_title">Today</string>
+    <string name="today_lesson">Your lesson</string>
+    <string name="today_lesson_loading">Loading your course…</string>
+    <string name="today_lesson_empty">There are no lessons yet. Check your connection and try again.</string>
+    <string name="today_start">Start</string>
+    <string name="today_continue">Continue</string>
+    <string name="today_browse">See the course</string>
+    <string name="today_sounds">Sounds to work on</string>
+    <string name="today_sounds_no_profile">Your profile isn't ready yet. Say a few phrases and it will fill in.</string>
+    <string name="today_sounds_clear">No weak sounds right now.</string>
+    <string name="today_sounds_hint">Weakest first, from your own recordings.</string>
+    <string name="today_sounds_unlock">See Glosso Pro</string>
+    <string name="today_sounds_locked">Your phonetic profile is Pro.</string>
+    <plurals name="today_review">
+        <item quantity="one">Review %1$d sound</item>
+        <item quantity="other">Review %1$d sounds</item>
+    </plurals>
+    <string name="today_reminder_title">A few days have passed</string>
+    <!-- Always shown for 2 or more days (REMINDER_AFTER_DAYS), so the plural is
+         not ambiguous; lint cannot see the caller's guard. -->
+    <string name="today_reminder_body" tools:ignore="PluralsCandidate">%1$d days since your last practice. No rush: your plan is still here.</string>
+    <string name="today_settings">Settings</string>
+
+    <!-- Library hub -->
+    <string name="library_title">Library</string>
+    <string name="library_practice_title">Free practice</string>
+    <string name="library_practice_subtitle">Train any sound, weakest first</string>
+    <string name="library_stories_title">Stories</string>
+    <string name="library_stories_subtitle">Short pieces to read and listen to</string>
+    <string name="library_exercises_title">Exercises</string>
+    <string name="library_exercises_subtitle">Grammar and vocabulary on their own</string>
+    <string name="library_offline_title">Offline lessons</string>
+    <string name="library_offline_subtitle">Keep them on this device</string>
+    <string name="library_settings_title">Settings</string>
+    <string name="library_settings_subtitle">Language and accent</string>
+
+    <!-- Free practice -->
+    <string name="practice_title">Free practice</string>
+    <string name="practice_title_personalized">Your practice</string>
+    <string name="practice_counter">%1$d of %2$d</string>
+    <string name="practice_skip">Skip this drill</string>
+    <string name="practice_next">Next exercise</string>
+    <string name="practice_source_profile">Chosen from your weakest sounds.</string>
+    <string name="practice_source_no_plan">No drills for your weak sounds yet. Here is the general set.</string>
+    <string name="practice_empty_title">No drills yet</string>
+    <string name="practice_empty_message">The drill bank is empty for now.</string>
+    <string name="practice_listen">Listen</string>
+    <string name="practice_repeat">Repeat</string>
+    <string name="practice_hear_again">Hear it again</string>
+    <string name="phase_score">Score</string>
+    <string name="practice_sounds">Sounds</string>
+    <string name="practice_work_on">Work on /%1$s/</string>
+    <string name="practice_diagnosis_sub">Your /%1$s/ sounds too close to /%2$s/.</string>
+    <string name="practice_diagnosis_dropped">The /%1$s/ sound is missing.</string>
+    <string name="practice_practise_sound">Practice /%1$s/</string>
+    <string name="practice_drill_unavailable">No drill for this sound right now. Try again when you are back online.</string>
+    <string name="practice_improved">You improved /%1$s/</string>
+    <string name="practice_trend">Progress on /%1$s/</string>
+
+    <!-- Reference audio -->
+    <string name="audio_play_piece">Play the piece</string>
+    <string name="audio_pause">Pause</string>
+    <string name="audio_paragraph_of">Paragraph %1$d of %2$d</string>
+    <string name="audio_line_of">Line %1$d of %2$d</string>
+    <string name="audio_loading">Preparing audio</string>
+    <string name="audio_playing">Playing</string>
+    <string name="audio_paused">Paused</string>
+    <string name="audio_finished">Finished</string>
+    <string name="audio_listen_all">Play from the start</string>
+    <string name="audio_none">No reference audio for this piece yet</string>
+    <string name="audio_play_from">Play from this paragraph</string>
+    <string name="audio_play_reference">Play the reference</string>
+
+    <!-- Lessons -->
+    <string name="lessons_title">Lessons</string>
+    <string name="lessons_empty_all">No lessons yet</string>
+    <string name="lessons_empty_level">No lessons yet for %1$s</string>
+    <string name="lessons_empty_message">Pick another level; new lessons are on the way.</string>
+    <string name="lessons_week">Your week</string>
+    <string name="lessons_continue_kicker">Continue</string>
+    <string name="lessons_start_kicker">Start here</string>
+    <string name="lessons_next_kicker">Up next</string>
+    <string name="lessons_step_progress">Step %1$d of %2$d · %3$s</string>
+    <string name="lessons_continue">Continue</string>
+    <string name="lessons_start">Start</string>
+    <string name="lessons_day_practiced">Day practiced</string>
+    <string name="lessons_downloaded">Downloaded for offline use</string>
+    <string name="lessons_download">Download for offline use</string>
+    <string name="lessons_finished">Finished</string>
+    <string name="lessons_locked">Locked lesson</string>
+    <string name="lessons_close">Close lesson</string>
+    <string name="lessons_offline_badge">Offline</string>
+    <string name="lessons_words">Words</string>
+    <string name="lessons_no_exercises">No exercises in this lesson yet.</string>
+    <string name="lessons_practise_read">Practice what you read</string>
+    <string name="lessons_back_to_lessons">Back to lessons</string>
+    <string name="lessons_drill_progress">Drill %1$d of %2$d</string>
+    <string name="lessons_finish_speaking">Finish pronunciation</string>
+    <string name="lessons_completed">Lesson completed</string>
+    <string name="lessons_read">Lesson read</string>
+    <string name="lessons_summary_high">Your pronunciation is improving. Try a harder lesson.</string>
+    <string name="lessons_summary_keep">Come back tomorrow: repetition is what fixes a sound.</string>
+    <string name="lessons_summary_read">You read the base and did the exercises. Drills wait for next time.</string>
+    <string name="lessons_all">All</string>
+    <string name="lessons_pick_level">Pick level</string>
+    <string name="lessons_level">Level</string>
+    <string name="lessons_all_levels">All levels</string>
+    <string name="lessons_level_n">Level %1$s</string>
+    <string name="lessons_offline_sheet">Offline lesson</string>
+    <string name="lessons_downloading">Downloading (%1$d%)</string>
+    <string name="lessons_downloaded_bytes">Downloaded · %1$s</string>
+    <string name="lessons_offline_note">This lesson opens and plays with no connection.</string>
+    <string name="lessons_calculating">Calculating size…</string>
+    <string name="lessons_about_size">About %1$s</string>
+    <string name="lessons_size_unavailable">Size unavailable offline</string>
+    <string name="lessons_download_detail">Download the base, its audio and art, the exercises and its drills to this device. The cloud stays the norm.</string>
+    <string name="lessons_download_for_offline">Download for offline</string>
+    <string name="lessons_storage">Offline storage: %1$s used</string>
+    <string name="lessons_delete_device">Delete from device</string>
+    <string name="lessons_offline_needs_connection">You need a connection to download. Connect and try again.</string>
+    <string name="lesson_unavailable_title">Couldn't load the lesson</string>
+    <string name="lesson_unavailable_offline_title">This lesson isn't on your device</string>
+    <string name="lesson_unavailable_offline_note">You're offline and this lesson wasn't downloaded. Connect to load it, or open a lesson you downloaded.</string>
+    <string name="lesson_download_now">Download this lesson</string>
+
+    <!-- Lesson steps -->
+    <string name="step_base">Read or listen</string>
+    <string name="step_exercises">Exercises</string>
+    <string name="step_speak">Your turn</string>
+    <string name="step_review">Review</string>
+    <string name="step_context">Context</string>
+    <string name="lessons_context_next">Continue</string>
+    <string name="note_kind_culture">Culture</string>
+    <string name="note_kind_etiquette">Etiquette</string>
+    <string name="note_kind_register">Register</string>
+    <string name="note_kind_language">Language</string>
+    <string name="note_example_wrong">Not said</string>
+    <string name="review_intro">Phrases from earlier lessons. Say each one from memory.</string>
+    <string name="review_skip">Skip the review</string>
+    <string name="review_finish">Start the lesson</string>
+    <string name="lessons_summary_review">Phrases that will come back for review: %1$d</string>
+    <string name="speak_progress">Line %1$d of %2$d</string>
+    <string name="speak_show_phrase">Show the phrase</string>
+    <string name="speak_say_as">Your turn. Say it as %1$s:</string>
+    <string name="speak_from_memory">Your turn, from memory:</string>
+    <string name="speak_recall_question">What did %1$s answer?</string>
+    <string name="speak_hidden_hint">The phrase appears once you have said it.</string>
+    <string name="speak_partial">Part of the phrase was missing.</string>
+    <string name="speak_try_again">Try again from memory</string>
+    <string name="speak_next">Next line</string>
+    <string name="speak_finish">Go on to pronunciation</string>
+    <string name="speak_miss_title">That was another phrase.</string>
+    <string name="speak_miss_detail">Listen to it and say it again from memory. This take does not count as a score.</string>
+    <string name="step_drills">Pronunciation</string>
+    <string name="step_summary">Wrap-up</string>
+
+    <!-- Lesson base/content types -->
+    <string name="content_dialogue">Dialogue</string>
+    <string name="content_story">Story</string>
+    <string name="content_news">News</string>
+    <string name="content_lesson">Lesson</string>
+
+    <!-- Offline drawer -->
+    <string name="offline_title">Offline</string>
+    <string name="offline_confirm_title">Delete all downloads?</string>
+    <string name="offline_confirm_message">All downloaded lessons will be removed from this device. You can download them again whenever you want.</string>
+    <string name="offline_delete_all">Delete all</string>
+    <string name="offline_empty_title">Nothing downloaded</string>
+    <string name="offline_empty_message">Open a lesson and tap the download icon to keep it on this device.</string>
+    <string name="offline_section">Downloaded lessons</string>
+    <string name="offline_free_space">Free up space</string>
+    <string name="offline_delete_download">Delete download</string>
+    <plurals name="offline_in_device">
+        <item quantity="one">%1$d lesson on this device</item>
+        <item quantity="other">%1$d lessons on this device</item>
+    </plurals>
+    <string name="offline_model_desc">Download it once and score on this device, with no cloud and no connection.</string>
+    <string name="offline_model_not_downloaded">Not downloaded</string>
+
+    <!-- Stories -->
+    <string name="stories_title">Stories</string>
+    <string name="stories_empty_title">No stories yet</string>
+    <string name="stories_empty_message">We're writing new stories.</string>
+    <string name="stories_reader_title">Story</string>
+    <string name="stories_practice">Practice</string>
+    <string name="stories_vocabulary">Word</string>
+    <string name="stories_vocabulary_hint">Tap a highlighted word for its sound and meaning.</string>
+
+    <!-- Exercises -->
+    <string name="exercises_title">Exercises</string>
+    <string name="exercises_empty_title">No exercises yet</string>
+    <string name="exercises_empty_message">Exercises arrive with the lessons.</string>
+    <string name="exercises_all">All</string>
+
+    <!-- You -->
+    <string name="you_title">You</string>
+    <string name="you_pronunciation">Pronunciation</string>
+    <string name="you_global">Overall %1$d% · %2$s</string>
+    <string name="you_focus">Focus here: it is right %1$d% of the time.</string>
+    <string name="you_days">Days</string>
+    <string name="you_streak">Days in a row</string>
+    <string name="you_sounds">Sounds</string>
+    <string name="you_week_up" tools:ignore="PluralsCandidate">+%1$d this week</string>
+    <string name="you_week_down" tools:ignore="PluralsCandidate">%1$d this week</string>
+    <string name="you_week_flat">No change yet this week</string>
+    <string name="you_your_sounds">Your sounds</string>
+    <string name="you_sounds_hint">The arrow is how much each sound moved today.</string>
+    <string name="you_work_on">What to work on</string>
+    <string name="you_practise_sound">Practice /%1$s/</string>
+    <string name="you_sound_delta">/%1$s/ %2$d -&gt; %3$d</string>
+    <string name="you_today_up">Up %1$d% today</string>
+    <string name="you_today_down">Down %1$d% today</string>
+    <string name="you_empty_title">No sounds mapped yet</string>
+    <string name="you_empty_message">Record a few drills and here you will see the sounds you have mastered and the ones that still need work.</string>
+    <string name="you_start_practice">Start practicing</string>
+    <string name="you_last_30_days">Last 30 days</string>
+    <string name="you_calendar">Calendar</string>
+    <string name="you_achievements">Achievements</string>
+    <string name="you_today">Today</string>
+    <string name="you_today_practice">Your practice today</string>
+    <string name="you_today_minutes">%1$d min</string>
+    <string name="you_plan_start">Start practice</string>
+    <string name="you_plan_minutes">%1$d min</string>
+    <string name="you_plan_phrases">Phrases in context</string>
+    <string name="you_reason_persistent">Persistent difficulty</string>
+    <string name="you_reason_lapsed">It has slipped</string>
+    <string name="you_reason_weak">Weak sound</string>
+    <string name="you_reason_check_in">Confirm your progress</string>
+    <string name="you_reason_phrases">Put it into phrases</string>
+    <string name="you_trend_title">Progress on /%1$s/</string>
+    <string name="you_trend_day">d%1$d</string>
+    <string name="you_trend_up" tools:ignore="PluralsCandidate">Improving: +%1$d since day 1.</string>
+    <string name="you_trend_down" tools:ignore="PluralsCandidate">Slipping: %1$d since day 1.</string>
+    <string name="you_trend_flat">Steady around %1$d%. Keep checking back.</string>
+    <string name="you_pattern_title">Possible persistent difficulty with /%1$s/</string>
+    <string name="you_pattern_detail">It keeps sounding like /%1$s/ · confidence %2$d%</string>
+    <string name="you_pattern_dropped">The sound keeps disappearing · confidence %1$d%</string>
+    <string name="you_competences">Competences</string>
+    <string name="skill_pronunciation">Pronunciation</string>
+    <string name="skill_comprehension">Comprehension</string>
+    <string name="skill_vocabulary">Vocabulary</string>
+    <string name="skill_grammar">Grammar</string>
+    <plurals name="you_sounds_mastered">
+        <item quantity="one">%1$d sound mastered</item>
+        <item quantity="other">%1$d sounds mastered</item>
+    </plurals>
+
+    <!-- Achievements -->
+    <string name="achievement_first_title">First answer</string>
+    <string name="achievement_first_detail">Answer your first exercise</string>
+    <string name="achievement_streak5_title">Five in a row</string>
+    <string name="achievement_streak5_detail">Get five right in a row</string>
+    <string name="achievement_streak10_title">Ten in a row</string>
+    <string name="achievement_streak10_detail">Get ten right in a row</string>
+    <string name="achievement_streak20_title">Twenty in a row</string>
+    <string name="achievement_streak20_detail">Get twenty right in a row</string>
+    <string name="achievement_answered50_title">Fifty answers</string>
+    <string name="achievement_answered50_detail">Answer fifty exercises</string>
+    <string name="achievement_answered200_title">Two hundred</string>
+    <string name="achievement_answered200_detail">Answer two hundred exercises</string>
+    <string name="achievement_days3_title">Three days</string>
+    <string name="achievement_days3_detail">Practice on three different days</string>
+    <string name="achievement_days7_title">Seven days</string>
+    <string name="achievement_days7_detail">Practice on seven different days</string>
+    <string name="achievement_perfect_title">Flawless</string>
+    <string name="achievement_perfect_detail">Score 100 on a pronunciation drill</string>
+    <string name="achievement_lesson1_title">First lesson</string>
+    <string name="achievement_lesson1_detail">Finish a lesson</string>
+    <string name="achievement_lesson10_title">Ten lessons</string>
+    <string name="achievement_lesson10_detail">Finish ten lessons</string>
+    <string name="achievement_lesson25_title">Twenty-five lessons</string>
+    <string name="achievement_lesson25_detail">Finish twenty-five lessons</string>
+    <string name="achievement_answered500_title">Five hundred</string>
+    <string name="achievement_answered500_detail">Answer five hundred exercises</string>
+    <string name="achievement_drills50_title">Fifty takes</string>
+    <string name="achievement_drills50_detail">Record fifty pronunciation takes</string>
+    <string name="achievement_daily3_title">Three days in a row</string>
+    <string name="achievement_daily3_detail">Practice three days in a row</string>
+    <string name="achievement_daily7_title">Seven days in a row</string>
+    <string name="achievement_daily7_detail">Practice seven days in a row</string>
+    <string name="achievement_daily30_title">Thirty days in a row</string>
+    <string name="achievement_daily30_detail">Practice thirty days in a row</string>
+    <string name="achievement_sound3_title">Three sounds</string>
+    <string name="achievement_sound3_detail">Get three sounds to 85 or more, each on five takes</string>
+    <string name="achievement_sound10_title">Ten sounds</string>
+    <string name="achievement_sound10_detail">Get ten sounds to 85 or more, each on five takes</string>
+    <string name="achievement_climb20_title">Climbing</string>
+    <string name="achievement_climb20_detail">Lift a sound 20 points from day one</string>
+    <string name="achievement_climb40_title">Transformed</string>
+    <string name="achievement_climb40_detail">Lift a sound 40 points from day one</string>
+    <string name="achievement_phrases15_title">Fifteen phrases</string>
+    <string name="achievement_phrases15_detail">Score 85 or more on fifteen phrases</string>
+    <string name="achievement_competences3_title">Well rounded</string>
+    <string name="achievement_competences3_detail">All three competences at 75% or more</string>
+    <string name="achievement_progress" translatable="false">%1$d/%2$d</string>
+    <string name="celebration_achievement">Achievement</string>
+    <string name="celebration_mastery">Nice work</string>
+    <string name="celebration_mastery_title">Sound mastered</string>
+    <string name="celebration_mastery_detail">You passed 85 on a pronunciation drill.</string>
+
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_delete_score_title">Delete on-device scoring?</string>
+    <string name="settings_delete_score_message">The acoustic model will be deleted from this device. Pronunciation will be scored in the cloud again.</string>
+    <string name="settings_target_language">Target language</string>
+    <string name="settings_target_language_desc">The language you're studying. Content, drills and audio follow it.</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_reference_accent">Reference accent</string>
+    <string name="settings_reference_accent_desc">The accent of every recording and every lesson.</string>
+    <string name="settings_accent">Accent</string>
+    <string name="settings_reminder">Practice reminder</string>
+    <string name="settings_reminder_desc">Optional. A quiet note on Today when days pass without practicing. No notifications.</string>
+    <string name="settings_reminder_toggle">Show it on Today</string>
+    <string name="settings_ondevice">On-device scoring</string>
+    <string name="settings_ondevice_desc">Optional. Score on this device, with no cloud and no connection; about %1$s. If the audio isn't usable, it tells you so.</string>
+    <string name="settings_preparing">Preparing the model…</string>
+    <string name="settings_ready">Ready on this device</string>
+    <string name="settings_download_model">Download model (%1$s)</string>
+    <string name="scoring_no_model_title">Score without a connection</string>
+    <string name="scoring_no_model_body">This take couldn't reach the cloud and the on-device model isn't installed. Download it once and scoring works offline.</string>
+    <string name="scoring_no_model_offline">Connect to download the model, then record again.</string>
+    <string name="scoring_download_model">Download the model (%1$s)</string>
+    <string name="settings_downloading">Downloading (%1$d%)</string>
+    <string name="settings_app_language">App language</string>
+    <string name="settings_app_language_desc">The language of the interface, not the one you're learning.</string>
+    <string name="settings_app_language_system">Change it in Settings</string>
+    <string name="settings_language_system">System default</string>
+    <string name="settings_lang_en">English</string>
+    <string name="settings_lang_es">Spanish</string>
+    <string name="settings_lang_fr">French</string>
+    <string name="settings_lang_de">German</string>
+    <string name="settings_lang_ru">Russian</string>
+    <string name="settings_lang_zh">Chinese</string>
+    <string name="settings_accent_us">American</string>
+    <string name="settings_accent_uk">British</string>
+    <string name="settings_about">About</string>
+    <string name="settings_about_subtitle">Version, privacy and licenses</string>
+
+    <!-- First-run welcome -->
+    <string name="onboarding_skip">Skip</string>
+    <string name="onboarding_continue">Continue</string>
+    <string name="onboarding_start">Start the first lesson</string>
+    <string name="onboarding_title">Learn the language. Pronounce it well.</string>
+    <string name="onboarding_body">Listen, practice and measure your pronunciation phrase by phrase. What resists comes back until it lands.</string>
+    <string name="onboarding_how_title">How it works</string>
+    <string name="onboarding_how_body">A lesson is short and always the same shape.</string>
+    <string name="onboarding_how_read_title">Read or listen</string>
+    <string name="onboarding_how_read_detail">Short phrases and texts with their translation.</string>
+    <string name="onboarding_how_practice_title">Practice</string>
+    <string name="onboarding_how_practice_detail">Quick exercises that fix what you just learned.</string>
+    <string name="onboarding_how_speak_title">Speak and measure</string>
+    <string name="onboarding_how_speak_detail">You record and the app shows which sound to work on.</string>
+    <string name="onboarding_target_language">Your target language</string>
+    <string name="onboarding_target_language_desc">The language you want to learn.</string>
+    <string name="onboarding_accent">Your accent</string>
+    <string name="onboarding_accent_desc">The accent you will hear and the wording of the course. You can change it later in Settings.</string>
+    <string name="onboarding_seed_title">Let's map your voice</string>
+    <string name="onboarding_seed_body">Say these phrases. They cover different sounds, so Glosso finds the ones worth working on.</string>
+    <string name="onboarding_seed_progress">Phrase %1$d of %2$d</string>
+    <string name="onboarding_seed_next">Next phrase</string>
+    <string name="onboarding_seed_need_take">Record a phrase to continue.</string>
+    <string name="onboarding_seed_skip">Skip this part</string>
+    <string name="onboarding_seed_done_title">Your profile is ready</string>
+    <string name="onboarding_seed_done_body">You can start your first lesson, and the sounds to work on are waiting for you on Today.</string>
+    <string name="onboarding_seed_error_title">We couldn't load the phrases</string>
+    <string name="onboarding_seed_debug">Test take</string>
+    <string name="onboarding_offline_title">Practice without a connection</string>
+    <string name="onboarding_offline_body">Optional. Download the on-device model once (%1$s) and keep practicing without a connection. You can also do it later from Offline.</string>
+
+    <!-- About -->
+    <string name="about_title">About</string>
+    <string name="about_version">Version %1$s (%2$d)</string>
+    <string name="about_privacy_title">Privacy</string>
+    <string name="about_privacy_detail">We don't keep your audio: it is scored in memory and discarded. No account required, no ads and no third parties.</string>
+    <string name="about_privacy_link">Privacy policy</string>
+    <string name="about_licenses_title">Licenses</string>
+    <string name="about_licenses_intro">Glosso is built on open-source components and third-party assets. Their licenses and attributions are listed here, inside the app.</string>
+    <string name="about_licenses_open">Open-source licenses and attributions</string>
+    <string name="licenses_full_terms">Read the full terms</string>
+
+    <!-- Exercise cards -->
+    <string name="exercise_choose_word">Choose the word that fits</string>
+    <string name="exercise_true_false">True or false</string>
+    <string name="exercise_true">True</string>
+    <string name="exercise_false">False</string>
+    <string name="exercise_fill_blank">Type the missing word</string>
+    <string name="exercise_fill_blank_choice">Choose the missing word</string>
+    <string name="exercise_order">Put the words in order</string>
+    <string name="exercise_match">Match each word with its meaning</string>
+    <string name="exercise_answer_question">Answer the question</string>
+    <string name="exercise_your_answer">Your answer</string>
+    <string name="exercise_check">Check</string>
+    <string name="exercise_order_hint">Tap the words below in the right order.</string>
+    <string name="exercise_order_placed">Your sentence</string>
+    <string name="exercise_order_available">Words</string>
+    <string name="exercise_show_answer">Show answer</string>
+    <string name="exercise_answer">Answer: %1$s</string>
+    <string name="exercise_got_it">Got it</string>
+    <string name="exercise_again">Again</string>
+    <string name="exercise_correct">Correct</string>
+    <string name="exercise_incorrect">Incorrect</string>
+    <string name="exercise_praise_streak">%1$d in a row</string>
+    <string name="exercise_returns">This one comes back at the end.</string>
+    <string name="exercise_complete">Nice work.</string>
+    <string name="exercise_continue">Continue</string>
+    <string name="exercise_restart">Start again</string>
+    <string name="exercise_source_story">From the story "%1$s"</string>
+    <string name="exercise_source_lesson">From the lesson "%1$s"</string>
+    <string name="exercise_source_read_first">Read it first</string>
+    <string name="match_matched">Matched</string>
+
+    <!-- Pronunciation practice -->
+    <string name="practice_normal">Normal</string>
+    <string name="practice_slow">Slow</string>
+    <string name="practice_your_take">Your take</string>
+    <string name="practice_listening">Listening to your take</string>
+    <string name="practice_recording">Recording - tap to stop</string>
+    <string name="practice_tap_say">Tap and say the phrase</string>
+    <string name="practice_stop_score">Stop and score</string>
+    <string name="practice_start_recording">Start recording</string>
+    <string name="practice_mic_permission">Glosso needs the microphone to score your pronunciation.</string>
+    <string name="practice_mic_permission_action">Open settings</string>
+    <string name="level_perfect">Perfect</string>
+    <string name="level_mastered">Mastered</string>
+    <string name="level_almost">Almost</string>
+    <string name="level_rough">Needs work</string>
+    <string name="level_not_yet">Keep trying</string>
+    <string name="feedback_perfect">Every sound landed. Move on to the next phrase.</string>
+    <string name="feedback_mastered">Good take. Move on to the next phrase.</string>
+    <string name="feedback_almost">One sound slipped. Hear it again slowly and repeat, closer to the mic.</string>
+    <string name="feedback_rough">Some sounds need work. Try the slow version, closer to the mic.</string>
+    <string name="feedback_not_yet">Hear the slow version and repeat it, closer to the mic.</string>
+    <string name="error_phoneme_note">It sounded like /%2$s/ instead of /%1$s/</string>
+    <string name="error_phoneme_dropped">/%1$s/ was missing</string>
+    <string name="score_not_evaluated_title">We couldn't evaluate your pronunciation.</string>
+    <string name="score_not_evaluated_detail">The audio was too quiet or noisy. Repeat louder, closer to the mic.</string>
+
+    <!-- Theme fallback names (server ids) -->
+    <string name="theme_family">Family</string>
+    <string name="theme_travel">Travel</string>
+    <string name="theme_city">City</string>
+    <string name="theme_work">Work</string>
+    <string name="theme_food">Food</string>
+    <string name="theme_health">Health</string>
+    <string name="theme_shopping">Shopping</string>
+    <string name="theme_time">Time and dates</string>
+    <string name="theme_education">Education</string>
+    <string name="theme_society">Society</string>
+    <string name="theme_environment">Environment</string>
+    <string name="theme_science">Science</string>
+    <string name="theme_culture">Culture</string>
+    <string name="theme_business">Business</string>
+    <string name="theme_friends">Friends</string>
+    <string name="theme_home">Home</string>
+    <string name="theme_daily_routine">Daily routine</string>
+    <string name="theme_clothes">Clothes</string>
+    <string name="theme_weather">Weather</string>
+    <string name="theme_feelings">Feelings</string>
+    <string name="theme_transport">Transport</string>
+    <string name="theme_restaurant">Restaurant</string>
+    <string name="theme_school">School</string>
+    <string name="theme_hobbies">Hobbies</string>
+    <string name="theme_pets">Pets</string>
+    <string name="theme_greetings">Greetings</string>
+    <string name="theme_invitations">Invitations</string>
+    <string name="theme_directions">Directions</string>
+    <string name="theme_airport">Airport</string>
+    <string name="theme_hotel">Hotel</string>
+    <string name="theme_emergencies">Emergencies</string>
+    <string name="theme_office">Office</string>
+    <string name="theme_money">Money</string>
+    <string name="theme_holidays">Holidays</string>
+    <string name="theme_sports">Sports</string>
+    <string name="theme_technology">Technology</string>
+    <string name="theme_nature">Nature</string>
+    <string name="theme_apologies">Apologies</string>
+    <string name="theme_complaints">Complaints</string>
+    <string name="theme_email">Email</string>
+    <string name="theme_gaming">Gaming</string>
+    <string name="theme_job_interview">Job interview</string>
+    <string name="theme_movies">Movies</string>
+    <string name="theme_music">Music</string>
+    <string name="theme_entertainment">Entertainment</string>
+    <string name="theme_history">History</string>
+    <string name="theme_scifi">Sci-fi</string>
+    <string name="theme_opinions">Opinions</string>
+    <string name="theme_phone_calls">Phone calls</string>
+    <string name="theme_plans">Plans</string>
+    <string name="theme_reading">Reading</string>
+    <string name="theme_small_talk">Small talk</string>
+    <string name="theme_storytelling">Storytelling</string>
+    <string name="theme_university">University</string>
+
+    <!-- Billing and the Pro gate -->
+    <string name="library_pro_title">Glosso Pro</string>
+    <string name="lesson_free_badge">FREE</string>
+    <string name="lessons_unlock_with_pro">Unlock with Pro</string>
+    <string name="pro_locked_title">This is Glosso Pro</string>
+    <string name="pro_locked_message">All of A1 and free practice stay open. A2 and beyond, your personalized practice and your phonetic profile are Pro.</string>
+    <string name="pro_summary_none">The full course and offline downloads</string>
+    <string name="pro_summary_trial">Free trial active</string>
+    <string name="pro_summary_active">Subscription active</string>
+    <string name="pro_summary_grace">Check your payment method in Google Play</string>
+    <string name="pro_summary_canceled">Canceled, with access until the period ends</string>
+    <string name="pro_summary_pending">Payment pending in Google Play</string>
+    <string name="paywall_headline">The full course, from A1 to B2.</string>
+    <string name="paywall_body">All of A1 is free and stays free. Glosso Pro opens A2 and the rest of the course, plus downloads to study offline.</string>
+    <string name="paywall_headline_next_level">You have finished A1. A good moment to continue.</string>
+    <string name="paywall_body_next_level">All of A1 is free and stays free. Glosso Pro opens %1$s and the rest of the course, plus downloads to study offline.</string>
+    <string name="paywall_benefit_course">A2, B1, B2 and the whole course beyond A1</string>
+    <string name="paywall_benefit_offline">Downloads to study offline</string>
+    <string name="paywall_benefit_practice">Practice and phonetic profile included</string>
+    <string name="paywall_default_title">Monthly subscription</string>
+    <string name="paywall_price_loading">Loading the Google Play price…</string>
+    <string name="paywall_price_unavailable">Price unavailable. Check your connection.</string>
+    <string name="paywall_cta_trial">Start %1$s free</string>
+    <string name="paywall_cta_price">Subscribe for %1$s</string>
+    <string name="paywall_cta_default">Subscribe</string>
+    <string name="paywall_restore">Restore purchases</string>
+    <string name="paywall_manage">Manage or cancel the subscription</string>
+    <string name="paywall_status_trial">Free trial active. It will become %1$s when it ends.</string>
+    <string name="paywall_status_trial_no_price">Free trial active.</string>
+    <string name="paywall_status_active">Subscription active.</string>
+    <string name="paywall_status_grace">There is a problem with your payment. Update your method in Google Play to keep access.</string>
+    <string name="paywall_status_canceled">Subscription canceled. You keep access until the paid period ends.</string>
+    <string name="paywall_status_pending">Payment pending. It will open when Google Play confirms it.</string>
+    <string name="paywall_legal">Payment is charged to your Google Play account. The subscription renews automatically %1$s until you cancel.</string>
+    <string name="paywall_legal_no_frequency">Payment is charged to your Google Play account. The subscription renews automatically until you cancel.</string>
+    <string name="paywall_legal_trial">The %1$s free trial renews automatically; cancel before it ends so you are not charged.</string>
+    <string name="paywall_legal_manage">Manage or cancel the subscription in Google Play &gt; Subscriptions.</string>
+    <string name="paywall_close">Close</string>
+    <string name="billing_price_with_frequency">%1$s %2$s</string>
+    <string name="billing_offer_with_trial">%1$s free, then %2$s</string>
+    <string name="billing_offer_trial_only">%1$s free</string>
+    <plurals name="billing_period_days">
+        <item quantity="one">%1$d day</item>
+        <item quantity="other">%1$d days</item>
+    </plurals>
+    <plurals name="billing_period_weeks">
+        <item quantity="one">%1$d week</item>
+        <item quantity="other">%1$d weeks</item>
+    </plurals>
+    <plurals name="billing_period_months">
+        <item quantity="one">%1$d month</item>
+        <item quantity="other">%1$d months</item>
+    </plurals>
+    <plurals name="billing_period_years">
+        <item quantity="one">%1$d year</item>
+        <item quantity="other">%1$d years</item>
+    </plurals>
+    <plurals name="billing_freq_days">
+        <item quantity="one">per day</item>
+        <item quantity="other">every %1$d days</item>
+    </plurals>
+    <plurals name="billing_freq_weeks">
+        <item quantity="one">per week</item>
+        <item quantity="other">every %1$d weeks</item>
+    </plurals>
+    <plurals name="billing_freq_months">
+        <item quantity="one">per month</item>
+        <item quantity="other">every %1$d months</item>
+    </plurals>
+    <plurals name="billing_freq_years">
+        <item quantity="one">per year</item>
+        <item quantity="other">every %1$d years</item>
+    </plurals>
+    <string name="settings_phonetics">Written pronunciation</string>
+    <string name="settings_phonetics_desc">Shows the IPA under each phrase and every sound, in practice and in your profile. Turn it off if it distracts you.</string>
+    <string name="settings_phonetics_toggle">Show written pronunciation (IPA)</string>
+    <string name="settings_translations">Translation</string>
+    <string name="settings_translations_desc">The meaning of the phrase, hidden until you ask for it. Tap Show translation on any phrase to see it.</string>
+    <string name="settings_translations_toggle">Show translations</string>
+    <string name="translation_show">Show translation</string>
+    <string name="translation_hide">Hide translation</string>
+    <string name="practice_work_on_plain">A sound needs work</string>
+    <string name="practice_diagnosis_sub_plain">One sound is landing too close to another.</string>
+    <string name="practice_diagnosis_dropped_plain">A sound is going missing.</string>
+    <string name="practice_practise_sound_plain">Practice this sound</string>
+    <string name="error_phoneme_dropped_plain">A sound was missing</string>
+    <string name="you_practise_sound_plain">Practice this sound</string>
+    <string name="you_trend_title_plain">Progress on a sound</string>
+    <string name="you_pattern_title_plain">Possible persistent difficulty with a sound</string>
+    <string name="you_pattern_detail_plain">It keeps coming out differently · confidence %1$d%</string>
+    <string name="you_plan_sound">Sound</string>
+    <string name="download_model_title">Acoustic model</string>
+    <string name="download_pause">Pause</string>
+    <string name="download_resume">Resume</string>
+    <string name="download_cancel">Cancel</string>
+    <string name="download_allow_metered">Use mobile data</string>
+    <string name="download_waiting_wifi">Waiting for Wi-Fi</string>
+    <string name="download_paused">Paused</string>
+    <string name="download_queued">Queued</string>
+    <string name="download_cancelled">Canceled</string>
+    <string name="download_complete_title">Download complete</string>
+    <string name="download_error_generic">Couldn't download.</string>
+    <string name="download_progress_bytes">%1$s of %2$s</string>
+    <string name="download_pause_all">Pause all</string>
+    <string name="download_resume_all">Resume all</string>
+    <string name="download_cancel_all">Cancel all</string>
+    <plurals name="download_group_title">
+        <item quantity="one">Downloading %1$d item</item>
+        <item quantity="other">Downloading %1$d items</item>
+    </plurals>
+    <string name="download_complete_text">%1$s is ready to use offline.</string>
+    <string name="download_failed_title">Download failed</string>
+    <string name="download_error_damaged">The file arrived damaged and was discarded. Try again.</string>
+    <string name="download_error_rejected">The server rejected the download.</string>
+    <string name="download_error_server">The server could not send the file. Try again later.</string>
+    <string name="download_error_space">Not enough space on the device.</string>
+    <string name="download_error_network">Connection lost. Check your network and try again.</string>
+    <string name="download_percent">%1$d%</string>
+    <string name="download_notification_permission_title">Allow download notifications?</string>
+    <string name="download_notification_permission_message">Downloads keep going when you leave the app. Android needs notification permission so you can see the progress and pause or cancel without reopening Glosso.</string>
+    <string name="download_notification_permission_allow">Allow</string>
+    <string name="download_notification_permission_later">Not now</string>
+    <string name="settings_downloads">Downloads</string>
+    <string name="settings_downloads_desc">How downloads use your connection.</string>
+    <string name="settings_wifi_only">Download only on Wi-Fi</string>
+    <string name="settings_wifi_only_desc">Pauses downloads on mobile data so nothing is spent behind your back. You can allow a single download from its notification.</string>
+    <string name="offline_downloading_section">Downloading</string>
+
+    <!-- Beta and product configuration (dates always come from the server) -->
+    <string name="beta_open_title">Glosso is in beta</string>
+    <string name="beta_free_until">Free until %1$s.</string>
+    <string name="beta_free_during">Free during the beta.</string>
+    <string name="beta_founder_note">As a Beta Founder you will get Glosso Pro free forever. The Personalized plan is not included.</string>
+    <string name="beta_founder_you_are">You are a Beta Founder: you have Glosso Pro free forever. The Personalized plan is not included.</string>
+    <string name="entitlement_lifetime_pro">Permanent access to Glosso Pro</string>
+    <string name="entitlement_lifetime_founder">Permanent access to Glosso Pro (Beta Founder)</string>
+    <string name="about_beta_title">Beta</string>
+    <string name="update_notice">A new version of Glosso is available. Updating is recommended, but everything keeps working.</string>
+    <string name="update_notice_dismiss">Dismiss</string>
+    <string name="paywall_not_for_sale">Plans are not for sale yet.</string>
+    <string name="score_a11y" tools:ignore="PluralsCandidate">Score %1$d out of 100</string>
+
+    <!-- Rhythm and intonation bonus (ProsodyBonus) -->
+    <string name="prosody_title">Rhythm and intonation</string>
+    <string name="prosody_points" tools:ignore="PluralsCandidate">of %1$d extra points</string>
+    <string name="prosody_note">Extra, measured against the reference audio. It does not change your score.</string>
+    <string name="prosody_rhythm">Rhythm</string>
+    <string name="prosody_pauses">Pauses</string>
+    <string name="prosody_stress">Stress</string>
+    <string name="prosody_intonation">Intonation</string>
+    <string name="prosody_tempo">Pace</string>
+    <string name="prosody_tip_rhythm">Hold the long sounds and keep the short ones quick, like the audio.</string>
+    <string name="prosody_tip_pauses">Link the words without stopping between them.</string>
+    <string name="prosody_tip_stress">Put the weight on the same syllables as the audio.</string>
+    <string name="prosody_tip_intonation">Follow how the voice rises and falls in the audio.</string>
+    <string name="prosody_tip_tempo">Try a pace closer to the audio.</string>
+    <string name="prosody_tip_good">Your rhythm and intonation follow the audio closely.</string>
+    <!-- Change phone: take the account to a new phone with Google (no personal data) -->
+    <string name="settings_account">Account</string>
+    <string name="settings_recovery">Change phone</string>
+    <string name="settings_recovery_subtitle">Take your account and your Beta Founder status with you</string>
+    <string name="recovery_title">Change phone</string>
+    <string name="recovery_intro">Take your account and your Beta Founder status to a new phone.</string>
+    <string name="google_section">With your Google account</string>
+    <string name="google_desc">Pick one of the Google accounts on this phone, no passwords. On the new phone, do the same with the same account.</string>
+    <string name="google_linked">Linked to %1$s. On the new phone, sign in with this same account.</string>
+    <string name="google_continue">Continue with Google</string>
+    <string name="google_privacy">We only keep the ID Google assigns to your account, not your email or name. No access to Gmail or Drive.</string>
+    <string name="google_success">Done. Your account and your Beta Founder status now go with your Google account.</string>
+    <string name="google_error_no_account">There is no Google account on this phone. Add one in the system settings.</string>
+    <string name="google_error_failed">Could not sign in with Google. Try again.</string>
+    <string name="google_error_conflict">This phone is already linked to another Google account. Sign in with that one.</string>
+    <string name="onboarding_analytics_notice">Glosso sends usage statistics, linked to a random installation id, to our own servers (no ads, no third parties) to improve the course. You can turn this off in Settings.</string>
+    <string name="settings_usage">Usage statistics</string>
+    <string name="settings_usage_desc">Events such as finished lessons, score bands and the technical call stack of crashes and errors (without messages or user data), linked to a random installation id and sent only to Glosso's own servers. No audio, no ads, no third parties.</string>
+    <string name="settings_usage_toggle">Share usage statistics</string>
+    <string name="settings_usage_erase">Delete my usage data</string>
+    <string name="settings_usage_erased">Your usage data has been deleted.</string>
+    <string name="settings_usage_erase_failed">Could not delete it now. Try again with a connection.</string>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Release network policy: HTTPS only, no cleartext, and only the system trust
+     anchors. A user-installed CA (a proxy on a compromised or corporate device)
+     is not trusted, so the app is not trivially man-in-the-middled.
+     The debug variant overlays this file with a permissive one for local dev. -->
+<network-security-config>
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+</network-security-config>

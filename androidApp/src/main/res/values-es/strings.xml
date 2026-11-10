@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Downloads (background service and its notification) -->
+    <string name="download_channel_name">Descargas</string>
+    <string name="download_channel_description">Mantiene las descargas aunque salgas de la app.</string>
+
+    <!-- Mensajes de error de facturacion (visibles en el paywall) -->
+    <string name="billing_error_offline">Sin conexión con Google Play. Se reintentará.</string>
+    <string name="billing_error_reconnect">No se pudo conectar con Google Play.</string>
+    <string name="billing_error_connecting">Aún conectando con Google Play. Inténtalo en un momento.</string>
+    <string name="billing_error_not_configured">La suscripción no está configurada en Google Play.</string>
+    <string name="billing_error_no_offers">La suscripción no tiene ofertas activas.</string>
+    <string name="billing_error_not_available_yet">La suscripción aún no está disponible.</string>
+    <string name="billing_error_confirm">No se pudo confirmar la compra. Se reintentará.</string>
+    <string name="billing_error_network">Sin conexión. Comprueba tu red e inténtalo de nuevo.</string>
+    <string name="billing_error_service_unavailable">Google Play no está disponible ahora mismo.</string>
+    <string name="billing_error_service_disconnected">Se perdió la conexión con Google Play.</string>
+    <string name="billing_error_unavailable">Las compras no están disponibles en este dispositivo o cuenta.</string>
+    <string name="billing_error_item_unavailable">La suscripción no está disponible en este país o cuenta.</string>
+    <string name="billing_error_developer">Error de configuración de la compra. Revisa Play Console.</string>
+    <string name="billing_error_already_owned">Ya tienes esta suscripción.</string>
+    <string name="billing_error_generic">No se pudo completar la operación con Google Play.</string>
+</resources>

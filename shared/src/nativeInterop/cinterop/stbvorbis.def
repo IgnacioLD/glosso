@@ -1,0 +1,8 @@
+package = com.glosso.app.vorbis
+# stb_vorbis.c is header and implementation in one file; with
+# STB_VORBIS_HEADER_ONLY only its public API is parsed. The implementation is
+# compiled by src/nativeInterop/stb_vorbis/build-static.sh with the same defines.
+headers = stb_vorbis.c
+headerFilter = stb_vorbis.c
+compilerOpts = -DSTB_VORBIS_HEADER_ONLY -DSTB_VORBIS_NO_STDIO -DSTB_VORBIS_NO_PUSHDATA_API
+staticLibraries = libstb_vorbis.a

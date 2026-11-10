@@ -1,0 +1,19 @@
+# Keep secrets and history out of the image build context. The runtime stage only
+# copies the server distribution, but the build stage sees the context, so this
+# also keeps .env, git history and signing keys out of build layers.
+.git
+.gitignore
+local.properties
+.env
+**/.env
+!deploy/.env.example
+.idea
+.kotlin
+**/build
+**/.gradle
+data
+docs
+benchmark
+apks
+*.jks
+*.keystore

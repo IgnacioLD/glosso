@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@color/glosso_splash_bg" />
+    <!-- The mark alone: its first bubble follows the theme text colour, so it
+         holds on ink and on paper without a medallion. -->
+    <item
+        android:width="76dp"
+        android:height="63.4dp"
+        android:gravity="center"
+        android:drawable="@drawable/ic_glosso_symbol" />
+</layer-list>

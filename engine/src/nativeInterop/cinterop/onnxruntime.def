@@ -1,0 +1,148 @@
+package = com.glosso.engine.ort
+headers = onnxruntime_c_api.h
+headerFilter = onnxruntime_c_api.h
+staticLibraries = libonnxruntime.a
+# The iOS archive is C++ and its CoreML execution provider is compiled in, even
+# though the recognizer only uses the CPU provider (same as JVM and Android);
+# the archive also references the Network framework.
+linkerOpts = -lc++ -framework Foundation -framework CoreML -framework Network
+
+---
+
+/*
+ * The few ONNX Runtime calls the recognizer needs, wrapped so Kotlin does not
+ * have to walk the OrtApi function-pointer table. The session is created with
+ * default options, exactly like OrtEnvironment.createSession(path) on the
+ * JVM/Android side, so the CPU kernels and graph optimisations are the same.
+ * Every function returns NULL or 0 on success and a malloc'ed error message
+ * otherwise (free it with glosso_ort_free_error).
+ */
+
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct {
+    const OrtApi* api;
+    OrtEnv* env;
+    OrtSession* session;
+    OrtMemoryInfo* cpu;
+    char* output_name;
+} GlossoOrtSession;
+
+static inline char* glosso_ort_take_error(const OrtApi* api, OrtStatus* status) {
+    if (status == NULL) return NULL;
+    const char* message = api->GetErrorMessage(status);
+    char* copy = strdup(message != NULL ? message : "unknown ONNX Runtime error");
+    api->ReleaseStatus(status);
+    return copy;
+}
+
+static inline void glosso_ort_free_error(char* error) { free(error); }
+
+static inline void glosso_ort_close(GlossoOrtSession* s) {
+    if (s == NULL) return;
+    if (s->output_name != NULL) free(s->output_name);
+    if (s->cpu != NULL) s->api->ReleaseMemoryInfo(s->cpu);
+    if (s->session != NULL) s->api->ReleaseSession(s->session);
+    if (s->env != NULL) s->api->ReleaseEnv(s->env);
+    free(s);
+}
+
+/** Loads the model at [model_path] (UTF-8). On failure returns NULL and sets *error. */
+static inline GlossoOrtSession* glosso_ort_open(const char* model_path, char** error) {
+    *error = NULL;
+    const OrtApi* api = OrtGetApiBase()->GetApi(ORT_API_VERSION);
+    if (api == NULL) {
+        *error = strdup("ONNX Runtime API version not supported by the linked library");
+        return NULL;
+    }
+    GlossoOrtSession* s = (GlossoOrtSession*) calloc(1, sizeof(GlossoOrtSession));
+    if (s == NULL) {
+        *error = strdup("out of memory");
+        return NULL;
+    }
+    s->api = api;
+    OrtSessionOptions* options = NULL;
+    OrtAllocator* allocator = NULL;
+    char* name = NULL;
+    char* err = glosso_ort_take_error(api, api->CreateEnv(ORT_LOGGING_LEVEL_WARNING, "glosso", &s->env));
+    if (err == NULL) err = glosso_ort_take_error(api, api->CreateSessionOptions(&options));
+    if (err == NULL) err = glosso_ort_take_error(api, api->CreateSession(s->env, model_path, options, &s->session));
+    if (options != NULL) api->ReleaseSessionOptions(options);
+    if (err == NULL) err = glosso_ort_take_error(api, api->CreateCpuMemoryInfo(OrtArenaAllocator, OrtMemTypeDefault, &s->cpu));
+    if (err == NULL) err = glosso_ort_take_error(api, api->GetAllocatorWithDefaultOptions(&allocator));
+    if (err == NULL) err = glosso_ort_take_error(api, api->SessionGetOutputName(s->session, 0, allocator, &name));
+    if (err == NULL) {
+        s->output_name = strdup(name);
+        api->AllocatorFree(allocator, name);
+    }
+    if (err != NULL) {
+        glosso_ort_close(s);
+        *error = err;
+        return NULL;
+    }
+    return s;
+}
+
+/**
+ * Runs the model on one take: [samples] normalised floats as input_values
+ * [1, n]. On success *output holds the first output ([1, T, V] logits), which
+ * the caller reads with glosso_ort_output_data and frees with
+ * glosso_ort_release_value.
+ */
+static inline char* glosso_ort_run(
+    GlossoOrtSession* s,
+    float* samples,
+    int64_t n,
+    OrtValue** output,
+    int64_t* time_steps,
+    int64_t* vocab_size
+) {
+    const OrtApi* api = s->api;
+    *output = NULL;
+    OrtValue* input = NULL;
+    int64_t shape[2] = {1, n};
+    char* err = glosso_ort_take_error(api, api->CreateTensorWithDataAsOrtValue(
+        s->cpu, samples, (size_t) n * sizeof(float), shape, 2,
+        ONNX_TENSOR_ELEMENT_DATA_TYPE_FLOAT, &input));
+    if (err != NULL) return err;
+
+    const char* input_names[1] = {"input_values"};
+    const char* output_names[1] = {s->output_name};
+    const OrtValue* inputs[1] = {input};
+    OrtValue* result = NULL;
+    err = glosso_ort_take_error(api, api->Run(s->session, NULL, input_names, inputs, 1, output_names, 1, &result));
+    api->ReleaseValue(input);
+    if (err != NULL) return err;
+
+    OrtTensorTypeAndShapeInfo* info = NULL;
+    size_t dims = 0;
+    int64_t out_shape[3] = {0, 0, 0};
+    err = glosso_ort_take_error(api, api->GetTensorTypeAndShape(result, &info));
+    if (err == NULL) err = glosso_ort_take_error(api, api->GetDimensionsCount(info, &dims));
+    if (err == NULL && dims != 3) err = strdup("unexpected logits rank");
+    if (err == NULL) err = glosso_ort_take_error(api, api->GetDimensions(info, out_shape, 3));
+    if (info != NULL) api->ReleaseTensorTypeAndShapeInfo(info);
+    if (err != NULL) {
+        api->ReleaseValue(result);
+        return err;
+    }
+    *time_steps = out_shape[1];
+    *vocab_size = out_shape[2];
+    *output = result;
+    return NULL;
+}
+
+static inline const float* glosso_ort_output_data(GlossoOrtSession* s, OrtValue* value) {
+    void* data = NULL;
+    OrtStatus* status = s->api->GetTensorMutableData(value, &data);
+    if (status != NULL) {
+        s->api->ReleaseStatus(status);
+        return NULL;
+    }
+    return (const float*) data;
+}
+
+static inline void glosso_ort_release_value(GlossoOrtSession* s, OrtValue* value) {
+    if (value != NULL) s->api->ReleaseValue(value);
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <!-- Play Billing: the Pro subscription is purchased through Google Play. -->
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <!-- Downloads started by the learner keep going when the app is left or the
+         screen is off: a dataSync foreground service. The runtime notification
+         permission is requested in context, when the first download starts. -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- allowBackup=false is a deliberate privacy choice (no learner data
+         leaves the device). It already disables cloud backup and device-to-device
+         transfer on every supported version, so no dataExtractionRules split is
+         needed; lint's generic deprecation notice does not apply here. -->
+    <!-- No cleartext anywhere: release pins HTTPS via the network security
+         config (system trust anchors only). minSdk 26 means the platform default
+         would still allow cleartext on API 26-27, so it is denied explicitly. The
+         debug variant overlays a permissive config (src/debug/res/xml) so a local
+         http://10.0.2.2:8080 server keeps working in development. -->
+    <application
+        android:name=".GlossoApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:localeConfig="@xml/locales_config"
+        android:networkSecurityConfig="@xml/network_security_config"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Glosso"
+        android:usesCleartextTraffic="false"
+        tools:ignore="DataExtractionRules"
+        tools:targetApi="33">
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service
+            android:name=".download.DownloadService"
+            android:exported="false"
+            android:foregroundServiceType="dataSync"
+            android:stopWithTask="false" />
+    </application>
+
+</manifest>

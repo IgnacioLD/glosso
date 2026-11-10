@@ -1,0 +1,249 @@
+Glosso
+Copyright (C) 2026 IgnacioLD
+
+This program is free software: you can redistribute it and/or modify it under
+the terms of the GNU Affero General Public License as published by the Free
+Software Foundation, either version 3 of the License, or (at your option) any
+later version. See LICENSE.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE. See the GNU Affero General Public License for more
+details.
+
+Additional permission under GNU AGPL version 3 section 7:
+If you modify this program, or any covered work, by linking or combining it
+with the Google Play Billing Library, Google Play services, the Google Play
+In-App Review library, the Google Identity (googleid) library or JUnit (or
+modified versions of those libraries), containing parts covered by the terms
+of their respective licenses, the licensors of this program grant you
+additional permission to convey the resulting work.
+
+The names "Glosso" and "Glosso Pro", the logo and the store listing assets are
+not licensed under the AGPL. Forks must use a different name and icon.
+
+This product includes and depends on the third-party components listed below.
+Each remains under its own license; the full license texts are in the
+licenses/ directory of this repository. Nothing in the Glosso license
+restricts the rights granted to you by those licenses.
+
+===========================================================================
+MODEL
+===========================================================================
+
+wav2vec2-lv-60-espeak-cv-ft
+  Source:      https://huggingface.co/facebook/wav2vec2-lv-60-espeak-cv-ft
+  Conversion:  https://huggingface.co/onnx-community/wav2vec2-lv-60-espeak-cv-ft-ONNX
+  Copyright:   Meta Platforms / Facebook AI Research and contributors
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+  Distributed as: wav2vec2_phoneme_int8_dyn_pertensor.onnx (selectively quantized ONNX export), fetched at
+  runtime with tools/fetch-assets.sh and not committed to this repository.
+
+===========================================================================
+LANGUAGE DATA
+===========================================================================
+
+CMUdict (CMU Pronouncing Dictionary)
+  Source:      https://github.com/cmusphinx/cmudict
+  Copyright:   Carnegie Mellon University
+  License:     BSD-2-Clause (see licenses/BSD-2-Clause.txt)
+  Distributed as: cmudict.dict, fetched at runtime and not committed.
+
+CEFR-J Wordlist v1.6
+  Source:      https://www.cefr-j.org/
+  Copyright:   Yukio Tono, Tokyo University of Foreign Studies (Tono Lab)
+  License:     Free for research and commercial use with attribution.
+  Used as:     CEFR levels, parts of speech and vocabulary bands in the course.
+
+Tatoeba English frequency snapshot
+  Source:      https://tatoeba.org/
+  Copyright:   Tatoeba contributors
+  License:     CC BY 2.0 FR (https://creativecommons.org/licenses/by/2.0/fr/)
+  Used as:     Word-frequency ordering in the vocabulary.
+  Derived from the Tatoeba English corpus with attribution; see the source
+  file header under glosso-data/curriculum/.
+
+===========================================================================
+AUDIO / TTS (build-time only, not distributed)
+===========================================================================
+
+The app's audio assets are rendered offline by this repository's content
+pipeline. No TTS engine or model is shipped in the app; only the rendered
+.ogg clips are delivered.
+
+Kokoro (kokoro)
+  Source:      https://github.com/hexgrad/kokoro
+  Copyright:   hexgrad and contributors
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+  Used as:     reference voice generation. tools/content/make_voice_refs.py
+               renders every reference clip with Kokoro, so the references in
+               tools/content/voices/ are fully synthetic and no real person's
+               voice is cloned.
+
+Chatterbox (chatterbox-tts)
+  Source:      https://github.com/resemble-ai/chatterbox
+  Copyright:   Resemble AI
+  License:     MIT (see licenses/MIT.txt)
+  Used as:     rendering the app's audio assets, cloning each voice from the
+               Kokoro-generated reference above.
+
+Perth (resemble-perth)
+  Source:      https://github.com/resemble-ai/Perth
+  Copyright:   Resemble AI
+  License:     MIT (see licenses/MIT.txt)
+  Used as:     implicit audio watermarker that Chatterbox embeds into every
+               generated clip.
+
+===========================================================================
+CATALOGUE ARTWORK
+===========================================================================
+
+FLUX.2 [klein] base 4B (black-forest-labs/FLUX.2-klein-base-4B)
+  Source:      https://huggingface.co/black-forest-labs/FLUX.2-klein-base-4B
+  Copyright:   Black Forest Labs
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+  Used as:     build-time generation of the catalogue artwork on our own GPU.
+  The non-commercial FLUX.2 klein 9B variant is never used by default; it
+  requires an explicit --model and the pipeline records it as non-commercial.
+  Per-image provenance (model, seed, steps, guidance, dtype, prompt hash,
+  duotone version, date) is in content/en/images/provenance.json.
+
+===========================================================================
+FONTS
+===========================================================================
+
+Bricolage Grotesque
+  Source:      https://github.com/ateliertriay/bricolage
+  Copyright:   2022 The Bricolage Grotesque Project Authors
+  License:     SIL Open Font License 1.1 (see licenses/fonts/OFL-BricolageGrotesque.txt)
+  Used as:     display, titles and large numbers in the Android app.
+
+Plus Jakarta Sans
+  Source:      https://github.com/tokotype/PlusJakartaSans
+  Copyright:   2020 The Plus Jakarta Sans Project Authors
+  License:     SIL Open Font License 1.1 (see licenses/fonts/OFL-PlusJakartaSans.txt)
+  Used as:     UI sans in the Android app.
+
+JetBrains Mono
+  Source:      https://github.com/JetBrains/JetBrainsMono
+  Copyright:   2020 The JetBrains Mono Project Authors
+  License:     SIL Open Font License 1.1 (see licenses/fonts/OFL-JetBrainsMono.txt)
+  Used as:     IPA transcription and tabular numbers in the Android app.
+
+===========================================================================
+JVM / KOTLIN LIBRARIES
+===========================================================================
+
+Kotlin standard library, kotlinx-serialization-json, kotlinx-coroutines-core
+  Copyright:   JetBrains s.r.o. and Kotlin contributors
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+Ktor (server-core, server-netty, content-negotiation, call-logging,
+status-pages, cors, serialization-kotlinx-json, test-host, client-client-*
+used in tests)
+  Copyright:   JetBrains s.r.o.
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+ONNX Runtime (com.microsoft.onnxruntime, com.microsoft.onnxruntime:onnxruntime-android)
+  Copyright:   Microsoft Corporation
+  License:     MIT (see licenses/MIT.txt)
+
+kotlin-logging (io.github.oshai:kotlin-logging-jvm)
+  Copyright:   Ohad Shai and contributors
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+SLF4J (org.slf4j:slf4j-api, org.slf4j:slf4j-simple)
+  Copyright:   QOS.ch
+  License:     MIT (see licenses/MIT.txt)
+
+PostgreSQL JDBC Driver (org.postgresql:postgresql)
+  Copyright:   PostgreSQL Global Development Group
+  License:     BSD-2-Clause (see licenses/BSD-2-Clause.txt)
+
+HikariCP (com.zaxxer:HikariCP)
+  Copyright:   Brett Wooldridge and contributors
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+Micrometer (io.micrometer:micrometer-core, micrometer-registry-prometheus)
+  Copyright:   VMware, Inc. / Broadcom
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+Prometheus Java client (io.prometheus:prometheus-metrics-*)
+  Copyright:   The Prometheus Authors
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+===========================================================================
+ANDROID APP LIBRARIES
+===========================================================================
+
+AndroidX (core-ktx, activity-compose, lifecycle-*, test.ext)
+  Copyright:   The Android Open Source Project
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+Jetpack Compose (ui, ui-graphics, ui-tooling, material3, material-icons-extended)
+  Copyright:   The Android Open Source Project
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+Coil (io.coil-kt:coil-compose)
+  Copyright:   Coil Contributors
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+Google Play Billing Library (com.android.billingclient:billing)
+  Copyright:   Google LLC
+  License:     Android Software Development Kit License
+               (https://developer.android.com/studio/terms.html)
+  Used as:     in-app subscriptions. This SDK is NOT Apache-2.0; its use is
+               governed by the Android SDK License.
+
+Google Play In-App Review (com.google.android.play:review-ktx)
+  Copyright:   Google LLC
+  License:     Play Core Software Development Kit Terms of Service
+               (https://developer.android.com/guide/playcore/in-app-review)
+  Used as:     in-app review prompt. This SDK is NOT Apache-2.0; its use is
+               governed by the Play Core SDK Terms of Service.
+
+Test-only libraries (not distributed in the app):
+JUnit 4 (junit:junit)
+  Copyright:   JUnit
+  License:     EPL-1.0 (see licenses/EPL-1.0.txt)
+Robolectric (org.robolectric:robolectric)
+  Copyright:   Robolectric
+  License:     MIT (see licenses/MIT.txt)
+
+===========================================================================
+BUILD TOOLING (not distributed)
+===========================================================================
+
+Gradle
+  Copyright:   Gradle, Inc.
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+Kotlin, Android Gradle Plugin and KSP
+  Copyright:   JetBrains s.r.o. / Google LLC
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+
+eSpeak NG (build-time only, not distributed)
+  Source:      https://github.com/espeak-ng/espeak-ng
+  Copyright:   eSpeak NG contributors
+  License:     GPL-3.0. This is a build tool used by
+               tools/content/phonemize.py to generate reference IPA and the
+               per-language lexicon. It is never linked, packaged or invoked at
+               runtime by the app, the server or their container; only the
+               generated data ships. See docs/LICENSING.md section 4.b.
+
+===========================================================================
+CHANGES
+===========================================================================
+
+The wav2vec2 model is used unmodified except for the standard fp16 ONNX
+conversion performed by onnx-community. No third-party component is modified
+by Glosso Pro.
+
+This NOTICE is a summary. The app itself ships the machine-readable catalogue at
+assets/licenses.json, generated from the **resolved runtime classpath** (not only
+the declared dependencies) plus the curated attribution list. Each artifact's
+licence comes from the POM declared by its publisher; the Gradle task
+`:androidApp:licensesRuntimeClasspath` keeps the lock and `preBuild` fails if it
+drifts. The About screen renders the catalogue, so the attribution travels inside
+the APK and does not depend on this repository being reachable.
+tools/licensing/collect_test.py fails if a runtime artifact has no entry.

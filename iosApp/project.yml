@@ -1,0 +1,61 @@
+# Source of the Xcode project. Edit this file, then regenerate with
+#   cd iosApp && xcodegen generate
+# (brew install xcodegen). Glosso.xcodeproj is generated and committed so a clean
+# checkout builds with xcodebuild alone; never edit it by hand. See docs/IOS-DEV.md.
+name: Glosso
+options:
+  bundleIdPrefix: com.glossostudio
+  # The owner's test phone (iPhone XS Max) stops at iOS 18; keep it supported.
+  deploymentTarget:
+    iOS: "16.0"
+  developmentLanguage: en
+  createIntermediateGroups: true
+  generateEmptyDirectories: false
+configs:
+  Debug: debug
+  Release: release
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    # Shared.framework is built for the active architecture only.
+    ONLY_ACTIVE_ARCH: YES
+targets:
+  Glosso:
+    type: application
+    platform: iOS
+    configFiles:
+      Debug: Configuration/Glosso.xcconfig
+      Release: Configuration/Glosso.xcconfig
+    sources:
+      - path: Glosso
+        excludes:
+          - Info.plist
+      # The two answer cues the Android app plays from res/raw; iOS reads them from
+      # the bundle (FeedbackSounds.ios.kt). One copy of the files for both apps.
+      - path: ../shared/src/androidMain/res/raw/feedback_correct.wav
+        buildPhase: resources
+        group: Glosso/Sounds
+      - path: ../shared/src/androidMain/res/raw/feedback_wrong.wav
+        buildPhase: resources
+        group: Glosso/Sounds
+    settings:
+      base:
+        INFOPLIST_FILE: Glosso/Info.plist
+        PRODUCT_NAME: Glosso
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        GENERATE_INFOPLIST_FILE: NO
+        # Simulator only until the Apple Developer account exists.
+        CODE_SIGN_STYLE: Automatic
+        CODE_SIGN_IDENTITY: "-"
+        DEVELOPMENT_TEAM: ""
+        # Shared.framework (static) comes from the Gradle phase below.
+        FRAMEWORK_SEARCH_PATHS: $(inherited) $(SRCROOT)/../shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
+        OTHER_LDFLAGS: $(inherited) -framework Shared
+        # The Gradle phase reads and writes outside the sandboxed inputs.
+        ENABLE_USER_SCRIPT_SANDBOXING: NO
+    preBuildScripts:
+      - name: Build Shared.framework
+        script: |
+          "${SRCROOT}/scripts/build-shared.sh"
+        basedOnDependencyAnalysis: false

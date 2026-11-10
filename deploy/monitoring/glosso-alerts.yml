@@ -1,0 +1,34 @@
+# Reglas de alerta de Prometheus para el backend (A09). Sin Alertmanager las
+# alertas se ven en la UI de Prometheus (tunel SSH, ver docs/INFRA-DEPLOY.md) y
+# sirven para que el operador las conecte a su canal cuando haga falta; la
+# disponibilidad la cubre Uptime Kuma. Se evaluan a partir de las metricas que
+# expone el API en /metrics.
+groups:
+  - name: glosso-backend
+    rules:
+      - alert: GlossoHighServerErrors
+        expr: increase(glosso_server_errors_total[5m]) > 5
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Glosso API devolviendo 5xx"
+          description: "Mas de 5 errores 500 en 5 minutos; revisar los logs del servidor."
+
+      - alert: GlossoAuthFailures
+        expr: increase(glosso_auth_failures_total[5m]) > 20
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Fuerza bruta / credenciales erroneas ({{ $labels.gate }})"
+          description: "Mas de 20 fallos de credencial en 5 minutos en el gate {{ $labels.gate }}."
+
+      - alert: GlossoInferenceQueueSaturated
+        expr: increase(glosso_score_requests_total{outcome="busy"}[5m]) > 10
+        for: 5m
+        labels:
+          severity: info
+        annotations:
+          summary: "Cola de inferencia saturada"
+          description: "El API esta devolviendo 503 busy; valorar GLOSSO_MAX_CONCURRENT o capacidad."

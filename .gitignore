@@ -1,0 +1,60 @@
+# --- General ---
+.DS_Store
+*.log
+*.tmp
+*.temp
+*.bak
+.env
+.env.*
+!.env.example
+
+# --- Gradle / Android ---
+.gradle/
+**/build/
+local.properties
+captures/
+.externalNativeBuild
+.cxx/
+*.apk
+*.aab
+*.ap_
+*.jks
+*.keystore
+*.dex
+*.class
+
+# --- Kotlin Multiplatform ---
+.kotlin/
+.idea/
+*.iml
+
+# --- Python ---
+__pycache__/
+*.pyc
+
+# --- Load test ---
+# Raw ab output stays local; the recorded minimal run is validation.txt.
+tools/loadtest/results/
+
+# --- Derived binaries (hosted on the VPS, not in git) ---
+data/*
+!data/.gitkeep
+*.db
+*.db-shm
+*.db-wal
+*.onnx
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa
+google-services.json
+service-account*.json
+keystores/
+
+# --- iOS ---
+# Machine-local build settings with the API key (iosApp/scripts/write-secrets.sh).
+iosApp/Configuration/Secrets.xcconfig
+xcuserdata/
+*.xcuserstate
+DerivedData/

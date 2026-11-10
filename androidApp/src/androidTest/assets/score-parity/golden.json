@@ -1,0 +1,64 @@
+{
+  "formatVersion": 1,
+  "generatedBy": "tools/score-parity/regenerate-golden.py against the real server /v1/score",
+  "provenance": {
+    "scoringPath": "Ktor /v1/score -> Wav2Vec2PhonemeRecognizer -> PhoneticComparator.calculateScoringResult -> FeedbackAssembler",
+    "modelFile": "wav2vec2_phoneme_int8_dyn_pertensor.onnx",
+    "modelSha256": "f3a768be3f4f1918a0cd52f51798dc50db307167d6b6dd12d0fa8ce6de1e258a",
+    "vocabFile": "phoneme_vocab.json",
+    "vocabSha256": "d732ab2456c0c017930001dc9af0b41b3b93d25b2eb9740bf9d925508d7d87d0"
+  },
+  "request": {
+    "text": "I think my brother is thirsty.",
+    "expectedIpa": "ˈaɪ θˈɪŋk mˈaɪ bɹˈʌðɚ ˈɪz θˈɝsti",
+    "language": "en_GB",
+    "uiLanguage": "en"
+  },
+  "tolerance": {
+    "scoreAbs": 0,
+    "note": "Measured 0: the device and the cloud run the same selective int8 model and the same deterministic CTC decode, so the score is identical. Verified on an arm64 emulator against the cloud (docs/release/2.4.0/README.md)."
+  },
+  "cases": [
+    {
+      "fixture": "good.wav",
+      "sha256": "bd585fddd0f854006eb675cd7792b3e3e070320d96c7afad70ade77602b0ffb1",
+      "evaluable": true,
+      "server": {
+        "httpStatus": 200,
+        "score": 100,
+        "level": "PERFECT",
+        "isMastery": true,
+        "accuracy": 100,
+        "completeness": 100,
+        "transcription": "aɪθɪŋkmaɪbɹʌðəɪzθɜːsti"
+      }
+    },
+    {
+      "fixture": "silence.wav",
+      "sha256": "d621069b4c089d5bffbd448020450210bbcf3a89581468434d5909a32a500990",
+      "evaluable": false,
+      "server": {
+        "httpStatus": 200,
+        "evaluated": false
+      }
+    },
+    {
+      "fixture": "noise.wav",
+      "sha256": "1bb59faefa9649bc220447793f4c7b10f0a018c2141ea5b22608ccf23aead6d6",
+      "evaluable": false,
+      "server": {
+        "httpStatus": 200,
+        "evaluated": false
+      }
+    },
+    {
+      "fixture": "low.wav",
+      "sha256": "5e52741a703a87ac57710a9b2279bf1295f2b40d21b66e97d149710489ced019",
+      "evaluable": false,
+      "server": {
+        "httpStatus": 200,
+        "evaluated": false
+      }
+    }
+  ]
+}
