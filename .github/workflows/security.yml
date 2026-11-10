@@ -58,7 +58,7 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Gradle
-        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
       - name: Distribucion del servidor (resuelve todas las dependencias)
         run: ./gradlew :server:installDist --no-daemon --console=plain
       # rootfs, no fs: trivy solo reconoce los JARs como paquetes Java cuando
@@ -107,7 +107,7 @@ jobs:
           distribution: temurin
           java-version: "21"
       - name: Gradle
-        uses: gradle/actions/setup-gradle@9c971963bec38e04b3d30dcc455b5382be2fdbfb # v6.3.0
+        uses: gradle/actions/setup-gradle@8da46b539cd8fe6ab27ca75128919a18d757604c # v6.4.1
       # Los tests de Postgres/Redis embebidos lanzan procesos locales; initdb
       # exige un locale valido y en el runner el default puede no existir.
       - name: Tests del servidor
