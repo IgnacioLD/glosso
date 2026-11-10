@@ -34,6 +34,7 @@ class GlossoApplication : Application(), SingletonImageLoader.Factory {
         // instead of racing the refresh into a permanently disabled one. All of
         // these are fail-open, so none can block the launch.
         wireSharedCode()
+        ServerPreferences.init(this, BuildConfig.API_BASE_URL)
         DeviceId.init(this)
         Analytics.init(this)
         CrashReporter.install(this)

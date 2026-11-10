@@ -63,7 +63,7 @@ services and no Sign in with Google (so "Change phone" is hidden), and usage
 statistics start off. `playstore` is the Google Play build with Sign in with
 Google. See `docs/FDROID.md`.
 
-Without `-PglossoApiBase` the app talks to the public Glosso API. Build inputs are Gradle
+Without `-PglossoApiBase` the app talks to the public Glosso API by default. Build inputs are Gradle
 properties documented in `androidApp/build.gradle.kts`. The server runs with only the assets on
 disk; PostgreSQL, Redis and the TTS providers are optional and each feature turns itself off
 when its dependency is missing. The full list of environment variables is in
@@ -72,6 +72,19 @@ when its dependency is missing. The full list of environment variables is in
 Engine tests that need the model or real audio skip themselves when the assets are not set.
 `tools/engine-bench/run.sh` is the scoring bench that runs them; see
 `docs/ENGINE-BENCHMARK.md`.
+
+## Use your own server
+
+The server is in this repository (`:server`, AGPL) and anyone can run it: `deploy/` has the
+Dockerfile, a Compose stack and the reverse proxy, and `docs/DEPLOYMENT.md` walks through a
+production setup. To point the app at it, open Settings > Advanced > Server, enter its address
+(`https://...`) and tap "Check and use". The app checks that the address answers like a Glosso
+server (`/health` and `/v1/config`) before switching; from then on lessons, cloud scoring,
+downloads, usage statistics and sign-in all go to that server. "Use the default server" switches
+back. Switching drops what came from the previous server (downloaded lessons, cached content and
+config, unsent statistics); the learner's progress stays on the phone. Plain `http://` is
+accepted only by debug builds and only for a local address (`localhost`, `10.0.2.2`, private
+LAN ranges).
 
 ## Documentation
 

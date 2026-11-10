@@ -607,4 +607,22 @@
     <string name="import_model_rejected">Eine Datei gehört nicht zum Bewertungsmodell von Glosso oder ist beschädigt. Wähle das Modell (.onnx) und phoneme_vocab.json.</string>
     <string name="import_model_failed">Die Datei konnte nicht gelesen werden. Versuch es noch einmal.</string>
     <string name="onboarding_analytics_notice_off">Nutzungsstatistiken sind aus. Wenn du helfen willst, den Kurs zu verbessern, kannst du sie in den Einstellungen einschalten: Sie gehen nur an unsere eigenen Server (ohne Werbung, ohne Dritte), verknüpft mit einer zufälligen Installations-ID.</string>
+    <string name="settings_advanced">Erweitert</string>
+    <string name="settings_server">Server</string>
+    <string name="settings_server_default">Standard: %1$s</string>
+    <string name="server_title">Server</string>
+    <string name="server_intro">Glosso ist freie Software, und jeder kann den Server betreiben. Gib die Adresse eines Glosso-Servers ein, dem du vertraust, zum Beispiel deines eigenen. Lektionen, Bewertung in der Cloud und Downloads kommen dann von dort.</string>
+    <string name="server_in_use">In Verwendung</string>
+    <string name="server_default">Der Standardserver</string>
+    <string name="server_custom">Ein von dir gewählter Server</string>
+    <string name="server_address">Serveradresse</string>
+    <string name="server_switch_note">Beim Wechsel werden heruntergeladene Lektionen gelöscht, und das Bewertungsmodell, wenn der neue Server ein anderes nutzt. Dein Fortschritt bleibt auf diesem Handy.</string>
+    <string name="server_check_and_use">Prüfen und verwenden</string>
+    <string name="server_use_default">Standardserver verwenden</string>
+    <string name="server_saved">Jetzt in Verwendung: %1$s.</string>
+    <string name="server_error_invalid">Das ist keine Serveradresse. Sie sieht so aus: https://glosso.example.org.</string>
+    <string name="server_error_https">Die Adresse muss mit https:// beginnen.</string>
+    <string name="server_error_unreachable">Der Server ist nicht erreichbar. Prüfe die Adresse und deine Verbindung.</string>
+    <string name="server_error_not_glosso">Diese Adresse antwortet, ist aber kein Glosso-Server.</string>
+    <string name="about_server">Server: %1$s</string>
 </resources>

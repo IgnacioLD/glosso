@@ -47,8 +47,23 @@ and in this repository, so it does not apply. `TetheredNet` applies to an app
 that "depends entirely on a service which is impossible (or not easy) to
 replace", unless there is "a simple configuration option that allows pointing the
 app to a running instance of an alternative, publicly available, self-hostable
-server". The API host is only a build input (`-PglossoApiBase`), so the recipe
-declares `TetheredNet`. An in-app server setting would remove it (owner decision).
+server". Settings > Advanced > Server is that option, so the recipe does not
+declare `TetheredNet`:
+
+- The build input (`-PglossoApiBase`, default `https://api.glossostudio.com`) is
+  only the default. The learner enters another address; the app normalizes it,
+  requires `https://` (debug builds also take `http://` to a local address), and
+  uses it only after `/health` and `/v1/config` answer like a Glosso server.
+- All network traffic follows the setting: every call of the one HTTP client
+  (`GlossoApi`) reads the server at request time (`ServerPreferences.base`), and
+  that covers content, cloud scoring, lesson and model downloads and their
+  digests, product config, usage statistics, crash traces and sign-in. The app
+  has no other network endpoint (no CDN, no third-party SDK).
+- Switching drops what came from the previous server (`ServerSwitch`): queued
+  downloads, the HTTP cache and content version, downloaded lessons, cached
+  config and account, the linked Google account shown on the phone and unsent
+  statistics. The scoring model is kept only when its SHA-256 is the released one
+  or the one the new server publishes. Progress is local and is kept.
 
 **Downloading the model and content.** The Inclusion Policy only restricts
 downloading "additional executable binary files ... without explicit user

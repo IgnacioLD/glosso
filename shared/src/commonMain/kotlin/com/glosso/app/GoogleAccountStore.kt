@@ -43,6 +43,12 @@ object GoogleAccountStore {
         prefs?.edit { remove(KEY_EMAIL) }
     }
 
+    /** The account was linked on another server ([ServerSwitch]), so it is not linked here. */
+    fun forget() {
+        _email.value = null
+        prefs?.edit { remove(KEY_EMAIL) }
+    }
+
     /** Null means the server did not say, which is not evidence of an unlink. */
     fun isUnlinked(linkedAccounts: List<String>?): Boolean =
         linkedAccounts != null && GOOGLE_PROVIDER !in linkedAccounts

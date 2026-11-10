@@ -35,4 +35,10 @@ object ApiCache : AssetVersionStore {
     override fun save(version: String) {
         prefs?.edit { putString(KEY, version) }
     }
+
+    /** Drops the content version and every cached response (a server switch). */
+    suspend fun forget() {
+        prefs?.edit(commit = true) { remove(KEY) }
+        storage?.clear()
+    }
 }

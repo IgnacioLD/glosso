@@ -56,6 +56,20 @@ internal object ModelPackImport {
         }
     }
 
+    /** Lowercase hex SHA-256 of an installed file. */
+    fun sha256(file: File): String {
+        val digest = MessageDigest.getInstance("SHA-256")
+        file.inputStream().use { input ->
+            val buffer = ByteArray(DEFAULT_BUFFER_SIZE)
+            while (true) {
+                val read = input.read(buffer)
+                if (read == -1) break
+                digest.update(buffer, 0, read)
+            }
+        }
+        return digest.digest().joinToString("") { "%02x".format(it) }
+    }
+
     private fun copyHashing(file: PickedFile, target: File): String {
         val digest = MessageDigest.getInstance("SHA-256")
         file.open().buffer().use { source ->

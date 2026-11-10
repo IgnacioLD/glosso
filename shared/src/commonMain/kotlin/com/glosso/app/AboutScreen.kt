@@ -74,6 +74,15 @@ fun AboutScreen(onBack: () -> Unit) {
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
 
+            val server by ServerPreferences.base.collectAsState()
+            if (server != ServerPreferences.defaultBase) {
+                Text(
+                    text = stringResource(Res.string.about_server, server),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+
             if (VersionNotice.from(config, appConfig.versionCode).visible) {
                 Spacer(Modifier.height(Space.x32))
                 Text(

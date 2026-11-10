@@ -248,6 +248,13 @@ object Analytics {
         }
     }
 
+    /** Drops unsent events and the pending crash trace: they were meant for the previous server. */
+    fun dropPending() {
+        queueLock.withLock { queue.clear() }
+        persist()
+        contextRef?.let { PendingCrash.clear(it) }
+    }
+
     /** Erases this device's events on the server and the local queue. */
     suspend fun deleteMyData(): Boolean {
         queueLock.withLock { queue.clear() }

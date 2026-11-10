@@ -61,7 +61,7 @@ object ClientEvents {
     /** The app's screens and sheets, as `screen_view` names them. */
     val SCREENS = setOf(
         "today", "lessons", "you", "library", "lesson", "practice", "stories", "story", "word",
-        "exercises", "offline", "settings", "about", "privacy", "licenses", "recovery",
+        "exercises", "offline", "settings", "about", "privacy", "licenses", "recovery", "server",
         "onboarding", "level_picker", "download_sheet",
     )
     private val SCREEN = OneOf(SCREENS)

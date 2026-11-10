@@ -609,4 +609,22 @@
     <string name="import_model_rejected">Un fichier ne fait pas partie du modèle d'évaluation de Glosso ou il est endommagé. Choisissez le modèle (.onnx) et phoneme_vocab.json.</string>
     <string name="import_model_failed">Impossible de lire ce fichier. Réessayez.</string>
     <string name="onboarding_analytics_notice_off">Les statistiques d'utilisation sont désactivées. Pour aider à améliorer le cours, vous pouvez les activer dans les Réglages : elles ne vont qu'à nos propres serveurs (sans publicité ni tiers), liées à un identifiant d'installation aléatoire.</string>
+    <string name="settings_advanced">Avancé</string>
+    <string name="settings_server">Serveur</string>
+    <string name="settings_server_default">Par défaut : %1$s</string>
+    <string name="server_title">Serveur</string>
+    <string name="server_intro">Glosso est un logiciel libre, et chacun peut faire tourner son serveur. Saisissez l'adresse d'un serveur Glosso de confiance, par exemple le vôtre. Les leçons, la notation en ligne et les téléchargements viendront alors de lui.</string>
+    <string name="server_in_use">Utilisé</string>
+    <string name="server_default">Le serveur par défaut</string>
+    <string name="server_custom">Un serveur que vous avez choisi</string>
+    <string name="server_address">Adresse du serveur</string>
+    <string name="server_switch_note">Changer de serveur supprime les leçons téléchargées, et le modèle de notation si le nouveau serveur en utilise un autre. Votre progression reste sur ce téléphone.</string>
+    <string name="server_check_and_use">Vérifier et utiliser</string>
+    <string name="server_use_default">Utiliser le serveur par défaut</string>
+    <string name="server_saved">Serveur utilisé : %1$s.</string>
+    <string name="server_error_invalid">Ce n'est pas une adresse de serveur. Elle ressemble à https://glosso.example.org.</string>
+    <string name="server_error_https">L'adresse doit commencer par https://.</string>
+    <string name="server_error_unreachable">Impossible de joindre ce serveur. Vérifiez l'adresse et votre connexion.</string>
+    <string name="server_error_not_glosso">Cette adresse répond, mais ce n'est pas un serveur Glosso.</string>
+    <string name="about_server">Serveur : %1$s</string>
 </resources>

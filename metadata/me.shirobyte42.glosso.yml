@@ -1,13 +1,9 @@
 # Draft F-Droid build recipe, kept here as the reference for the merge request
 # to https://gitlab.com/fdroid/fdroiddata (where it lives as
 # metadata/me.shirobyte42.glosso.yml). See docs/FDROID.md for the reasoning
-# behind every field. Before submitting: tag the release, put its full commit
+# behind every field (and why there is no TetheredNet: Settings > Advanced >
+# Server points the app at any self-hosted instance). Before submitting: tag the release, put its full commit
 # hash in `commit`, and check versionName/versionCode match androidApp/build.gradle.kts.
-AntiFeatures:
-  TetheredNet:
-    en-US: Lessons and cloud pronunciation scoring come from the developer's server.
-      Its source is free (AGPL, in the same repository) and self-hostable, but the
-      app has no setting to point it at another instance.
 Categories:
   - Science & Education
 License: AGPL-3.0-or-later
