@@ -45,7 +45,6 @@ data class IosBuild(
  * the safe area and keyboard insets, and the left-edge swipe is a back event.
  *
  * What is deliberately not wired yet, by phase of `docs/IOS-KMP-PLAN.md`:
- * - phase 2: on-device scoring ([NoOnDeviceScoring]: every take is scored in the cloud);
  * - phase 3: background downloads ([ForegroundDownloader] runs while the app is
  *   open), the daily reminder and crash reports ([CrashReporter] not installed);
  * - phase 5: Sign in with Apple (no Google sign-in on iOS);
@@ -99,6 +98,7 @@ private object IosHost {
         ServerPreferences.init(context, build.apiBaseUrl)
         ProductConfigRepository.api = { appApi }
         OfflineStore.downloader = downloader
+        IosOnDeviceScorer.init(downloader)
         DeviceId.init(context)
         ApiCache.init(context)
         OfflineStore.init(context)
@@ -133,7 +133,7 @@ private object IosHost {
                 usageStatistics = false,
             ),
             connectivity = connectivity,
-            onDevice = NoOnDeviceScoring,
+            onDevice = IosOnDeviceScorer,
             downloader = downloader,
             newApi = newApi,
         )
