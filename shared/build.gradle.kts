@@ -24,7 +24,7 @@ val iosEnabled: Boolean = when {
 }
 
 if (androidEnabled) {
-    apply(plugin = "com.android.library")
+    apply(plugin = "com.android.kotlin.multiplatform.library")
 }
 
 // The vendored decoder (src/nativeInterop/stb_vorbis/README.md) and, per iOS
@@ -38,8 +38,18 @@ val stbVorbisSlices = mapOf(
 
 kotlin {
     if (androidEnabled) {
-        androidTarget {
+        // The plugin is applied imperatively above, so there is no generated `android {}` accessor.
+        extensions.configure<com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget>("android") {
+            namespace = "com.glosso.shared"
+            compileSdk = 36
+            minSdk = 26
             compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
+            // src/androidMain/res, and the Compose resources packaged as Android assets.
+            androidResources { enable = true }
+            // Robolectric tests (src/androidHostTest) read those resources.
+            withHostTest { isIncludeAndroidResources = true }
+            // Compose UI tests of the shared components on a device (src/androidDeviceTest).
+            withDeviceTest { instrumentationRunner = "androidx.test.runner.AndroidJUnitRunner" }
         }
     }
     if (iosEnabled) {
@@ -74,7 +84,7 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting {
+        val commonMain = getByName("commonMain") {
             dependencies {
                 api(project(":engine"))
                 api(libs.ktor.client.core)
@@ -101,7 +111,7 @@ kotlin {
                 api(libs.okio)
             }
         }
-        val commonTest by getting {
+        val commonTest = getByName("commonTest") {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(libs.kotlinx.coroutines.test)
@@ -118,7 +128,7 @@ kotlin {
         }
         // Robolectric tests of the shared UI that need Android (Compose UI tests,
         // resources in a locale, SharedPreferences). Pure logic goes in commonTest.
-        findByName("androidUnitTest")?.dependencies {
+        findByName("androidHostTest")?.dependencies {
             implementation(libs.junit)
             implementation(libs.robolectric)
             implementation(libs.kotlinx.coroutines.test)
@@ -127,10 +137,16 @@ kotlin {
             // Registers the ComponentActivity that createComposeRule launches.
             implementation(libs.compose.ui.test.manifest)
         }
+        findByName("androidDeviceTest")?.dependencies {
+            implementation(project.dependencies.platform(libs.compose.bom))
+            implementation(libs.compose.ui.test.junit4)
+            implementation(libs.androidx.test.ext.junit)
+            implementation(libs.compose.ui.test.manifest)
+        }
         // gradle.properties turns the default hierarchy template off (for :engine's
         // onnxMain), so the iOS source sets are wired by hand.
         if (iosEnabled) {
-            val iosMain by creating {
+            val iosMain = create("iosMain") {
                 dependsOn(commonMain)
                 dependencies {
                     // Every Ktor module on the version Coil brings (libs.versions.toml, ktor-ios).
@@ -143,31 +159,11 @@ kotlin {
             }
             getByName("iosArm64Main").dependsOn(iosMain)
             getByName("iosSimulatorArm64Main").dependsOn(iosMain)
-            val iosTest by creating {
+            val iosTest = create("iosTest") {
                 dependsOn(commonTest)
             }
             getByName("iosArm64Test").dependsOn(iosTest)
             getByName("iosSimulatorArm64Test").dependsOn(iosTest)
-        }
-    }
-}
-
-if (androidEnabled) {
-    extensions.configure<com.android.build.gradle.LibraryExtension>("android") {
-        namespace = "com.glosso.shared"
-        compileSdk = 36
-        defaultConfig {
-            minSdk = 26
-        }
-        // Robolectric reads the Compose resources packaged as Android assets.
-        testOptions {
-            unitTests {
-                isIncludeAndroidResources = true
-            }
-        }
-        compileOptions {
-            sourceCompatibility = JavaVersion.VERSION_17
-            targetCompatibility = JavaVersion.VERSION_17
         }
     }
 }

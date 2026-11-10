@@ -1,9 +1,7 @@
 import java.util.Properties
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.compose.compiler)
 }
@@ -96,7 +94,7 @@ android {
 
         // Ship only the locales the app is translated into, so the APK does not
         // carry every AndroidX/Play Services translation.
-        resourceConfigurations += listOf("en", "es", "fr", "de")
+        androidResources.localeFilters += listOf("en", "es", "fr", "de")
 
         // Extra points for rhythm and intonation (engine ProsodyBonus), computed
         // on-device against the item's reference audio. Off by default, like
@@ -181,11 +179,12 @@ android {
             }
         }
         release {
-            // Release is production: shrink and obfuscate the whole app. The keep
-            // rules that R8 needs (ONNX Runtime's JNI/reflection, kotlinx.serialization,
-            // Coil/SVG and the engine) live in proguard-rules.pro; without them the
-            // acoustic model fails to load at runtime. Mapping is written next to the
-            // APK (build/outputs/mapping/release/mapping.txt) to read stack traces.
+            // Release is production: shrink and obfuscate the whole app, and shrink
+            // resources with R8's optimized resource shrinking (AGP 9's default). The
+            // keep rule R8 needs for ONNX Runtime's JNI lives in proguard-rules.pro;
+            // without it the acoustic model fails to load at runtime. The other
+            // libraries ship their own rules. Mapping is written next to the APK
+            // (build/outputs/mapping/<variant>/mapping.txt) to read stack traces.
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(
@@ -195,12 +194,6 @@ android {
             // Unsigned when no keystore is configured, so a clean clone still builds.
             if (releaseSigning != null) signingConfig = releaseSigning
         }
-    }
-}
-
-kotlin {
-    compilerOptions {
-        jvmTarget.set(JvmTarget.JVM_17)
     }
 }
 
@@ -268,14 +261,31 @@ dependencies {
 // the union. Each flavor's build checks only its own lock, so the F-Droid
 // build still passes after its recipe strips the Play-only dependencies.
 val licensedFlavors = listOf("fdroid", "playstore")
+val repoRoot: File = rootProject.projectDir
 
-fun licenseLock(flavor: String): File = rootProject.file("tools/licensing/runtime-classpath-$flavor.txt")
+fun licenseLock(flavor: String): File = File(repoRoot, "tools/licensing/runtime-classpath-$flavor.txt")
 
-fun Project.runtimeComponentIds(flavor: String): List<org.gradle.api.artifacts.component.ModuleComponentIdentifier> =
-    configurations.getByName("${flavor}DebugRuntimeClasspath").incoming.resolutionResult.allComponents
-        .mapNotNull { it.id as? org.gradle.api.artifacts.component.ModuleComponentIdentifier }
+// Resolved lazily, when a task runs, but captured here: tasks must not reach for
+// `project` at execution time.
+val runtimeGraphs = licensedFlavors.associateWith { flavor ->
+    // The variant configurations exist only once AGP has created the variants.
+    provider { configurations.getByName("${flavor}DebugRuntimeClasspath") }.flatMap { it.incoming.resolutionResult.rootComponent }
+}
+val dependencyHandler = dependencies
 
-fun Project.resolvedRuntimeCoordinates(flavor: String): List<String> =
+fun runtimeComponentIds(flavor: String): List<org.gradle.api.artifacts.component.ModuleComponentIdentifier> {
+    val seen = mutableSetOf<org.gradle.api.artifacts.result.ResolvedComponentResult>()
+    val queue = ArrayDeque(listOf(runtimeGraphs.getValue(flavor).get()))
+    while (queue.isNotEmpty()) {
+        val component = queue.removeFirst()
+        if (!seen.add(component)) continue
+        component.dependencies.filterIsInstance<org.gradle.api.artifacts.result.ResolvedDependencyResult>()
+            .forEach { queue.add(it.selected) }
+    }
+    return seen.mapNotNull { it.id as? org.gradle.api.artifacts.component.ModuleComponentIdentifier }
+}
+
+fun resolvedRuntimeCoordinates(flavor: String): List<String> =
     runtimeComponentIds(flavor)
         .map { "${it.group}:${it.module}:${it.version}" }
         .distinct()
@@ -287,8 +297,8 @@ fun Project.resolvedRuntimeCoordinates(flavor: String): List<String> =
  * metadata, so without this the catalogue depends on what an earlier build
  * happened to download and comes out different on another machine.
  */
-fun Project.fetchRuntimePoms(flavor: String) {
-    dependencies.createArtifactResolutionQuery()
+fun fetchRuntimePoms(flavor: String) {
+    dependencyHandler.createArtifactResolutionQuery()
         .forComponents(runtimeComponentIds(flavor))
         .withArtifacts(org.gradle.maven.MavenModule::class.java, org.gradle.maven.MavenPomArtifact::class.java)
         .execute()
@@ -296,17 +306,17 @@ fun Project.fetchRuntimePoms(flavor: String) {
         .forEach { component -> component.getArtifacts(org.gradle.maven.MavenPomArtifact::class.java) }
 }
 
-val licensesRuntimeClasspath by tasks.registering {
+val licensesRuntimeClasspath = tasks.register("licensesRuntimeClasspath") {
     group = "licensing"
     description = "Write the resolved debug runtime classpath lock of every flavor for tools/licensing/collect.py"
     doLast {
         licensedFlavors.forEach { flavor ->
-            val coordinates = project.resolvedRuntimeCoordinates(flavor)
-            project.fetchRuntimePoms(flavor)
+            val coordinates = resolvedRuntimeCoordinates(flavor)
+            fetchRuntimePoms(flavor)
             val file = licenseLock(flavor)
             file.parentFile.mkdirs()
             file.writeText(coordinates.joinToString("\n", postfix = "\n"))
-            logger.lifecycle("licensing: ${coordinates.size} $flavor runtime modules -> ${file.relativeTo(rootProject.projectDir)}")
+            logger.lifecycle("licensing: ${coordinates.size} $flavor runtime modules -> ${file.relativeTo(repoRoot)}")
         }
     }
 }
@@ -317,13 +327,13 @@ val licensesRuntimeClasspathChecks = licensedFlavors.associateWith { flavor ->
         description = "Fail if the $flavor runtime classpath lock is stale (run :androidApp:licensesRuntimeClasspath)"
         outputs.upToDateWhen { false }
         doLast {
-            val coordinates = project.resolvedRuntimeCoordinates(flavor)
-            project.fetchRuntimePoms(flavor)
+            val coordinates = resolvedRuntimeCoordinates(flavor)
+            fetchRuntimePoms(flavor)
             val lock = licenseLock(flavor)
             val committed = lock.takeIf { it.isFile }?.readLines()?.filter { it.isNotBlank() } ?: emptyList()
             if (coordinates != committed) {
                 throw GradleException(
-                    "${lock.relativeTo(rootProject.projectDir)} is out of date. Refresh the runtime locks and the app catalogue:\n" +
+                    "${lock.relativeTo(repoRoot)} is out of date. Refresh the runtime locks and the app catalogue:\n" +
                         "  ./gradlew :androidApp:licensesRuntimeClasspath\n" +
                         "  python3 tools/licensing/collect.py",
                 )
@@ -332,7 +342,7 @@ val licensesRuntimeClasspathChecks = licensedFlavors.associateWith { flavor ->
     }
 }
 
-val licensesRuntimeClasspathCheck by tasks.registering {
+val licensesRuntimeClasspathCheck = tasks.register("licensesRuntimeClasspathCheck") {
     group = "licensing"
     description = "Fail if any flavor's runtime classpath lock is stale"
     dependsOn(licensesRuntimeClasspathChecks.values)
@@ -343,12 +353,12 @@ val licensesRuntimeClasspathCheck by tasks.registering {
  * if it exits non-zero. Fail closed: a missing interpreter or a crashed script
  * is a gate failure, not a skip, and the script's own report is surfaced.
  */
-fun Project.runLicensingPython(script: File, vararg args: String) {
+fun runLicensingPython(logger: Logger, script: File, vararg args: String) {
     val command = listOf("python3", script.absolutePath) + args
     val output = StringBuilder()
     val exit = try {
         val process = ProcessBuilder(command)
-            .directory(rootProject.projectDir)
+            .directory(repoRoot)
             .redirectErrorStream(true)
             .start()
         process.inputStream.bufferedReader().forEachLine { line ->
@@ -370,13 +380,13 @@ fun Project.runLicensingPython(script: File, vararg args: String) {
     }
 }
 
-val licensesCatalogueCheck by tasks.registering {
+val licensesCatalogueCheck = tasks.register("licensesCatalogueCheck") {
     group = "licensing"
     description = "Fail if the in-app licence catalogue is stale, incomplete or carries a prohibited licence"
     outputs.upToDateWhen { false }
     doLast {
-        project.runLicensingPython(rootProject.file("tools/licensing/collect.py"), "--check")
-        project.runLicensingPython(rootProject.file("tools/licensing/collect_test.py"))
+        runLicensingPython(logger, File(repoRoot, "tools/licensing/collect.py"), "--check")
+        runLicensingPython(logger, File(repoRoot, "tools/licensing/collect_test.py"))
     }
 }
 
