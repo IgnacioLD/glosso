@@ -15,7 +15,7 @@ import com.glosso.app.resources.*
 import org.jetbrains.compose.resources.stringResource
 
 /** The Ko-fi page for voluntary donations; blank hides every "Support Glosso" entry. */
-const val KOFI_URL = ""
+const val KOFI_URL = "https://ko-fi.com/ignaciold"
 
 /**
  * The "Support Glosso" row: Glosso is free and open source, and a coffee helps
