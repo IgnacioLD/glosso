@@ -1,5 +1,10 @@
 # App iOS: compilar y ejecutar en el simulador
 
+> **Parked (2026-11-12).** iPhone users get the web app instead (`docs/WEB.md`): no App Store
+> account or review needed. This project and the iOS targets stay in the repo and keep building
+> (`:shared:compileKotlinIosSimulatorArm64`), but get no new work; PR #18 (on-device scoring) is
+> parked with them.
+
 Fase 4 de `docs/IOS-KMP-PLAN.md`. `iosApp/` es un cascaron SwiftUI que muestra
 `MainViewController()` (`shared/src/iosMain/.../MainViewController.kt`): toda la UI es la de
 `:shared`, como en Android. Solo simulador hasta que exista la cuenta de Apple Developer (sin firma

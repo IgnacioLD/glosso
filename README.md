@@ -2,7 +2,8 @@
 
 A language course that measures your pronunciation for real. Glosso listens to each take,
 recognizes the sounds you actually made, compares them with the expected ones and tells you
-exactly which sound to fix. Android first, with an iOS app in progress. Languages: English
+exactly which sound to fix. On Android, and in the browser as an installable web app (iPhone, desktop).
+Languages: English
 (British and American), French, German and Russian.
 
 The same phonetic engine runs on the phone (offline, ONNX Runtime) and on the server, so a
@@ -16,9 +17,9 @@ Glosso is free for everyone, with no paid tier. Support is a voluntary donation.
 |---|---|
 | `:engine` | Kotlin Multiplatform phonetic engine: G2P, wav2vec2 phoneme recognition (ONNX), speech gate, phonetic comparison and feedback. The only place a score is computed. |
 | `:server` | Ktor API (`/v1/score`, content, assets, product config, accounts). Reuses `:engine`. |
-| `:shared` | The app itself in Compose Multiplatform (screens, view models, stores, API client), shared by Android and iOS. |
+| `:shared` | The app itself in Compose Multiplatform (screens, view models, stores, API client), shared by Android, the web app (WebAssembly) and iOS. |
 | `:androidApp` | Android shell: activity, on-device scorer, download service. Two flavors: `playstore` and `fdroid` (no Google libraries). |
-| `iosApp/` | Xcode project that runs the shared app on iOS. |
+| `iosApp/` | Xcode project that runs the shared app on iOS (parked: iPhone users get the web app). |
 | `deploy/` | Dockerfile, Compose stack, Caddy and monitoring config for self-hosting the server. |
 | `tools/` | Asset download, scoring bench, score parity, content pipeline and license tooling. |
 
@@ -99,7 +100,8 @@ that are not part of the public repository.
 - `docs/CONTENT-ENGINE.md`, `docs/CONTENT_POOL.md`, `docs/TTS-LAYER.md`, `docs/TTS-CACHE.md` - content and audio generation
 - `docs/PRODUCT-CONFIG-CONTRACT.md`, `docs/GOOGLE-SIGNIN.md` - product config and accounts
 - `docs/BILLING.md` - why there is no paid tier
-- `docs/IOS-DEV.md`, `docs/IOS-ENGINE.md` - iOS
+- `docs/WEB.md` - the web app: build, hosting, how it differs from the native apps
+- `docs/IOS-DEV.md`, `docs/IOS-ENGINE.md` - the native iOS app (parked)
 - `docs/FDROID.md` - the F-Droid flavor and the rules it follows
 - `docs/PRIVACY.md`, `docs/LICENSING.md` - privacy and third-party licensing
 

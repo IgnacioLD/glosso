@@ -58,3 +58,6 @@ iosApp/Configuration/Secrets.xcconfig
 xcuserdata/
 *.xcuserstate
 DerivedData/
+
+# The web app build copied for Caddy (docs/WEB.md); never committed.
+deploy/web/
