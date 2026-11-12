@@ -369,6 +369,7 @@ services:
       GLOSSO_DOMAIN: ${GLOSSO_DOMAIN:-api.glossopro.example}
       GLOSSO_UMAMI_DOMAIN: ${GLOSSO_UMAMI_DOMAIN:-umami.glossostudio.com}
       GLOSSO_STATUS_DOMAIN: ${GLOSSO_STATUS_DOMAIN:-status.glossostudio.com}
+      GLOSSO_WEB_DOMAIN: ${GLOSSO_WEB_DOMAIN:-app.glossostudio.com}
     ports:
       - "80:80"
       - "443:443"
@@ -378,6 +379,8 @@ services:
       # `docker compose up -d --no-deps --force-recreate caddy`; un `caddy reload`
       # no basta. Paso hasta el 2026-10-05 sin que nadie lo viera.
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      # The web app build (docs/WEB.md), replaced as a whole folder per release.
+      - ./web:/srv/web:ro
       - caddy_data:/data
       - caddy_config:/config
     depends_on:
