@@ -79,7 +79,6 @@ class GlossoApplication : Application(), SingletonImageLoader.Factory {
             connectivity = platformConnectivity(this),
             onDevice = OnDeviceScorer,
             downloader = DownloadManager,
-            newApi = { GlossoApi() },
         )
     }
 }

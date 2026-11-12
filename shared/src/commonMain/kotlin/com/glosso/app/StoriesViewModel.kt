@@ -32,7 +32,7 @@ data class StoriesState(
 
 class StoriesViewModel(
     private val services: AppServices,
-    private val api: GlossoApi = services.newApi(),
+    private val api: GlossoApi = appApi,
 ) : ViewModel() {
 
     private val platform = platformInfo(services.context)

@@ -4,7 +4,6 @@ import com.glosso.app.audio.playbackFor
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.glosso.app.api.DrillPlanRequest
-import com.glosso.app.api.GlossoApi
 import com.glosso.engine.drills.DrillPlanner
 import com.glosso.engine.model.DrillModel
 import com.glosso.engine.model.PhonemeErrorModel
@@ -85,7 +84,7 @@ suspend fun planPractice(
 
 class PracticeViewModel(private val services: AppServices) : ViewModel() {
 
-    private val api = services.newApi()
+    private val api = appApi
     private val profiles = ProfileStore.get(services.context)
     private val config = services.config
     private val engine = PracticeEngine(
