@@ -85,12 +85,15 @@ TEXT_FILES = {
     "OFL-BricolageGrotesque": "licenses/fonts/OFL-BricolageGrotesque.txt",
     "OFL-PlusJakartaSans": "licenses/fonts/OFL-PlusJakartaSans.txt",
     "OFL-JetBrainsMono": "licenses/fonts/OFL-JetBrainsMono.txt",
+    "OFL-NotoSansMono": "licenses/fonts/OFL-NotoSansMono.txt",
+    "BSD-3-Clause": "licenses/BSD-3-Clause.txt",
 }
 # Licence id -> text key, when there is a redistributable text.
 LICENCE_TEXT = {
     "Apache-2.0": "Apache-2.0",
     "MIT": "MIT",
     "BSD-2-Clause": "BSD-2-Clause",
+    "BSD-3-Clause": "BSD-3-Clause",
     "EPL-1.0": "EPL-1.0",
     "OFL-1.1": "OFL-PlusJakartaSans",
 }
@@ -99,6 +102,7 @@ LICENSE_NAMES = {
     "Apache-2.0": "Apache License 2.0",
     "MIT": "MIT License",
     "BSD-2-Clause": "BSD 2-Clause \"Simplified\" License",
+    "BSD-3-Clause": "BSD 3-Clause \"New\" or \"Revised\" License",
     "OFL-1.1": "SIL Open Font License 1.1",
     "EPL-1.0": "Eclipse Public License 1.0",
     "Android-SDK": "Android Software Development Kit License",
@@ -123,6 +127,9 @@ ALLOWED_LICENCES = {
     "Apache-2.0",
     "MIT",
     "BSD-2-Clause",
+    # Permissive like BSD-2-Clause plus a no-endorsement clause; added for
+    # @js-joda/core in the web app bundle (2026-11-12).
+    "BSD-3-Clause",
     "EPL-1.0",
     "OFL-1.1",
     "Android-SDK",
@@ -217,8 +224,8 @@ COMPONENTS = [
         author="Sean Barrett and contributors",
         license="MIT",
         url="https://github.com/nothings/stb",
-        notice="Copyright (c) 2017 Sean Barrett. Dual licensed MIT or public domain (Unlicense); used under the MIT licence. Vendored unmodified in shared/src/nativeInterop/stb_vorbis (commit and SHA-256 in its README) and linked statically into the iOS app.",
-        usage="Decodes the Ogg Vorbis lesson and story audio on iOS, which AVFoundation cannot play.",
+        notice="Copyright (c) 2017 Sean Barrett. Dual licensed MIT or public domain (Unlicense); used under the MIT licence. Vendored unmodified in shared/src/nativeInterop/stb_vorbis (commit and SHA-256 in its README), linked statically into the iOS app and built to WebAssembly (stb_vorbis.wasm) for the web app.",
+        usage="Decodes the Ogg Vorbis lesson and story audio on iOS and in the web app, where AVFoundation and Safari cannot play it.",
         distribution="app",
     ),
     # --- Fonts (each with its own OFL copy) ----------------------------------
@@ -251,6 +258,35 @@ COMPONENTS = [
         url="https://github.com/JetBrains/JetBrainsMono",
         usage="IPA transcription and tabular numbers.",
         distribution="app",
+    ),
+    dict(
+        id="font:NotoSansMono-IPA",
+        name="Noto Sans Mono (IPA subset)",
+        author="2022 The Noto Project Authors",
+        license="OFL-1.1",
+        text="OFL-NotoSansMono",
+        url="https://github.com/notofonts/latin-greek-cyrillic",
+        usage="IPA symbols JetBrains Mono lacks, in the web app only (a browser has no system font to fall back on).",
+        distribution="web",
+    ),
+    # --- Web app bundle (npm and wasm, outside the Android classpath) ---------
+    dict(
+        id="web:skiko",
+        name="Skiko (Skia for Kotlin), WebAssembly",
+        author="JetBrains s.r.o.",
+        license="Apache-2.0",
+        url="https://github.com/JetBrains/skiko",
+        usage="Draws the Compose UI in the web app (skiko.wasm).",
+        distribution="web",
+    ),
+    dict(
+        id="web:js-joda",
+        name="@js-joda/core",
+        author="Philipp Thurwachter, Pattrick Huper and contributors",
+        license="BSD-3-Clause",
+        url="https://github.com/js-joda/js-joda",
+        usage="Date and time support kotlinx-datetime uses in the web app bundle.",
+        distribution="web",
     ),
     # --- Catalogue media -----------------------------------------------------
     dict(
@@ -669,13 +705,13 @@ def unresolved_dependencies():
 
 
 def distributed_component_ids():
-    """Ids that reach users: the resolved APK runtime plus the shipped content.
+    """Ids that reach users: the resolved APK runtime, the shipped content and the web bundle.
 
     Server/build/test-only artifacts are still catalogued (attribution has no
     scope), but only this set gates the build on its licence, matching the audit:
     the binary ships the runtime classpath and the served content, nothing else.
     """
-    shipped = {c["id"] for c in COMPONENTS if c.get("distribution") in ("app", "content")}
+    shipped = {c["id"] for c in COMPONENTS if c.get("distribution") in ("app", "content", "web")}
     return set(runtime_module_ids()) | shipped
 
 
