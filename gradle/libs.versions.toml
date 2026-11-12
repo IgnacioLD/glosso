@@ -8,7 +8,7 @@ compose-multiplatform = "1.11.1"
 # The newest AGP inside Kotlin 2.4.20's tested range (AGP 8.5.2-9.3.1, Gradle up to
 # 9.7.0; 9.3.3 and Gradle 9.7.1 are patch releases of those). AGP 9.3 needs Gradle 9.5+.
 agp = "9.3.3"
-ktor = "3.0.3"
+ktor = "3.6.1"
 # Ktor on iOS: Coil's Ktor fetcher (coil-network-ktor3 3.5.0) lifts ktor-client-core
 # to 3.1.0 there, and Kotlin/Native needs every Ktor module on that same version (a
 # 3.0.3 Darwin engine links but fails at the first response with IrLinkageError).
