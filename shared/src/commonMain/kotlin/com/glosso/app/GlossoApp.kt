@@ -19,9 +19,11 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -30,6 +32,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
@@ -64,6 +68,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
@@ -350,106 +355,121 @@ fun GlossoApp() {
         shell = shell.copy(destination = GlossoDestination.LIBRARY, route = LibraryRoute.SETTINGS)
     }
 
-    Box(Modifier.fillMaxSize()) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background),
-        ) {
-            Box(Modifier.weight(1f)) {
-                val reduce = LocalReduceMotion.current
-                AnimatedContent(
-                    targetState = destination,
-                    transitionSpec = {
-                        if (reduce) {
-                            fadeIn(tween(0)) togetherWith fadeOut(tween(0))
-                        } else {
-                            val dir = if (targetState.ordinal > initialState.ordinal) 1 else -1
-                            (
-                                slideInHorizontally(
-                                    animationSpec = spring(
-                                        dampingRatio = Spring.DampingRatioNoBouncy,
-                                        stiffness = Spring.StiffnessMediumLow,
-                                    ),
-                                ) { width -> dir * width / 4 } +
-                                    fadeIn(tween(Motion.base, easing = Motion.decelerate)) +
-                                    scaleIn(initialScale = 0.99f)
-                                ) togetherWith (
-                                slideOutHorizontally(
-                                    animationSpec = tween(Motion.base, easing = Motion.accelerate),
-                                ) { width -> -dir * width / 6 } +
-                                    fadeOut(tween(Motion.fast))
-                                )
-                        }
-                    },
-                    label = "destination",
-                ) { dest ->
-                    when (dest) {
-                        GlossoDestination.TODAY -> TodayScreen(
-                            plan = today,
-                            step = lessonState.resumeStep.takeIf { today.resumable },
-                            loading = lessonState.loading && lessonState.lessons.isEmpty(),
-                            hasLessons = lessonState.lessons.isNotEmpty(),
-                            offline = !online,
-                            onStartLesson = startTodayLesson,
-                            onBrowseLessons = browseLessons,
-                            onReviewSounds = openTodayReview,
-                            onSettings = openTodaySettings,
-                            error = lessonState.error,
-                            onRetry = { lessonVm.refresh() },
-                        )
-
-                        GlossoDestination.LESSONS -> LessonsScreen(vm = lessonVm)
-
-                        GlossoDestination.YOU -> YouScreen(
-                            onPractice = {
-                                shell = shell.copy(destination = GlossoDestination.LIBRARY, route = LibraryRoute.PRACTICE)
-                            },
-                        )
-
-                        GlossoDestination.LIBRARY -> LibraryRoutes(
-                            route = route,
-                            storiesVm = storiesVm,
-                            lessonVm = lessonVm,
-                            onOpen = { shell = shell.copy(route = it) },
-                            onOpenLesson = { lesson ->
-                                shell = shell.openLessons()
-                                lessonVm.openLesson(lesson, LessonStep.BASE)
-                            },
-                            onBack = { shell = shell.copy(route = null) },
-                        )
-                    }
-                }
-            }
-            // With the bar present it already clears the gesture inset; alone
-            // (lesson player, story reader) the strip must clear it itself.
-            if (versionNotice.visible && !updateDismissed) {
-                UpdateNotice(
-                    notice = versionNotice,
-                    onDismiss = { updateDismissed = true },
-                    modifier = if (showBar) Modifier else Modifier.navigationBarsPadding(),
-                )
-            }
-            OfflineBanner(
-                visible = !online,
-                modifier = if (showBar) Modifier else Modifier.navigationBarsPadding(),
-            ) {
-                if (showOfflineModelNudge) {
-                    OfflineModelNudge(
-                        sizeText = onDeviceModelSize(),
-                        onDownload = {
-                            scoringVm.download()
-                            requestNotifications()
-                        },
-                        onHide = { OfflineModelHint.dismiss(context) },
-                    )
-                }
-            }
-            if (showBar) {
-                GlossoBottomBar(
+    // A wide window (a tablet, a desktop browser) gets the tabs as a side rail
+    // and the screens at a phone's reading width, centred.
+    BoxWithConstraints(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        val wide = maxWidth >= Sizes.wideLayout
+        val bottomBar = showBar && !wide
+        Row(Modifier.fillMaxSize()) {
+            if (showBar && wide) {
+                GlossoNavRail(
                     current = destination,
                     onSelect = { shell = shell.copy(destination = it, route = null) },
                 )
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .wrapContentWidth()
+                    .widthIn(max = if (wide) Sizes.contentMaxWidth else Dp.Infinity)
+                    .fillMaxWidth(),
+            ) {
+                Box(Modifier.weight(1f)) {
+                    val reduce = LocalReduceMotion.current
+                    AnimatedContent(
+                        targetState = destination,
+                        transitionSpec = {
+                            if (reduce) {
+                                fadeIn(tween(0)) togetherWith fadeOut(tween(0))
+                            } else {
+                                val dir = if (targetState.ordinal > initialState.ordinal) 1 else -1
+                                (
+                                    slideInHorizontally(
+                                        animationSpec = spring(
+                                            dampingRatio = Spring.DampingRatioNoBouncy,
+                                            stiffness = Spring.StiffnessMediumLow,
+                                        ),
+                                    ) { width -> dir * width / 4 } +
+                                        fadeIn(tween(Motion.base, easing = Motion.decelerate)) +
+                                        scaleIn(initialScale = 0.99f)
+                                    ) togetherWith (
+                                    slideOutHorizontally(
+                                        animationSpec = tween(Motion.base, easing = Motion.accelerate),
+                                    ) { width -> -dir * width / 6 } +
+                                        fadeOut(tween(Motion.fast))
+                                    )
+                            }
+                        },
+                        label = "destination",
+                    ) { dest ->
+                        when (dest) {
+                            GlossoDestination.TODAY -> TodayScreen(
+                                plan = today,
+                                step = lessonState.resumeStep.takeIf { today.resumable },
+                                loading = lessonState.loading && lessonState.lessons.isEmpty(),
+                                hasLessons = lessonState.lessons.isNotEmpty(),
+                                offline = !online,
+                                onStartLesson = startTodayLesson,
+                                onBrowseLessons = browseLessons,
+                                onReviewSounds = openTodayReview,
+                                onSettings = openTodaySettings,
+                                error = lessonState.error,
+                                onRetry = { lessonVm.refresh() },
+                            )
+
+                            GlossoDestination.LESSONS -> LessonsScreen(vm = lessonVm)
+
+                            GlossoDestination.YOU -> YouScreen(
+                                onPractice = {
+                                    shell = shell.copy(destination = GlossoDestination.LIBRARY, route = LibraryRoute.PRACTICE)
+                                },
+                            )
+
+                            GlossoDestination.LIBRARY -> LibraryRoutes(
+                                route = route,
+                                storiesVm = storiesVm,
+                                lessonVm = lessonVm,
+                                onOpen = { shell = shell.copy(route = it) },
+                                onOpenLesson = { lesson ->
+                                    shell = shell.openLessons()
+                                    lessonVm.openLesson(lesson, LessonStep.BASE)
+                                },
+                                onBack = { shell = shell.copy(route = null) },
+                            )
+                        }
+                    }
+                }
+                // With the bar present it already clears the gesture inset; alone
+                // (lesson player, story reader) the strip must clear it itself.
+                if (versionNotice.visible && !updateDismissed) {
+                    UpdateNotice(
+                        notice = versionNotice,
+                        onDismiss = { updateDismissed = true },
+                        modifier = if (bottomBar) Modifier else Modifier.navigationBarsPadding(),
+                    )
+                }
+                OfflineBanner(
+                    visible = !online,
+                    modifier = if (bottomBar) Modifier else Modifier.navigationBarsPadding(),
+                ) {
+                    if (showOfflineModelNudge) {
+                        OfflineModelNudge(
+                            sizeText = onDeviceModelSize(),
+                            onDownload = {
+                                scoringVm.download()
+                                requestNotifications()
+                            },
+                            onHide = { OfflineModelHint.dismiss(context) },
+                        )
+                    }
+                }
+                if (bottomBar) {
+                    GlossoBottomBar(
+                        current = destination,
+                        onSelect = { shell = shell.copy(destination = it, route = null) },
+                    )
+                }
             }
         }
         AchievementOverlay(modifier = Modifier.align(Alignment.TopCenter))
@@ -459,8 +479,14 @@ fun GlossoApp() {
     // The guard keeps a tap on its empty areas from reaching the app behind.
     if (!onboardingDone) {
         TrackScreen("onboarding")
-        Box(Modifier.fillMaxSize().consumePointerEvents())
-        OnboardingScreen(onFinish = { OnboardingStore.complete() })
+        Box(
+            Modifier.fillMaxSize().consumePointerEvents().background(MaterialTheme.colorScheme.background),
+            contentAlignment = Alignment.TopCenter,
+        ) {
+            Box(Modifier.widthIn(max = Sizes.contentMaxWidth)) {
+                OnboardingScreen(onFinish = { OnboardingStore.complete() })
+            }
+        }
     }
 }
 

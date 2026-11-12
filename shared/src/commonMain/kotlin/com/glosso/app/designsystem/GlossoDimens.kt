@@ -50,6 +50,13 @@ object Sizes {
     val mic = 80.dp
     val avatar = 56.dp
     val bottomBar = 64.dp
+    val navRail = 96.dp
+
+    /** From this window width (a tablet, a desktop browser) the bottom bar becomes a side rail. */
+    val wideLayout = 600.dp
+
+    /** The widest a screen's content gets in a wide window, so lines and cards keep a phone's reading width. */
+    val contentMaxWidth = 640.dp
 }
 
 /**

@@ -13,11 +13,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
@@ -101,6 +103,40 @@ fun GlossoBottomBar(
                 }
             }
         }
+    }
+}
+
+/**
+ * The same four destinations as [GlossoBottomBar], down the side of a wide
+ * window, where a bar under a centred column would sit far from the content.
+ */
+@Composable
+fun GlossoNavRail(
+    current: GlossoDestination,
+    onSelect: (GlossoDestination) -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    Row(modifier.fillMaxHeight().background(MaterialTheme.colorScheme.background)) {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .width(Sizes.navRail)
+                .systemBarsPadding()
+                .padding(top = Space.x24)
+                .selectableGroup(),
+            verticalArrangement = Arrangement.spacedBy(Space.x16),
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            GlossoDestination.entries.forEach { destination ->
+                NavItem(
+                    destination = destination,
+                    selected = current == destination,
+                    onClick = { onSelect(destination) },
+                    modifier = Modifier.fillMaxWidth(),
+                )
+            }
+        }
+        Box(Modifier.fillMaxHeight().width(1.dp).background(MaterialTheme.colorScheme.outline))
     }
 }
 
