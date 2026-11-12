@@ -15,6 +15,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.focusable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -49,12 +50,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.rotate
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.input.key.Key
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -146,8 +156,23 @@ internal fun DeckControls(
     LaunchedEffect(state.playing) { if (!state.playing) active = null }
     val mic = rememberMicAction(onToggle)
     val canPlay = state.hasAudio && !state.recording
+    // With a keyboard (a desktop browser, a tablet), Space starts and stops a
+    // take: the deck takes focus when it appears, so the key reaches it.
+    val keys = remember { FocusRequester() }
+    LaunchedEffect(Unit) { runCatching { keys.requestFocus() } }
 
-    Column(Modifier.fillMaxWidth(), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        Modifier
+            .fillMaxWidth()
+            .focusRequester(keys)
+            .focusable()
+            .onPreviewKeyEvent { event ->
+                val space = event.key == Key.Spacebar && event.type == KeyEventType.KeyUp
+                if (space && !state.scoring) mic.onMic()
+                space
+            },
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
         DeckStatus(recording = state.recording, scoring = state.scoring)
         Spacer(Modifier.height(Space.x4))
         Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
@@ -254,6 +279,7 @@ private fun DeckButton(
             .widthIn(min = Sizes.touch)
             .alpha(if (enabled) 1f else 0.38f)
             .pressScale(interaction, pressed = 0.92f)
+            .pointerHoverIcon(PointerIcon.Hand)
             .clickable(
                 interactionSource = interaction,
                 indication = null,
@@ -379,6 +405,7 @@ private fun HaloMic(
                 .pressScale(interaction, pressed = 0.94f)
                 .clip(CircleShape)
                 .background(if (scoring) primary.copy(alpha = 0.5f) else primary)
+                .pointerHoverIcon(PointerIcon.Hand)
                 .clickable(
                     interactionSource = interaction,
                     indication = null,

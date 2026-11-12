@@ -38,7 +38,8 @@ import org.w3c.dom.events.Event
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalResourceApi::class)
 fun main() {
     val services = wire()
-    ComposeViewport(document.body!!) {
+    // index.html sizes #app to the safe area (notch, home indicator).
+    ComposeViewport(document.getElementById("app")!!) {
         // A browser has no system fonts for Skia to fall back on, so the IPA
         // symbols JetBrains Mono lacks come from this subset; preloaded, it is
         // the fallback for every family. The UI waits for it (about 100 KB) so

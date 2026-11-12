@@ -48,6 +48,29 @@ cd shared/build/dist/wasmJs/productionExecutable && python3 -m http.server 8096
   Skia no system fonts.
 - **Back**: the browser's Back button (and Safari's edge swipe) runs the innermost `PlatformBackHandler`.
 
+## Installing it (PWA)
+
+`shared/src/wasmJsMain/resources` holds the page shell:
+- **`index.html`:**
+  - sizes the app to the safe area (`viewport-fit=cover` with `env(safe-area-inset-*)`), clear of the notch and the home indicator;
+  - shows a splash until the first frame;
+  - explains itself on a browser without WebAssembly GC;
+  - registers the service worker.
+- **`manifest.webmanifest` and `icons/`:** the install metadata and icons, made from the iOS app icon. The maskable icon keeps the artwork inside the safe circle.
+- **`sw.js`:** network first for this origin's files, so a deploy shows on the next load. The cache is only the fallback that lets the app open with no connection, where it shows its own offline state. The API is on another origin and is never touched.
+  - There is one cache per release; the build fills in the version.
+  - When a new release activates, only older `glosso-shell-*` caches are dropped. Compose keeps its resources in a cache of its own.
+
+On iPhone: Safari, Share, Add to Home Screen. On desktop Chrome or Edge: the install icon in the address bar.
+
+A first visit downloads about 5.8 MB gzipped (4.5 MB brotli). Most of it is the two wasm files (app 1.8 MB, Skia 3.3 MB gzipped), plus the fonts. The browser then serves them from its cache.
+
+## Wide windows and keyboards
+
+- **Layout:** from 600 dp wide, the tabs are a side rail and screens are centred at 640 dp (`Sizes.wideLayout`, `Sizes.contentMaxWidth`). Android tablets get the same layout.
+- **Keyboard:** Space starts and stops a take, and Esc goes back.
+- **Pointer:** buttons, rows and the record controls show the hand cursor.
+
 ## Browser support
 
 The app needs WebAssembly GC: Safari 18.2+ (iOS 18.2+), and current Chrome, Edge and Firefox.

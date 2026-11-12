@@ -5,10 +5,11 @@ import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.rememberUpdatedState
 import kotlinx.browser.window
 import org.w3c.dom.events.Event
+import org.w3c.dom.events.KeyboardEvent
 
 /**
- * The browser's Back button (and the iOS edge swipe in Safari). Every subscreen
- * also keeps its on-screen back button.
+ * The browser's Back button, the iOS edge swipe in Safari and, on a desktop,
+ * Esc. Every subscreen also keeps its on-screen back button.
  */
 @Composable
 actual fun PlatformBackHandler(enabled: Boolean, onBack: () -> Unit) {
@@ -38,6 +39,9 @@ private object BrowserBack {
             handlers.lastOrNull()?.invoke()
             // After the screen that handled it has recomposed away.
             window.setTimeout({ guard(); null }, 0)
+        })
+        window.addEventListener("keydown", { event: Event ->
+            if ((event as KeyboardEvent).key == "Escape" && !event.repeat) handlers.lastOrNull()?.invoke()
         })
     }
 
