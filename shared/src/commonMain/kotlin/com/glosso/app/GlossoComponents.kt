@@ -72,6 +72,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
@@ -83,6 +84,8 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.input.pointer.PointerIcon
+import androidx.compose.ui.input.pointer.pointerHoverIcon
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
@@ -328,24 +331,35 @@ fun SubHeader(
 }
 
 /**
- * Content scrolled under a fixed header dissolves over [height] instead of being
- * cut on a hard line. The fade only exists while there is something above to
- * scroll back to, so a list at rest shows its first item untouched.
+ * Content scrolled under a fixed header, or on under a pinned footer (the
+ * record bar, the tab bar), dissolves over [height] instead of being cut on a
+ * hard line. Each fade only exists while there is something on that side to
+ * scroll to, so a list at rest shows its first item untouched and its end says
+ * there is more below.
  */
 internal fun Modifier.scrollEdgeFade(state: ScrollableState, height: Dp = Space.x16): Modifier =
     this
         .graphicsLayer { compositingStrategy = CompositingStrategy.Offscreen }
         .drawWithContent {
             drawContent()
+            val fade = height.toPx()
             if (state.canScrollBackward) {
                 drawRect(
+                    brush = Brush.verticalGradient(0f to Color.Transparent, 1f to Color.Black, startY = 0f, endY = fade),
+                    size = Size(size.width, fade),
+                    blendMode = BlendMode.DstIn,
+                )
+            }
+            if (state.canScrollForward) {
+                drawRect(
                     brush = Brush.verticalGradient(
-                        0f to Color.Transparent,
-                        1f to Color.Black,
-                        startY = 0f,
-                        endY = height.toPx(),
+                        0f to Color.Black,
+                        1f to Color.Transparent,
+                        startY = size.height - fade,
+                        endY = size.height,
                     ),
-                    size = Size(size.width, height.toPx()),
+                    topLeft = Offset(0f, size.height - fade),
+                    size = Size(size.width, fade),
                     blendMode = BlendMode.DstIn,
                 )
             }
@@ -580,6 +594,7 @@ fun PrimaryButton(
         modifier = modifier
             .fillMaxWidth()
             .heightIn(min = Sizes.button)
+            .pointerHoverIcon(PointerIcon.Hand)
             .graphicsLayer { scaleX = scale; scaleY = scale },
     ) {
         if (loading) {
@@ -629,6 +644,7 @@ internal fun SecondaryButton(
         contentPadding = PaddingValues(horizontal = Space.x16, vertical = Space.x8),
         modifier = modifier
             .heightIn(min = Sizes.button)
+            .pointerHoverIcon(PointerIcon.Hand)
             .graphicsLayer { scaleX = scale; scaleY = scale },
         content = content,
     )
@@ -655,7 +671,7 @@ internal fun glossoTextFieldColors() = androidx.compose.material3.OutlinedTextFi
 fun QuietTextButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     TextButton(
         onClick = onClick,
-        modifier = modifier,
+        modifier = modifier.pointerHoverIcon(PointerIcon.Hand),
         colors = ButtonDefaults.textButtonColors(
             contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
         ),
@@ -728,6 +744,7 @@ internal fun HubRow(
         modifier = modifier
             .fillMaxWidth()
             .heightIn(min = 64.dp)
+            .pointerHoverIcon(PointerIcon.Hand)
             .clickable(onClick = onClick)
             .padding(vertical = Space.x12),
         verticalAlignment = Alignment.CenterVertically,

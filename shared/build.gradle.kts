@@ -239,9 +239,13 @@ if (webEnabled) {
     configurations.matching { it.name.startsWith("wasmJs") }.configureEach {
         resolutionStrategy.force("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1-0.6.x-compat")
     }
-    // The two answer cues, served next to the page (FeedbackSounds.wasmJs.kt).
     tasks.named<ProcessResources>("wasmJsProcessResources") {
+        // The two answer cues, served next to the page (FeedbackSounds.wasmJs.kt).
         from("src/androidMain/res/raw") { include("feedback_*.wav") }
+        // One service worker cache per release (sw.js).
+        val release = generateWebBuild.map { it.inputs.properties["values"].toString().hashCode().toUInt().toString(16) }
+        inputs.property("release", release)
+        filesMatching("sw.js") { filter { it.replace("__VERSION__", release.get()) } }
     }
 }
 

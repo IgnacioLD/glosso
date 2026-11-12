@@ -4,14 +4,53 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Glosso</title>
+  <meta name="description" content="Learn the language and pronounce it right: practise sentence by sentence and get every sound measured.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Glosso">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="theme-color" content="#F3F3F6" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0B0B0E" media="(prefers-color-scheme: dark)">
   <style>
-    html, body { height: 100%; margin: 0; overflow: hidden; background: #fff; }
-    #splash { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center;
-      font: 600 20px system-ui, sans-serif; color: #666; }
+    /* The page colours are the app's background (designsystem/GlossoColor.kt). */
+    :root { color-scheme: light dark; --paper: #F3F3F6; --ink: #0B0B0E; --muted: #5D5D6A; }
+    @media (prefers-color-scheme: dark) { :root { --paper: #0B0B0E; --ink: #F4F4F6; --muted: #A3A3AE; } }
+    html, body { height: 100%; margin: 0; overflow: hidden; background: var(--paper); overscroll-behavior: none; }
+    /* The app draws inside the safe area: clear of the notch and the home indicator. */
+    #app { position: fixed; top: env(safe-area-inset-top); right: env(safe-area-inset-right);
+      bottom: env(safe-area-inset-bottom); left: env(safe-area-inset-left); }
+    #splash { position: fixed; inset: 0; display: flex; flex-direction: column; gap: 16px;
+      align-items: center; justify-content: center; font: 600 15px system-ui, -apple-system, sans-serif; color: var(--muted); }
+    #splash img { width: 72px; height: 72px; border-radius: 16px; }
+    #unsupported { display: none; max-width: 22em; text-align: center; line-height: 1.5; color: var(--ink); }
   </style>
 </head>
 <body>
-  <div id="splash">Glosso</div>
-  <script type="module" src="glosso.js"></script>
+  <div id="app"></div>
+  <div id="splash">
+    <img src="icons/icon-192.png" alt="">
+    <span id="loading">Glosso</span>
+    <p id="unsupported">This browser cannot run Glosso. Update it (Safari 18.2 or newer on iPhone) or open the page in a current Chrome, Edge or Firefox.</p>
+  </div>
+  <script>
+    // WebAssembly GC is what the app needs (Safari 18.2+, current Chrome, Edge, Firefox).
+    const wasmGc = (() => {
+      try { return WebAssembly.validate(new Uint8Array([0, 97, 115, 109, 1, 0, 0, 0, 1, 5, 1, 95, 1, 120, 0])); }
+      catch (e) { return false; }
+    })();
+    if (!wasmGc) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('unsupported').style.display = 'block';
+    } else {
+      const script = document.createElement('script');
+      script.type = 'module';
+      script.src = 'glosso.js';
+      document.body.appendChild(script);
+    }
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
+  </script>
 </body>
 </html>
