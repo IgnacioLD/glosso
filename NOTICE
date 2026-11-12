@@ -129,6 +129,22 @@ JetBrains Mono
   License:     SIL Open Font License 1.1 (see licenses/fonts/OFL-JetBrainsMono.txt)
   Used as:     IPA transcription and tabular numbers in the Android app.
 
+Noto Sans Mono (IPA subset)
+  Source:      https://github.com/notofonts/latin-greek-cyrillic
+  Copyright:   2022 The Noto Project Authors
+  License:     SIL Open Font License 1.1 (see licenses/fonts/OFL-NotoSansMono.txt)
+  Used as:     IPA symbols JetBrains Mono lacks, in the web app only (a browser
+               has no system font to fall back on). Subset to U+0250-036F and
+               U+1D00-1DBF.
+
+@wasm-audio-decoders/ogg-vorbis, @wasm-audio-decoders/common, codec-parser, simple-yenc
+  Source:      https://github.com/eshaz/wasm-audio-decoders
+  Copyright:   Ethan Halsall
+  License:     MIT (see licenses/MIT.txt). The decoder embeds libvorbis and libogg,
+               Copyright Xiph.Org Foundation, BSD-3-Clause (see
+               licenses/BSD-3-Clause-Xiph-libvorbis.txt)
+  Used as:     Ogg Vorbis decoding of the lesson audio in the web app.
+
 ===========================================================================
 JVM / KOTLIN LIBRARIES
 ===========================================================================

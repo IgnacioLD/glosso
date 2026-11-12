@@ -23,6 +23,11 @@ data class AppConfig(
      * (docs/IOS-KMP-PLAN.md, phase 6): its switch would turn them on.
      */
     val usageStatistics: Boolean = true,
+    /**
+     * Lessons and the model pack downloaded for offline use. Off on the web,
+     * where a page keeps no files between visits and scoring is in the cloud.
+     */
+    val offlineDownloads: Boolean = true,
 ) {
     /** The debug affordances drawn on screen: debug builds that are not taking store captures. */
     val debugUi: Boolean get() = debug && !storeScreenshots

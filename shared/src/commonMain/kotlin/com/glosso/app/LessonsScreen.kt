@@ -625,8 +625,10 @@ private fun LessonRow(
                     color = MaterialTheme.colorScheme.onSurface,
                     modifier = Modifier.weight(1f),
                 )
-                Spacer(Modifier.width(Space.x8))
-                DownloadButton(lessonId = lesson.id, offline = offline, onClick = onDownload)
+                if (LocalAppConfig.current.offlineDownloads) {
+                    Spacer(Modifier.width(Space.x8))
+                    DownloadButton(lessonId = lesson.id, offline = offline, onClick = onDownload)
+                }
             }
             if (lesson.objective.isNotBlank()) {
                 Spacer(Modifier.height(Space.x4))
@@ -894,7 +896,7 @@ private fun LessonUnavailable(
                 onClick = onRetry,
                 modifier = Modifier.width(220.dp),
             )
-            if (!offline) {
+            if (!offline && LocalAppConfig.current.offlineDownloads) {
                 Spacer(Modifier.height(Space.x4))
                 QuietTextButton(
                     text = stringResource(Res.string.lesson_download_now),

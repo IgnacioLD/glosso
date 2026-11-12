@@ -22,6 +22,40 @@ val iosEnabled: Boolean = when {
     hasProperty("glosso.ios") -> property("glosso.ios").toString().toBoolean()
     else -> System.getProperty("os.name").startsWith("Mac", ignoreCase = true)
 }
+// The browser build (docs/WEB.md): needs no host tools, so it is on unless
+// -Pglosso.web=false.
+val webEnabled: Boolean = findProperty("glosso.web")?.toString()?.toBoolean() ?: true
+
+// What Android reads from BuildConfig, for the web build: the version shown in
+// Settings (the Android app's, so both report the same release) and the same
+// -PglossoApiBase / -PglossoApiKey inputs androidApp/build.gradle.kts takes.
+val webBuildSource = layout.buildDirectory.dir("generated/webBuild")
+val generateWebBuild = tasks.register("generateWebBuild") {
+    val androidBuild = rootProject.file("androidApp/build.gradle.kts")
+    val versionName = Regex("""baseVersionName = "([^"]+)"""").find(androidBuild.readText())!!.groupValues[1]
+    val versionCode = Regex("""versionCode = (\d+)""").find(androidBuild.readText())!!.groupValues[1]
+    val apiBase = (findProperty("glossoApiBase") as String?) ?: "https://api.glossostudio.com"
+    val apiKey = (findProperty("glossoApiKey") as String?).orEmpty()
+    val debug = (findProperty("glosso.web.debug") as String?).toBoolean()
+    inputs.property("values", listOf(versionName, versionCode, apiBase, apiKey, debug.toString()))
+    val out = webBuildSource.map { it.file("com/glosso/app/WebBuild.kt") }
+    outputs.dir(webBuildSource)
+    doLast {
+        out.get().asFile.apply { parentFile.mkdirs() }.writeText(
+            """
+            |package com.glosso.app
+            |
+            |internal object WebBuild {
+            |    const val VERSION_NAME = "$versionName"
+            |    const val VERSION_CODE = $versionCode
+            |    const val API_BASE = "$apiBase"
+            |    const val API_KEY = "$apiKey"
+            |    const val DEBUG = $debug
+            |}
+            |""".trimMargin(),
+        )
+    }
+}
 
 if (androidEnabled) {
     apply(plugin = "com.android.kotlin.multiplatform.library")
@@ -75,6 +109,19 @@ kotlin {
                 extraOpts("-libraryPath", outDir.get().asFile.path)
                 tasks.named(interopProcessingTaskName).configure { dependsOn(compileStbVorbis) }
             }
+        }
+    }
+
+    if (webEnabled) {
+        // The PWA: :shared:wasmJsBrowserDevelopmentRun serves it, and
+        // :shared:wasmJsBrowserDistribution builds what is deployed.
+        @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+        wasmJs {
+            outputModuleName.set("glosso")
+            browser {
+                commonWebpackConfig { outputFileName = "glosso.js" }
+            }
+            binaries.executable()
         }
     }
 
@@ -144,7 +191,25 @@ kotlin {
             implementation(libs.compose.ui.test.manifest)
         }
         // gradle.properties turns the default hierarchy template off (for :engine's
-        // onnxMain), so the iOS source sets are wired by hand.
+        // onnxMain), so the web and iOS source sets are wired by hand.
+        if (webEnabled) {
+            getByName("wasmJsMain") {
+                dependsOn(commonMain)
+                dependencies {
+                    // Every Ktor module on the version Coil brings, as on iOS.
+                    implementation(project.dependencies.platform(libs.ktor.bom.ios))
+                    implementation(libs.ktor.client.js)
+                    implementation(libs.coil.network.ktor3)
+                    // The browser has no synchronous file system (AppFiles.wasmJs.kt). The
+                    // okio Compose brings on the web (3.17), not the app's 3.9.
+                    implementation(libs.okio.fakefilesystem)
+                    // Content clips are Ogg Vorbis, which Safari cannot decode (glosso-web.mjs).
+                    implementation(npm("@wasm-audio-decoders/ogg-vorbis", "0.1.20"))
+                }
+                kotlin.srcDir(generateWebBuild)
+            }
+            // No web tests: commonTest reads the real file system, which a page has not.
+        }
         if (iosEnabled) {
             val iosMain = create("iosMain") {
                 dependsOn(commonMain)
@@ -165,6 +230,18 @@ kotlin {
             getByName("iosArm64Test").dependsOn(iosTest)
             getByName("iosSimulatorArm64Test").dependsOn(iosTest)
         }
+    }
+}
+
+if (webEnabled) {
+    // FakeFileSystem still uses kotlinx.datetime.Clock, which kotlinx-datetime 0.7
+    // (brought by Compose) dropped; its compat build keeps it next to the 0.7 API.
+    configurations.matching { it.name.startsWith("wasmJs") }.configureEach {
+        resolutionStrategy.force("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1-0.6.x-compat")
+    }
+    // The two answer cues, served next to the page (FeedbackSounds.wasmJs.kt).
+    tasks.named<ProcessResources>("wasmJsProcessResources") {
+        from("src/androidMain/res/raw") { include("feedback_*.wav") }
     }
 }
 

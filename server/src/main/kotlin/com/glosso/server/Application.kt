@@ -238,6 +238,34 @@ internal fun parseCorsOrigins(raw: String?): List<Pair<String, String>> =
         host to scheme.ifEmpty { "https" }
     }.orEmpty()
 
+/**
+ * CORS for the browser clients: the website and the web app (docs/WEB.md).
+ * The web app is the shared app code, so it sends what the native apps send:
+ * JSON bodies, `Cache-Control: no-cache` on content, revalidation and ranges
+ * on assets, and it reads the ETag it revalidates with.
+ */
+internal fun Application.installCors(origins: List<Pair<String, String>>) {
+    if (origins.isEmpty()) return
+    install(CORS) {
+        origins.forEach { (host, scheme) -> allowHost(host, schemes = listOf(scheme)) }
+        allowMethod(HttpMethod.Get)
+        allowMethod(HttpMethod.Post)
+        allowMethod(HttpMethod.Delete)
+        allowNonSimpleContentTypes = true
+        allowHeader(HttpHeaders.ContentType)
+        allowHeader(HttpHeaders.Authorization)
+        allowHeader(HttpHeaders.CacheControl)
+        allowHeader(HttpHeaders.IfNoneMatch)
+        allowHeader(HttpHeaders.Range)
+        allowHeader(HttpHeaders.IfRange)
+        allowHeader(API_KEY_HEADER)
+        allowHeader(INGEST_TOKEN_HEADER)
+        allowHeader("X-Device-Id")
+        allowHeader("X-Analytics")
+        exposeHeader(HttpHeaders.ETag)
+    }
+}
+
 /** Shared client credential header for `/v1/score`; see `GLOSSO_API_KEY`. */
 private const val API_KEY_HEADER = "X-Api-Key"
 
@@ -911,19 +939,7 @@ fun Application.module(
     // allowlist is explicit and never `*`; when nothing is configured nothing is
     // exposed. Entries may be full origins (`https://glossostudio.com`) or bare
     // hosts (`glossostudio.com`, assumed https).
-    val corsOrigins = parseCorsOrigins(System.getenv("GLOSSO_CORS_ORIGINS"))
-    if (corsOrigins.isNotEmpty()) {
-        install(CORS) {
-            corsOrigins.forEach { (host, scheme) -> allowHost(host, schemes = listOf(scheme)) }
-            allowMethod(HttpMethod.Get)
-            allowMethod(HttpMethod.Post)
-            allowHeader(HttpHeaders.ContentType)
-            allowHeader(HttpHeaders.Authorization)
-            allowHeader(API_KEY_HEADER)
-            allowHeader(INGEST_TOKEN_HEADER)
-            allowHeader("X-Device-Id")
-        }
-    }
+    installCors(parseCorsOrigins(System.getenv("GLOSSO_CORS_ORIGINS")))
     install(RateLimit) {
         // All budgets are keyed by the edge-resolved client IP, never by a
         // client-supplied forwarding header (SEC-05). See [clientLimitKey].

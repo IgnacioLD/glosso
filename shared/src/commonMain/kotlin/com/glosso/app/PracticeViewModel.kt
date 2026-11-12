@@ -1,16 +1,15 @@
 package com.glosso.app
 
-import com.glosso.app.audio.playbackFor
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.glosso.app.api.DrillPlanRequest
+import com.glosso.app.audio.playbackFor
+import com.glosso.app.platform.ioDispatcher
 import com.glosso.engine.drills.DrillPlanner
 import com.glosso.engine.model.DrillModel
 import com.glosso.engine.model.PhonemeErrorModel
 import com.glosso.engine.model.PhoneticProfileModel
 import com.glosso.engine.phonetics.PhoneticLoop
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -289,7 +288,7 @@ class PracticeViewModel(private val services: AppServices) : ViewModel() {
         val other = drill.audio.entries.firstOrNull { ':' !in it.key && it.value != reference }?.value ?: return
         viewModelScope.launch {
             runCatching {
-                val bytes = withContext(Dispatchers.IO) { AssetResolver.localBytes(other) } ?: api.assetBytes(other)
+                val bytes = withContext(ioDispatcher) { AssetResolver.localBytes(other) } ?: api.assetBytes(other)
                 services.onDevice.decodeToWav16k(bytes)
             }.getOrNull()?.let { wav ->
                 engine.debugScoreWav(wav, drill.text, drill.ipa, drill.ipaVariants, reference, drill.accentIpa)

@@ -41,6 +41,26 @@ object Wav {
         return out
     }
 
+    /**
+     * Float samples at [fromRate] (a browser microphone, usually 48 kHz) as
+     * little-endian 16-bit PCM at [SAMPLE_RATE]. Each output sample averages the
+     * input it spans, which keeps the speech band and drops most of what would
+     * alias above 8 kHz.
+     */
+    fun downsampleToPcm16(samples: FloatArray, fromRate: Int): ByteArray {
+        val ratio = fromRate.toDouble() / SAMPLE_RATE
+        val count = (samples.size / ratio).toInt()
+        val out = ShortArray(count)
+        for (i in 0 until count) {
+            val start = (i * ratio).toInt()
+            val end = minOf(samples.size, maxOf(start + 1, ((i + 1) * ratio).toInt()))
+            var sum = 0.0
+            for (j in start until end) sum += samples[j]
+            out[i] = ((sum / (end - start)).coerceIn(-1.0, 1.0) * Short.MAX_VALUE).toInt().toShort()
+        }
+        return bytesOf(out)
+    }
+
     /** Peak absolute sample in the first [length] bytes of [bytes], 0..1, little-endian 16-bit PCM. */
     fun peak(bytes: ByteArray, length: Int = bytes.size): Float {
         var peak = 0

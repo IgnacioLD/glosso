@@ -7,13 +7,12 @@ import com.glosso.app.platform.PlatformContext
 import com.glosso.app.platform.PlatformInfo
 import com.glosso.app.platform.appFiles
 import com.glosso.app.platform.currentTimeMillis
+import com.glosso.app.platform.ioDispatcher
 import com.glosso.app.platform.keyValueStore
 import com.glosso.app.platform.platformInfo
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -70,7 +69,7 @@ object Analytics {
     private val sending = Mutex()
     private val persisting = Lock()
 
-    var scope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    var scope: CoroutineScope = CoroutineScope(SupervisorJob() + ioDispatcher)
 
     /** Sends a batch and returns the HTTP status; the app wires it to its API client. */
     var sender: suspend (List<ClientEvent>) -> Int = { error("Analytics.sender is not wired") }

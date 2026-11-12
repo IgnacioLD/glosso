@@ -38,6 +38,10 @@ val ortIosDir: File by lazy {
     }
 }
 
+// The browser build of the app (docs/WEB.md) compiles commonMain only, like iOS
+// without its recognizer: web scoring is always in the cloud. -Pglosso.web=false skips it.
+val webEnabled: Boolean = findProperty("glosso.web")?.toString()?.toBoolean() ?: true
+
 if (androidEnabled) {
     apply(plugin = "com.android.kotlin.multiplatform.library")
 }
@@ -63,6 +67,11 @@ kotlin {
                 extraOpts("-libraryPath", ortIosDir.resolve(slice).path)
             }
         }
+    }
+
+    if (webEnabled) {
+        @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+        wasmJs { browser() }
     }
 
     sourceSets {
@@ -94,6 +103,11 @@ kotlin {
             androidMain.dependencies {
                 implementation(libs.onnxruntime.android)
             }
+        }
+        if (webEnabled) {
+            // No web tests: the engine is tested on the JVM, and the web build never
+            // runs the recognizer the shared tests need.
+            getByName("wasmJsMain").dependsOn(commonMain)
         }
         if (iosEnabled) {
             val iosMain = create("iosMain") {

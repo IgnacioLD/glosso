@@ -1,17 +1,16 @@
 package com.glosso.app.api
 
+import com.glosso.app.platform.currentTimeMillis
+import com.glosso.app.platform.ioDispatcher
+import com.glosso.app.platform.setLastModified
 import io.ktor.client.plugins.cache.storage.CachedResponseData
 import io.ktor.http.Headers
 import io.ktor.http.HttpProtocolVersion
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.Url
-import com.glosso.app.platform.currentTimeMillis
-import com.glosso.app.platform.setLastModified
 import io.ktor.util.date.GMTDate
 import kotlin.concurrent.Volatile
 import kotlin.io.encoding.Base64
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
@@ -51,7 +50,7 @@ class LruCacheStorage(
         val name = fileName(url)
         mutex.withLock {
             ensureIndexedLocked()
-            withContext(Dispatchers.IO) {
+            withContext(ioDispatcher) {
                 fileSystem.createDirectories(directory)
                 val variants = readVariantsLocked(name)
                     .filterNot { it.varyKeys == data.varyKeys }
@@ -86,7 +85,7 @@ class LruCacheStorage(
     /** Drops every entry, e.g. when the served content version changes. */
     override suspend fun clear() {
         mutex.withLock {
-            withContext(Dispatchers.IO) {
+            withContext(ioDispatcher) {
                 fileSystem.listOrNull(directory)?.forEach { runCatching { fileSystem.delete(it) } }
             }
             index.clear()
@@ -108,7 +107,7 @@ class LruCacheStorage(
     }
 
     private suspend fun readVariantsLocked(name: String): List<StoredVariant> =
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             val file = fileFor(name)
             if (fileSystem.metadataOrNull(file)?.isRegularFile != true) return@withContext emptyList()
             runCatching { json.decodeFromString<List<StoredVariant>>(fileSystem.read(file) { readUtf8() }) }
@@ -116,7 +115,7 @@ class LruCacheStorage(
         }
 
     private suspend fun writeLocked(name: String, variants: List<StoredVariant>) {
-        withContext(Dispatchers.IO) {
+        withContext(ioDispatcher) {
             val file = fileFor(name)
             val partial = directory / (name + ".part")
             fileSystem.write(partial) { writeUtf8(json.encodeToString(variants)) }
@@ -149,7 +148,7 @@ class LruCacheStorage(
             val (name, size) = iterator.next().let { it.key to it.value }
             iterator.remove()
             total -= size
-            withContext(Dispatchers.IO) { runCatching { fileSystem.delete(fileFor(name)) } }
+            withContext(ioDispatcher) { runCatching { fileSystem.delete(fileFor(name)) } }
         }
     }
 

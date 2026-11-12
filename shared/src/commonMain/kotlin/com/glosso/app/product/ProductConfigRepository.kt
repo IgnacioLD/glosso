@@ -3,11 +3,14 @@ package com.glosso.app.product
 import com.glosso.app.GoogleAccountStore
 import com.glosso.app.ServerPreferences
 import com.glosso.app.api.AccountState
-import com.glosso.app.api.ProductConfig
 import com.glosso.app.api.GlossoApi
+import com.glosso.app.api.ProductConfig
+import com.glosso.app.platform.KeyValueStore
+import com.glosso.app.platform.PlatformContext
+import com.glosso.app.platform.ioDispatcher
+import com.glosso.app.platform.keyValueStore
+import kotlin.concurrent.Volatile
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,10 +20,6 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import com.glosso.app.platform.KeyValueStore
-import com.glosso.app.platform.PlatformContext
-import com.glosso.app.platform.keyValueStore
-import kotlin.concurrent.Volatile
 
 /**
  * The app's single view of `/v1/config` and `/v1/me`.
@@ -44,7 +43,7 @@ object ProductConfigRepository {
         encodeDefaults = true
     }
 
-    private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
+    private val scope = CoroutineScope(SupervisorJob() + ioDispatcher)
 
     /** The app's API client, wired by the app at startup (the process-wide `appApi` on Android). */
     lateinit var api: () -> GlossoApi
