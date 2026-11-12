@@ -71,3 +71,21 @@ docker compose --env-file .env up -d --no-deps --no-build glosso-server   # in /
 In `/opt/glosso/deploy`, restore `Caddyfile.bak-20261112-155428` with a copy and an `mv` (the
 single-file mount needs a new inode), restore `docker-compose.yml.bak-20261112-155428`, then run
 `docker compose --env-file .env up -d --no-deps --force-recreate caddy`.
+
+## Addendum: the Ogg decoder and the release layout (same day)
+
+- **Why:** the first web build decoded Ogg with `@wasm-audio-decoders/ogg-vorbis`, whose `codec-parser`
+  is LGPL-3.0-or-later. #27 replaced it with the vendored stb_vorbis built to WebAssembly.
+- **Release built from:** `main` `5f59b38`.
+- **First attempt:** swapping `deploy/web` with `mv` did nothing. The bind mount kept serving the
+  directory Caddy started with, now `web.old-20261112-170700`. The live site kept working on the old
+  build meanwhile.
+- **New layout** (`web-layout.sh`):
+  - `deploy/web/releases/20261112-170734` plus a `current` symlink;
+  - Caddy's root is now `/srv/web/current` (backup `Caddyfile.bak-20261112-170734`);
+  - Caddy was recreated once.
+- **After the switch:** the API, app, `stb_vorbis.wasm`, umami, status and reparacionestatay.com all
+  answer as before.
+- **From now on,** a release switches the symlink, with no Caddy restart (`docs/WEB.md`).
+- **Checked on production:** the bundle has no `codec-parser` left. Headless Chromium plays the
+  decoded clips and the take, and the take is sent for scoring.
