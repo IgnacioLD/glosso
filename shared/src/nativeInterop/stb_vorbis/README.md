@@ -1,7 +1,8 @@
 # stb_vorbis (vendored)
 
-Ogg Vorbis decoder for the iOS app: the content audio (lessons, drills, stories) is Ogg Vorbis and
-AVFoundation cannot play it. Android plays it with `MediaPlayer` and does not use this code.
+Ogg Vorbis decoder for the iOS app and the web app: the content audio (lessons, drills, stories) is
+Ogg Vorbis, which AVFoundation cannot play and Safari cannot decode. Android plays it with
+`MediaPlayer` and does not use this code.
 
 | | |
 | --- | --- |
@@ -21,6 +22,15 @@ AVFoundation cannot play it. Android plays it with `MediaPlayer` and does not us
   static library in the klib, so the app links it with no extra flags.
 - Both use `STB_VORBIS_NO_STDIO` and `STB_VORBIS_NO_PUSHDATA_API`: the app decodes from memory only.
 - The Kotlin side is `shared/src/iosMain/.../audio/OggVorbis.kt` (`VorbisDecoder`, `OggPages`).
+
+## The web build
+
+- `build-wasm.sh` compiles it with `zig cc` (wasm32-wasi, its own libc) into
+  `shared/src/wasmJsMain/resources/stb_vorbis.wasm`. The module imports nothing, exports `malloc`, `free`
+  and `stb_vorbis_decode_memory`, and is about 80 KB.
+- The output is committed, so a web build needs no C toolchain. Rerun the script only when
+  `stb_vorbis.c` changes.
+- `glosso-web.mjs` loads it and turns each decoded clip into a WAV for an `<audio>` element.
 
 ## Security
 

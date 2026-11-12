@@ -203,8 +203,6 @@ kotlin {
                     // The browser has no synchronous file system (AppFiles.wasmJs.kt). The
                     // okio Compose brings on the web (3.17), not the app's 3.9.
                     implementation(libs.okio.fakefilesystem)
-                    // Content clips are Ogg Vorbis, which Safari cannot decode (glosso-web.mjs).
-                    implementation(npm("@wasm-audio-decoders/ogg-vorbis", "0.1.20"))
                 }
                 kotlin.srcDir(generateWebBuild)
             }

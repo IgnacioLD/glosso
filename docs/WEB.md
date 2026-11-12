@@ -35,8 +35,8 @@ cd shared/build/dist/wasmJs/productionExecutable && python3 -m http.server 8096
 - **No sign-in, analytics or crash reports**, as on iOS.
 - **Audio** is in `shared/src/wasmJsMain/resources/glosso-web.mjs`:
   - Content clips are Ogg Vorbis. Safari says it plays Ogg and then fails to decode it, so every Ogg
-    clip is decoded with `@wasm-audio-decoders/ogg-vorbis` into a WAV blob and played on an `<audio>`
-    element (slow playback keeps the pitch).
+    clip is decoded with the vendored stb_vorbis, built to WebAssembly (`stb_vorbis.wasm`, see its
+    README). The result is a WAV blob played on an `<audio>` element, and slow playback keeps the pitch.
   - iOS only sounds an element first started inside a tap, and the app starts clips after a network
     wait. So the first tap or key press unlocks a small pool of elements and the audio context, and
     clips borrow from that pool.

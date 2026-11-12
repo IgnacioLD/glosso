@@ -137,13 +137,25 @@ Noto Sans Mono (IPA subset)
                has no system font to fall back on). Subset to U+0250-036F and
                U+1D00-1DBF.
 
-@wasm-audio-decoders/ogg-vorbis, @wasm-audio-decoders/common, codec-parser, simple-yenc
-  Source:      https://github.com/eshaz/wasm-audio-decoders
-  Copyright:   Ethan Halsall
-  License:     MIT (see licenses/MIT.txt). The decoder embeds libvorbis and libogg,
-               Copyright Xiph.Org Foundation, BSD-3-Clause (see
-               licenses/BSD-3-Clause-Xiph-libvorbis.txt)
-  Used as:     Ogg Vorbis decoding of the lesson audio in the web app.
+stb_vorbis 1.22
+  Source:      https://github.com/nothings/stb (vendored in shared/src/nativeInterop/stb_vorbis)
+  Copyright:   2017 Sean Barrett
+  License:     MIT or public domain, used under MIT (see licenses/MIT.txt)
+  Used as:     Ogg Vorbis decoding of the lesson audio on iOS and, built to
+               WebAssembly, in the web app.
+
+Skiko (Skia for Kotlin), WebAssembly
+  Source:      https://github.com/JetBrains/skiko
+  Copyright:   JetBrains s.r.o.
+  License:     Apache-2.0 (see licenses/Apache-2.0.txt)
+  Used as:     The renderer of the Compose UI in the web app (skiko.wasm).
+
+@js-joda/core
+  Source:      https://github.com/js-joda/js-joda
+  Copyright:   Philipp Thurwachter, Pattrick Huper; Stephen Colebourne, Michael
+               Nascimento Santos (ThreeTen)
+  License:     BSD-3-Clause (see licenses/BSD-3-Clause.txt)
+  Used as:     Date and time support for kotlinx-datetime in the web app bundle.
 
 ===========================================================================
 JVM / KOTLIN LIBRARIES

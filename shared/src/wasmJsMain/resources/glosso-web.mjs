@@ -1,7 +1,6 @@
 // The browser side of the web build's audio, called from wasmJsMain
 // (audio/WebAudio.kt). Kept in plain JS because it is mostly promises, events
 // and typed arrays, which read better here than through Kotlin interop.
-import { OggVorbisDecoder } from '@wasm-audio-decoders/ogg-vorbis';
 
 // iOS Safari only sounds a media element first started inside a tap, and the
 // app starts clips after a network wait. So the first tap or key press starts
@@ -62,35 +61,53 @@ function remember(url, objectUrl) {
 
 const isOgg = (bytes) => bytes.length > 4 && bytes[0] === 0x4f && bytes[1] === 0x67 && bytes[2] === 0x67 && bytes[3] === 0x53;
 
-let decoder = null;
-async function decodeOgg(bytes) {
-  if (!decoder) decoder = new OggVorbisDecoder();
-  await decoder.ready;
-  const { channelData, samplesDecoded, sampleRate } = await decoder.decodeFile(bytes);
-  await decoder.reset();
-  if (!samplesDecoded) throw new Error('no samples');
-  return wav(channelData, samplesDecoded, sampleRate);
+// stb_vorbis (shared/src/nativeInterop/stb_vorbis, MIT) built to WebAssembly by
+// its build-wasm.sh and served next to the page. It imports nothing.
+let vorbis = null;
+function loadVorbis() {
+  if (!vorbis) {
+    vorbis = WebAssembly.instantiateStreaming(fetch('stb_vorbis.wasm'), {}).then(({ instance }) => {
+      instance.exports._initialize();
+      return instance.exports;
+    });
+  }
+  return vorbis;
 }
 
-/** 16-bit PCM WAV from planar float channels. */
-function wav(channels, frames, sampleRate) {
-  const count = channels.length;
-  const out = new DataView(new ArrayBuffer(44 + frames * count * 2));
-  const ascii = (at, text) => { for (let i = 0; i < text.length; i++) out.setUint8(at + i, text.charCodeAt(i)); };
-  ascii(0, 'RIFF'); out.setUint32(4, 36 + frames * count * 2, true); ascii(8, 'WAVE');
-  ascii(12, 'fmt '); out.setUint32(16, 16, true); out.setUint16(20, 1, true); out.setUint16(22, count, true);
-  out.setUint32(24, sampleRate, true); out.setUint32(28, sampleRate * count * 2, true);
-  out.setUint16(32, count * 2, true); out.setUint16(34, 16, true);
-  ascii(36, 'data'); out.setUint32(40, frames * count * 2, true);
-  let at = 44;
-  for (let i = 0; i < frames; i++) {
-    for (let c = 0; c < count; c++) {
-      const s = Math.max(-1, Math.min(1, channels[c][i]));
-      out.setInt16(at, s < 0 ? s * 0x8000 : s * 0x7fff, true);
-      at += 2;
+async function decodeOgg(bytes) {
+  const e = await loadVorbis();
+  const src = e.malloc(bytes.length);
+  const out = e.malloc(12);
+  try {
+    new Uint8Array(e.memory.buffer, src, bytes.length).set(bytes);
+    const frames = e.stb_vorbis_decode_memory(src, bytes.length, out, out + 4, out + 8);
+    if (frames <= 0) throw new Error('cannot decode Ogg Vorbis');
+    const view = new DataView(e.memory.buffer);
+    const channels = view.getInt32(out, true);
+    const sampleRate = view.getInt32(out + 4, true);
+    const pcm = view.getUint32(out + 8, true);
+    try {
+      return wav(new Int16Array(e.memory.buffer, pcm, frames * channels), channels, sampleRate);
+    } finally {
+      e.free(pcm);
     }
+  } finally {
+    e.free(src);
+    e.free(out);
   }
-  return new Blob([out.buffer], { type: 'audio/wav' });
+}
+
+/** A 16-bit PCM WAV around interleaved samples (copied out of the decoder's memory). */
+function wav(samples, channels, sampleRate) {
+  const bytes = samples.length * 2;
+  const header = new DataView(new ArrayBuffer(44));
+  const ascii = (at, text) => { for (let i = 0; i < text.length; i++) header.setUint8(at + i, text.charCodeAt(i)); };
+  ascii(0, 'RIFF'); header.setUint32(4, 36 + bytes, true); ascii(8, 'WAVE');
+  ascii(12, 'fmt '); header.setUint32(16, 16, true); header.setUint16(20, 1, true); header.setUint16(22, channels, true);
+  header.setUint32(24, sampleRate, true); header.setUint32(28, sampleRate * channels * 2, true);
+  header.setUint16(32, channels * 2, true); header.setUint16(34, 16, true);
+  ascii(36, 'data'); header.setUint32(40, bytes, true);
+  return new Blob([header.buffer, samples.slice()], { type: 'audio/wav' });
 }
 
 async function playable(bytes) {
