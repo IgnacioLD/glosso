@@ -3,17 +3,17 @@ package com.glosso.app
 import com.glosso.app.platform.KeyValueStore
 import com.glosso.app.platform.Lock
 import com.glosso.app.platform.PlatformContext
+import com.glosso.app.platform.ioDispatcher
 import com.glosso.app.platform.keyValueStore
 import com.glosso.app.platform.todayEpochDay
 import com.glosso.engine.model.PhonemeHistoryModel
-import com.glosso.engine.model.PhonemeObservationModel
 import com.glosso.engine.model.PhonemeMatchModel
+import com.glosso.engine.model.PhonemeObservationModel
 import com.glosso.engine.model.PhoneticProfileModel
 import com.glosso.engine.profile.PhonemeMemory
+import kotlin.concurrent.Volatile
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,7 +23,6 @@ import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
-import kotlin.concurrent.Volatile
 
 /** Minimal key/value port, so the store logic is testable without Android. */
 interface ProfilePrefs {
@@ -231,7 +230,7 @@ class ProfileStore private constructor(
 
         fun fromPrefs(
             prefs: ProfilePrefs,
-            scope: CoroutineScope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
+            scope: CoroutineScope = CoroutineScope(ioDispatcher + SupervisorJob()),
             today: () -> Long = { todayEpochDay() },
         ): ProfileStore = ProfileStore(prefs, scope, today)
     }

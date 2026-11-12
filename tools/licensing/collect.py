@@ -356,6 +356,17 @@ CURATED_DEPS = {c["id"]: c for c in [
          "Apache-2.0", "https://github.com/brettwooldridge/HikariCP", "Server connection pool.", "server"),
     _dep("org.xerial:sqlite-jdbc", "sqlite-jdbc", "Xerial",
          "Apache-2.0", "https://github.com/xerial/sqlite-jdbc", "Content database driver.", "server"),
+    # Curated so the gate does not depend on the local Gradle cache holding their
+    # POMs (an IDE that fetched only jars and sources leaves them unresolved).
+    _dep("com.nimbusds:nimbus-jose-jwt", "Nimbus JOSE + JWT", "Connect2id Ltd.",
+         "Apache-2.0", "https://bitbucket.org/connect2id/nimbus-jose-jwt",
+         "Verifies Google sign-in tokens on the server.", "server"),
+    _dep("io.zonky.test:embedded-postgres", "Embedded PostgreSQL", "Tomas Vanek",
+         "Apache-2.0", "https://github.com/zonkyio/embedded-postgres",
+         "PostgreSQL for the server tests.", "test"),
+    _dep("io.zonky.test.postgres:embedded-postgres-binaries-darwin-arm64v8", "Embedded PostgreSQL binaries",
+         "Tomas Vanek", "Apache-2.0", "https://github.com/zonkyio/embedded-postgres-binaries",
+         "PostgreSQL binaries for the server tests on Apple Silicon.", "test"),
     _dep("io.micrometer:micrometer-registry-prometheus", "Micrometer Prometheus registry",
          "VMware, Inc. / Broadcom", "Apache-2.0",
          "https://github.com/micrometer-metrics/micrometer", "Server metrics.", "server"),

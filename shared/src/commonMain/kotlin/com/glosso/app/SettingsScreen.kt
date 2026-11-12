@@ -294,40 +294,42 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
                 )
             }
 
-            SectionBreak()
-            SectionLabel(stringResource(Res.string.settings_downloads))
-            Spacer(Modifier.height(Space.x8))
-            Text(
-                stringResource(Res.string.settings_downloads_desc),
-                style = MaterialTheme.typography.bodyMedium,
-                color = MaterialTheme.colorScheme.onSurfaceVariant,
-            )
-            Spacer(Modifier.height(Space.x20))
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Column(Modifier.weight(1f)) {
-                    Text(
-                        stringResource(Res.string.settings_wifi_only),
-                        style = MaterialTheme.typography.bodyLarge,
-                        color = MaterialTheme.colorScheme.onSurface,
-                    )
-                    Spacer(Modifier.height(Space.x2))
-                    Text(
-                        stringResource(Res.string.settings_wifi_only_desc),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+            if (LocalAppConfig.current.offlineDownloads) {
+                SectionBreak()
+                SectionLabel(stringResource(Res.string.settings_downloads))
+                Spacer(Modifier.height(Space.x8))
+                Text(
+                    stringResource(Res.string.settings_downloads_desc),
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+                Spacer(Modifier.height(Space.x20))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Column(Modifier.weight(1f)) {
+                        Text(
+                            stringResource(Res.string.settings_wifi_only),
+                            style = MaterialTheme.typography.bodyLarge,
+                            color = MaterialTheme.colorScheme.onSurface,
+                        )
+                        Spacer(Modifier.height(Space.x2))
+                        Text(
+                            stringResource(Res.string.settings_wifi_only_desc),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
+                    Switch(
+                        checked = wifiOnly,
+                        onCheckedChange = {
+                            WifiOnlyPreference.set(context, it)
+                            downloader.wifiOnlyChanged()
+                            UsageEvents.settingChanged("wifi_only", it)
+                        },
                     )
                 }
-                Switch(
-                    checked = wifiOnly,
-                    onCheckedChange = {
-                        WifiOnlyPreference.set(context, it)
-                        downloader.wifiOnlyChanged()
-                        UsageEvents.settingChanged("wifi_only", it)
-                    },
-                )
             }
 
             if (LocalAppServices.current.onDevice.supported) {

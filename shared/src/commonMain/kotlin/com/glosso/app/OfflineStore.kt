@@ -17,13 +17,12 @@ import com.glosso.app.platform.Lock
 import com.glosso.app.platform.PlatformContext
 import com.glosso.app.platform.appFiles
 import com.glosso.app.platform.currentTimeMillis
+import com.glosso.app.platform.ioDispatcher
 import com.glosso.app.platform.logWarning
 import com.glosso.app.resources.*
 import com.glosso.engine.model.localized
 import kotlin.concurrent.Volatile
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.IO
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -57,7 +56,7 @@ object OfflineStore {
     private const val ESTIMATE_PARALLELISM = 6
 
     private val json = Json { ignoreUnknownKeys = true; encodeDefaults = true }
-    private val scope = CoroutineScope(Dispatchers.IO + SupervisorJob())
+    private val scope = CoroutineScope(ioDispatcher + SupervisorJob())
     private val cache = LockedMap<String, OfflineBundle>()
 
     /**
@@ -122,7 +121,7 @@ object OfflineStore {
 
     private fun assetsDir(version: String): Path = layout.assetsFor(version)
 
-    suspend fun reload() = withContext(Dispatchers.IO) {
+    suspend fun reload() = withContext(ioDispatcher) {
         val index = readIndex()
         // Only downloads made for the current catalogue are usable; an older one
         // is offered for download again instead of silently playing old audio.
@@ -135,13 +134,13 @@ object OfflineStore {
     }
 
     /** The downloaded lesson catalog, newest first, for the offline lesson list. */
-    suspend fun bundles(): List<OfflineBundle> = withContext(Dispatchers.IO) {
+    suspend fun bundles(): List<OfflineBundle> = withContext(ioDispatcher) {
         readIndex().usableLessons(contentVersion)
             .sortedByDescending { it.downloadedAt }
             .mapNotNull { bundle(it.id) }
     }
 
-    suspend fun bundle(id: String): OfflineBundle? = withContext(Dispatchers.IO) {
+    suspend fun bundle(id: String): OfflineBundle? = withContext(ioDispatcher) {
         val stored = cache[id] ?: run {
             val file = bundleFile(id)
             if (!isFile(file)) return@withContext null
@@ -194,7 +193,7 @@ object OfflineStore {
      * server could not be reached, so the UI can say "needs connection" instead
      * of a fake number.
      */
-    suspend fun estimate(bundle: OfflineBundle, api: GlossoApi): Long? = withContext(Dispatchers.IO) {
+    suspend fun estimate(bundle: OfflineBundle, api: GlossoApi): Long? = withContext(ioDispatcher) {
         // One manifest fetch, ever. Revalidating it on every size request would
         // be a network round trip for something already in hand.
         if (!api.isManifestLoaded) api.ensureAssetVersion()
@@ -271,7 +270,7 @@ object OfflineStore {
         bundle: OfflineBundle,
         api: GlossoApi,
         onProgress: (Float) -> Unit = {},
-    ): Boolean = withContext(Dispatchers.IO) {
+    ): Boolean = withContext(ioDispatcher) {
         val id = bundle.id
         _state.value = _state.value.copy(downloadingId = id, progress = 0f, error = null)
         try {
@@ -339,7 +338,7 @@ object OfflineStore {
      * Called by the [downloader] when every one of a lesson's files has landed:
      * the staged pack becomes a real one and the index is updated.
      */
-    suspend fun commitDownload(id: String) = withContext(Dispatchers.IO) {
+    suspend fun commitDownload(id: String) = withContext(ioDispatcher) {
         val staged = pendingFile(id)
         if (!isFile(staged)) return@withContext
         val bundle = runCatching {
@@ -372,7 +371,7 @@ object OfflineStore {
         _state.value = _state.value.copy(downloadingId = null, progress = 1f, metas = fresh, error = null)
     }
 
-    suspend fun onDownloadFailed(id: String, failure: DownloadFailure) = withContext(Dispatchers.IO) {
+    suspend fun onDownloadFailed(id: String, failure: DownloadFailure) = withContext(ioDispatcher) {
         discardStaged(id)
         _state.value = _state.value.copy(downloadingId = null, error = getString(failure.message))
     }
@@ -407,7 +406,7 @@ object OfflineStore {
 
     private fun pendingVersionFile(id: String): Path = layout.pendingVersion(id)
 
-    suspend fun delete(id: String) = withContext(Dispatchers.IO) {
+    suspend fun delete(id: String) = withContext(ioDispatcher) {
         val index = readIndex()
         if (id !in index.lessons) return@withContext
         val removed = index.lessons[id]
@@ -437,13 +436,13 @@ object OfflineStore {
      * manifest publishes, and deletes every other one. A blank [version] (no
      * manifest, or one without a fingerprint) deletes them all.
      */
-    suspend fun keepOnly(version: String) = withContext(Dispatchers.IO) {
+    suspend fun keepOnly(version: String) = withContext(ioDispatcher) {
         if (version.isBlank()) return@withContext clear()
         readIndex().lessons.filterValues { it.contentVersion != version }.keys.forEach { delete(it) }
         pruneOtherVersions(version)
     }
 
-    suspend fun clear() = withContext(Dispatchers.IO) {
+    suspend fun clear() = withContext(ioDispatcher) {
         cache.clear()
         assetSizes.clear()
         estimateCache.clear()

@@ -7,7 +7,7 @@ package com.glosso.app.platform
  * the UI language) are read on each access.
  */
 interface PlatformInfo {
-    /** [ANDROID] or [IOS]. */
+    /** [ANDROID], [IOS] or [WEB]. */
     val osName: String
 
     /** Android: the API level (`Build.VERSION.SDK_INT`). iOS: the major system version. */
@@ -28,6 +28,7 @@ interface PlatformInfo {
     companion object {
         const val ANDROID = "android"
         const val IOS = "ios"
+        const val WEB = "web"
     }
 }
 

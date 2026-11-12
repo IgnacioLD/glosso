@@ -552,13 +552,15 @@ private fun LibraryScreen(onOpen: (LibraryRoute) -> Unit) {
                 onClick = { onOpen(LibraryRoute.EXERCISES) },
             )
             Hairline()
-            HubRow(
-                icon = Icons.Outlined.DownloadForOffline,
-                title = stringResource(Res.string.library_offline_title),
-                subtitle = stringResource(Res.string.library_offline_subtitle),
-                onClick = { onOpen(LibraryRoute.OFFLINE) },
-            )
-            Hairline()
+            if (LocalAppConfig.current.offlineDownloads) {
+                HubRow(
+                    icon = Icons.Outlined.DownloadForOffline,
+                    title = stringResource(Res.string.library_offline_title),
+                    subtitle = stringResource(Res.string.library_offline_subtitle),
+                    onClick = { onOpen(LibraryRoute.OFFLINE) },
+                )
+                Hairline()
+            }
             HubRow(
                 icon = Icons.Outlined.Tune,
                 title = stringResource(Res.string.library_settings_title),

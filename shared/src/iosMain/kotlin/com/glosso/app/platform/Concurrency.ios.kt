@@ -1,5 +1,8 @@
 package com.glosso.app.platform
 
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import platform.Foundation.NSRecursiveLock
 
 actual fun Lock(): Lock = FoundationLock()
@@ -16,3 +19,5 @@ private class FoundationLock : Lock {
         }
     }
 }
+
+actual val ioDispatcher: CoroutineDispatcher get() = Dispatchers.IO

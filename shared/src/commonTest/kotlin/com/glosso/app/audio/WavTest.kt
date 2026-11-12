@@ -39,4 +39,24 @@ class WavTest {
         assertEquals(0.5f, Wav.peak(Wav.bytesOf(shortArrayOf(100, -16384, 200))))
         assertEquals(0f, Wav.peak(ByteArray(0)))
     }
+
+    @Test
+    fun `48 kHz is averaged down to 16 kHz pcm`() {
+        // Three input samples per output sample: a steady half level, then a
+        // full-scale tone at the 24 kHz Nyquist limit, which must average out.
+        val steady = FloatArray(6) { 0.5f }
+        val nyquist = FloatArray(6) { if (it % 2 == 0) 1f else -1f }
+        val pcm = Wav.downsampleToPcm16(steady + nyquist, fromRate = 48_000)
+        val samples = (0 until pcm.size / 2).map { (pcm[2 * it + 1].toInt() shl 8) or (pcm[2 * it].toInt() and 0xFF) }
+            .map { it.toShort().toInt() }
+        assertEquals(4, samples.size)
+        assertEquals(listOf(16383, 16383), samples.take(2))
+        samples.drop(2).forEach { assert(kotlin.math.abs(it) <= Short.MAX_VALUE / 3 + 1) { "aliased: $it" } }
+    }
+
+    @Test
+    fun `a rate that is already 16 kHz is kept sample for sample`() {
+        val pcm = Wav.downsampleToPcm16(floatArrayOf(0f, 1f, -1f), fromRate = 16_000)
+        assertContentEquals(Wav.bytesOf(shortArrayOf(0, Short.MAX_VALUE, (-Short.MAX_VALUE).toShort())), pcm)
+    }
 }
