@@ -71,6 +71,36 @@ A first visit downloads about 5.8 MB gzipped (4.5 MB brotli). Most of it is the 
 - **Keyboard:** Space starts and stops a take, and Esc goes back.
 - **Pointer:** buttons, rows and the record controls show the hand cursor.
 
+## Hosting
+
+Caddy serves the build as static files at `GLOSSO_WEB_DOMAIN` (default `app.glossostudio.com`), from
+`deploy/web` mounted read-only (`deploy/Caddyfile`, `deploy/docker-compose.yml`).
+- **Cache:** the hashed wasm files are cached for a year as immutable. Everything else revalidates on each
+  load (`no-cache` plus ETag).
+- **CSP:** strict, with no inline script; `boot.js` starts the app. `connect-src` allows only the page
+  itself and `https://$GLOSSO_DOMAIN`.
+- **Not served:** the source map and the raw `glosso-web.mjs` return 404.
+- **CORS:** the API must allow the page's origin. Add `https://app.glossostudio.com` to
+  `GLOSSO_CORS_ORIGINS` in `deploy/.env`, next to the website's origin.
+
+A release, by hand. Production `/v1/score` takes no key today, so the build needs none:
+
+```sh
+./gradlew :shared:wasmJsBrowserDistribution    # the API base defaults to https://api.glossostudio.com
+```
+
+Then, on the VPS:
+1. Copy the build to a new folder next to `deploy/web`.
+2. Swap that folder in with one `mv`, so a page never loads half a release.
+3. The first time, also recreate Caddy so it picks up the new mount and site:
+   `docker compose up -d --no-deps --force-recreate caddy`.
+
+The server must run a build that has the CORS change from PR #19, or browsers are refused.
+
+Check a release locally first. Extract the site block into a file with `auto_https off`, run it with
+`caddy run` against a local `:server:run`, and drive it with the headless Chromium below. The page must
+load with no CSP violation, play clips, and get a take scored.
+
 ## Browser support
 
 The app needs WebAssembly GC: Safari 18.2+ (iOS 18.2+), and current Chrome, Edge and Firefox.
