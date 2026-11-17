@@ -3,6 +3,7 @@ package com.glosso.app.audio
 import kotlin.test.Test
 import kotlin.test.assertContentEquals
 import kotlin.test.assertEquals
+import kotlin.test.assertTrue
 
 class WavTest {
 
@@ -51,7 +52,7 @@ class WavTest {
             .map { it.toShort().toInt() }
         assertEquals(4, samples.size)
         assertEquals(listOf(16383, 16383), samples.take(2))
-        samples.drop(2).forEach { assert(kotlin.math.abs(it) <= Short.MAX_VALUE / 3 + 1) { "aliased: $it" } }
+        samples.drop(2).forEach { assertTrue(kotlin.math.abs(it) <= Short.MAX_VALUE / 3 + 1, "aliased: $it") }
     }
 
     @Test

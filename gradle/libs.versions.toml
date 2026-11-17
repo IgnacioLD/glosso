@@ -8,7 +8,7 @@ compose-multiplatform = "1.11.1"
 # The newest AGP inside Kotlin 2.4.20's tested range (AGP 8.5.2-9.3.1, Gradle up to
 # 9.7.0; 9.3.3 and Gradle 9.7.1 are patch releases of those). AGP 9.3 needs Gradle 9.5+.
 agp = "9.3.3"
-ktor = "3.0.3"
+ktor = "3.6.1"
 # Ktor on iOS: Coil's Ktor fetcher (coil-network-ktor3 3.5.0) lifts ktor-client-core
 # to 3.1.0 there, and Kotlin/Native needs every Ktor module on that same version (a
 # 3.0.3 Darwin engine links but fails at the first response with IrLinkageError).
@@ -25,7 +25,7 @@ okio = "3.9.0"
 onnxruntime-jvm = "1.20.0"
 onnxruntime-android = "1.30.0"
 kotlin-logging = "7.0.0"
-slf4j = "2.0.16"
+slf4j = "2.0.20"
 postgresql = "42.7.13"
 hikaricp = "6.2.1"
 sqlite = "3.47.1.0"
@@ -51,7 +51,7 @@ coil = "3.5.0"
 lifecycle-multiplatform = "2.9.6"
 # The iOS back gesture (edge swipe) reaches Compose through navigationevent; 1.0.1 is
 # the line Compose Multiplatform 1.11 already brings on iOS (navigationevent core).
-navigationevent-multiplatform = "1.0.1"
+navigationevent-multiplatform = "1.1.0"
 # Material 3 for the shared UI. 1.9.0 is the one whose Android artifact is
 # androidx material3 1.4.0, the same the app already ships (1.10+/1.11 are alphas
 # that pull material3 1.5.0 alphas). Icons are frozen at 1.7.3 and map onto the
