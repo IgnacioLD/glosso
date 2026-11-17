@@ -5,6 +5,8 @@ import java.io.File
 import java.nio.file.Files
 import java.security.MessageDigest
 import okio.Buffer
+import okio.FileSystem
+import okio.Path.Companion.toOkioPath
 import org.junit.Assert.assertArrayEquals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -28,7 +30,7 @@ class ModelPackImportTest {
 
     @Test
     fun `valid files install whatever order and name they come in`() {
-        val outcome = ModelPackImport.install(dir, listOf(picked(vocab), picked(model)), accepted)
+        val outcome = ModelPackImport.install(FileSystem.SYSTEM, dir.toOkioPath(), listOf(picked(vocab), picked(model)), accepted)
 
         assertEquals(ModelPackImport.Outcome.COMPLETE, outcome)
         assertArrayEquals(model, File(dir, "model.onnx").readBytes())
@@ -40,7 +42,7 @@ class ModelPackImportTest {
     fun `a corrupt file is rejected and leaves nothing behind`() {
         val corrupt = model.copyOf().also { it[1234] = (it[1234] + 1).toByte() }
 
-        val outcome = ModelPackImport.install(dir, listOf(picked(corrupt), picked(vocab)), accepted)
+        val outcome = ModelPackImport.install(FileSystem.SYSTEM, dir.toOkioPath(), listOf(picked(corrupt), picked(vocab)), accepted)
 
         assertEquals(ModelPackImport.Outcome.REJECTED, outcome)
         assertFalse(File(dir, "model.onnx").exists())
@@ -49,7 +51,7 @@ class ModelPackImportTest {
 
     @Test
     fun `a truncated file is rejected`() {
-        val outcome = ModelPackImport.install(dir, listOf(picked(model.copyOf(1000))), accepted)
+        val outcome = ModelPackImport.install(FileSystem.SYSTEM, dir.toOkioPath(), listOf(picked(model.copyOf(1000))), accepted)
 
         assertEquals(ModelPackImport.Outcome.REJECTED, outcome)
         assertTrue(leftovers().isEmpty())
@@ -57,15 +59,15 @@ class ModelPackImportTest {
 
     @Test
     fun `one valid file is kept and the pack is reported incomplete until the other arrives`() {
-        assertEquals(ModelPackImport.Outcome.INCOMPLETE, ModelPackImport.install(dir, listOf(picked(model)), accepted))
-        assertEquals(ModelPackImport.Outcome.COMPLETE, ModelPackImport.install(dir, listOf(picked(vocab)), accepted))
+        assertEquals(ModelPackImport.Outcome.INCOMPLETE, ModelPackImport.install(FileSystem.SYSTEM, dir.toOkioPath(), listOf(picked(model)), accepted))
+        assertEquals(ModelPackImport.Outcome.COMPLETE, ModelPackImport.install(FileSystem.SYSTEM, dir.toOkioPath(), listOf(picked(vocab)), accepted))
     }
 
     @Test
     fun `an unreadable file fails without a partial copy`() {
         val broken = PickedFile { throw java.io.FileNotFoundException("gone") }
 
-        runCatching { ModelPackImport.install(dir, listOf(broken), accepted) }
+        runCatching { ModelPackImport.install(FileSystem.SYSTEM, dir.toOkioPath(), listOf(broken), accepted) }
 
         assertTrue(leftovers().isEmpty())
     }

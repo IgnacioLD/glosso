@@ -17,20 +17,15 @@ import com.glosso.app.download.DownloadManager
 import com.glosso.app.download.DownloadPriority
 import com.glosso.app.platform.PickedFile
 import com.glosso.app.resources.*
-import com.glosso.engine.accent.AccentScoring
-import com.glosso.engine.accent.AccentTarget
 import com.glosso.engine.model.PhonemeModelConfig
 import com.glosso.engine.model.PronunciationFeedback
 import com.glosso.engine.model.ProsodyBonusModel
 import com.glosso.engine.phonetics.AudioAnalysis
-import com.glosso.engine.phonetics.FeedbackAssembler
 import com.glosso.engine.phonetics.ModelState
-import com.glosso.engine.phonetics.PhoneticComparator
-import com.glosso.engine.phonetics.PhoneticProfile
 import com.glosso.engine.phonetics.ProsodyBonus
-import com.glosso.engine.phonetics.StressAnalyzer
 import com.glosso.engine.phonetics.Wav2Vec2PhonemeRecognizer
 import java.io.File
+import okio.FileSystem
 import okio.Path.Companion.toOkioPath
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
@@ -43,7 +38,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeoutOrNull
 import org.jetbrains.compose.resources.getString
 
 /**
@@ -177,7 +171,7 @@ object OnDeviceScorer : OnDeviceScoring {
         _state.value = current.copy(importing = true, error = null)
         scope.launch {
             val error = try {
-                when (ModelPackImport.install(root, files, acceptedDigests())) {
+                when (ModelPackImport.install(FileSystem.SYSTEM, root.toOkioPath(), files, ModelPackImport.acceptedDigests(appApi))) {
                     ModelPackImport.Outcome.COMPLETE -> null
                     ModelPackImport.Outcome.INCOMPLETE -> getString(Res.string.import_model_incomplete)
                     ModelPackImport.Outcome.REJECTED -> getString(Res.string.import_model_rejected)
@@ -197,24 +191,10 @@ object OnDeviceScorer : OnDeviceScoring {
     /** Keeps the pack only if every file's digest is pinned or published by the new server. */
     override suspend fun onServerChanged(): Unit = withContext(Dispatchers.IO) {
         if (!packPresent() || _state.value.downloading) return@withContext
-        val accepted = acceptedDigests()
-        val matches = accepted.all { (name, digests) -> ModelPackImport.sha256(File(root, name)) in digests }
+        val accepted = ModelPackImport.acceptedDigests(appApi)
+        val matches = accepted.all { (name, digests) -> ModelPackImport.sha256(FileSystem.SYSTEM, File(root, name).toOkioPath()) in digests }
         if (!matches) delete()
     }
-
-    private suspend fun acceptedDigests(): Map<String, Set<String>> =
-        PINNED_SHA256.mapValues { (name, pinned) ->
-            val served = withTimeoutOrNull(PUBLISHED_DIGEST_TIMEOUT_MS) { appApi.sharedAssetSha256(name) }
-            setOfNotNull(pinned, served?.lowercase())
-        }
-
-    /** SHA-256 of the pack the app was released with (`<asset>.sha256` on the server). */
-    private val PINNED_SHA256 = mapOf(
-        PhonemeModelConfig.MODEL_FILE to "f3a768be3f4f1918a0cd52f51798dc50db307167d6b6dd12d0fa8ce6de1e258a",
-        PhonemeModelConfig.VOCAB_FILE to "d732ab2456c0c017930001dc9af0b41b3b93d25b2eb9740bf9d925508d7d87d0",
-    )
-
-    private const val PUBLISHED_DIGEST_TIMEOUT_MS = 5_000L
 
     /** Mirrors the shared queue's model item into this scorer's state. */
     internal fun onQueueState(item: DownloadItemState?) {
@@ -347,48 +327,9 @@ object OnDeviceScorer : OnDeviceScoring {
         referenceAudio: String?,
     ): PronunciationFeedback {
         val active = recognizer ?: error("On-device scorer is not loaded")
-        val expected = request.expectedIpa?.takeIf { it.isNotBlank() }
-            ?: error("On-device scoring needs the reference pronunciation")
-        val audio = request.audioBase64?.takeIf { it.isNotBlank() }
-            ?: error("On-device scoring needs the recorded audio")
-
-        // Nothing usable was heard: report a not-evaluated attempt instead of a
-        // fabricated score, so the learner can simply try again.
-        val analysis = active.analyze(audio, expected)
-            ?: return PronunciationFeedback(evaluated = false)
-        val confidences = PhoneticComparator.phoneConfidencesOf(analysis.recognition.phones)
-        // The same entry point as `/v1/score`, with the same inputs, so the cloud
-        // and the device give the same score with the flag on or off.
-        val accentTarget = request.accent?.takeIf { it.isNotBlank() }?.let { AccentTarget(it) }
-        val outcome = AccentScoring.score(
-            text = request.text,
-            canonicalIpa = expected,
-            actual = analysis.recognition.ipa,
-            language = request.language,
-            actualConfidence = confidences,
-            wordVariants = expectedWordVariants,
-            multiAccent = AccentScoringFlag.enabled,
-            accentReferences = request.accentIpa,
-            target = accentTarget,
-        )
-        val result = outcome.result
-        val profile = PhoneticProfile.fold(request.profile, result.alignment)
-        val stress = StressAnalyzer.analyze(
-            timings = analysis.timings.orEmpty(),
-            referenceWords = PhoneticComparator.referenceWords(expected),
-        )
-        return FeedbackAssembler.assemble(
-            text = request.text,
-            expectedIpa = expected,
-            result = result,
-            targetLanguage = request.language,
-            uiLanguage = request.uiLanguage,
-            timings = analysis.timings.orEmpty(),
-            profile = profile,
-            stress = stress,
-            quality = analysis.quality,
-            prosody = prosodyBonus(active, analysis, expected, referenceAudio, result.completeness),
-        ).copy(accentMatch = outcome.accent?.toModel(accentTarget))
+        return scoreOnDevice(active, request, expectedWordVariants) { analysis, expected, completeness ->
+            prosodyBonus(active, analysis, expected, referenceAudio, completeness)
+        }
     }
 
     /** Reference takes already aligned, keyed by clip and reference IPA. */

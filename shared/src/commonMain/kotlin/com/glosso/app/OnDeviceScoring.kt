@@ -3,7 +3,16 @@ package com.glosso.app
 import com.glosso.app.api.GlossoApi
 import com.glosso.app.api.ScoreRequest
 import com.glosso.app.platform.PickedFile
+import com.glosso.engine.accent.AccentScoring
+import com.glosso.engine.accent.AccentTarget
 import com.glosso.engine.model.PronunciationFeedback
+import com.glosso.engine.model.ProsodyBonusModel
+import com.glosso.engine.phonetics.AudioAnalysis
+import com.glosso.engine.phonetics.FeedbackAssembler
+import com.glosso.engine.phonetics.PhonemeRecognizer
+import com.glosso.engine.phonetics.PhoneticComparator
+import com.glosso.engine.phonetics.PhoneticProfile
+import com.glosso.engine.phonetics.StressAnalyzer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,8 +39,8 @@ data class OnDeviceScorerState(
  * The optional on-device scorer as the app sees it: a downloaded model pack
  * scored by the same engine the cloud runs. The pronunciation loop scores with
  * it; the offline screens show its [state] and install or remove it. Android
- * implements it with the ONNX recognizer (`OnDeviceScorer`); iOS will in phase 2
- * and until then has [NoOnDeviceScoring].
+ * (`OnDeviceScorer`) and iOS (`IosOnDeviceScorer`) implement it with their ONNX
+ * recognizer and score through [scoreOnDevice].
  */
 interface OnDeviceScoring {
     /**
@@ -93,6 +102,67 @@ interface OnDeviceScoring {
         /** Approximate download size of the pack, shown before it exists. */
         const val APPROX_BYTES = 358_357_774L
     }
+}
+
+/**
+ * Scores one take with a loaded [recognizer], mirroring the cloud path so the
+ * result is the same; both platforms' scorers run it. [prosody] is the optional
+ * rhythm-and-intonation bonus (null leaves the section out).
+ *
+ * The first three [error]s are internal invariants, not user copy: callers only
+ * ever hit them through a wiring bug. [PracticeEngine] catches any failure from
+ * here and shows the localized `error_score`/`error_mic`, so these English
+ * developer messages never reach the UI.
+ */
+suspend fun scoreOnDevice(
+    recognizer: PhonemeRecognizer,
+    request: ScoreRequest,
+    expectedWordVariants: List<List<String>>,
+    prosody: suspend (analysis: AudioAnalysis, expectedIpa: String, completeness: Int) -> ProsodyBonusModel? =
+        { _, _, _ -> null },
+): PronunciationFeedback {
+    val expected = request.expectedIpa?.takeIf { it.isNotBlank() }
+        ?: error("On-device scoring needs the reference pronunciation")
+    val audio = request.audioBase64?.takeIf { it.isNotBlank() }
+        ?: error("On-device scoring needs the recorded audio")
+
+    // Nothing usable was heard: report a not-evaluated attempt instead of a
+    // fabricated score, so the learner can simply try again.
+    val analysis = recognizer.analyze(audio, expected)
+        ?: return PronunciationFeedback(evaluated = false)
+    val confidences = PhoneticComparator.phoneConfidencesOf(analysis.recognition.phones)
+    // The same entry point as `/v1/score`, with the same inputs, so the cloud
+    // and the device give the same score with the flag on or off.
+    val accentTarget = request.accent?.takeIf { it.isNotBlank() }?.let { AccentTarget(it) }
+    val outcome = AccentScoring.score(
+        text = request.text,
+        canonicalIpa = expected,
+        actual = analysis.recognition.ipa,
+        language = request.language,
+        actualConfidence = confidences,
+        wordVariants = expectedWordVariants,
+        multiAccent = AccentScoringFlag.enabled,
+        accentReferences = request.accentIpa,
+        target = accentTarget,
+    )
+    val result = outcome.result
+    val profile = PhoneticProfile.fold(request.profile, result.alignment)
+    val stress = StressAnalyzer.analyze(
+        timings = analysis.timings.orEmpty(),
+        referenceWords = PhoneticComparator.referenceWords(expected),
+    )
+    return FeedbackAssembler.assemble(
+        text = request.text,
+        expectedIpa = expected,
+        result = result,
+        targetLanguage = request.language,
+        uiLanguage = request.uiLanguage,
+        timings = analysis.timings.orEmpty(),
+        profile = profile,
+        stress = stress,
+        quality = analysis.quality,
+        prosody = prosody(analysis, expected, result.completeness),
+    ).copy(accentMatch = outcome.accent?.toModel(accentTarget))
 }
 
 /**

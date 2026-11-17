@@ -14,7 +14,7 @@ Android.
 | Cargar el modelo y ejecutarlo | `onnxMain` `Wav2Vec2PhonemeRecognizer` (API Java de ONNX Runtime) | JVM, Android |
 | Cargar el modelo y ejecutarlo | `iosMain` `Wav2Vec2PhonemeRecognizer` (API C por cinterop) | iosArm64, iosSimulatorArm64 |
 
-Las dos clases de plataforma solo crean la sesion (opciones por defecto en los dos lados), pasan
+Las dos clases de plataforma solo crean la sesion (mismas opciones en los dos lados), pasan
 `input_values [1, n]` y copian los logits `[1, T, V]`. Todo lo demas es el mismo codigo Kotlin, asi que
 con los mismos logits la nota es la misma. La version iOS se construye con rutas (`String`), no
 `java.io.File`: `Wav2Vec2PhonemeRecognizer(modelPath, vocabPath)` o `fromPack(dir)`.
@@ -97,14 +97,43 @@ el limite de una app en primer plano ronda la mitad de la RAM, asi que 420-780 M
 deja margen, pero no mucho junto a la UI: hay que confirmarlo en el dispositivo y liberar el modelo
 cuando no se use.
 
-## Lo que falta para enchufarlo en la app
+## Session memory options
 
-1. En `:shared` `iosMain`, una implementacion de `OnDeviceScoring` que sustituya a `NoOnDeviceScoring`:
-   crea `Wav2Vec2PhonemeRecognizer.fromPack(<Application Support>/scoring)` y repite lo que hace
-   `OnDeviceScorer` en Android (variantes, `StressAnalyzer`, `CheapScorer`, `FeedbackAssembler`).
-2. Descarga del paquete del modelo a Application Support (excluido de la copia de iCloud con
-   `NSURLIsExcludedFromBackupKey`), con la misma comprobacion de sha256 que Android.
-3. Cargar el modelo fuera del hilo principal (`Dispatchers.Default`) y liberarlo con `close()` cuando la
-   app pase a segundo plano si la memoria aprieta.
-4. Proyecto Xcode con deployment target >= 15.1.
-5. Medir carga, inferencia y pico de memoria en el iPhone XS Max real.
+Since #16 the JVM/Android session runs with `setCPUArenaAllocator(false)` and
+`session.use_device_allocator_for_initializers=1`; the C shim in
+`engine/src/nativeInterop/cinterop/onnxruntime.def` sets the same two options (`DisableCpuMemArena`,
+`AddSessionConfigEntry`). They only change where tensors are allocated. Measured with
+`tools/score-parity/run-ios-parity.sh` (77 clips, iOS 27 simulator, 2026-11-10):
+
+| `phys_footprint` | Default options | Memory options |
+| --- | --- | --- |
+| Model loaded | 400 MB (peak 538 MB) | 399 MB (peak 537 MB) |
+| After the 77 clips | 666 MB (peak 706 MB) | 468 MB (peak 592 MB) |
+
+The iOS logits are bit-identical with and without the options (47/47 clips, every record of the
+run identical), and the gate still passes 49/49.
+
+## In the app
+
+`IosOnDeviceScorer` (`shared/src/iosMain`) is the iOS `OnDeviceScoring`, the twin of Android's
+`OnDeviceScorer`. Both score through `scoreOnDevice` (shared `commonMain`), the same pipeline as
+`/v1/score`: `AccentScoring` with the content's word variants, `PhoneticProfile`, `StressAnalyzer`
+and `FeedbackAssembler`. There is no prosody bonus on iOS (it is off by default on Android too).
+
+- **Pack:** `Application Support/scoring/` (model + vocabulary), flagged with
+  `NSURLIsExcludedFromBackupKey` because it can be downloaded again. It downloads through the app's
+  download queue (`ForegroundDownloader`, so only while the app is open; a background `URLSession`
+  only has to replace the transport in `DownloadFile.fetch`), checked against the digest the server
+  publishes, like Android.
+- **Import from a file:** `rememberFilePicker` opens the Files picker in place (no copy into the
+  app inbox, the model is 358 MB) and `ModelPackImport` (now shared) installs a file only when its
+  SHA-256 is the pinned or published one, whatever its name.
+- **Memory:** the model loads on `Dispatchers.IO` on the first on-device take and is released on
+  `UIApplicationDidEnterBackgroundNotification` and on memory warnings (Android does it on
+  `TRIM_MEMORY_BACKGROUND`); the next take reloads it. A take holds the load lock, so a release
+  never closes the session under it.
+
+Measured in the app (Debug, iOS 27 simulator, 2026-11-10, `footprint -p <pid>`): 105 MB idle,
+~390-490 MB after an on-device take (peak ~500 MB), 126 MB after going to the background.
+
+Still to do: measure load, inference and peak memory on the real iPhone XS Max.
