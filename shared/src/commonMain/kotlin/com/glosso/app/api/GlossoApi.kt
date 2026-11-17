@@ -131,7 +131,7 @@ class GlossoApi(
     /** The HTTP engine; null picks the platform's own ([defaultHttpEngine]). */
     engine: HttpClientEngine?,
     /** Disk cache for immutable content; null disables HTTP caching. */
-    private val contentCache: ContentCacheStorage?,
+    private val contentCache: CacheStorage?,
     private val versionStore: AssetVersionStore,
     /**
      * Shared client credential for the scoring oracle, from the build

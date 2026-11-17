@@ -3,6 +3,7 @@ package com.glosso.app.api
 import com.glosso.app.platform.currentTimeMillis
 import com.glosso.app.platform.ioDispatcher
 import com.glosso.app.platform.setLastModified
+import io.ktor.client.plugins.cache.storage.CacheStorage
 import io.ktor.client.plugins.cache.storage.CachedResponseData
 import io.ktor.http.Headers
 import io.ktor.http.HttpProtocolVersion
@@ -32,7 +33,7 @@ class LruCacheStorage(
     private val directory: Path,
     private val fileSystem: FileSystem,
     private val maxBytes: Long = DEFAULT_MAX_BYTES,
-) : ContentCacheStorage {
+) : CacheStorage {
 
     private val json = Json { ignoreUnknownKeys = true }
     private val mutex = Mutex()
@@ -80,6 +81,31 @@ class LruCacheStorage(
             touchLocked(name)
             return readVariantsLocked(name).map { it.toData() }.toSet()
         }
+    }
+
+    override suspend fun remove(url: Url, varyKeys: Map<String, String>) {
+        val name = fileName(url)
+        mutex.withLock {
+            ensureIndexedLocked()
+            val kept = readVariantsLocked(name).filterNot { it.varyKeys == varyKeys }
+            if (kept.isEmpty()) deleteLocked(name) else withContext(ioDispatcher) {
+                writeLocked(name, kept)
+                use(name, sizeOf(fileFor(name)))
+            }
+        }
+    }
+
+    override suspend fun removeAll(url: Url) {
+        val name = fileName(url)
+        mutex.withLock {
+            ensureIndexedLocked()
+            deleteLocked(name)
+        }
+    }
+
+    private suspend fun deleteLocked(name: String) {
+        index.remove(name)
+        withContext(ioDispatcher) { runCatching { fileSystem.delete(fileFor(name)) } }
     }
 
     /** Drops every entry, e.g. when the served content version changes. */
