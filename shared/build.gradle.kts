@@ -75,7 +75,7 @@ kotlin {
         // The plugin is applied imperatively above, so there is no generated `android {}` accessor.
         extensions.configure<com.android.build.api.dsl.KotlinMultiplatformAndroidLibraryTarget>("android") {
             namespace = "com.glosso.shared"
-            compileSdk = 36
+            compileSdk = 37
             minSdk = 26
             compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
             // src/androidMain/res, and the Compose resources packaged as Android assets.
