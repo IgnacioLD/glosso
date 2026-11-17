@@ -488,6 +488,10 @@ def _pom_paths(group, artifact, version=None):
     base = GRADLE_CACHE / group / artifact
     if not base.is_dir():
         return []
+    # A pinned version reads only its own POM: falling back to other cached
+    # versions made the output depend on the machine.
+    # shortcut: with no version (BOM-managed or raw coordinates) any cached version
+    # is read; pin those in the catalog if their entry ever drifts between machines.
     candidates = [base / version] if version else sorted(p for p in base.iterdir() if p.is_dir())
     poms = []
     for version_dir in candidates:
@@ -598,6 +602,30 @@ def _parse_version_catalog(root):
     return alias_to_module
 
 
+def catalog_versions(root=ROOT):
+    """Module id -> the version the catalog pins, so a declared-only module (not on
+    the Android runtime classpath) reads its own POM, not whichever one the local
+    Gradle cache happens to hold."""
+    data = tomllib.loads((root / "gradle/libs.versions.toml").read_text(encoding="utf-8"))
+    refs = data.get("versions", {})
+    pinned = {}
+    for spec in data.get("libraries", {}).values():
+        if isinstance(spec, str):
+            parts = spec.split(":")
+            if len(parts) >= 3:
+                pinned[":".join(parts[:2])] = parts[2]
+            continue
+        module = spec.get("module") or (f"{spec['group']}:{spec['name']}" if spec.get("group") else None)
+        version = spec.get("version")
+        if isinstance(version, dict):
+            version = refs.get(version.get("ref")) if "ref" in version else None
+        elif version is None and "version.ref" in spec:
+            version = refs.get(spec["version.ref"])
+        if module and isinstance(version, str):
+            pinned[module] = version
+    return pinned
+
+
 _LIB_REF = re.compile(r"libs\.([a-zA-Z0-9_.]+)")
 _KOTLIN_REF = re.compile(r'kotlin\("([a-zA-Z0-9_.-]+)"\)')
 # Raw coordinates written directly in a build file (not through the version
@@ -680,7 +708,8 @@ def declared_dependency_ids(root=ROOT):
 def _catalog_and_unresolved():
     """(components tuple, unresolved coordinates tuple), cached per process."""
     runtime_ids = runtime_module_ids()
-    version_of = {":".join(c.split(":")[:2]): c.split(":")[2] for c in runtime_coordinates()}
+    version_of = catalog_versions()
+    version_of.update({":".join(c.split(":")[:2]): c.split(":")[2] for c in runtime_coordinates()})
     scopes = declared_dependency_scopes()
     needed = dict.fromkeys(runtime_ids | set(scopes) | set(CURATED_DEPS))
     components, unresolved = {}, []

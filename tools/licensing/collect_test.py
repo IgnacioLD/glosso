@@ -57,6 +57,11 @@ class TestRuntimeCoverage(unittest.TestCase):
         missing = sorted(d for d in declared if d not in component_ids)
         self.assertEqual(missing, [], f"declared dependencies with no licence entry: {missing}")
 
+    def test_declared_modules_use_the_catalog_version(self):
+        pinned = collect.catalog_versions()
+        self.assertEqual(pinned["io.ktor:ktor-server-core"], pinned["io.ktor:ktor-client-mock"])
+        self.assertRegex(pinned["io.ktor:ktor-server-core"], r"^\d+\.\d+\.\d+$")
+
     def test_asset_is_in_lockstep_with_the_catalogue(self):
         self.assertEqual(
             _asset(),
