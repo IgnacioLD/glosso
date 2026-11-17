@@ -80,6 +80,27 @@ class LruCacheStorageTest {
     }
 
     @Test
+    fun `remove drops one variant and removeAll the whole URL`() = runTest {
+        val dir = folder("cache")
+        val storage = LruCacheStorage(dir, fileSystem)
+        val url = Url("http://test/first")
+        val en = mapOf("Accept-Language" to "en")
+        val es = mapOf("Accept-Language" to "es")
+        storage.store(url, data(url, en))
+        storage.store(url, data(url, es))
+
+        storage.remove(url, en)
+
+        assertNull(storage.find(url, en))
+        assertNotNull(storage.find(url, es))
+
+        storage.removeAll(url)
+
+        assertEquals(emptySet(), storage.findAll(url))
+        assertEquals(0, cacheFiles(dir))
+    }
+
+    @Test
     fun `entries keep the file names earlier versions wrote`() = runTest {
         // SHA-256 of the URL in lowercase hex, as the JVM-only version named them,
         // so an update finds the cache already on disk.
@@ -116,7 +137,7 @@ class LruCacheStorageTest {
 
     private fun cacheFiles(dir: Path): Int = fileSystem.list(dir).count { it.name.endsWith(".cache") }
 
-    private fun data(url: Url) = CachedResponseData(
+    private fun data(url: Url, varyKeys: Map<String, String> = emptyMap()) = CachedResponseData(
         url = url,
         statusCode = HttpStatusCode.OK,
         requestTime = GMTDate(0),
@@ -124,7 +145,7 @@ class LruCacheStorageTest {
         version = HttpProtocolVersion.HTTP_1_1,
         expires = GMTDate(currentTimeMillis() + 3_600_000),
         headers = Headers.build { append("Cache-Control", "public, max-age=3600") },
-        varyKeys = emptyMap(),
+        varyKeys = varyKeys,
         body = ByteArray(200) { 1 },
     )
 }
