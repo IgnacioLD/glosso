@@ -1,23 +1,18 @@
 [versions]
-kotlin = "2.4.20"
+kotlin = "2.4.21"
 # Compose Multiplatform (plugin + runtime) for the :shared module. 1.12 needs
 # compileSdk 37 (targetSdk stays 36). compose-bom below is the androidx BOM on the
 # same Compose line (1.12), so the app and :shared agree.
 compose-multiplatform = "1.12.2"
-# The newest AGP inside Kotlin 2.4.20's tested range (AGP 8.5.2-9.3.1, Gradle up to
-# 9.7.0; 9.3.3 and Gradle 9.7.1 are patch releases of those). AGP 9.3 needs Gradle 9.5+.
-agp = "9.3.3"
+agp = "9.5.1"
+# One Ktor version everywhere: Kotlin/Native needs every Ktor module on the same
+# version (a mismatched Darwin engine can link and fail at the first response), so
+# :shared also pins iOS and web through ktor-bom.
 ktor = "3.6.1"
-# Ktor on iOS: Coil's Ktor fetcher (coil-network-ktor3 3.5.0) lifts ktor-client-core
-# to 3.1.0 there, and Kotlin/Native needs every Ktor module on that same version (a
-# 3.0.3 Darwin engine links but fails at the first response with IrLinkageError).
-# :shared aligns its iOS source set to this through ktor-bom.
-ktor-ios = "3.1.0"
-kotlinx-serialization = "1.7.3"
-kotlinx-coroutines = "1.9.0"
-# File IO for the shared app code (AppFiles). Same version Coil 2 already brings to the
-# Android app, so the runtime classpath does not change.
-okio = "3.9.0"
+kotlinx-serialization = "1.13.0"
+kotlinx-coroutines = "1.11.0"
+# File IO for the shared app code (AppFiles).
+okio = "3.18.2"
 # Two versions on purpose. Android needs 1.30.0 (16 KB pages). The JVM artifact of
 # 1.30.0 dies with SIGSEGV on the production VPS (docs/DEPLOY-ONNX-1.30-ROLLBACK-2026-09-27.md),
 # so the server stays on the version it has always run.
@@ -38,8 +33,8 @@ embedded-redis = "1.4.4"
 
 androidx-core = "1.19.1"
 androidx-fragment = "1.9.1"
-androidx-activity-compose = "1.9.3"
-androidx-lifecycle = "2.8.7"
+androidx-activity-compose = "1.13.0"
+androidx-lifecycle = "2.11.0"
 compose-bom = "2026.09.00"
 # Coil 3 is multiplatform (images in the shared UI). 3.6 is built on Compose
 # Multiplatform 1.12. Android keeps OkHttp 4.12 as the
@@ -47,7 +42,7 @@ compose-bom = "2026.09.00"
 coil = "3.6.3"
 # Multiplatform ViewModel and lifecycle for the shared UI, the versions Compose
 # Multiplatform 1.12 itself depends on. On Android they resolve to androidx.lifecycle.
-lifecycle-multiplatform = "2.9.6"
+lifecycle-multiplatform = "2.11.0"
 # The iOS back gesture (edge swipe) reaches Compose through navigationevent; 1.1.0 is
 # the line Compose Multiplatform 1.12 already brings on iOS (navigationevent core).
 navigationevent-multiplatform = "1.1.0"
@@ -57,16 +52,16 @@ navigationevent-multiplatform = "1.1.0"
 # androidx icons the BOM already brings.
 compose-material3-multiplatform = "1.9.0"
 compose-material-icons-multiplatform = "1.7.3"
-androidx-credentials = "1.5.0"
-googleid = "1.1.1"
+androidx-credentials = "1.6.0"
+googleid = "1.2.1"
 junit = "4.13.2"
-robolectric = "4.17"
-androidx-test-ext-junit = "1.2.1"
+robolectric = "4.18"
+androidx-test-ext-junit = "1.3.0"
 
 [libraries]
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 okio = { module = "com.squareup.okio:okio", version.ref = "okio" }
-okio-fakefilesystem = { module = "com.squareup.okio:okio-fakefilesystem", version = "3.17.0" }
+okio-fakefilesystem = { module = "com.squareup.okio:okio-fakefilesystem", version.ref = "okio" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
 
 onnxruntime = { module = "com.microsoft.onnxruntime:onnxruntime", version.ref = "onnxruntime-jvm" }
@@ -112,9 +107,9 @@ androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinx-coroutines" }
 ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-client-android = { module = "io.ktor:ktor-client-android", version.ref = "ktor" }
-ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor-ios" }
-ktor-bom-ios = { module = "io.ktor:ktor-bom", version.ref = "ktor-ios" }
-ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor-ios" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-bom = { module = "io.ktor:ktor-bom", version.ref = "ktor" }
+ktor-client-js = { module = "io.ktor:ktor-client-js", version.ref = "ktor" }
 ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
 ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }

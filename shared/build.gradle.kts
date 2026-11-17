@@ -196,12 +196,11 @@ kotlin {
             getByName("wasmJsMain") {
                 dependsOn(commonMain)
                 dependencies {
-                    // Every Ktor module on the version Coil brings, as on iOS.
-                    implementation(project.dependencies.platform(libs.ktor.bom.ios))
+                    // Every Ktor module on one version (libs.versions.toml, ktor).
+                    implementation(project.dependencies.platform(libs.ktor.bom))
                     implementation(libs.ktor.client.js)
                     implementation(libs.coil.network.ktor3)
-                    // The browser has no synchronous file system (AppFiles.wasmJs.kt). The
-                    // okio Compose brings on the web (3.17), not the app's 3.9.
+                    // The browser has no synchronous file system (AppFiles.wasmJs.kt).
                     implementation(libs.okio.fakefilesystem)
                 }
                 kotlin.srcDir(generateWebBuild)
@@ -212,8 +211,8 @@ kotlin {
             val iosMain = create("iosMain") {
                 dependsOn(commonMain)
                 dependencies {
-                    // Every Ktor module on the version Coil brings (libs.versions.toml, ktor-ios).
-                    implementation(project.dependencies.platform(libs.ktor.bom.ios))
+                    // Every Ktor module on one version (libs.versions.toml, ktor).
+                    implementation(project.dependencies.platform(libs.ktor.bom))
                     implementation(libs.ktor.client.darwin)
                     // NavigationBackHandler: the edge swipe back (PlatformBackHandler.ios.kt).
                     implementation(libs.navigationevent.compose.multiplatform)
