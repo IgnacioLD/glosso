@@ -911,34 +911,8 @@
       "notice": null
     },
     {
-      "id": "androidx.documentfile:documentfile",
-      "name": "documentfile",
-      "author": "The Android Open Source Project",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
-      "usage": "Transitive Android runtime dependency.",
-      "distribution": "app",
-      "license": "Apache-2.0",
-      "licenseName": "Apache License 2.0",
-      "licenseText": "Apache-2.0",
-      "licenseTextUrl": null,
-      "notice": null
-    },
-    {
       "id": "androidx.drawerlayout:drawerlayout",
       "name": "drawerlayout",
-      "author": "The Android Open Source Project",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
-      "usage": "Transitive Android runtime dependency.",
-      "distribution": "app",
-      "license": "Apache-2.0",
-      "licenseName": "Apache License 2.0",
-      "licenseText": "Apache-2.0",
-      "licenseTextUrl": null,
-      "notice": null
-    },
-    {
-      "id": "androidx.dynamicanimation:dynamicanimation",
-      "name": "dynamicanimation",
       "author": "The Android Open Source Project",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Transitive Android runtime dependency.",
@@ -1017,19 +991,6 @@
     {
       "id": "androidx.interpolator:interpolator",
       "name": "interpolator",
-      "author": "The Android Open Source Project",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
-      "usage": "Transitive Android runtime dependency.",
-      "distribution": "app",
-      "license": "Apache-2.0",
-      "licenseName": "Apache License 2.0",
-      "licenseText": "Apache-2.0",
-      "licenseTextUrl": null,
-      "notice": null
-    },
-    {
-      "id": "androidx.legacy:legacy-support-core-utils",
-      "name": "legacy-support-core-utils",
       "author": "The Android Open Source Project",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Transitive Android runtime dependency.",
@@ -1314,32 +1275,6 @@
       "notice": null
     },
     {
-      "id": "androidx.localbroadcastmanager:localbroadcastmanager",
-      "name": "localbroadcastmanager",
-      "author": "The Android Open Source Project",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
-      "usage": "Transitive Android runtime dependency.",
-      "distribution": "app",
-      "license": "Apache-2.0",
-      "licenseName": "Apache License 2.0",
-      "licenseText": "Apache-2.0",
-      "licenseTextUrl": null,
-      "notice": null
-    },
-    {
-      "id": "androidx.print:print",
-      "name": "print",
-      "author": "The Android Open Source Project",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
-      "usage": "Transitive Android runtime dependency.",
-      "distribution": "app",
-      "license": "Apache-2.0",
-      "licenseName": "Apache License 2.0",
-      "licenseText": "Apache-2.0",
-      "licenseTextUrl": null,
-      "notice": null
-    },
-    {
       "id": "androidx.profileinstaller:profileinstaller",
       "name": "profileinstaller",
       "author": "The Android Open Source Project",
@@ -1472,19 +1407,6 @@
     {
       "id": "androidx.tracing:tracing-android",
       "name": "tracing-android",
-      "author": "The Android Open Source Project",
-      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
-      "usage": "Transitive Android runtime dependency.",
-      "distribution": "app",
-      "license": "Apache-2.0",
-      "licenseName": "Apache License 2.0",
-      "licenseText": "Apache-2.0",
-      "licenseTextUrl": null,
-      "notice": null
-    },
-    {
-      "id": "androidx.transition:transition",
-      "name": "transition",
       "author": "The Android Open Source Project",
       "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Transitive Android runtime dependency.",
@@ -2149,7 +2071,7 @@
       "id": "io.coil-kt.coil3:coil-network-ktor3",
       "name": "coil-network-ktor3",
       "author": "Coil Contributors",
-      "url": null,
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Build-time or catalog-only dependency; not shipped in the app.",
       "distribution": "build",
       "license": "Apache-2.0",
@@ -3147,8 +3069,34 @@
       "notice": null
     },
     {
+      "id": "org.jetbrains.compose.animation:animation-android",
+      "name": "animation-android",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
       "id": "org.jetbrains.compose.animation:animation-core",
       "name": "animation-core",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
+      "id": "org.jetbrains.compose.animation:animation-core-android",
+      "name": "animation-core-android",
       "author": "JetBrains s.r.o.",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Transitive Android runtime dependency.",
@@ -3225,8 +3173,34 @@
       "notice": null
     },
     {
+      "id": "org.jetbrains.compose.foundation:foundation-android",
+      "name": "foundation-android",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
       "id": "org.jetbrains.compose.foundation:foundation-layout",
       "name": "foundation-layout",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
+      "id": "org.jetbrains.compose.foundation:foundation-layout-android",
+      "name": "foundation-layout-android",
       "author": "JetBrains s.r.o.",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Transitive Android runtime dependency.",
@@ -3303,6 +3277,19 @@
       "notice": null
     },
     {
+      "id": "org.jetbrains.compose.runtime:runtime-android",
+      "name": "runtime-android",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
       "id": "org.jetbrains.compose.runtime:runtime-saveable",
       "name": "runtime-saveable",
       "author": "JetBrains s.r.o.",
@@ -3316,8 +3303,34 @@
       "notice": null
     },
     {
+      "id": "org.jetbrains.compose.runtime:runtime-saveable-android",
+      "name": "runtime-saveable-android",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
       "id": "org.jetbrains.compose.ui:ui",
       "name": "ui",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
+      "id": "org.jetbrains.compose.ui:ui-android",
+      "name": "ui-android",
       "author": "JetBrains s.r.o.",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Transitive Android runtime dependency.",
@@ -3368,8 +3381,34 @@
       "notice": null
     },
     {
+      "id": "org.jetbrains.compose.ui:ui-geometry-android",
+      "name": "ui-geometry-android",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
       "id": "org.jetbrains.compose.ui:ui-graphics",
       "name": "ui-graphics",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
+      "id": "org.jetbrains.compose.ui:ui-graphics-android",
+      "name": "ui-graphics-android",
       "author": "JetBrains s.r.o.",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Transitive Android runtime dependency.",
@@ -3394,6 +3433,19 @@
       "notice": null
     },
     {
+      "id": "org.jetbrains.compose.ui:ui-text-android",
+      "name": "ui-text-android",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
       "id": "org.jetbrains.compose.ui:ui-unit",
       "name": "ui-unit",
       "author": "JetBrains s.r.o.",
@@ -3407,8 +3459,34 @@
       "notice": null
     },
     {
+      "id": "org.jetbrains.compose.ui:ui-unit-android",
+      "name": "ui-unit-android",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
       "id": "org.jetbrains.compose.ui:ui-util",
       "name": "ui-util",
+      "author": "JetBrains s.r.o.",
+      "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+      "usage": "Transitive Android runtime dependency.",
+      "distribution": "app",
+      "license": "Apache-2.0",
+      "licenseName": "Apache License 2.0",
+      "licenseText": "Apache-2.0",
+      "licenseTextUrl": null,
+      "notice": null
+    },
+    {
+      "id": "org.jetbrains.compose.ui:ui-util-android",
+      "name": "ui-util-android",
       "author": "JetBrains s.r.o.",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Transitive Android runtime dependency.",

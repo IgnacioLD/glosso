@@ -1,10 +1,9 @@
 [versions]
 kotlin = "2.4.20"
-# Compose Multiplatform (plugin + runtime) for the :shared module. Kept on the line
-# whose Android artifacts fit compileSdk 36: CMP 1.11.1 maps onto androidx.compose
-# 1.11.2 (1.12 needs compileSdk 37). compose-bom below is the androidx BOM with that
-# same Compose (1.11.2), so the app and :shared agree.
-compose-multiplatform = "1.11.1"
+# Compose Multiplatform (plugin + runtime) for the :shared module. 1.12 needs
+# compileSdk 37 (targetSdk stays 36). compose-bom below is the androidx BOM on the
+# same Compose line (1.12), so the app and :shared agree.
+compose-multiplatform = "1.12.2"
 # The newest AGP inside Kotlin 2.4.20's tested range (AGP 8.5.2-9.3.1, Gradle up to
 # 9.7.0; 9.3.3 and Gradle 9.7.1 are patch releases of those). AGP 9.3 needs Gradle 9.5+.
 agp = "9.3.3"
@@ -37,20 +36,20 @@ jedis = "5.1.0"
 nimbus-jose-jwt = "10.5"
 embedded-redis = "1.4.3"
 
-androidx-core = "1.15.0"
+androidx-core = "1.19.1"
 androidx-fragment = "1.9.1"
 androidx-activity-compose = "1.9.3"
 androidx-lifecycle = "2.8.7"
-compose-bom = "2026.05.01"
-# Coil 3 is multiplatform (images in the shared UI). 3.5.0 is built on Compose
-# Multiplatform 1.11.1 (3.6 needs 1.12). Android keeps OkHttp 4.12 as the
+compose-bom = "2026.09.00"
+# Coil 3 is multiplatform (images in the shared UI). 3.6 is built on Compose
+# Multiplatform 1.12. Android keeps OkHttp 4.12 as the
 # network fetcher, iOS uses Ktor.
-coil = "3.5.0"
+coil = "3.6.3"
 # Multiplatform ViewModel and lifecycle for the shared UI, the versions Compose
-# Multiplatform 1.11.1 itself depends on. On Android they resolve to androidx.lifecycle.
+# Multiplatform 1.12 itself depends on. On Android they resolve to androidx.lifecycle.
 lifecycle-multiplatform = "2.9.6"
-# The iOS back gesture (edge swipe) reaches Compose through navigationevent; 1.0.1 is
-# the line Compose Multiplatform 1.11 already brings on iOS (navigationevent core).
+# The iOS back gesture (edge swipe) reaches Compose through navigationevent; 1.1.0 is
+# the line Compose Multiplatform 1.12 already brings on iOS (navigationevent core).
 navigationevent-multiplatform = "1.1.0"
 # Material 3 for the shared UI. 1.9.0 is the one whose Android artifact is
 # androidx material3 1.4.0, the same the app already ships (1.10+/1.11 are alphas

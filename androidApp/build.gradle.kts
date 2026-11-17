@@ -12,7 +12,7 @@ android {
     // The two are independent in Gradle, so the source tree is not refactored and
     // the upgrade path keeps the same `/data/data/` directory. See docs/MERGE-FREE-PRO.md.
     namespace = "com.glosso.app"
-    compileSdk = 36
+    compileSdk = 37
 
     // Release signing continues the published glosso-studio identity: the same
     // keystore and the same package, so Android installs this build *over* the
