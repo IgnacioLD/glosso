@@ -48,7 +48,7 @@ android {
     defaultConfig {
         applicationId = "me.shirobyte42.glosso"
         minSdk = 26
-        targetSdk = 36
+        targetSdk = 37
         // Continues the published versionCode (glosso-studio v2.2.8 was 2213), so
         // Play accepts this as an update of the same listing. 2215 is the first
         // build of the beta that ships R8-shrunk, obfuscated and billed. 2216 is
