@@ -120,12 +120,15 @@ ROBOTS
 }
 
 # The web app (docs/WEB.md): the shared app built to WebAssembly, served as
-# static files from deploy/web (read-only), for iPhone and desktop browsers. It
+# static files from deploy/web/current (read-only), for iPhone and desktop
+# browsers. `current` is a symlink to deploy/web/releases/<ts>, so a release
+# switches without restarting Caddy (a bind mount follows the directory it
+# started with, so replacing deploy/web itself is invisible to the container). It
 # calls the API on GLOSSO_DOMAIN, which must list this origin in
 # GLOSSO_CORS_ORIGINS. Revert: remove this block, `caddy validate`, recreate caddy.
 {$GLOSSO_WEB_DOMAIN:app.glossostudio.com} {
 	encode zstd gzip
-	root * {$GLOSSO_WEB_ROOT:/srv/web}
+	root * {$GLOSSO_WEB_ROOT:/srv/web/current}
 
 	header {
 		Strict-Transport-Security "max-age=15552000; includeSubDomains"

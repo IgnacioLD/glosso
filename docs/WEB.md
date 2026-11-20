@@ -74,7 +74,8 @@ A first visit downloads about 5.8 MB gzipped (4.5 MB brotli). Most of it is the 
 ## Hosting
 
 Caddy serves the build as static files at `GLOSSO_WEB_DOMAIN` (default `app.glossostudio.com`), from
-`deploy/web` mounted read-only (`deploy/Caddyfile`, `deploy/docker-compose.yml`).
+`deploy/web/current`. That is a symlink to `deploy/web/releases/<ts>`, and `deploy/web` is mounted
+read-only (`deploy/Caddyfile`, `deploy/docker-compose.yml`).
 - **Cache:** the hashed wasm files are cached for a year as immutable. Everything else revalidates on each
   load (`no-cache` plus ETag).
 - **CSP:** strict, with no inline script; `boot.js` starts the app. `connect-src` allows only the page
@@ -89,11 +90,14 @@ A release, by hand. Production `/v1/score` takes no key today, so the build need
 ./gradlew :shared:wasmJsBrowserDistribution    # the API base defaults to https://api.glossostudio.com
 ```
 
-Then, on the VPS:
-1. Copy the build to a new folder next to `deploy/web`.
-2. Swap that folder in with one `mv`, so a page never loads half a release.
-3. The first time, also recreate Caddy so it picks up the new mount and site:
-   `docker compose up -d --no-deps --force-recreate caddy`.
+Then, on the VPS, in `/opt/glosso/deploy`:
+1. Copy the build (without `*.map`) to `web/releases/<ts>`.
+2. Switch with `ln -sfn releases/<ts> web/current.new && mv -T web/current.new web/current`. That is
+   atomic, and Caddy sees it at once.
+3. To roll back, point `current` at the previous release the same way.
+
+Never replace `deploy/web` itself. The bind mount follows the directory Caddy started with, so a
+new folder at that path stays invisible until Caddy is recreated.
 
 The server must run a build that has the CORS change from PR #19, or browsers are refused.
 

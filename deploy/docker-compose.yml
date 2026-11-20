@@ -379,7 +379,7 @@ services:
       # `docker compose up -d --no-deps --force-recreate caddy`; un `caddy reload`
       # no basta. Paso hasta el 2026-10-05 sin que nadie lo viera.
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
-      # The web app build (docs/WEB.md), replaced as a whole folder per release.
+      # The web app builds (docs/WEB.md): releases/<ts> and the `current` symlink.
       - ./web:/srv/web:ro
       - caddy_data:/data
       - caddy_config:/config
