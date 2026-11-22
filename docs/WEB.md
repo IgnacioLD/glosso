@@ -32,7 +32,8 @@ cd shared/build/dist/wasmJs/productionExecutable && python3 -m http.server 8096
   (`AppConfig.offlineDownloads = false` hides lesson downloads, the Offline hub and the download
   settings), because a page keeps no files between visits: `AppFiles` is an in-memory okio file system.
   Settings and progress live in `localStorage` (`KeyValueStore.wasmJs.kt`).
-- **No sign-in, analytics or crash reports**, as on iOS.
+- **No sign-in or crash reports**, as on iOS.
+- **Usage statistics are anonymous and need consent:** nothing is sent until the learner taps Accept in the first-visit prompt, and the server stores web events with no install id (`X-Analytics: anonymous`) and does not mirror them to Umami. Deploy the server before the web build: an older server would keep the id. The answer is kept in `localStorage` and can be changed in Settings. The unsent queue lives in memory, so events not yet sent are lost when the page closes.
 - **Audio** is in `shared/src/wasmJsMain/resources/glosso-web.mjs`:
   - Content clips are Ogg Vorbis. Safari says it plays Ogg and then fails to decode it, so every Ogg
     clip is decoded with the vendored stb_vorbis, built to WebAssembly (`stb_vorbis.wasm`, see its

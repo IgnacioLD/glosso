@@ -74,6 +74,10 @@ optional; the app works the same without it.
 
 ## Your choice
 
+- On the web app (app.glossostudio.com), usage statistics stay off until you
+  accept them in the prompt on your first visit, and they are stored with no
+  installation id, so they cannot be linked to you. Your answer is kept in this
+  browser and can be changed at any time in Settings > Usage statistics.
 - Usage statistics are on by default and the onboarding says so. They can be
   turned off at any time in Settings > Usage statistics; the app works exactly
   the same without them, and the server then stops recording the score event

@@ -76,6 +76,11 @@ optional; die App funktioniert ohne es genauso.
 
 ## Deine Wahl
 
+- In der Web-App (app.glossostudio.com) bleiben Nutzungsstatistiken aus, bis du
+  ihnen beim ersten Besuch zustimmst, und werden ohne Installations-ID
+  gespeichert, sodass sie nicht mit dir verknüpft werden können. Deine Antwort wird in diesem Browser
+  gespeichert und lässt sich jederzeit in den Einstellungen unter
+  Nutzungsstatistiken ändern.
 - Nutzungsstatistiken sind standardmäßig an, und das Onboarding sagt es. Sie
   lassen sich jederzeit unter Einstellungen > Nutzungsstatistiken abschalten;
   die App funktioniert ohne sie genauso, und der Server erfasst dann auch das

@@ -1408,7 +1408,7 @@
       "id": "androidx.test.ext:junit",
       "name": "junit",
       "author": "The Android Open Source Project",
-      "url": null,
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.txt",
       "usage": "Test-only dependency; not shipped in the app.",
       "distribution": "test",
       "license": "Apache-2.0",

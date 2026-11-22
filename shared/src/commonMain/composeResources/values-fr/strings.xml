@@ -627,4 +627,9 @@
     <string name="server_error_unreachable">Impossible de joindre ce serveur. Vérifiez l'adresse et votre connexion.</string>
     <string name="server_error_not_glosso">Cette adresse répond, mais ce n'est pas un serveur Glosso.</string>
     <string name="about_server">Serveur : %1$s</string>
+    <string name="usage_consent_title">Nous aider à améliorer Glosso ?</string>
+    <string name="usage_consent_body">Si vous acceptez, Glosso envoie des statistiques d'utilisation anonymes, comme les leçons terminées et les tranches de score, à nos propres serveurs. Elles ne portent aucun identifiant qui les relie à vous. Pas d'audio, pas de publicité, aucun tiers. L'application fonctionne de la même façon si vous refusez, et vous pouvez changer ce choix à tout moment dans les Réglages.</string>
+    <string name="settings_usage_desc_anonymous">Des événements anonymes, comme les leçons terminées et les tranches de score, envoyés uniquement aux serveurs de Glosso. Ils ne portent aucun identifiant qui les relie à vous. Pas d'audio, pas de publicité, aucun tiers.</string>
+    <string name="usage_consent_accept">Accepter</string>
+    <string name="usage_consent_decline">Refuser</string>
 </resources>

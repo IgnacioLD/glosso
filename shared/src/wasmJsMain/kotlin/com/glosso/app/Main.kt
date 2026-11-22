@@ -32,8 +32,8 @@ import org.w3c.dom.events.Event
 /**
  * The web entry point (docs/WEB.md): the whole shared UI in the page, wired like
  * `MainViewController` wires it on iOS. Every take is scored in the cloud
- * ([NoOnDeviceScoring]), nothing is downloaded for offline use, there is no
- * sign-in, and analytics are not initialised, so nothing is recorded or sent.
+ * ([NoOnDeviceScoring]), nothing is downloaded for offline use and there is no
+ * sign-in. Usage statistics are anonymous and sent only after the learner accepts them.
  */
 @OptIn(ExperimentalComposeUiApi::class, ExperimentalResourceApi::class)
 fun main() {
@@ -77,7 +77,8 @@ private fun wire(): AppServices {
             versionStore = ApiCache,
             apiKey = WebBuild.API_KEY,
             deviceIdProvider = { DeviceId.valueOrNull() },
-            analyticsEnabled = { false },
+            analyticsEnabled = { Analytics.enabled.value },
+            anonymousAnalytics = true,
             scope = AppContentScope,
         )
     }
@@ -85,10 +86,17 @@ private fun wire(): AppServices {
 
     // The same order as GlossoApplication: the API's dependencies first.
     AppApi.factory = newApi
+    Analytics.sender = { appApi.sendEvents(it, Analytics.clock()) }
+    Analytics.eraser = { appApi.deleteEvents() }
+    // The web has no crash reports: wasm gives no stack frames and the server refuses the platform.
+    Analytics.traceSender = { 204 }
     ServerPreferences.init(context, WebBuild.API_BASE)
     ProductConfigRepository.api = { appApi }
     OfflineStore.downloader = NoDownloader
     DeviceId.init(context)
+    Analytics.defaultEnabled = false
+    Analytics.askConsent = true
+    Analytics.init(context)
     ApiCache.init(context)
     OfflineStore.init(context)
     ProductConfigRepository.init(context)
@@ -123,7 +131,6 @@ private fun wire(): AppServices {
             debug = WebBuild.DEBUG,
             versionName = WebBuild.VERSION_NAME,
             versionCode = WebBuild.VERSION_CODE,
-            usageStatistics = false,
             offlineDownloads = false,
         ),
         connectivity = connectivity,

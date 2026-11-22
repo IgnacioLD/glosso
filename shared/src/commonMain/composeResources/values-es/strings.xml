@@ -627,4 +627,9 @@
     <string name="server_error_unreachable">No se pudo conectar con ese servidor. Revisa la dirección y tu conexión.</string>
     <string name="server_error_not_glosso">Esa dirección responde, pero no es un servidor de Glosso.</string>
     <string name="about_server">Servidor: %1$s</string>
+    <string name="usage_consent_title">¿Nos ayudas a mejorar Glosso?</string>
+    <string name="usage_consent_body">Si aceptas, Glosso envía estadísticas de uso anónimas, como lecciones terminadas y franjas de puntuación, a nuestros propios servidores. No llevan ningún identificador que las vincule contigo. Sin audio, sin anuncios y sin terceros. La app funciona igual si rechazas, y puedes cambiarlo cuando quieras en Ajustes.</string>
+    <string name="settings_usage_desc_anonymous">Eventos anónimos como lecciones terminadas y franjas de puntuación, enviados solo a los servidores de Glosso. No llevan ningún identificador que los vincule contigo. Sin audio, sin anuncios y sin terceros.</string>
+    <string name="usage_consent_accept">Aceptar</string>
+    <string name="usage_consent_decline">Rechazar</string>
 </resources>

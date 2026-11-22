@@ -359,7 +359,10 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
                 SectionLabel(stringResource(Res.string.settings_usage))
                 Spacer(Modifier.height(Space.x8))
                 Text(
-                    stringResource(Res.string.settings_usage_desc),
+                    stringResource(
+                        if (Analytics.askConsent) Res.string.settings_usage_desc_anonymous
+                        else Res.string.settings_usage_desc,
+                    ),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                 )
@@ -372,18 +375,21 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
                     )
                     Switch(checked = shareUsage, onCheckedChange = { Analytics.setEnabled(context, it) })
                 }
-                Spacer(Modifier.height(Space.x8))
-                QuietTextButton(
-                    text = stringResource(Res.string.settings_usage_erase),
-                    onClick = { scope.launch { usageErase = Analytics.deleteMyData() } },
-                    modifier = Modifier.offset(x = -Space.x12),
-                )
-                usageErase?.let { erased ->
-                    Text(
-                        stringResource(if (erased) Res.string.settings_usage_erased else Res.string.settings_usage_erase_failed),
-                        style = MaterialTheme.typography.bodySmall,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                // Anonymous events are tied to nobody, so there is nothing of "mine" to delete.
+                if (!Analytics.askConsent) {
+                    Spacer(Modifier.height(Space.x8))
+                    QuietTextButton(
+                        text = stringResource(Res.string.settings_usage_erase),
+                        onClick = { scope.launch { usageErase = Analytics.deleteMyData() } },
+                        modifier = Modifier.offset(x = -Space.x12),
                     )
+                    usageErase?.let { erased ->
+                        Text(
+                            stringResource(if (erased) Res.string.settings_usage_erased else Res.string.settings_usage_erase_failed),
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        )
+                    }
                 }
             }
             Spacer(Modifier.height(Space.x32))
