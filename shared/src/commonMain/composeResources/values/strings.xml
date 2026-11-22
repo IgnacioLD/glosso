@@ -18,6 +18,7 @@
     <string name="error_load_message">Check your connection and try again.</string>
     <string name="error_offline">No connection. Check your network and try again.</string>
     <string name="error_server">Couldn't reach the server. Try again in a moment.</string>
+    <string name="error_clock">Your phone's date and time look wrong, so secure connections fail. Turn on automatic date and time, then try again.</string>
     <string name="offline_banner">No connection</string>
     <string name="offline_nudge_body">You can keep practicing without a connection. Download the model once (about %1$s).</string>
     <string name="offline_nudge_cta">Download model</string>

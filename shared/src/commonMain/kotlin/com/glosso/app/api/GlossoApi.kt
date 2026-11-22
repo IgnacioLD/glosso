@@ -1,6 +1,7 @@
 package com.glosso.app.api
 
 import com.glosso.app.CrashTrace
+import com.glosso.app.TrustedClock
 import com.glosso.engine.model.ArticleModel
 import com.glosso.engine.model.ContentManifest
 import com.glosso.engine.model.DialogueModel
@@ -17,11 +18,13 @@ import com.glosso.engine.model.localized
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.HttpClientEngine
+import io.ktor.client.plugins.HttpSend
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.cache.HttpCache
 import io.ktor.client.plugins.cache.storage.CacheStorage
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.plugins.plugin
 import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.headers
@@ -33,6 +36,7 @@ import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
+import io.ktor.http.fromHttpToGmtDate
 import io.ktor.http.isSuccess
 import io.ktor.serialization.kotlinx.json.json
 import kotlin.concurrent.Volatile
@@ -213,6 +217,22 @@ class GlossoApi(
         // touches POST, so score and events stay uncached.
         install(HttpCache) {
             publicStorage(contentCache ?: CacheStorage.Disabled)
+        }
+    }.also { client ->
+        // HttpSend sees only real exchanges, never a cache hit, so the Date header
+        // read here is the server's time now (TrustedClock counts days by it).
+        client.plugin(HttpSend).intercept { request ->
+            try {
+                execute(request).also { call ->
+                    call.response.headers[HttpHeaders.Date]?.let { runCatching { it.fromHttpToGmtDate() }.getOrNull() }
+                        ?.let { TrustedClock.onServerTime(it.timestamp) }
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Throwable) {
+                TrustedClock.onNetworkFailure(e)
+                throw e
+            }
         }
     }
 

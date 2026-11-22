@@ -89,6 +89,7 @@ private fun wire(): AppServices {
     ProductConfigRepository.api = { appApi }
     OfflineStore.downloader = NoDownloader
     DeviceId.init(context)
+    TrustedClock.init(context)
     ApiCache.init(context)
     OfflineStore.init(context)
     ProductConfigRepository.init(context)
