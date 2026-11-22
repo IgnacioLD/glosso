@@ -1,0 +1,6 @@
+Primera versión en F-Droid.
+- Sin bibliotecas de Google: sin servicios de Play ni inicio de sesión con Google ("Cambiar de móvil" no está disponible).
+- Las estadísticas de uso empiezan desactivadas; actívalas en Ajustes.
+- Importa el modelo de puntuación sin conexión desde un archivo, verificado antes de instalarlo.
+- Las rachas y los días se cuentan con la hora del servidor, no con el reloj del móvil.
+- Una descarga del modelo iniciada sin conexión ahora muestra que está esperando.

@@ -89,6 +89,14 @@ The only binary in git is `gradle/wrapper/gradle-wrapper.jar`, which the scanner
 removes on its own. Repositories are only `google()`, `mavenCentral()` and the
 Gradle plugin portal. The model, vocabulary and content are gitignored.
 
+**The web app's binaries.** The repository also holds the web app (`docs/WEB.md`),
+whose Ogg decoder is a committed WebAssembly build of the vendored stb_vorbis
+(`shared/src/wasmJsMain/resources/stb_vorbis.wasm`, built from source by
+`shared/src/nativeInterop/stb_vorbis/build-wasm.sh`). `fdroid scanner` flags it
+as a binary. The Android app never uses it, so the recipe deletes it (`rm:`) and
+turns the web target off (`glosso.web=false`), which also keeps the Kotlin/Wasm
+toolchain (a prebuilt Node download) out of the F-Droid build.
+
 **Self-updater.** None. The server's version policy is only a dismissible notice
 with no link and no download.
 
@@ -123,3 +131,25 @@ ones `tools/fetch-assets.sh` downloads.
 
 Lesson packs are not importable: they are fetched per lesson from the content
 manifest and have no file format of their own yet.
+
+## Releasing a version to F-Droid
+
+Checked for 2.5.5 (2227) on 2026-11-22: the steps below passed locally.
+
+1. Bump `baseVersionName` and `versionCode` in `androidApp/build.gradle.kts`, add
+   `fastlane/metadata/android/<locale>/changelogs/<versionCode>.txt` (max 500
+   characters) for every locale, and set the same version in the recipe's build
+   entry, `CurrentVersion` and `CurrentVersionCode`.
+2. Check the recipe and the build the way F-Droid runs them:
+   - `fdroid readmeta` and `fdroid lint me.shirobyte42.glosso` in a directory with
+     the recipe under `metadata/` and fdroiddata's `config/` (sparse clone of
+     https://gitlab.com/fdroid/fdroiddata).
+   - From a fresh clone of the tagged commit, delete the `rm:` paths, then
+     `ANDROID_HOME=... ./gradlew :androidApp:assembleFdroidRelease -Pglosso.ios=false -Pglosso.web=false`.
+   - `fdroid scanner --exit-code` on that APK, and the scanner's `scan_source` on
+     the clone: the only source finding is the `rm:`'d `stb_vorbis.wasm`.
+3. Tag the release commit `v<versionName>` and push the tag. F-Droid builds from
+   tags (`UpdateCheckMode: Tags`), and the recipe's `commit:` is the tag.
+4. First submission only: open the merge request to fdroiddata with
+   `metadata/me.shirobyte42.glosso.yml`. Later versions are picked up from new
+   tags (`AutoUpdateMode: Version`).

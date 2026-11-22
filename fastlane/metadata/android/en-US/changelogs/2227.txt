@@ -1,0 +1,6 @@
+First F-Droid release.
+- No Google libraries: no Play services or Google sign-in ("Change phone" is not available).
+- Usage statistics start off; turn them on in Settings.
+- Import the offline scoring model from a file, verified before install.
+- Streaks and days count by the server's time, not the phone's clock.
+- A model download started offline now shows that it is waiting.
