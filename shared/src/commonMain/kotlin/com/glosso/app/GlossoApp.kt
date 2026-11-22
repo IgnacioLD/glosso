@@ -1,5 +1,7 @@
 package com.glosso.app
 
+import com.glosso.app.download.DownloadIds
+import com.glosso.app.download.LocalDownloader
 import com.glosso.app.platform.currentPlatformContext
 import com.glosso.app.platform.rememberConnectivity
 import com.glosso.app.platform.PlatformBackHandler
@@ -246,6 +248,10 @@ fun GlossoApp() {
     val scorer by scoringVm.state.collectAsState()
     val offlineHintDismissed by OfflineModelHint.dismissed.collectAsState()
     val requestNotifications = rememberNotificationPermissionRequest()
+    val downloads by LocalDownloader.current.state.collectAsState()
+    // Started from the offline strip, the download waits for a connection; the
+    // strip keeps showing it so the tap visibly did something.
+    val modelDownload = downloads.item(DownloadIds.MODEL)?.takeIf { it.isActive }
 
     // The offline strip's offer is a one-time tip, not a loop: it only appears
     // while offline without the model, and never again once hidden or started.
@@ -461,6 +467,11 @@ fun GlossoApp() {
                                 requestNotifications()
                             },
                             onHide = { OfflineModelHint.dismiss(context) },
+                        )
+                    } else if (modelDownload != null) {
+                        PendingDownloadLine(
+                            modelDownload,
+                            Modifier.padding(start = Space.gutter, end = Space.x4, bottom = Space.x4),
                         )
                     }
                 }
