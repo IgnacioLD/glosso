@@ -31,10 +31,12 @@ CODE_PATTERN = re.compile(
 # Source trees that build a distributable artifact (APK/AAB, server jar/image).
 DISTRIBUTABLE_SOURCES = ("androidApp/src", "engine/src", "server/src")
 
-# The one place espeak-ng is allowed: the build-time authoring tool. The guard
+# The places espeak-ng is allowed: the build-time authoring tools. The guard
 # itself references the library names in its patterns, so it is excluded too.
 ALLOWED_CODE_REFERENCES = {
     "tools/content/phonemize.py",
+    "tools/content/accent_reference.py",
+    "tools/multi-accent-bench/add_accent_ipa.py",
     "tools/licensing/espeak_boundary_test.py",
 }
 
@@ -51,6 +53,8 @@ def _iter_files(base, extra_globs):
         for path in files
         if path.is_file()
         and "__pycache__" not in path.parts
+        # A tool's local virtualenv (gitignored) holds third-party packages, not our code.
+        and not any(part.startswith(".venv") for part in path.parts)
         and path.suffix != ".pyc"
     )
 
