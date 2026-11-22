@@ -47,10 +47,12 @@ import androidx.compose.material.icons.outlined.DownloadForOffline
 import androidx.compose.material.icons.outlined.Mic
 import androidx.compose.material.icons.outlined.Quiz
 import androidx.compose.material.icons.outlined.Tune
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -487,6 +489,25 @@ fun GlossoApp() {
                 OnboardingScreen(onFinish = { OnboardingStore.complete() })
             }
         }
+    }
+
+    if (Analytics.consentPending.collectAsState().value) {
+        // Only an explicit answer counts as consent, so tapping outside does nothing.
+        AlertDialog(
+            onDismissRequest = {},
+            title = { Text(stringResource(Res.string.usage_consent_title)) },
+            text = { Text(stringResource(Res.string.usage_consent_body)) },
+            confirmButton = {
+                TextButton(colors = accentTextButtonColors(), onClick = { Analytics.setEnabled(context, true) }) {
+                    Text(stringResource(Res.string.usage_consent_accept))
+                }
+            },
+            dismissButton = {
+                TextButton(colors = accentTextButtonColors(), onClick = { Analytics.setEnabled(context, false) }) {
+                    Text(stringResource(Res.string.usage_consent_decline))
+                }
+            },
+        )
     }
 }
 

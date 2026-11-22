@@ -290,15 +290,18 @@ private fun PromisePage(
             Spacer(Modifier.height(Space.x32))
             AppLanguageChoice()
         }
-        Spacer(Modifier.height(Space.x32))
-        Text(
-            text = stringResource(
-                if (Analytics.enabled.collectAsState().value) Res.string.onboarding_analytics_notice
-                else Res.string.onboarding_analytics_notice_off,
-            ),
-            style = MaterialTheme.typography.bodySmall,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
+        // iOS sends no statistics and has no Settings switch; the web asks in its consent prompt.
+        if (LocalAppConfig.current.usageStatistics && !Analytics.askConsent) {
+            Spacer(Modifier.height(Space.x32))
+            Text(
+                text = stringResource(
+                    if (Analytics.enabled.collectAsState().value) Res.string.onboarding_analytics_notice
+                    else Res.string.onboarding_analytics_notice_off,
+                ),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+        }
         Spacer(Modifier.height(Space.x24))
     }
 }

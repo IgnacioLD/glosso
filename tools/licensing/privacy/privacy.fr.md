@@ -77,6 +77,11 @@ Il permet d'emporter le compte sur un nouveau téléphone. Il est facultatif ; l
 
 ## Votre choix
 
+- Sur l'application web (app.glossostudio.com), les statistiques d'utilisation
+  restent désactivées tant que vous ne les acceptez pas dans le message de la
+  première visite, et elles sont enregistrées sans identifiant d'installation :
+  elles ne peuvent donc pas être reliées à vous. Votre réponse est conservée dans ce navigateur et peut être
+  modifiée à tout moment dans Réglages > Statistiques d'utilisation.
 - Les statistiques d'utilisation sont activées par défaut et l'accueil le
   signale. Elles se désactivent à tout moment dans Réglages > Statistiques
   d'utilisation ; l'app fonctionne exactement pareil sans elles et le serveur

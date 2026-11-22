@@ -180,6 +180,33 @@ class AnalyticsPostgresTest {
     }
 
     @Test
+    fun `anonymous statistics are stored with no install id`() = testApplication {
+        app()
+        val client = jsonClient()
+        client.post("/v1/events") {
+            contentType(ContentType.Application.Json)
+            header("X-Device-Id", "device-web")
+            header("X-Analytics", "anonymous")
+            setBody(AnalyticsIngestRequest(listOf(AnalyticsEventDto(name = "app_open", deviceId = "device-web"))))
+        }
+        client.post("/v1/score") {
+            contentType(ContentType.Application.Json)
+            header("X-Device-Id", "device-web")
+            header("X-Analytics", "anonymous")
+            setBody(ScoreRequest(text = "cat", expectedIpa = "kæt", actualIpa = "kæt"))
+        }
+
+        val deadline = System.currentTimeMillis() + 5_000
+        while (rows("select 1 from glosso.analytics_event").size < 2 && System.currentTimeMillis() < deadline) {
+            Thread.sleep(50)
+        }
+        assertEquals(
+            listOf(listOf("app_open", null), listOf("score_attempt", null)),
+            rows("select name, device_id from glosso.analytics_event order by name"),
+        )
+    }
+
+    @Test
     fun `a device can erase its own events and nobody else's`() = testApplication {
         app()
         val client = jsonClient()

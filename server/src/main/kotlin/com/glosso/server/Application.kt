@@ -1378,7 +1378,8 @@ fun Application.module(
                     // Server-side product analytics: no app change needed to see
                     // how scoring is actually used. Best-effort and off the path.
                     if (analytics != null && !call.analyticsOptedOut()) {
-                        val deviceId = call.request.headers["X-Device-Id"]?.take(MAX_ID)
+                        val anonymous = call.analyticsAnonymous()
+                        val deviceId = call.request.headers["X-Device-Id"]?.take(MAX_ID).takeUnless { anonymous }
                         val properties = buildJsonObject {
                             put("language", JsonPrimitive(pack.code))
                             put("score", JsonPrimitive(result.score))
@@ -1404,7 +1405,7 @@ fun Application.module(
                             runCatching { analytics.insert(events) }
                                 .onFailure { logger.warn(it) { "analytics insert failed" } }
                                 .onSuccess {
-                                    runCatching { mirror?.send(events) }
+                                    if (!anonymous) runCatching { mirror?.send(events) }
                                         .onFailure { logger.warn { "umami mirror failed: ${it.message}" } }
                                 }
                         }
@@ -1695,12 +1696,13 @@ fun Application.module(
                             ErrorResponse("event name or properties are invalid or too large"),
                         )
                     }
-                    val headerDeviceId = call.request.headers["X-Device-Id"]?.take(MAX_ID)
+                    val anonymous = call.analyticsAnonymous()
+                    val headerDeviceId = call.request.headers["X-Device-Id"]?.take(MAX_ID).takeUnless { anonymous }
                     val now = Instant.now()
                     val events = request.events.mapNotNull { event ->
                         val name = event.name.trim()
                         ClientEvents.sanitize(name, event.properties)?.let { properties ->
-                            event.copy(name = name, properties = properties)
+                            event.copy(name = name, properties = properties, deviceId = event.deviceId.takeUnless { anonymous })
                                 .toStored(headerDeviceId, now, request.sentAt)
                         }
                     }
@@ -1718,7 +1720,8 @@ fun Application.module(
                         )
                     }
                     eventsIngested.increment(accepted.toDouble())
-                    if (mirror != null) {
+                    // Umami needs an id to tell visitors apart: anonymous events would merge into one.
+                    if (mirror != null && !anonymous) {
                         analyticsScope.launch {
                             runCatching { mirror.send(events) }
                                 .onFailure { logger.warn { "umami mirror failed: ${it.message}" } }
@@ -2637,6 +2640,10 @@ private fun AnalyticsEventDto.toStored(headerDeviceId: String?, now: Instant, se
 /** The app sends `X-Analytics: off` when the learner turned usage statistics off. */
 private fun io.ktor.server.application.ApplicationCall.analyticsOptedOut(): Boolean =
     request.headers["X-Analytics"]?.trim()?.equals("off", ignoreCase = true) == true
+
+/** The web app sends `X-Analytics: anonymous`: its events are stored without the install id. */
+internal fun io.ktor.server.application.ApplicationCall.analyticsAnonymous(): Boolean =
+    request.headers["X-Analytics"]?.trim()?.equals("anonymous", ignoreCase = true) == true
 
 private fun renderDashboardHtml(
     summary: AnalyticsSummary,

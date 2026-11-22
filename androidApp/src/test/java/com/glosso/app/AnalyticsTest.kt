@@ -68,6 +68,48 @@ class AnalyticsTest {
         assertEquals(listOf("lesson_started"), names())
     }
 
+    private fun relaunchAskingConsent() {
+        Analytics.resetForTest()
+        Analytics.scope = CoroutineScope(UnconfinedTestDispatcher())
+        Analytics.sender = { batch -> sent.add(batch); 202 }
+        Analytics.clock = { now }
+        Analytics.defaultEnabled = false
+        Analytics.askConsent = true
+        Analytics.init(app)
+    }
+
+    @Test
+    fun `a consent build sends nothing until accepted, then counts the open`() {
+        relaunchAskingConsent()
+        assertTrue(Analytics.consentPending.value)
+        Analytics.onForeground(app)
+        Analytics.track("lesson_started")
+        Analytics.flush()
+        assertTrue(sent.isEmpty())
+
+        Analytics.setEnabled(app, true)
+        assertFalse(Analytics.consentPending.value)
+        assertEquals(listOf("app_open"), names())
+
+        relaunchAskingConsent()
+        assertFalse(Analytics.consentPending.value)
+        assertTrue(Analytics.enabled.value)
+    }
+
+    @Test
+    fun `declining consent is remembered and sends nothing`() {
+        relaunchAskingConsent()
+        Analytics.setEnabled(app, false)
+        assertFalse(Analytics.consentPending.value)
+
+        relaunchAskingConsent()
+        assertFalse(Analytics.consentPending.value)
+        assertFalse(Analytics.enabled.value)
+        Analytics.onForeground(app)
+        Analytics.flush()
+        assertTrue(sent.isEmpty())
+    }
+
     @Test
     fun `events wait on disk while offline and are sent once the server takes them`() {
         status = null

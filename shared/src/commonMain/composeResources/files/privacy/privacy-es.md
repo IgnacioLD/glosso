@@ -73,6 +73,11 @@ opcional; sin ello la app funciona igual.
 
 ## Tu decision
 
+- En la app web (app.glossostudio.com), las estadisticas de uso siguen
+  desactivadas hasta que las aceptas en el aviso de la primera visita, y se
+  guardan sin identificador de instalacion, asi que no se pueden vincular
+  contigo. Tu respuesta se guarda en este navegador y puedes cambiarla en cualquier momento
+  en Ajustes > Estadisticas de uso.
 - Las estadisticas de uso estan activadas por defecto y el onboarding lo dice.
   Se pueden desactivar en cualquier momento en Ajustes > Estadisticas de uso; la
   app funciona exactamente igual sin ellas y el servidor deja de registrar

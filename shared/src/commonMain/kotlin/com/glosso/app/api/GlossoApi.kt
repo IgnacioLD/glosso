@@ -152,6 +152,8 @@ class GlossoApi(
     private val analyticsEnabled: () -> Boolean,
     /** The learner's language and accent choices, read at call time. */
     private val scope: ContentScope,
+    /** The web's statistics: the server stores them with no install id (`X-Analytics: anonymous`). */
+    private val anonymousAnalytics: Boolean = false,
 ) {
 
     /** The server this client last used, to notice a switch (see [baseUrl]). */
@@ -201,6 +203,7 @@ class GlossoApi(
                 headers.append(DEVICE_ID_HEADER, it)
             }
             if (!analyticsEnabled()) headers.append(ANALYTICS_HEADER, "off")
+            else if (anonymousAnalytics) headers.append(ANALYTICS_HEADER, "anonymous")
         }
         // A dead connection should surface as an error the UI can show, not hang.
         install(HttpTimeout) {

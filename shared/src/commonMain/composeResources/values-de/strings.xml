@@ -625,4 +625,9 @@
     <string name="server_error_unreachable">Der Server ist nicht erreichbar. Prüfe die Adresse und deine Verbindung.</string>
     <string name="server_error_not_glosso">Diese Adresse antwortet, ist aber kein Glosso-Server.</string>
     <string name="about_server">Server: %1$s</string>
+    <string name="usage_consent_title">Hilfst du uns, Glosso zu verbessern?</string>
+    <string name="usage_consent_body">Wenn du zustimmst, sendet Glosso anonyme Nutzungsstatistiken, etwa abgeschlossene Lektionen und Punktebereiche, an unsere eigenen Server. Sie enthalten keine ID, die sie mit dir verknüpft. Kein Audio, keine Werbung, keine Dritten. Die App funktioniert auch bei Ablehnung genauso, und du kannst das jederzeit in den Einstellungen ändern.</string>
+    <string name="settings_usage_desc_anonymous">Anonyme Ereignisse wie abgeschlossene Lektionen und Punktebereiche, die nur an die Server von Glosso gehen. Sie enthalten keine ID, die sie mit dir verknüpft. Kein Audio, keine Werbung, keine Dritten.</string>
+    <string name="usage_consent_accept">Zustimmen</string>
+    <string name="usage_consent_decline">Ablehnen</string>
 </resources>

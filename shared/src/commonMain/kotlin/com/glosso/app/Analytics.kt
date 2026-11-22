@@ -35,7 +35,7 @@ import okio.Path
  * the events and properties of its catalogue.
  *
  * On by default with a notice in onboarding ([defaultEnabled]; the F-Droid build
- * starts with it off); the learner can turn it off (or on) in Settings, which drops the queue and tells the server (`X-Analytics: off`) not
+ * starts with it off, and the web sends nothing until the learner accepts, [askConsent]); the learner can turn it off (or on) in Settings, which drops the queue and tells the server (`X-Analytics: off`) not
  * to record the score event either. Best-effort: nothing here can block the UI,
  * a take or a launch, and every failure is silent.
  */
@@ -57,8 +57,16 @@ object Analytics {
     /** Whether a new install sends statistics before the learner chooses; set by the app before [init]. */
     var defaultEnabled: Boolean = true
 
+    /** Whether this build asks first and sends anonymous statistics (the web); set by the app before [init]. */
+    var askConsent: Boolean = false
+
     private val _enabled = MutableStateFlow(true)
     val enabled: StateFlow<Boolean> = _enabled.asStateFlow()
+
+    private val _consentPending = MutableStateFlow(false)
+
+    /** True until the learner answers the consent prompt of an [askConsent] build. */
+    val consentPending: StateFlow<Boolean> = _consentPending.asStateFlow()
 
     private var prefs: KeyValueStore? = null
     private var fileSystem: FileSystem? = null
@@ -100,6 +108,7 @@ object Analytics {
         prefs = loaded
         platform = platformInfo(context)
         _enabled.value = loaded.getBoolean(KEY_ENABLED, defaultEnabled)
+        _consentPending.value = askConsent && !loaded.contains(KEY_ENABLED)
         val files = appFiles(context)
         fileSystem = files.fileSystem
         queueFile = (files.filesDir / QUEUE_FILE).also { file ->
@@ -136,6 +145,7 @@ object Analytics {
             name = name,
             sessionId = sessionId,
             appVersion = platform?.appVersion.orEmpty(),
+            platform = platform?.osName ?: PlatformInfo.ANDROID,
             language = LanguagePreferences.current.code,
             properties = JsonObject(
                 properties.mapNotNull { (key, value) ->
@@ -237,13 +247,20 @@ object Analytics {
 
     fun setEnabled(context: PlatformContext, value: Boolean) {
         init(context)
-        if (_enabled.value == value) return
+        val answeringPrompt = _consentPending.value
+        // A "no" equals the default, but it is still an answer to remember.
+        if (_enabled.value == value && !answeringPrompt) return
+        _consentPending.value = false
         _enabled.value = value
         prefs?.edit { putBoolean(KEY_ENABLED, value) }
         if (!value) {
             queueLock.withLock { queue.clear() }
             PendingCrash.clear(context)
             scope.launch { persist() }
+        } else if (answeringPrompt) {
+            // The launch's app_open was dropped while waiting for this answer.
+            track("app_open", mapOf("cold" to true) + openContext(context))
+            flush()
         }
     }
 
@@ -306,6 +323,8 @@ object Analytics {
         queueLock.withLock { queue.clear() }
         _enabled.value = true
         defaultEnabled = true
+        askConsent = false
+        _consentPending.value = false
         sessionId = null
         foregroundSince = 0
         backgroundSince = 0
