@@ -29,6 +29,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.getString
 
@@ -177,6 +179,9 @@ data class LessonState(
 
 class LessonViewModel(private val services: AppServices) : ViewModel() {
 
+    private var refreshJob: Job? = null
+    private var lessonsJob: Job? = null
+
     private val api = appApi
     private val profiles = ProfileStore.get(services.context)
     private val platform = platformInfo(services.context)
@@ -275,9 +280,13 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
      * up without reinstalling. Falls back to downloaded packs when offline.
      */
     fun refresh() {
-        viewModelScope.launch {
+        // Latest wins: a reload for the new language must not be overwritten by a
+        // slower one still running for the old language.
+        refreshJob?.cancel()
+        refreshJob = viewModelScope.launch {
             _state.value = _state.value.copy(loading = true, error = null)
             val manifest = runCatching { api.manifest() }.getOrNull()
+            ensureActive()
             if (manifest != null) {
                 _state.value = _state.value.copy(
                     levels = orderedLevels(manifest.levels),
@@ -289,6 +298,7 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
             // no manifest at all): derive the levels from the whole lesson bank.
             if (_state.value.levels.isEmpty()) {
                 val all = runCatching { api.lessons(limit = 200) }.getOrNull()
+                ensureActive()
                 val derived = if (all != null) {
                     orderedLevels(all.map { it.level })
                 } else {
@@ -305,11 +315,12 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
     }
 
     fun loadLessons() {
-        viewModelScope.launch {
+        lessonsJob?.cancel()
+        lessonsJob = viewModelScope.launch {
             _state.value = _state.value.copy(loading = true, error = null)
             val level = _state.value.level
             val offlineIds = OfflineStore.state.value.downloadedIds
-            runCatching { api.lessons(level = level.takeIf { it != "ALL" }) }
+            runCatching { api.lessons(level = level.takeIf { it != "ALL" }) }.also { ensureActive() }
                 .onSuccess { list ->
                     _state.value = _state.value.copy(
                         loading = false,
