@@ -13,6 +13,7 @@ son multi-idioma; anadir un idioma es **datos + un language pack declarativo**.
 - [7. Publicar y sincronizar](#7-publicar-y-sincronizar)
 - [8. Verificar](#8-verificar)
 - [9. Estado por idioma objetivo](#9-estado-por-idioma-objetivo)
+- [10. Benchmark de modelos por idioma](#10-benchmark-de-modelos-por-idioma)
 
 ---
 
@@ -520,3 +521,185 @@ Que NO esta validado, y limites conocidos:
 
 Para cualquier idioma nuevo: `experimental = true` hasta validar el
 reconocimiento con voz real, y anotar el resultado en `docs/FINDINGS.md`.
+
+---
+
+## 10. Benchmark de modelos por idioma
+
+Medido el 2026-11-22 con `tools/language-bench/` (como reproducirlo, fuentes,
+normalizacion y metricas en su `README.md`; numeros en `results/`). Pregunta
+doble: para que idiomas podemos crear contenido ya y con que modelo, sabiendo
+que el modelo tiene que caber en el VPS (CPU, ~3 GB para todo el servidor) y en
+el movil (int8 ONNX, idealmente muy por debajo de 400 MB).
+
+**Audio.** Voz nativa real: los 100 primeros clips del test de Google FLEURS
+(CC-BY-4.0) por idioma, frases largas leidas de Wikipedia (10-20 s), mucho mas
+dificiles que un drill. Voz TTS: 18 frases cortas de FLEURS x 2 voces Cartesia
+(mujer y hombre) por idioma, 36 clips, 23.644 caracteres en total (30 frases x 2
+voces se iba a ~43k, por encima del presupuesto). La TTS se parece mas a un drill
+de la app, pero no es un humano.
+
+**Metricas.** PER (tasa de error de fonos) contra la IPA de espeak-ng de la frase:
+*raw* (solo sin acento ni espacios) y *plegado* (sin diacriticos, longitud ni
+modificadores, y con las variantes de notacion unificadas: `g/ɡ`, las R, `ɫ/ɭ/l`,
+`ɐ/ə`, `ʂ ʐ ʈ/ʃ ʒ t`, `ɨ/y`...), para no castigar a ZIPA por escribir en otra
+notacion que la de espeak, con la que se entreno wav2vec2. *Basura*: clips con
+transcripcion vacia o PER plegado > 0,5. *Motor*: la nota real de
+`PhoneticComparator` via `NativeTranscriptBenchTest` (media y % de clips >= 98,
+contando como fallo los vacios), solo en `en ru es fr de`, los idiomas con matriz
+propia; `it pt nl pl uk` caen en la matriz inglesa y su nota no significaria nada.
+A ZIPA y whisper se les aplica antes del motor un mapeo minimo a la notacion de
+espeak (`TO_ESPEAK` en `bench.py`: tilde de velarizacion fuera, `g`->`ɡ`,
+`ɜ˞`->`ɚ`, `ʀ`->`ʁ`, `ʈʂ ʂ ʐ`->`tʃ ʃ ʒ`), el primer esbozo del mapeo que habria
+que mantener si se cambia de modelo.
+
+### Modelos
+
+| clave | modelo | params | int8 en disco | licencia |
+| --- | --- | ---: | ---: | --- |
+| w2v2-lv60 | `facebook/wav2vec2-lv-60-espeak-cv-ft` (el multilingue del servidor hoy) | 315M | 358 MB | Apache-2.0 |
+| w2v2-en-int8 | el ingles desplegado (solo `en`, ancla) | 315M | 358 MB | Apache-2.0 (base) |
+| zipa-cr-small | `anyspeech/zipa-small-crctc-500k` (CTC) | 64M | 71 MB | CC-BY-4.0 |
+| zipa-t-small | `anyspeech/zipa-small-noncausal-500k` (transducer) | 65M | 71 MB | CC-BY-4.0 |
+| zipa-cr-large | `anyspeech/zipa-large-crctc-500k` (CTC) | 300M | 310 MB | CC-BY-4.0 |
+| zipa-ns | `anyspeech/zipa-small-crctc-ns-700k`, solo referencia | 64M | 71 MB | CC-BY-NC-SA-4.0: **no usable** (app de pago) |
+| whisper | `neurlang/ipa-whisper-base` (whisper-base ajustado a IPA de goruut) | 74M | 182 MB | Apache-2.0 |
+
+Descartados sin medir: Allosaurus (codigo GPL-3.0), PhoneticXeus (CC-BY-NC-SA),
+Phonon-2.5 (es ASR de texto, no de fonos). wav2vec2 se evaluo en fp32 con
+transformers (en ruso int8 y fp16 dieron la misma media, seccion 1); ZIPA en su
+int8 ONNX, que es lo que se desplegaria; whisper en fp32.
+
+### Velocidad y memoria (CPU, Apple M1 Max, 20 clips FLEURS, 189 s de audio)
+
+| modelo | ms por s de audio, 1 hilo | ms por s, hilos por defecto | RSS del modelo cargado | pico del proceso |
+| --- | ---: | ---: | ---: | ---: |
+| w2v2 (int8 ONNX del servidor) | 218 | 58 | 505-528 MB | 1,16 GB |
+| zipa-cr-small (int8) | 19 | 8 | 160-176 MB | 0,66 GB |
+| zipa-t-small (int8) | 18 | 9 | 139-179 MB | 0,68 GB |
+| zipa-cr-large (int8) | 51 | 18 | 606-610 MB | 1,10 GB |
+| whisper (fp32 torch) | 213 | 182 | 142 MB | 0,79 GB |
+
+El pico incluye ~0,5 GB de torch/transformers que el script importa para todos
+los modelos y que el producto no carga: para comparar cuenta el RSS del modelo.
+wav2vec2 se cronometro con el int8 ingles desplegado, que tiene el mismo grafo y
+la misma cabeza de 392 tokens que el multilingue int8. ZIPA small es ~12x mas
+rapido que wav2vec2 con un hilo y ocupa 1/5 en disco.
+
+### Nota del motor (media / % de clips >= 98)
+
+| idioma, audio | w2v2-en-int8 | w2v2-lv60 | zipa-cr-small | zipa-t-small | zipa-cr-large | whisper | zipa-ns (NC) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| en TTS | 92,9 / 11 % | 96,5 / 44 % | 91,9 / 14 % | 92,2 / 11 % | 92,3 / 14 % | 61,3 / 0 % | 92,1 / 17 % |
+| en FLEURS | 91,0 / 0 % | 92,2 / 6 % | 86,7 / 0 % | 88,2 / 0 % | 87,8 / 0 % | 58,9 / 0 % | 88,1 / 0 % |
+| ru TTS | - | 88,1 / 6 % | 82,2 / 0 % | 83,2 / 0 % | 84,4 / 0 % | 55,0 / 0 % | 83,4 / 0 % |
+| ru FLEURS | - | 84,1 / 0 % | 79,2 / 0 % | 82,1 / 0 % | 76,9 / 0 % | 60,2 / 0 % | 85,0 / 0 % |
+| es TTS | - | 92,1 / 11 % | 96,8 / 56 % | 97,6 / 58 % | 97,4 / 67 % | 61,8 / 0 % | 97,2 / 61 % |
+| es FLEURS | - | 86,7 / 0 % | 95,7 / 42 % | 95,8 / 49 % | 94,8 / 38 % | 75,0 / 0 % | 95,7 / 46 % |
+| fr TTS | - | 87,4 / 3 % | 91,6 / 8 % | 92,4 / 14 % | 89,4 / 3 % | 46,4 / 0 % | 90,0 / 8 % |
+| fr FLEURS | - | 82,4 / 0 % | 86,4 / 1 % | 88,8 / 5 % | 85,3 / 2 % | 44,8 / 0 % | 86,3 / 3 % |
+| de TTS | - | 86,9 / 0 % | 90,9 / 0 % | 90,2 / 0 % | 89,4 / 0 % | 53,9 / 0 % | 89,6 / 0 % |
+| de FLEURS | - | 82,5 / 0 % | 86,4 / 0 % | 87,3 / 0 % | 85,9 / 0 % | 53,0 / 0 % | 86,4 / 0 % |
+
+El ruso con wav2vec2 cuadra con la medicion de la seccion 1 (media 83-89). La
+fila inglesa es orientativa: en produccion la referencia inglesa sale de CMUdict,
+no de espeak `en-us`, y el ancla real es `tools/engine-bench` (62 % de los clips
+nativos del catalogo llegan a 98). Que `w2v2-lv60` saque mas que el ingles
+desplegado aqui solo dice que escribe en la misma notacion `en-us` que la
+referencia; el desplegado escribe en la britanica.
+
+### PER plegado (raw), TTS / FLEURS
+
+| idioma | w2v2-lv60 | zipa-cr-small | zipa-t-small | zipa-cr-large | whisper | zipa-ns (NC) |
+| --- | --- | --- | --- | --- | --- | --- |
+| en | 0,05 (0,06) / 0,10 (0,12) | 0,11 (0,20) / 0,20 (0,28) | 0,13 (0,22) / 0,18 (0,27) | 0,10 (0,19) / 0,19 (0,28) | 0,56 / 0,49 | 0,12 / 0,18 |
+| ru | 0,22 (0,26) / 0,26 (0,29) | 0,36 (0,53) / 0,38 (0,55) | 0,28 (0,49) / 0,31 (0,50) | 0,30 (0,50) / 0,31 (0,52) | 0,80 / 0,58 | 0,30 / 0,32 |
+| es | 0,10 (0,11) / 0,18 (0,18) | 0,23 (0,29) / 0,19 (0,25) | 0,21 (0,26) / 0,18 (0,20) | 0,22 (0,27) / 0,25 (0,29) | 0,62 / 0,32 | 0,23 / 0,25 |
+| fr | 0,18 (0,18) / 0,22 (0,23) | 0,13 (0,14) / 0,24 (0,29) | 0,11 (0,13) / 0,17 (0,20) | 0,17 (0,21) / 0,24 (0,30) | 1,14 / 0,72 | 0,16 / 0,24 |
+| de | 0,17 (0,19) / 0,23 (0,26) | 0,16 (0,24) / 0,26 (0,35) | 0,17 (0,27) / 0,23 (0,32) | 0,19 (0,29) / 0,24 (0,34) | 0,88 / 0,60 | 0,18 / 0,25 |
+| it | 0,21 (0,27) / 0,20 (0,23) | 0,18 (0,21) / 0,18 (0,21) | 0,15 (0,19) / 0,15 (0,18) | 0,17 (0,20) / 0,16 (0,18) | 1,46 / 0,46 | 0,17 / 0,16 |
+| pt | 0,31 (0,36) / 0,38 (0,43) | 0,38 (0,43) / 0,40 (0,44) | 0,36 (0,41) / 0,38 (0,42) | 0,42 (0,46) / 0,41 (0,45) | 1,26 / 1,06 | 0,39 / 0,43 |
+| nl | 0,38 (0,49) / 0,39 (0,48) | 0,23 (0,30) / 0,28 (0,34) | 0,26 (0,30) / 0,29 (0,33) | 0,26 (0,31) / 0,30 (0,33) | 0,57 / 0,59 | 0,26 / 0,29 |
+| pl | 0,34 (0,39) / 0,43 (0,51) | 0,24 (0,37) / 0,37 (0,46) | 0,18 (0,26) / 0,33 (0,38) | 0,08 (0,17) / 0,32 (0,36) | 0,65 / 0,52 | 0,08 / 0,30 |
+| uk | 0,36 (0,57) / 0,44 (0,63) | 0,38 (0,59) / 0,42 (0,60) | 0,31 (0,48) / 0,38 (0,50) | 0,34 (0,53) / 0,36 (0,44) | 0,69 / 0,63 | 0,31 / 0,34 |
+
+Clips vacios o basura: 0 % en casi todo para wav2vec2 y ZIPA; 1-9 % en `pt`,
+`pl` y `uk` (FLEURS) y 6-8 % en `ru` con zipa-cr-small; whisper entre 10 % y 93 %.
+whisper se midio con 30 clips FLEURS por idioma (100 en `en`/`ru`) mas toda la TTS.
+Una diferencia grande entre raw y plegado (ZIPA en `ru`/`uk`) es sobre todo la
+blandura `ʲ` y la longitud: notacion que el plegado quita y el motor si mira.
+
+### Lo que se ve en las transcripciones
+
+- ZIPA no marca la blandura rusa: "Парижане слывут..." (ref.
+  `pʌrʲiʒˈɑnʲi sɭyvˈut`) sale `pəriʐɑnisl̴ɛvut` en zipa-t-small y
+  `pʌrʲiʒɑnʲisɭʌvut` en wav2vec2. Por eso en ruso gana wav2vec2 (entrenado con la
+  notacion de espeak, que escribe `ʲ` en cada blanda).
+- wav2vec2 habla castellano peninsular: "Aerosmith canceló los conciertos" con
+  voz latina sale `aɾosmiθ ... konθjeɾtos` (la referencia `es-419` y la voz
+  sesean). ZIPA escribe `konsiɛrtos`: `e` como `ɛ` de forma sistematica, que la
+  matriz `es` tolera.
+- Polaco con zipa-cr-large: "Także zapaśnicy złożyli hołd Lunie" ->
+  `tagʐɛzapaɕɲitsɨzwuʐɨlixɔwtluɲɛ` (ref. `tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ`),
+  casi perfecto; wav2vec2 `tʌɡʒʌzʌpʌɕnʲitsy...`.
+- whisper entra en bucles (`ʌnʌnʌnʌn...`, `ˈpɑnəsəl ˈpɑnəsəl...`) y, como es
+  seq2seq con modelo de lenguaje, "corrige" hacia la palabra probable: ocultaria
+  justo los errores que queremos puntuar. Descartado.
+- `pt` y `uk` tienen un PER alto con todos los modelos, en parte por la
+  referencia: espeak `pt-br` escribe la -e final atona como `y`, la -a como `æ` y
+  la RR como `x`; espeak `uk` escribe la В como `β` y alarga la І (`iː`). Antes de
+  medir en serio esos idiomas hay que revisar su referencia (folds tipo
+  `SYMBOL_FOLDS`).
+
+### Recomendacion
+
+**Ningun idioma nuevo cumple hoy la regla "un nativo saca >= 98" con un modelo sin
+ajustar.** El mejor caso es el espanol con ZIPA: media 96-98 y 56-67 % de los
+clips TTS a 98 (38-49 % en FLEURS), lejos del >= 90 %. Para llegar hace falta lo
+mismo que en ingles: ajustar el modelo al idioma (y calibrar la matriz).
+
+Idiomas para crear contenido ya, como `experimental` y con nota orientativa (igual
+que el ruso hoy), por orden:
+
+1. **es**: el mas cerca con diferencia (con ZIPA). Matriz y motor existen.
+2. **fr** y **de**: media 87-92 con ZIPA, casi nada llega a 98; motor listo.
+3. **it**, **pl**, **nl**: PER plegado de ZIPA igual o mejor que fr/de
+   (0,08-0,33), pero no tienen matriz propia: primero la matriz y las reglas,
+   luego medir la nota.
+4. **pt** y **uk**: no empezar hasta arreglar su referencia de espeak y volver a
+   medir.
+5. **ru**: sigue con wav2vec2 multilingue, que en ruso gana a ZIPA.
+
+**Modelo.** Para los idiomas nuevos, **zipa-cr-small** (CTC, 64M, 71 MB int8,
+CC-BY-4.0). zipa-t-small (transducer) gana hasta 2,5 puntos en frances y empata
+en espanol y aleman, y el large no mejora siendo 4x mas grande y lento. El CTC
+pesa mas que esos puntos porque reutiliza lo que el motor ya tiene para wav2vec2
+(decodificador greedy, confianza por frame, alineacion forzada); el transducer
+obliga a un bucle decoder/joiner nuevo y no da posteriores por frame para alinear.
+**Ingles se queda con su modelo ajustado y ruso con wav2vec2.**
+
+**Coste del cambio a ZIPA (solo para los idiomas nuevos):**
+
+- Tamano: 71 MB frente a 358 MB. Cabe en el movil, asi que esos idiomas podrian
+  puntuarse en el dispositivo y no solo en el servidor.
+- Latencia: ~19 ms por segundo de audio con un hilo (8 con todos) frente a 218 (58).
+- RAM: ~160-180 MB del modelo cargado frente a ~510 MB. En el VPS cabe junto a
+  los dos wav2vec2 actuales (2,14 GiB de pico, seccion 1) dentro de
+  `GLOSSO_SERVER_MEMORY=3072M`.
+- Licencia: pesos CC-BY-4.0 (atribucion obligatoria en los creditos y en
+  `docs/LICENSING.md`), codigo MIT. Los modelos `-ns` de ZIPA son CC-BY-NC-SA y
+  no se pueden usar; en la tabla, zipa-ns apenas mejora a zipa-cr-small salvo en
+  polaco y ucraniano.
+- Frontend: ZIPA no toma la onda normalizada sino 80 filtros fbank tipo Kaldi;
+  hay que portarlo a Kotlin (servidor, Android) y a iOS, con un test de paridad
+  contra lhotse. La tasa de frames cambia, lo que afecta a los tiempos por fono.
+- Notacion: el vocabulario de ZIPA (`ipa_simplified`, 127 tokens de un simbolo;
+  longitud `ː`, blandura `ʲ` y diacriticos como tokens sueltos) no es
+  `phoneme_vocab.json` (392 tokens de espeak, con `tʃ`, `aɪ`, `tʲ` como uno solo).
+  Hace falta un vocabulario por modelo, que `ModelInventory` resuelva cada fono de
+  referencia a una secuencia de tokens ZIPA (no a uno), y un mapeo de lo oido a la
+  notacion de espeak que usan matrices y reglas (`TO_ESPEAK` es el punto de
+  partida). El cabezal de calidad y la prosodia estan entrenados sobre los tokens
+  de wav2vec2 ingles y no se trasladan (hoy ya solo son ingleses).
+- Ajuste fino: si se ajusta un modelo por idioma para llegar a 98, uno de 64M es
+  mucho mas barato de ajustar y desplegar que uno de 315M.
