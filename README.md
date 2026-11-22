@@ -1,10 +1,25 @@
 # Glosso
 
-A language course that measures your pronunciation for real. Glosso listens to each take,
+**Free, open-source English pronunciation app with phoneme-level feedback.** Glosso listens to
+you speak and tells you exactly which sounds you pronounce wrong. No ads, no subscription, no account.
+
+[![License: AGPL v3+](https://img.shields.io/badge/license-AGPL--3.0--or--later-blue.svg)](LICENSE)
+![Platforms: Android and web](https://img.shields.io/badge/platforms-Android%20%7C%20web-brightgreen.svg)
+
+**[Website](https://glossostudio.com)** ·
+**[Get it on Google Play](https://play.google.com/store/apps/details?id=me.shirobyte42.glosso)** ·
+**[Try it in your browser](https://app.glossostudio.com)**
+
+<p>
+  <img src="docs/screenshots/result.webp" width="240" alt="A scored take: the sentence scored 89 out of 100, with the sound /θ/ flagged at 33 and the other sounds at 100">
+  <img src="docs/screenshots/practice.webp" width="240" alt="The practice screen: a sentence with its IPA transcription and the sounds it targets, ready to record">
+  <img src="docs/screenshots/today.webp" width="240" alt="The Today screen: today's lesson, the day streak and the sounds to work on">
+</p>
+
+Glosso is a language course that measures your pronunciation for real. It listens to each take,
 recognizes the sounds you actually made, compares them with the expected ones and tells you
 exactly which sound to fix. On Android, and in the browser as an installable web app (iPhone, desktop).
-Languages: English
-(British and American), French, German and Russian.
+Languages: English (British and American), French, German and Russian.
 
 The same phonetic engine runs on the phone (offline, ONNX Runtime) and on the server, so a
 take gets the same score in both places.
