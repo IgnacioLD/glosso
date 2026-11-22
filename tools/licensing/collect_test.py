@@ -62,6 +62,16 @@ class TestRuntimeCoverage(unittest.TestCase):
         self.assertEqual(pinned["io.ktor:ktor-server-core"], pinned["io.ktor:ktor-client-mock"])
         self.assertRegex(pinned["io.ktor:ktor-server-core"], r"^\d+\.\d+\.\d+$")
 
+    def test_known_licences_use_their_canonical_url(self):
+        # A POM's URL depends on the local Gradle cache; the canonical one does not.
+        curated = set(collect.CURATED_DEPS) | {c["id"] for c in collect.COMPONENTS}
+        drift = [
+            c["id"] for c in _asset()["components"]
+            if c.get("license") in collect.LICENSE_URLS and c.get("url") != collect.LICENSE_URLS[c["license"]]
+            and c["id"] not in curated
+        ]
+        self.assertEqual(drift, [], f"entries not on their licence's canonical URL: {drift[:20]}")
+
     def test_asset_is_in_lockstep_with_the_catalogue(self):
         self.assertEqual(
             _asset(),
