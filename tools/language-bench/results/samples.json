@@ -1,0 +1,3296 @@
+[
+ {
+  "model": "w2v2-en-int8",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.1003119935936341070",
+  "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+  "ref": "haʊˈɛvɚ dˈuː tə ðə slˈoʊ kəmjˌuːnɪkˈeɪʃən tʃˈænəlz stˈaɪlz ɪnðə wˈɛst kʊd lˈæɡ bᵻhˌaɪnd baɪ twˈɛnti fˈaɪv tə θˈɜːɾi jˈɪɹ",
+  "heard": "haʊɛvədjuːtuːðəsləʊkəmjuːnɪkeɪʃəntʃanəlzstaɪlzɪnðəwɛstkʊdlaɡbɪhaɪndbaɪtwɛntifaɪvtuːθɜːtijiəz"
+ },
+ {
+  "model": "w2v2-en-int8",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10052240106321793346",
+  "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+  "ref": "ˈɔːl nˈaʊnz ɐlˈɔŋsaɪd ðə wˈɜːd sˈaɪ fɔːɹ juː ˈɔːlweɪz bɪɡˈɪn wɪð ɐ kˈæpɪɾəl lˈɛɾɚ ˈiːvən ɪnðə mˈɪdəl əvə sˈɛntəns",
+  "heard": "ɔːlnaʊnzɐlɒŋsaɪdðəwɜːldseɪfɔːjuːɔːlweɪzbɪɡɪnwɪðeɪkapɪtəllɛtəiːvənɪnðəmɪdəlɒveɪsɛntəns"
+ },
+ {
+  "model": "w2v2-en-int8",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10167324587744183095",
+  "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+  "ref": "tə ðə nˈɔːɹθ ænd wɪðˌɪn ˈiːzi ɹˈiːtʃ ɪz ðə ɹoʊmˈæntɪk ænd fˈæsᵻnˌeɪɾɪŋ tˈaʊn ʌv sˈɪntɹə ænd wˌɪtʃ wʌz mˌeɪd fˈeɪməs tə fˈɔːɹənɚz ˈæftɚɹ ɐ ɡlˈoʊɪŋ ɐkˈaʊnt ʌv ɪts splˈɛndɚz ɹᵻkˈɔːɹdᵻd baɪ lˈɔːɹd bˈaɪɹɑːn",
+  "heard": "tuːðənɔːθandwɪðɪniːziɹiːtʃɪzeɪɹəʊmantɪkandfasɪneɪtɪŋtaʊnɒvsɪntɹəandwɪtʃwɒzmeɪdfeɪməstuːfɒɹənəzaftəeɪɡləʊɪŋɐkaʊntɒvɪtssplɛndəzɹɪkɔːdɪdbaɪlɔːdbaɪɹən"
+ },
+ {
+  "model": "w2v2-en-int8",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛləʊɹɛsləzɔːlsəʊpeɪdtɹɪbjuːttuːluːnə"
+ },
+ {
+  "model": "w2v2-en-int8",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.daniel.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛləʊɹɛsləzɔːlsəʊpeɪdtɹɪbjuːttuːluːnə"
+ },
+ {
+  "model": "w2v2-en-int8",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.01",
+  "text": "Think of the skiing route as of a similar hiking route.",
+  "ref": "θˈɪŋk ʌvðə skˈiːɪŋ ɹˈaʊt æz əvə sˈɪmɪlɚ hˈaɪkɪŋ ɹˈaʊt",
+  "heard": "θɪŋkɒvðəskiːɪŋɹuːtazɒveɪsɪmɪləhaɪkɪŋɹuːt"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10004059102127011984",
+  "text": "Für die besten Aussichten auf Hongkong sollten Sie die Insel verlassen und zum gegenüberliegenden Ufer von Kowloon fahren.",
+  "ref": "fyːɾ diː bˈɛstən ˈaʊszˌɪçtən aʊf hˈɔŋkɔŋ zˌɔltən ziː diː ˈɪnzəl fɛɾlˈasən ʊnt tsʊm ɡeːɡənˌyːbɜlˈiːɡəndən ˈuːfɜ fɔn kˈɔvloːn fˈɑːrən",
+  "heard": "fyːdiːbɛstənaʊsiːçtənaʊfɾɔŋkɔkzɔltənzdiːɪnzɪlfɛlasənʊntsʊnɡiːɡnyːbəleːɪndənuːfɜfɔnkɔvlʊfɑːrən"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10009182821551087671",
+  "text": "Er griff auch alles an, was ins Wasser kam; selbst ein großer Dinosaurier wie der T. Rex war ihm nicht gewachsen.",
+  "ref": "ɛɾ ɡɾˈɪf ˌaʊx ˈaləs ˈan vˈas ɪns vˈasɜ kˌɑːm zˈɛlpst aɪn ɡɾˈoːsɜ dˌiːnoːzaʊrˈiːɾ viː dɛɾ tˈeː rˈɛks vɑːɾ iːm nˈɪçt ɡəvˈaxzən",
+  "heard": "ɛɾɡrɪfɔxaləsannvasənsvasɜkɑːmzɛpstɛnɡroːsɜdiːnʊzaʊrɪɜviːdɛɾtiːɛksvɑːaɪmnɪçtɡəvaksən"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10014044777125235464",
+  "text": "Wenn Sie den Film „Das Vermächtnis der Tempelritter“ gesehen haben, denken Sie vielleicht, dass auf die Rückseite der Unabhängigkeitserklärung eine Schatzkarte gezeichnet wurde.",
+  "ref": "vˌɛn ziː deːn fˈɪlm das fɛɾmˈɛçtnɪs dɛɾ tˈɛmpəlrˌɪtɜ ɡəzˈeːən hˈɑːbən dˈɛŋkən ziː fɪlˈaɪçt das aʊf diː rˈʏkzaɪtə dɛɾ ˌʊnaphˈɛŋɪçkˌaɪtzɜklˌɛːrʊŋ ˌaɪnə ʃˈatskaɾtə ɡətsˈaɪçnət vˌʊɐdə",
+  "heard": "veːnziːdɪnfɪləndasfɛɾmɛçtɲɪsdɛɾtɛmpədrɪtɛɡɪzeːənhabəndɛŋkɪnzɪçɪlaɪçtɛsɔfdəryɡzaɪtədɛʊnɜfɛŋɪçkaɪtsɛklɛrʊmaɪnəʃatskɑːtəɡɪtsaɪçnətvoːɾdə"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "rɪŋɜkɔleːɡəntsɔtənluːnɜiːmfaɪstɾiːbuːt"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.clemens.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "rɪŋɜkoːleːɡəntsɔltənluːnɜeːbənfalstɾiːbuːt"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.01",
+  "text": "Es ist dünner unter den Mare und dicker unter dem Hochland.",
+  "ref": "ɛsɪst dˈʏnɜ ˌʊntɜ deːn mˈɑːrə ʊnt dˈɪkɜ ˌʊntɜ deːm hˈoːxlˌant",
+  "heard": "ɛzɪsdynaʊntɜdɪnmarəʊndɪkɜʊntɜdɪmhoːxlant"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.1003119935936341070",
+  "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+  "ref": "haʊˈɛvɚ dˈuː tə ðə slˈoʊ kəmjˌuːnɪkˈeɪʃən tʃˈænəlz stˈaɪlz ɪnðə wˈɛst kʊd lˈæɡ bᵻhˌaɪnd baɪ twˈɛnti fˈaɪv tə θˈɜːɾi jˈɪɹ",
+  "heard": "haʊɛvɚduːtəðəsloʊkəmjuːnɪkeɪʃəntʃænəlzstaɪzɪnðəwɛstkədlæɡbᵻhaɪndbaɪtwnifaɪvtəθɜːɾijɪɹz"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10052240106321793346",
+  "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+  "ref": "ˈɔːl nˈaʊnz ɐlˈɔŋsaɪd ðə wˈɜːd sˈaɪ fɔːɹ juː ˈɔːlweɪz bɪɡˈɪn wɪð ɐ kˈæpɪɾəl lˈɛɾɚ ˈiːvən ɪnðə mˈɪdəl əvə sˈɛntəns",
+  "heard": "ɔːlnaʊnzɐlɔŋsaɪdðəwɜːldseɪfɔːɹjuːɔːlweɪzbɪɡɪnwɪðɐkæpᵻɾəllɛɾɚiːvənɪnðəmɪdəlʌvɐsɛntəns"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10167324587744183095",
+  "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+  "ref": "tə ðə nˈɔːɹθ ænd wɪðˌɪn ˈiːzi ɹˈiːtʃ ɪz ðə ɹoʊmˈæntɪk ænd fˈæsᵻnˌeɪɾɪŋ tˈaʊn ʌv sˈɪntɹə ænd wˌɪtʃ wʌz mˌeɪd fˈeɪməs tə fˈɔːɹənɚz ˈæftɚɹ ɐ ɡlˈoʊɪŋ ɐkˈaʊnt ʌv ɪts splˈɛndɚz ɹᵻkˈɔːɹdᵻd baɪ lˈɔːɹd bˈaɪɹɑːn",
+  "heard": "təðənɔːɹθænwɪðɪniːziɹiːtʃɪzðəɹoʊmæntɪkændfæsɪneɪɾɪŋtaʊnʌvsɪntɹəændwɪtʃwʌzmeɪdfeɪməstəfɔːɹɹɪnɚzæftɚɹɐɡloʊɪŋɐkaʊntʌvðɪtssplɛntɚzɹᵻkɔːɹdᵻdbaɪloːɹdbaɪɹən"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛloʊɹɛslɚzɔːlsoʊpeɪdtɹɪbjuːtəluːnɐ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.daniel.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛloʊɹɛslɚzɔːlsoʊpeɪdtɹɪbjuːttəluːnɐ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.01",
+  "text": "Think of the skiing route as of a similar hiking route.",
+  "ref": "θˈɪŋk ʌvðə skˈiːɪŋ ɹˈaʊt æz əvə sˈɪmɪlɚ hˈaɪkɪŋ ɹˈaʊt",
+  "heard": "θɪŋkʌvðəskiːɪŋɹuːtæzʌvɐsɪmɪlɚhaɪkɪŋɹuːt"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1001146817223348054",
+  "text": "Se recomienda enfáticamente a los viajeros que se informen sobre cualquier riesgo de clima extremo en el área que visitan, dado que ello puede afectar sus planes de viaje.",
+  "ref": "se rˌekomjˈɛnda enfˈatikamˈente a los βjaxˈeɾos ke se infˈoɾmen sˌoβɾe kwalkjˈeɾ riˈesɣo ðe klˈima ekstɾˈemo en el ˈaɾea ke βisˈitan dˈaðo ke ˈejjo pwˈeðe ˌafektˈaɾ sus plˈanes ðe βjˈaxe",
+  "heard": "seɾɾkomindaemfatikamentalofjaxeɾokesimfoɾmensoβɾekwalkeɾɾɾixoðelklimaktɾimoenelaɾjakeβiθitandaðokeeʃopweðafektaɾsuxplaneðeβjaxeɾ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.10050510856477907332",
+  "text": "El uso adecuado de los blogs «puede empoderar a los alumnos para que sean más analíticos y críticos, a través de la respuesta activa a los contenidos de internet, pueden definir sus posturas en el contexto de los escritos de otros, además de establecer sus perspectivas sobre temas específicos» (Oravec, 2002).",
+  "ref": "el ˈuso ˌaðekwˈaðo ðe los βlˈoɡs pwˈeðe ˌempoðeɾˈaɾ a los alˈumnos pˌaɾa ke sˈean mˈas ˌanalˈitikos i kɾˈitikos a tɾaβˈes ðe la respwˈesta aktˈiβa a los kˌontenˈiðos ðe ˌinteɾnˈet pwˈeðen dˌefinˈiɾ sus postˈuɾas en el kontˈeksto ðe los eskɾˈitos ðe ˈotɾos ˌaðemˈas ðe ˌestaβlesˈeɾ sus pˌeɾspektˈiβas sˌoβɾe tˈemas ˌespesˈifikos ˌoɾaβˈek dˈos mˈil ðˈos",
+  "heard": "elusoekwaoðelolokspweðempoeɾaɾalosalumnospaɾakeθanmasanalitikosikɾitiɣosaðɾaβeθelalɾespaxtaktiβaloskontonioðintaɾnetpaendefinilsospostuɾasenelkontetstoelosexkɾitoðeotɾosaðemaðestaleseɾsuspeɾpektiβassoβɾetemasespeθifikosoɾaβekðoxmildos"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1008205615316519958",
+  "text": "Fue tanta la cantidad de gente que se concentró, que no todos pudieron acceder al funeral en la Plaza de San Pedro.",
+  "ref": "fwˈe tˈanta la kˌantiðˈad ðe xˈɛnte ke se kˌonsentɾˈo ke nˈo tˈoðos puðjˈeɾon ˌakseðˈeɾ al fˌuneɾˈal en la plˈasa ðe sˈam pˈeðɾo",
+  "heard": "fwetantalakantiaexentekesekonsentɾokenotoðopuiɾonakθeeɾalfuneɾalenlaplasaesampeðɾo"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aɾosmiθkanseloloskonθjeɾtospendjentesðesuxiɾa"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.mateo.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aɾosmitkanseloluskonsjeɾtospendjentesesuxiɾa"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.01",
+  "text": "Imagínese la pista de esquí como una ruta de senderismo.",
+  "ref": "ˌimaxˈinese la pˈista ðe eskˈi kˌomo ˈuna rˈuta ðe sˌendeɾˈismo",
+  "heard": "imaxinaselapistaðeskikomunarutaasendeɾismo"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10043298898524273336",
+  "text": "L’accident a eu lieu en terrain montagneux, et il semblerait que cela ait été causé par un incendie malveillant.",
+  "ref": "laksidˈɑ̃ a y ljˈø ɑ̃ tɛʁˈɛ̃ mɔ̃tanjˈø e il sɑ̃bləʁˈɛ kə səlˌa ɛt etˈe kozˈe paʁ œ̃n ɛ̃sɑ̃dˈi malvɛjˈɑ̃",
+  "heard": "laksidɑ̃aylyɑ̃teʁɛ̃mɔ̃tanjyelsɑ̃bləʁekəsəlaetetekozepaʁnɛ̃sɑ̃dimalvejɑ̃"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10097171356371990207",
+  "text": "Nous sommes d'accord avec la déclaration de l'USOC (Comité olympique des États-Unis) selon laquelle les intérêts de nos athlètes et de nos clubs, ainsi que de leur sport, pourraient être mieux servis. Cela peut être fait en allant de l'avant et en procédant plutôt à des changements significatifs au sein de notre organisation, qu'à la révocation d'accréditation.",
+  "ref": "nu sɔm dakˈɔʁ avˌɛk la- deklaʁasjˈɔ̃ də- lyzˈɔk komitˈe olɛ̃pˈik de-z etˈazynˈi səlˈɔ̃ lakˈɛl le-z ɛ̃teʁˈɛ də- noz atlˈɛtz e də- no klˈœb ɛ̃sˌi kə də- lœʁ spˈɔʁ puʁˈɛt ˈɛtʁ mjˌø sɛʁvˈi səlˌa pˈøt ˈɛtʁ fˈɛt ɑ̃n alˈɑ̃ də- lavˌɑ̃ e ɑ̃ pʁosedˈɑ̃ plytˈoː a de- ʃɑ̃ʒmˈɑ̃ siɲifikatˈifz o sˈɛ̃ də- notʁ ɔʁɡanizasjˈɔ̃ ka la- ʁevokasjˈɔ̃ dakʁeditasjˈɔ̃",
+  "heard": "muzəndakɔʁavɛkladeklɛʁasjɔ̃dəlyzɔkkəmiteolɑ̃pikdiztaynisəlolakɛlezɑ̃tiʁadnəzatlɛtedənəklbɛ̃sikədəlɔʁspɔʁpuʁtɛtɛtnysɛʁvisəlaptɛtʁəfɛɑ̃nadɑ̃dəlavɑ̃eʁɑ̃pʁosɛdɑ̃pytoadɛʃɑ̃ʒɑ̃sinifikatifoʁsɑ̃dənətʁaʁɡanizasjɔ̃kɛlaʁɛvəkasjɔ̃dakʁɛditasjɔ̃"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10138021779681596478",
+  "text": "Il a ajouté qu’« on ne devrait cependant pas leur demander d’assumer des obligations qui dépassent leur stade de développement, leur responsabilité et leurs capacités. »",
+  "ref": "il a aʒutˈe k ɔ̃ nə- dəvʁˈɛ səpɑ̃dˈɑ̃ pa lœʁ dəmɑ̃dˈe dasymˈe de-z ɔbliɡasjˈɔ̃ ki depˈas lœʁ stˈad də- devlɔpmˈɑ̃ lœʁ ʁɛspɔ̃sabilitˈe e lœʁ kapasitˈe ˌaaksɑ̃siʁkɔ̃flˈɛks",
+  "heard": "ilaʒutekɔ̃nədyvʁezəpɑ̃nɑ̃palɑ̃ʁdəmɑ̃dedasymedezobliɡasʁɑ̃kidepasɔʁstadədevlopɑ̃ləʁespɑ̃sabditeelɑ̃ʁkapasite"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "lezotʁlytœʁɔ̃eɡalmɑ̃ʁɑ̃dymaʒaluna"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.etienne.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "lezɔ̃tʁlytaʁɑ̃teɡalmɛ̃ʁɑ̃doamaʒaluna"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.01",
+  "text": "Une bombe a explosé devant le bureau du gouverneur général.",
+  "ref": "yn bˈɔ̃b a ɛksplozˈe dəvˈɑ̃ lə- byʁˈo dy- ɡuvɛʁnˈœʁ ʒeneʁˈal",
+  "heard": "ynbɔ̃baɛksplozedəvɑ̃ləbyʁodyɡuvɛʁnɛʁʒeneʁal"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10000151032537989529",
+  "text": "Il blog è uno strumento che si prefigge di incoraggiare la collaborazione e sviluppare l'apprendimento degli studenti ben oltre la giornata scolastica normale.",
+  "ref": "il blˈoɡ e ˈuno strʊmˈento ke sɪ prefˈidʒːe dɪ inkoradʒːˈare la kollaboratsiˈone e zvilʊpːˈare lapːrendimˈento dˌeʎɪ stʊdˈɛntɪ bˈɛn ˌoltre la dʒornˈata skolˈastika normˈale",
+  "heard": "ibloɡenustɹumeɪŋtokesipɹɨfiɨdiŋkɔradʒɐrelakolaboratsiɑnɨezvʲiɾuparerapɹeɪŋdimeɪŋtudɨistudeɪŋtibeɪnɑtɹadʒernataskolastianormalɨ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10011138801715101183",
+  "text": "Sotto il ponte lo spazio in verticale libero è di 15 metri. La costruzione è terminata nell'agosto del 2011, ma l'apertura al traffico è avvenuta solo nel marzo 2017.",
+  "ref": "sˈotːo il pˈonte lo spˈatsio in vertikˈale lˈibero e dɪ kwˈimditʃɪ mˈɛtrɪ la kostrʊtsiˈone e terminˈata nellaɡˈosto del dˈue mˈiːla ˈunditʃɪ ma lapertˈura al trˈaffiko e avvenˈuta sˈolo nel mˈartso dˈue mˈiːla ditʃassˈɛtːe",
+  "heard": "sotelpɔntelospatsimvertikaleliberoedikwindiʃimætrilakostrutsjoneterminaːtanelaɡoseeldemileundiʃimalaberturaltrafikoɛvenutasononelmartsodɵmilediʃasɛte"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10017896147709177739",
+  "text": "Se avete visto il film \"Il mistero dei Templari\", potreste pensare che sul retro della Dichiarazione d'Indipendenza sia disegnata una mappa del tesoro.",
+  "ref": "se avˌete vˈisto il fˈilm il mistˈɛro dˌeɪ templˈarɪ potrˈɛste pensˈare ke sʊl rˈɛtro dˌella dikjaɾatsiˈone dindipendˈɛntsa sˌia dizeɲˈata ˌʊna mˈapːa del tezˈɔro",
+  "heard": "seavetevistolfilmailmisterodetemplaripotresðepensarekesurretrodeladikeratsjonedindipendentsasiadizeɲataunamapadeltezoro"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nʊnsɛrveperfɔrtsaʊnoːjɔtəperjɛrtʃipeːlaɡieːlaɡi"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.lorenzo.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nonserveperfortsoʊnojoːteperjertʃipelaɡeilaːɡi"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.01",
+  "text": "È più sottile sotto i mari e più spessa sotto le aree montuose.",
+  "ref": "e pjʊ sotːˈile sˈotːo i mˈarɪ e pjʊ spˈessa sˈotːo le ˈaːree montʊˈoze",
+  "heard": "epjusotilesotoɪmarʲiepjuspesasotoɭʲeareemuntoze"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10042455874761876908",
+  "text": "Volgens Angel (2006) kunnen organisaties beter presteren met een aanpak op basis van het continuümmodel.",
+  "ref": "vˈɔlɣəns ˈɑŋəl tʋˈeː dˌœyzɛnt zˌɛs kˌɵnən ˌɔrɣaːnizˈaːtsis bˈeːtər prɛstˈɪːrən mɛt ən ˈaːnpˌɑk ɔ pˈaːzɪs vɑn hət kˌɔntinˌyɵmoːdˈɛl",
+  "heard": "foːrʊsaŋoːltvɛdaɪzənsɛɾsɡənɔxənɪzaɾsiːsbeːtəpɾɛsteːrəmədənampɑːkɔbɑːsəsfɔnatkʊntɪnyːəmoːdɛl"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.1004717084892689357",
+  "text": "Varkens dragen de ziekte bij zich en dragen het via muggen over op mensen.",
+  "ref": "vˈɑrkəns drˈaːɣən də zˈiktə bɛɪ zɪx ɛn drˈaːɣən hət vˈiaː mˈɵɣən ˈoːvər ɔp mˈɛnsən",
+  "heard": "fɑːɾkəʃtɾɑːxdəziːktəbaɪzɪxantrɑːxənɛtfiːɜmmyːxənoːvʊrbmɛntsən"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10152288169439514825",
+  "text": "Bij een verkeersstroom wordt gekeken naar de bewegingen van individuele bestuurders en voertuigen tussen twee punten en de interacties die plaatsvinden tussen de individuen.",
+  "ref": "bɛɪ ən vərkˈɪːrsstrˌoːm ʋɔrt ɣəkˈeːkən naːr də bəʋˈeːɣɪŋən vɑn ˈɪndˌividyˌeːlə bəstˈyrdərs ɛn vˈurtœyɣən tˈɵsən tʋˈeː pˈɵntən ɛn də ˌɪntərˈɑksis di plˈaːtsfɪndən tˈɵsən də ˈɪndˌividˌyən",
+  "heard": "baɪənfəkeːʃtɾɔmvɔɾtɾɪɡɛɡənadəbəvɛxçɪŋəvɔnɪndɪfiːdəvɛləbəstyːɾəsɛnfuːtaɪxətysʊtsvaɪbyntənɛndəɪntəɾaksiːdiːplatsfɪndɜtœɾsəndəɪnvɪdiːviːdyːən"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeɪdəvɔːɹslaʊsbrɔxtəhyːldəanluːnɜ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.stijn.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeɪdəvoːʃtəlaʃpraxtəhyldaanluːnɜ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.01",
+  "text": "Je kunt de skiroute zien als een wandelroute.",
+  "ref": "jə kɵn tə skˈirutə zˈin ɑls ən ʋˈɑndɛlrˌutə",
+  "heard": "jɪkyntɪskiːruːtɪziːnaʊsəmvandoːruːtə"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10003602174340488201",
+  "text": "Podróżni zwiedzający państwa obłożone szczególnie wysokimi podatkami mogą czasem zaoszczędzić sporo pieniędzy, szczególnie na takich towarach jak alkohol i tytoń.",
+  "ref": "pɔdrˈuʒɲi zvʲˌɛdʑajˈɔntsɨ pˈaɲstfa ˌɔbwɔʒˈɔnɛ ʃtʃɛɡˈulɲʲɛ vˌɨsɔkˈimi pˌɔdatkˈami mˈɔɡɔ̃ tʃˈasɛm zˌaɔʃtʃˈɛɲdʑitɕ spˈɔrɔ pʲɛɲʲˈɛndʑɨ ʃtʃɛɡˈulɲʲɛ na tˈakix tɔvˈarax jˈak alkˈɔxɔl i tˈɨtɔɲ",
+  "heard": "podruʒnizvʲezaontsipasfɑobroʒonaʃʃeɡoɲievesotkimipodaːtkaːmimɑɡontʃɑsnemzɑlʃtʃɛnɟitsporɑpeɲenziʃtɛɡuɲinɑtakixtɑvɑraxakalkoxolititon"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10013271501230525766",
+  "text": "Większość mniejszych wysp to narody niezależne lub sprzymierzone z Francją i słynące jako luksusowe nadmorskie miejscowości wypoczynkowe.",
+  "ref": "vʲˈɛŋkʃɔɕtɕ mɲʲˈɛjʃɨɣ vˈɨsp tɔ narˈɔdɨ ɲʲˌɛzalˈɛʒnɛ lˈup spʃˌɨmjɛʒˈɔnɛ s frˈantsjɔ̃ i swɨnˈɔntsɛ jˈakɔ lˌuksusˈɔvɛ nadmˈɔrskʲɛ mʲˌɛjstsɔvˈɔɕtɕi vˌɨpɔtʃɨŋkˈɔvɛ",
+  "heard": "vʲeŋkʃvʌɕmnʲejɪʃyxvesptʌnnaradʌnʲizaɭɛʒnyɭʲubʌsprmʲiʒunʌsvrɑntsiʌmisvynɑntsʌjakʌɭʲuksusovʌnadvaɭskʲimʲistʌvoɕtʲivʌpotsynkovy"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10047713455444904767",
+  "text": "Zgodnie z oświadczeniem biura gubernatora wśród rannych było dziewiętnastu policjantów.",
+  "ref": "zɡˈɔdɲʲɛ z ˌɔɕfʲattʃˈɛɲʲɛm bjˈura ɡˌubɛrnatˈɔra fɕrˈut rˈannɨɣ bˌɨwɔ dʑˌɛvʲɛtnˈastu pˌɔlitsjˈantuf",
+  "heard": "skodɲisoʃvɛtʃoɲimbyraɡubernatorɑfsʃutranyxpodʒifjnaːsoporitʲaːntuf"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tʌɡʒʌzʌpʌɕnʲitsyzvoʒyɭʲixaʊtɭʲunʲɪ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.kacper.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "daɡʒezapaʃniːtsɪzvoːʒyliːxaʊtluːɲe"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.01",
+  "text": "Springboks przełamali złą passę pięciu przegranych.",
+  "ref": "sprˈiŋɡbɔks pʃˌɛwamˈali zwˈɔ̃ pˈassɛ pʲˈɛɲtɕu pʃɛɡrˈanɨx",
+  "heard": "spɹiŋbokspʃoːamaɭʲizvompassepʲendupʃaɡɹanʊ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10008174856218516817",
+  "text": "Segundo informações, ele estava na casa dos 20 anos. Em uma declaração, Bieber disse que, \"embora eu não estivesse presente nem diretamente envolvido neste trágico incidente, meus pensamentos e orações estão com a família da vítima\".",
+  "ref": "sˌeɡˈũŋdw ˌiŋfoɾəmasˈõjs ˌely estˌavæ na kˈazæ dʊs vˈiŋtʃy ˈɐ̃nʊs ˈeɪŋ ˌumæ dˌeklaɾasˈɐ̃ʊ̃ bˌiebˈer dʒˈisy ky ˌeɪmbˈɔɾæ eʊ nˌɐ̃ʊ̃ ˌestʃivˈɛsy prˌezˈeɪŋtʃy nˈeɪŋ dʒˌiɾetæmˈeɪŋtʃj ˌeɪŋvowvˈidʊ nˌestʃi trˈaʒikw ˌiŋsidˈeɪŋtʃy meʊs pˌeɪŋsæmˈeɪŋtʊz i ˌoɾasˈõjz estˌɐ̃ʊ̃ koŋ a fˌæmˈiljæ da vˈitʃimæ",
+  "heard": "sɨɡuŋdeɪŋfɐɾmɐsɐ̃ʊ̃eɪʃelistavɐnɐkazdʊzviŋtʃɨanʊʃeɪŋũmɐdɨklɐɾɐsɐ̃bibɨʁɨdisikieɪŋbɔɾɐʊnɐ̃tɨvɛsɨpɹɨzeɪŋtɨneɪŋdɨɾɛtɐmeɪŋteɪŋvovidʊnɨʃɨtɹaʒʊkʊeɪŋsideɪŋtɨmɨʃpeɪŋsɐmeɪŋtʊzioɾɐsɐ̃ʊ̃ŋʒɨʃtɐ̃ʊ̃ŋkoɐŋfɐmilɐdɐvitɨmɐ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10047022047800689031",
+  "text": "Construída pelos egípcios no século 3 A.C., a Grande Pirâmide é uma das muitas grandes estruturas de pirâmide construídas para honrar faraós mortos.",
+  "ref": "kˌoŋstruˈidæ pˈelʊz ˌeʒˈipsjʊz nʊ sˈɛkulʊ trˈez ˌasˌeˈa ɡrˈɐ̃ŋdʒy pˌiɾˈɐ̃midʒj ɛ ˌumæ daz mwˈiŋtæz ɡrˈɐ̃ŋdʒyz ˌestrutˈuɾæz dʒy pˌiɾˈɐ̃midʒy kˌoŋstruˈidæs pˌaɾæ oŋxˈar fˌaɾaˈɔz mˈɔɾətʊs",
+  "heard": "ustvidɐpilʊzeʒipsʊznʊʃɛkʊnʊtɹeɪɐeɪsdikɹiʃtuɐɡneɪŋdɨpiɾɐmidieʊmɐdazmuutɐzkleɪŋdɨiʃtɾʊtuɾɐʃtɐpiɾɐmidikuʃtvidɐʃpaɾɐfumʊaɾfaɾɐazmuartʊʃ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10083615766068544069",
+  "text": "Giancarlo Fisichella perdeu o controle do carro e acabou a corrida logo após a largada.",
+  "ref": "ʒˌiɐ̃ŋkˈaɾəlʊ fˌiziʃˈɛlæ peɾədˈeʊ ʊ kˌoŋtrˈoly dʊ kˈaxw i ˌakabˈow a kˌoxˈidæ lˈɔɡw apˈɔz a lˌaɾəɡˈadæ",
+  "heard": "ʃenkaɾrʊfisikelɐteɾteokutɾuedukaʁjɐkɐbukuʁidɐloɣɐposɐlaɾrɡadɐ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "peɪŋsinɐhɔtɐdiʃkikomʊmɐhɑtɐdɨkɐmiŋadɐ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.rafael.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "peɪŋsenahɑtedʒiʃkikomumahɑtadʒɨkamiŋad"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.01",
+  "text": "Outros lutadores também prestaram homenagem a Luna.",
+  "ref": "ˈowtrʊz lˌutadˈoɾys tɐ̃mbˈeɪŋ prˌestˈaɾɐ̃ʊ̃ ˌomenˈaʒeɪŋ a lˈunæ",
+  "heard": "otɹʊzlutɐdoɾistɐmbeɪmpɹɨstaɾɐ̃ʊ̃umɨnaʒɨŋɐlunɐ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10000611681338527501",
+  "text": "В древнем Китае использовали уникальный способ обозначения периодов времени; каждый этап Китая или каждая семья, находившаяся у власти, были особой династией.",
+  "ref": "v drʲˈevnʲim kʲitˈɑjɪ ɪspˈoɭzʌvʌɭʲɪ unʲikˈɑɭnyj spˈosʌp ʌbʌznatʃˈenʲija pʲirʲˈiʌdʌf vrʲˈemʲinʲɪ kˈɑʒdyj ɛtˈɑp kʲitˈɑja ˌɪɭʲɪ kˈɑʒdʌja sʲimʲjˈja nʌxʌdʲˈifʃʌjasʲʌ u vɭˈɑsʲtʲɪ bˌyɭʲɪ ʌsˈobʌj dʲinˈɑsʲtʲijij",
+  "heard": "vdrʲeevnʲimkʲitɑispoɭʲzʌvʌɭʲiunʲiɪkɑɭʲnysposʌpʌbʌznʌtʃʲenʲipʲirʲjadʌfʌvrʲimʲnʲikɑʒdytɑpkʲitɑjaiɭʲikɑʒdʌjasʲimɑnʌxʌdʲivʃʌsʲuvɭɑsʲtʲibyɭʲiʌsobʌdʲinɑsʲtʲi"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10002861505982796062",
+  "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+  "ref": "mʌdʌɡaskˈɑr namnˈoɡʌ bˈoɭʃy druɡʲˈix ɪ javɭʲˈɑjitsʌ sʌmʌbˈytnym kʌntʲinʲˈentʌm f tˈom ʃto kasˈɑjitsʌ dʲˈikʌj prʲirˈody",
+  "heard": "mʌdʌɡʌskɑrnʌmnoɡʌboɭʲʃydrudʲixijivɭʲɑtsʌsʌmʌbutnymkʌntʲinʲiʌntʌmftomʃtokʌsɑtsydʲikyprʲirody"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10008070632189747443",
+  "text": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+  "ref": "vˈo fsʲˈex naˈutʃnyx vʌprˈosʌx fkɭʲutʃˈɑja psʲixʌɭˈoɡʲiju bˌyɭʲɪ prʲˈinʲʌty vzɡɭʲˈɑdy arʲistˈotʲiɭʲʌ",
+  "heard": "vɑfsʲixnɑutʃʲnʌxvʌprosʌxvkɭʲytʃʲepsʲixʌɭoɡʲibyɭʲiprʲinʲiɪtʌvzkɭʲɑdʌrʲistotʲiɭʲɪ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʒnʌrʌzɭʲitʃʲɑtʲɡɭʌɡoɭyidʌpʌɭnʲinʲija"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.sergei.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʒnʌrʌzɭitʃʲediɡɭʌɡoɭyidʌpʌɭnʲenʲija"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.01",
+  "text": "Коллеги-рестлеры тоже отдали Луне дань уважения.",
+  "ref": "kʌɭɭʲˈeɡʲɪrʲistɭʲˈery tˈoʒy ʌddˈɑɭʲɪ ɭunʲˈe dˈɑnʲ uvaʒˈɛnʲija",
+  "heard": "kʌɭʲeɡiresɭʲʌrytoːʒyʌdɑɭʲyunʲidɑnʲuvaʒɛnʲi"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10021730821550109934",
+  "text": "Жінки: усім подорожнім жінкам радять казати, що вони заміжні, незалежно від справжнього сімейного стану.",
+  "ref": "ʒˈiːnkɪ ˈusiːm podorˈoʒɲiːm ʒˈiːnkam rˈadjat kazˈat̪ɪ ʃtʃˈo βonˈɪ zamˈiːʒɲiː nɛzˈalɛʒno βˈiːt spraβʒɲˈoho siːmˈɛjnoho st̪ˈanu",
+  "heard": "ʒinkiusʲimpodoroʒnʲimʒinkɑmrɑdʲirʲkʌzɑtʌɕivʌnyzʌmʲiʒnʲinʌzʌvɑʒnʌvʲitsprɑvʒnyusʲimɑnʌʌstɑnu"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10046655283476675991",
+  "text": "Такі батьки можуть вирішити створити для своєї дитини план всиновлення.",
+  "ref": "t̪ˈakiː bˈatkɪ mˈoʒut βɪrˈiːʃɪt̪ɪ zd̪βorˈɪt̪ɪ dʎˈa zβojˈɛjiː dɪt̪ˈɪnɪ plˈan fsɪnˈoβlɛnɲa",
+  "heard": "takʲibʌtʲkʲimoʒudʲvyrʲiʃitʌstvrytidʌsvʌɪdʲitinipɑnfsynovʌnʲɪ"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10095052411990461296",
+  "text": "Місячна кора становить приблизно 70 км у товщину на ближній стороні та 100 км у товщину на дальній стороні.",
+  "ref": "miːsjˈatʃna kˈora st̪anˈoβɪt prɪblˈɪzno siːmdesjˈat kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa blˈɪʒɲiːj st̪orˈoɲiː t̪ˈa stˈo kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa dˈaʎɲiːj st̪orˈoɲiː",
+  "heard": "mʲiʑiʒnʌkorɑstanovitʲprʲibɭeznʌsʲimdisʲɑtkʲiɭʌmɑtrʲiutovɕinunʌbɭeʒnʲistorʌnʲitastokʲɭʌmɑtrʲiutovɕinunadɑnʲijstorunʲi"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bʲitʲikoɭɑhitakoʒvʲidaɭyʃɑnuɭunʲi"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.taras.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bʲitsikoɭehetakoʃvʲidaɭyʃanuɭunʲi"
+ },
+ {
+  "model": "w2v2-lv60",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.01",
+  "text": "Але птахи все ще мають багато чого від динозаврів.",
+  "ref": "alˈɛ pt̪ˈaxɪ fsˈɛ ʃtʃˈɛ mˈajut bahˈat̪o tʃˈoho βˈiːd dɪnozˈaβriːβ",
+  "heard": "aɭyptaxifseɕimɑidʲbahɑtutʃʲovʌvʲidynozɑvrʲif"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10004059102127011984",
+  "text": "Für die besten Aussichten auf Hongkong sollten Sie die Insel verlassen und zum gegenüberliegenden Ufer von Kowloon fahren.",
+  "ref": "fyːɾ diː bˈɛstən ˈaʊszˌɪçtən aʊf hˈɔŋkɔŋ zˌɔltən ziː diː ˈɪnzəl fɛɾlˈasən ʊnt tsʊm ɡeːɡənˌyːbɜlˈiːɡəndən ˈuːfɜ fɔn kˈɔvloːn fˈɑːrən",
+  "heard": "fʏ dˈi bˈɛstən ˈaʊzɪçtən ɔfɹʊŋk zˈɔltən ziːdɪ ɪn zˈɪl fˈɛlˌasən ʊntsuːn gɛgɪnˈyːbɛlˌɪɪnˈən ʊfɔn kˈoʊvlˌuːn fˈɑɾən"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10009182821551087671",
+  "text": "Er griff auch alles an, was ins Wasser kam; selbst ein großer Dinosaurier wie der T. Rex war ihm nicht gewachsen.",
+  "ref": "ɛɾ ɡɾˈɪf ˌaʊx ˈaləs ˈan vˈas ɪns vˈasɜ kˌɑːm zˈɛlpst aɪn ɡɾˈoːsɜ dˌiːnoːzaʊrˈiːɾ viː dɛɾ tˈeː rˈɛks vɑːɾ iːm nˈɪçt ɡəvˈaxzən",
+  "heard": "ˈɛɾgˈɛɾgˈɛɾgˈɛɾgˈɛɾgˈɛɾ ˈɛn gɾˈɔlɪs ˈɛnʊsɛɾ dˈiː nˈɔsɛɾtˈɛɾtˌɛɾ tˈiːɾˌɛks vˈaɪm nˈɪçt gəvˈaxsən"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10014044777125235464",
+  "text": "Wenn Sie den Film „Das Vermächtnis der Tempelritter“ gesehen haben, denken Sie vielleicht, dass auf die Rückseite der Unabhängigkeitserklärung eine Schatzkarte gezeichnet wurde.",
+  "ref": "vˌɛn ziː deːn fˈɪlm das fɛɾmˈɛçtnɪs dɛɾ tˈɛmpəlrˌɪtɜ ɡəzˈeːən hˈɑːbən dˈɛŋkən ziː fɪlˈaɪçt das aʊf diː rˈʏkzaɪtə dɛɾ ˌʊnaphˈɛŋɪçkˌaɪtzɜklˌɛːrʊŋ ˌaɪnə ʃˈatskaɾtə ɡətsˈaɪçnət vˌʊɐdə",
+  "heard": "vˈeːn zˈɛn fˈeːlən dˈaɪs fɛɾmˈɛçtənˈiːs dˈɛtət tˈɛmpəlrˌɪtɛɾ gɛsˈeːən hˌɑːbən dˈɛnkən fˈiːlɛɪç dˈɛs ˈaʊf dˈɛɾɾyːɪtə dˈɛɾ ˈʊnɪçtɛs ˈʊnɛɾ ˈʃʃatskɑːtə gitsˈaɪçnət vˌʊɐdə"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "rɪgˈʊnˈɛmfˈaɪtˌɾibˈʊt"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.clemens.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "rɪnˌɛɾkʊlˈtˈnˈɪnˈɪmfˈalstɾˈibʊt"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.01",
+  "text": "Es ist dünner unter den Mare und dicker unter dem Hochland.",
+  "ref": "ɛsɪst dˈʏnɜ ˌʊntɜ deːn mˈɑːrə ʊnt dˈɪkɜ ˌʊntɜ deːm hˈoːxlˌant",
+  "heard": "ˈɛs dˈʊndɛn mˈɑːrə ˈɪn dˈiːkɑː ˌɪnʊxlˈant"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.1003119935936341070",
+  "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+  "ref": "haʊˈɛvɚ dˈuː tə ðə slˈoʊ kəmjˌuːnɪkˈeɪʃən tʃˈænəlz stˈaɪlz ɪnðə wˈɛst kʊd lˈæɡ bᵻhˌaɪnd baɪ twˈɛnti fˈaɪv tə θˈɜːɾi jˈɪɹ",
+  "heard": "hˈʌvɚ dˈu dˈoʊ dˈoʊ sləʊʃnəlz stˈaɪlz ˈɪn ðə wˈɛst kʊd lˈæg bəhˈaɪn bˈaɪ dˈoʊnˈfˌaɪv tˈɪ θɹtəɹ tˈɪ jɪɹz"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10052240106321793346",
+  "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+  "ref": "ˈɔːl nˈaʊnz ɐlˈɔŋsaɪd ðə wˈɜːd sˈaɪ fɔːɹ juː ˈɔːlweɪz bɪɡˈɪn wɪð ɐ kˈæpɪɾəl lˈɛɾɚ ˈiːvən ɪnðə mˈɪdəl əvə sˈɛntəns",
+  "heard": "ˈoʊnˌaʊnz ə wɔːl sɛɪ fɔː jˈu ˈoʊliz bɪgˈɪnd wˈɛɪ ˈkævɪtə ˈɪvən ðə ˈminəl əv ˈsentəns"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10167324587744183095",
+  "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+  "ref": "tə ðə nˈɔːɹθ ænd wɪðˌɪn ˈiːzi ɹˈiːtʃ ɪz ðə ɹoʊmˈæntɪk ænd fˈæsᵻnˌeɪɾɪŋ tˈaʊn ʌv sˈɪntɹə ænd wˌɪtʃ wʌz mˌeɪd fˈeɪməs tə fˈɔːɹənɚz ˈæftɚɹ ɐ ɡlˈoʊɪŋ ɐkˈaʊnt ʌv ɪts splˈɛndɚz ɹᵻkˈɔːɹdᵻd baɪ lˈɔːɹd bˈaɪɹɑːn",
+  "heard": "tˈɛɹˈdʒˈʌnˈʌnˈʌnˈʌnˈʌnˈʌnˈʌnˈ ˈɪzɪ ɛɹˈɑɹd ˈeɪɛn ˈɛnʌn ˈɪnʌnʌɹd ˈeɪ ˈɛnʌn"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fˈeɹˈɛɹˈz ˈɔlsə paɪd tɹɪbjˈut tʃiɪnˈɛ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.daniel.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fˈeɹˈɛzˈɔlsəʊ pˈeɪ tʃˈɛbjˈut tʃˈɛlunə"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.01",
+  "text": "Think of the skiing route as of a similar hiking route.",
+  "ref": "θˈɪŋk ʌvðə skˈiːɪŋ ɹˈaʊt æz əvə sˈɪmɪlɚ hˈaɪkɪŋ ɹˈaʊt",
+  "heard": "θɪv ðɪ skiɪŋ ˈɑz ˈeɪzəmɪlɛɹˈudʒjˈɔ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1001146817223348054",
+  "text": "Se recomienda enfáticamente a los viajeros que se informen sobre cualquier riesgo de clima extremo en el área que visitan, dado que ello puede afectar sus planes de viaje.",
+  "ref": "se rˌekomjˈɛnda enfˈatikamˈente a los βjaxˈeɾos ke se infˈoɾmen sˌoβɾe kwalkjˈeɾ riˈesɣo ðe klˈima ekstɾˈemo en el ˈaɾea ke βisˈitan dˈaðo ke ˈejjo pwˈeðe ˌafektˈaɾ sus plˈanes ðe βjˈaxe",
+  "heard": "seɾɾekomjnda enfˈatika mˈɛnta los bjaxeɾos ke sˌimfoɾmen soβɾe kˈerɾɪxɔ del klˈima ˌɛkˈtɾˌemˈo ˈɛn ˈelˈɑɾja ke bisitˈan dˈaɾo ke ˈeʎo pwˈeɾ afektˈaɾ sus plˈones de bjaxeɾ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.10050510856477907332",
+  "text": "El uso adecuado de los blogs «puede empoderar a los alumnos para que sean más analíticos y críticos, a través de la respuesta activa a los contenidos de internet, pueden definir sus posturas en el contexto de los escritos de otros, además de establecer sus perspectivas sobre temas específicos» (Oravec, 2002).",
+  "ref": "el ˈuso ˌaðekwˈaðo ðe los βlˈoɡs pwˈeðe ˌempoðeɾˈaɾ a los alˈumnos pˌaɾa ke sˈean mˈas ˌanalˈitikos i kɾˈitikos a tɾaβˈes ðe la respwˈesta aktˈiβa a los kˌontenˈiðos ðe ˌinteɾnˈet pwˈeðen dˌefinˈiɾ sus postˈuɾas en el kontˈeksto ðe los eskɾˈitos ðe ˈotɾos ˌaðemˈas ðe ˌestaβlesˈeɾ sus pˌeɾspektˈiβas sˌoβɾe tˈemas ˌespesˈifikos ˌoɾaβˈek dˈos mˈil ðˈos",
+  "heard": "el usʊ de kwado de los bloks pwedem poeɾaɾa los alumnos pɾaɾkesean asnalitikos kɾitikos atɾaβes de la ɾɛspastaktiβas los kontonioz dintonet pwen definil sus posturas el kontestos de los ɛskritos de otos ademas destables el sus perpɛktiβas soβɾe temas espezifikos oɾaβek dos mil dos"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1008205615316519958",
+  "text": "Fue tanta la cantidad de gente que se concentró, que no todos pudieron acceder al funeral en la Plaza de San Pedro.",
+  "ref": "fwˈe tˈanta la kˌantiðˈad ðe xˈɛnte ke se kˌonsentɾˈo ke nˈo tˈoðos puðjˈeɾon ˌakseðˈeɾ al fˌuneɾˈal en la plˈasa ðe sˈam pˈeðɾo",
+  "heard": "fwˈe tˈanta la kantˈia ˌexˈɛnte ke se konsentro ke no tˈoɾo nˌekθedˈeɾ alfʊŋirˈal ˈɛn la plˈasa ˈesampeðɾˌo"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aɾos mitsa ɦanθeɾtos pendjentes suxira"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.mateo.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aɾos mˈiɾa kˌansˈeɾtos pˈendjˈɛntes de suxˈiɾa"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.01",
+  "text": "Imagínese la pista de esquí como una ruta de senderismo.",
+  "ref": "ˌimaxˈinese la pˈista ðe eskˈi kˌomo ˈuna rˈuta ðe sˌendeɾˈismo",
+  "heard": "imaɣˈin elapista deʃa la ruta dezendirismo"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10043298898524273336",
+  "text": "L’accident a eu lieu en terrain montagneux, et il semblerait que cela ait été causé par un incendie malveillant.",
+  "ref": "laksidˈɑ̃ a y ljˈø ɑ̃ tɛʁˈɛ̃ mɔ̃tanjˈø e il sɑ̃bləʁˈɛ kə səlˌa ɛt etˈe kozˈe paʁ œ̃n ɛ̃sɑ̃dˈi malvɛjˈɑ̃",
+  "heard": "ɛmˈa ɛmˈɛmˈɛmˈɛmˈɛmˈɛmˈɛmˈɛmˈlʊ ʁə səlˈa etˈɛ kozˈe pa nˈɛm sɛmˈaɛmˈɛmˈ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10097171356371990207",
+  "text": "Nous sommes d'accord avec la déclaration de l'USOC (Comité olympique des États-Unis) selon laquelle les intérêts de nos athlètes et de nos clubs, ainsi que de leur sport, pourraient être mieux servis. Cela peut être fait en allant de l'avant et en procédant plutôt à des changements significatifs au sein de notre organisation, qu'à la révocation d'accréditation.",
+  "ref": "nu sɔm dakˈɔʁ avˌɛk la- deklaʁasjˈɔ̃ də- lyzˈɔk komitˈe olɛ̃pˈik de-z etˈazynˈi səlˈɔ̃ lakˈɛl le-z ɛ̃teʁˈɛ də- noz atlˈɛtz e də- no klˈœb ɛ̃sˌi kə də- lœʁ spˈɔʁ puʁˈɛt ˈɛtʁ mjˌø sɛʁvˈi səlˌa pˈøt ˈɛtʁ fˈɛt ɑ̃n alˈɑ̃ də- lavˌɑ̃ e ɑ̃ pʁosedˈɑ̃ plytˈoː a de- ʃɑ̃ʒmˈɑ̃ siɲifikatˈifz o sˈɛ̃ də- notʁ ɔʁɡanizasjˈɔ̃ ka la- ʁevokasjˈɔ̃ dakʁeditasjˈɔ̃",
+  "heard": "ˈo dˈa kɔːʁʁ dˈy- dˈy-ʁa sˈy-ʁˈkˈʁˈ dˈy-ʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁˈʁ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10138021779681596478",
+  "text": "Il a ajouté qu’« on ne devrait cependant pas leur demander d’assumer des obligations qui dépassent leur stade de développement, leur responsabilité et leurs capacités. »",
+  "ref": "il a aʒutˈe k ɔ̃ nə- dəvʁˈɛ səpɑ̃dˈɑ̃ pa lœʁ dəmɑ̃dˈe dasymˈe de-z ɔbliɡasjˈɔ̃ ki depˈas lœʁ stˈad də- devlɔpmˈɑ̃ lœʁ ʁɛspɔ̃sabilitˈe e lœʁ kapasitˈe ˌaaksɑ̃siʁkɔ̃flˈɛks",
+  "heard": "el aʒut kɔn dˈœʁ ʁezpʁɑn pa lɔʁ dɛmɑʁ dɛʁˈɛʁˈɛʁˈʁˈʁˈˈʁˈʁˈˈʁˈˈʁˈʁˈˈʁˈʁˈˈʁˈʁˈˈʁˈʁˈˈʁˈʁˈˈʁˈˈʁˈʁˈʁˈʁˈʁˈʁˈˈʁˈˈʁˈʁˈˈʁˈʁˈʁˈʁˈˈʁˈˈʁˈʁˈˈʁˈˈˈʁˈʁˈˈʁˈˈʁˈʁˈʁˈˈʁˈˈʁˈʁˈˈʁˈʁˈˈʁˈˈʁˈˈʁˈˈˈʁˈˈʁˈˈʁˈˈʁˈˈʁˈˈ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "le tˈœʁ ɑmˈaʒˈɛ ˈoʁmˈaʒˈɛɾ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.etienne.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "ʁˈʁˈʁˈʁʒˈɛʁ ʁɑʒˈʁˈʁˈ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.01",
+  "text": "Une bombe a explosé devant le bureau du gouverneur général.",
+  "ref": "yn bˈɔ̃b a ɛksplozˈe dəvˈɑ̃ lə- byʁˈo dy- ɡuvɛʁnˈœʁ ʒeneʁˈal",
+  "heard": "yn bɔ ba ekʃi dɛ bʁo dʒyvɛtʁaʁ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10000151032537989529",
+  "text": "Il blog è uno strumento che si prefigge di incoraggiare la collaborazione e sviluppare l'apprendimento degli studenti ben oltre la giornata scolastica normale.",
+  "ref": "il blˈoɡ e ˈuno strʊmˈento ke sɪ prefˈidʒːe dɪ inkoradʒːˈare la kollaboratsiˈone e zvilʊpːˈare lapːrendimˈento dˌeʎɪ stʊdˈɛntɪ bˈɛn ˌoltre la dʒornˈata skolˈastika normˈale",
+  "heard": "ʃiɾnˈɛ ʊn ʊstrʊmentˈoʊ ke si prefilʒːe dɪnˈkɔ radʒːˈɛrˈɛ ˌɛnˈɔˈɛˈɔˈɛˈɔˈɛˈɔˈɛˈɔˈɛˈɔˈɛˈɔˈɛˈʃtʃʃɔˈlɔˈɛˈʃtɛˈkɔˈlɔˈɛˈnˈɔˈɛˈnˈʃɔˈlɔˈɛˈnˈɔˈɛˈʃkɔˈlˈastɛːːˈˈˈʎɔnˈɔrmˈɔlɛː"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10011138801715101183",
+  "text": "Sotto il ponte lo spazio in verticale libero è di 15 metri. La costruzione è terminata nell'agosto del 2011, ma l'apertura al traffico è avvenuta solo nel marzo 2017.",
+  "ref": "sˈotːo il pˈonte lo spˈatsio in vertikˈale lˈibero e dɪ kwˈimditʃɪ mˈɛtrɪ la kostrʊtsiˈone e terminˈata nellaɡˈosto del dˈue mˈiːla ˈunditʃɪ ma lapertˈura al trˈaffiko e avvenˈuta sˈolo nel mˈartso dˈue mˈiːla ditʃassˈɛtːe",
+  "heard": "sˈɔtˈɛl pˈɔntˈeːlo spatsˈiːn vˈɛrtikare lˈibɛro edikwindʒˈi metˈri la kostrutsionˈɛt terminˈata nˈɛlla gˈɔsseldˈɛmˈʊndˈɛtʃiː mˈala pertoɾˈaltrˈafiko ˈavvonˈutasənɛ nˈelmˈɔtso dˈomiˈɛ dˈʃasˈɛtː"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10017896147709177739",
+  "text": "Se avete visto il film \"Il mistero dei Templari\", potreste pensare che sul retro della Dichiarazione d'Indipendenza sia disegnata una mappa del tesoro.",
+  "ref": "se avˌete vˈisto il fˈilm il mistˈɛro dˌeɪ templˈarɪ potrˈɛste pensˈare ke sʊl rˈɛtro dˌella dikjaɾatsiˈone dindipendˈɛntsa sˌia dizeɲˈata ˌʊna mˈapːa del tezˈɔro",
+  "heard": "sa avˈeʎa vˈisto il mistˈero dˌei templarˈi potresː pensare ke sʊrˈɛtɾo dˌella dikaɾatsionˈe dˌindipendˈɛnsa sɪa dizˈɛnjata ˌuna mapa del tɛzːˈɔro"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nʊ serve per fɔrtsɛ pɛlɛɾiɛiɾiɛiɾiɛiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾiɾi�"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.lorenzo.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nʊntʃˌɛ per foɾtsˈaʊ noiˈɔtˈɛ per iɔrˈtʃiː pelagˈi"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.01",
+  "text": "È più sottile sotto i mari e più spessa sotto le aree montuose.",
+  "ref": "e pjʊ sotːˈile sˈotːo i mˈarɪ e pjʊ spˈessa sˈotːo le ˈaːree montʊˈoze",
+  "heard": "ˈe pʃo tʃo mʊnʊˈɔˈʃˈ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10042455874761876908",
+  "text": "Volgens Angel (2006) kunnen organisaties beter presteren met een aanpak op basis van het continuümmodel.",
+  "ref": "vˈɔlɣəns ˈɑŋəl tʋˈeː dˌœyzɛnt zˌɛs kˌɵnən ˌɔrɣaːnizˈaːtsis bˈeːtər prɛstˈɪːrən mɛt ən ˈaːnpˌɑk ɔ pˈaːzɪs vɑn hət kˌɔntinˌyɵmoːdˈɛl",
+  "heard": "vˈɔz ˈaŋɔlˌtˈyːɾ dˈaɪsən sˈɛs kɔnˌɪsaːtˈɪs bˈeːtɛpɾɛ mɛn ˈaːnpˌakɔbˈɑːsɛs vɔn ɛt kɔntˈɪnˈyːyːmˈuːdˈɛl"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.1004717084892689357",
+  "text": "Varkens dragen de ziekte bij zich en dragen het via muggen over op mensen.",
+  "ref": "vˈɑrkəns drˈaːɣən də zˈiktə bɛɪ zɪx ɛn drˈaːɣən hət vˈiaː mˈɵɣən ˈoːvər ɔp mˈɛnsən",
+  "heard": "vˈɑkə zˈɪçt bˈaɪ zˈɪç ˈɪn dɹˈaɣən ˈɪn mˈʊʊʊʊʊʊʊʃ mˈɛnsən"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10152288169439514825",
+  "text": "Bij een verkeersstroom wordt gekeken naar de bewegingen van individuele bestuurders en voertuigen tussen twee punten en de interacties die plaatsvinden tussen de individuen.",
+  "ref": "bɛɪ ən vərkˈɪːrsstrˌoːm ʋɔrt ɣəkˈeːkən naːr də bəʋˈeːɣɪŋən vɑn ˈɪndˌividyˌeːlə bəstˈyrdərs ɛn vˈurtœyɣən tˈɵsən tʋˈeː pˈɵntən ɛn də ˌɪntərˈɑksis di plˈaːtsfɪndən tˈɵsən də ˈɪndˌividˌyən",
+  "heard": "ba jɛnvɛkˈɛrˈɔnˌʊɐt gəkˈeːkənˌaːdə bəvˈɪŋən vɛnˈvˈiːdə vˌeːlə bəstˈyːrˈdɛs ɛn fˈoːɾtaɪgə pɛnˈɛt tˈɛɾ tˈeːrˈɛ pʊɛn tɛrˈɾaːkˈsɪ dˈiː plˈaɑt vˈɪndə tˈɛrʃən dˈɪnvə dˈiːvɪ dˈuːən"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "ˌoːkˌmˈɛːʃtˈɛlˈdˈaːnˈlˈnˈaː"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.stijn.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "ˈoːmˈɛtˈɛlˈɑn lˈaɪsˌbɾˈɑnˈlˈnˈaː"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.01",
+  "text": "Je kunt de skiroute zien als een wandelroute.",
+  "ref": "jə kɵn tə skˈirutə zˈin ɑls ən ʋˈɑndɛlrˌutə",
+  "heard": "ˈjə kˈɵtə zˈɔn vˈandərˈutˈɛ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10003602174340488201",
+  "text": "Podróżni zwiedzający państwa obłożone szczególnie wysokimi podatkami mogą czasem zaoszczędzić sporo pieniędzy, szczególnie na takich towarach jak alkohol i tytoń.",
+  "ref": "pɔdrˈuʒɲi zvʲˌɛdʑajˈɔntsɨ pˈaɲstfa ˌɔbwɔʒˈɔnɛ ʃtʃɛɡˈulɲʲɛ vˌɨsɔkˈimi pˌɔdatkˈami mˈɔɡɔ̃ tʃˈasɛm zˌaɔʃtʃˈɛɲdʑitɕ spˈɔrɔ pʲɛɲʲˈɛndʑɨ ʃtʃɛɡˈulɲʲɛ na tˈakix tɔvˈarax jˈak alkˈɔxɔl i tˈɨtɔɲ",
+  "heard": "pɔdruʑni zvjɛzajɔnsɨ paɛsva ɔbɔʐɔna ʃtʂɛguɲɛ vɨsotkɨmi pɔdatka mi mɔgɔntʂɛm zɔʂtʂɛndʑits spɔrɔpɛɲɛndzɨ ʃtʂɛguɲɛnɑ takɛx tɔvaɾax jak alkɔxɔl ɛtɔɲ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10013271501230525766",
+  "text": "Większość mniejszych wysp to narody niezależne lub sprzymierzone z Francją i słynące jako luksusowe nadmorskie miejscowości wypoczynkowe.",
+  "ref": "vʲˈɛŋkʃɔɕtɕ mɲʲˈɛjʃɨɣ vˈɨsp tɔ narˈɔdɨ ɲʲˌɛzalˈɛʒnɛ lˈup spʃˌɨmjɛʒˈɔnɛ s frˈantsjɔ̃ i swɨnˈɔntsɛ jˈakɔ lˌuksusˈɔvɛ nadmˈɔrskʲɛ mʲˌɛjstsɔvˈɔɕtɕi vˌɨpɔtʃɨŋkˈɔvɛ",
+  "heard": "vjɛŋkʂɔɕiɲɛ ʃiɦ vɨspɛtʂɔn nɛɕnɔɕnɔɕnɔɕnɔɕnɔɕnɔɕnɔnɔɕnɔkʲɔlɔkʃɔvɛ nɑdbɑlskɛ miɕtɔvɔɕtiɛ vɨpɔtʃɛnkɔvɛɔ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10047713455444904767",
+  "text": "Zgodnie z oświadczeniem biura gubernatora wśród rannych było dziewiętnastu policjantów.",
+  "ref": "zɡˈɔdɲʲɛ z ˌɔɕfʲattʃˈɛɲʲɛm bjˈura ɡˌubɛrnatˈɔra fɕrˈut rˈannɨɣ bˌɨwɔ dʑˌɛvʲɛtnˈastu pˌɔlitsjˈantuf",
+  "heard": "skodnʲe ɔɕvɛtʂɲɛm bʲiragɔbɛrnɛnɔdɔdɔdɔdɔdɔk pɔdʑɔvjɔnɔdɔsɔpɔliʲtʃɛndʊv"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tak zvoɾi xot luɲa"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.kacper.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tak zɫi xɔtɕɔɔɕ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.01",
+  "text": "Springboks przełamali złą passę pięciu przegranych.",
+  "ref": "sprˈiŋɡbɔks pʃˌɛwamˈali zwˈɔ̃ pˈassɛ pʲˈɛɲtɕu pʃɛɡrˈanɨx",
+  "heard": "spʂɛɫa mɛɕɛ pjɛntʃu pʂagranɨ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10008174856218516817",
+  "text": "Segundo informações, ele estava na casa dos 20 anos. Em uma declaração, Bieber disse que, \"embora eu não estivesse presente nem diretamente envolvido neste trágico incidente, meus pensamentos e orações estão com a família da vítima\".",
+  "ref": "sˌeɡˈũŋdw ˌiŋfoɾəmasˈõjs ˌely estˌavæ na kˈazæ dʊs vˈiŋtʃy ˈɐ̃nʊs ˈeɪŋ ˌumæ dˌeklaɾasˈɐ̃ʊ̃ bˌiebˈer dʒˈisy ky ˌeɪmbˈɔɾæ eʊ nˌɐ̃ʊ̃ ˌestʃivˈɛsy prˌezˈeɪŋtʃy nˈeɪŋ dʒˌiɾetæmˈeɪŋtʃj ˌeɪŋvowvˈidʊ nˌestʃi trˈaʒikw ˌiŋsidˈeɪŋtʃy meʊs pˌeɪŋsæmˈeɪŋtʊz i ˌoɾasˈõjz estˌɐ̃ʊ̃ koŋ a fˌæmˈiljæ da vˈitʃimæ",
+  "heard": "ˈeɪʃˈɔˈʃˈɔˈʃˈɔˈʃˈɔˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃˈʃʈʃˈʃʌʃˈʃʈʃˈʃʈʃˈʌnʌʃˈʌnʌʃʌnʌʌʃˈʌnʌʌʃʌnʌʌnʌʌʃˈʊʃ ʌnʌʊʌʌʌʌʃˈʃʌnʌʌʌʌʌʌʌʌnʌʌʌnʌʌʌnʌʌnʌʌʌnʌʌnʌʌnʌʌnʌʌnʌnʌʌnʌnʌnʌnʌnʌnʌnʌnʌnʌnʌnʌnʌnʌnʌnjʊʌnʌnjʊʌnjʊʌnʌnʌnjʊʌnjʊʌnjʊʌnjʊnjʌnjʊnjʌn"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10047022047800689031",
+  "text": "Construída pelos egípcios no século 3 A.C., a Grande Pirâmide é uma das muitas grandes estruturas de pirâmide construídas para honrar faraós mortos.",
+  "ref": "kˌoŋstruˈidæ pˈelʊz ˌeʒˈipsjʊz nʊ sˈɛkulʊ trˈez ˌasˌeˈa ɡrˈɐ̃ŋdʒy pˌiɾˈɐ̃midʒj ɛ ˌumæ daz mwˈiŋtæz ɡrˈɐ̃ŋdʒyz ˌestrutˈuɾæz dʒy pˌiɾˈɐ̃midʒy kˌoŋstruˈidæs pˌaɾæ oŋxˈar fˌaɾaˈɔz mˈɔɾətʊs",
+  "heard": "kʊstɹuˈiɪ dɛ ʊstɹʊtʊʃkʊtɹiˈzɛnˈi dɐʒ ʒɹɪŋtʃʊʃʊʃʊʊʃʊʊʃʊʊʃʊʊʊʃʊʊʊʊʃʊʊʊʃʊʊʊʊʊʃʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊʊ�"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10083615766068544069",
+  "text": "Giancarlo Fisichella perdeu o controle do carro e acabou a corrida logo após a largada.",
+  "ref": "ʒˌiɐ̃ŋkˈaɾəlʊ fˌiziʃˈɛlæ peɾədˈeʊ ʊ kˌoŋtrˈoly dʊ kˈaxw i ˌakabˈow a kˌoxˈidæ lˈɔɡw apˈɔz a lˌaɾəɡˈadæ",
+  "heard": "ʃeɴ kɛlɐ pɐdɐ kɐɦɐ kɐbɐ kɐbɐ ɦidɐ lɔɡɐɐ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "pˈeɾˈɛ ˌeɾaɾˈɛtɾˈɛ ˈɛtʃiˈɾˈɛtʃiˈɾˈɛtʃiˈɾˈɛtʃiˈɾˈɛtʃiːɾˈɛɾˈɾˈɛɾˈɾˈɛɾˈɾˈɛɾˈɛɾˈɛɾˈɛɾˈɛɾˈɛɾˈɛɾˈɛɾˈɛɾˈɛɾˈeɾˈɛɾˈɛɾˈɛɾˈɾˈɛɾˈɾˈɛɾˈeˌeɾˈɛɾːɾˈɛɾːɾˈɛɾːɾˈɛɾːɾˈɛɾːɾˈɛɾːɾˈɛɾːɾːɾˈɛɾːɾːɾː ɾːˌeɾːɾːɾˈeɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾːɾː�"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.rafael.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "pɛnˈa ˈɛtʃiˈɔmˈɐ ˌɐɾˈɔtʃɐ ˈɛtʃɐ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.01",
+  "text": "Outros lutadores também prestaram homenagem a Luna.",
+  "ref": "ˈowtrʊz lˌutadˈoɾys tɐ̃mbˈeɪŋ prˌestˈaɾɐ̃ʊ̃ ˌomenˈaʒeɪŋ a lˈunæ",
+  "heard": "otoris tɔmɛm pɾɛstɑɾɛnʃɛnɑ luŋɛ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10000611681338527501",
+  "text": "В древнем Китае использовали уникальный способ обозначения периодов времени; каждый этап Китая или каждая семья, находившаяся у власти, были особой династией.",
+  "ref": "v drʲˈevnʲim kʲitˈɑjɪ ɪspˈoɭzʌvʌɭʲɪ unʲikˈɑɭnyj spˈosʌp ʌbʌznatʃˈenʲija pʲirʲˈiʌdʌf vrʲˈemʲinʲɪ kˈɑʒdyj ɛtˈɑp kʲitˈɑja ˌɪɭʲɪ kˈɑʒdʌja sʲimʲjˈja nʌxʌdʲˈifʃʌjasʲʌ u vɭˈɑsʲtʲɪ bˌyɭʲɪ ʌsˈobʌj dʲinˈɑsʲtʲijij",
+  "heard": "vdrʲev nʲimkʲitaje spolʲzavoɫʲi unʲekalʲnʲi sposopa znatʂɨnʲe pirɛda fʲuvrʲemʲi kaʐdaɨ tabkʲitaja ɫɛ kaʐdaɛ sʲimja naxadzʲivʂɛsʲauvɫasʲtsʲi bɨɫe asobɛ dzjnasʲiʲ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10002861505982796062",
+  "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+  "ref": "mʌdʌɡaskˈɑr namnˈoɡʌ bˈoɭʃy druɡʲˈix ɪ javɭʲˈɑjitsʌ sʌmʌbˈytnym kʌntʲinʲˈentʌm f tˈom ʃto kasˈɑjitsʌ dʲˈikʌj prʲirˈody",
+  "heard": "matagaskarno mnoga bolʲʂɨ druʣʲif javʲeʲetstsa samabɨtnɨm kanʲtsʲ nʲenʲ tam tokasatsʲ dzʲikaj prirodɨ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10008070632189747443",
+  "text": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+  "ref": "vˈo fsʲˈex naˈutʃnyx vʌprˈosʌx fkɭʲutʃˈɑja psʲixʌɭˈoɡʲiju bˌyɭʲɪ prʲˈinʲʌty vzɡɭʲˈɑdy arʲistˈotʲiɭʲʌ",
+  "heard": "va fʃex naːuʃnɨx vaproːx vkʲutʃɛx pʲiɫʲi prinʲetzglʲadɛ rʲistotʂɨɫʲa"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vaʐa razlʲatzʲ gɫa dopouʲːe"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.sergei.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vaʒna razlʲe tɕaɫa ji dopoɫʲenʲe"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.01",
+  "text": "Коллеги-рестлеры тоже отдали Луне дань уважения.",
+  "ref": "kʌɭɭʲˈeɡʲɪrʲistɭʲˈery tˈoʒy ʌddˈɑɭʲɪ ɭunʲˈe dˈɑnʲ uvaʒˈɛnʲija",
+  "heard": "kalʲːerɨ tˈɛʂɛrɨ tˈoʒʌ ʌdʌɭˈʌnʌ ʌvʌʒˈɛnija"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10021730821550109934",
+  "text": "Жінки: усім подорожнім жінкам радять казати, що вони заміжні, незалежно від справжнього сімейного стану.",
+  "ref": "ʒˈiːnkɪ ˈusiːm podorˈoʒɲiːm ʒˈiːnkam rˈadjat kazˈat̪ɪ ʃtʃˈo βonˈɪ zamˈiːʒɲiː nɛzˈalɛʒno βˈiːt spraβʒɲˈoho siːmˈɛjnoho st̪ˈanu",
+  "heard": "ʒinkʲi wsʲim pʲeroʐnʲe mʲetsʲ rɛtʲːkazatɛ tʂavɨ nʲa zamʲiʐnʲe nazavɛʐnʊvʲetsʲ pravʲnʲuju sʲimɨnʊa stanu"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10046655283476675991",
+  "text": "Такі батьки можуть вирішити створити для своєї дитини план всиновлення.",
+  "ref": "t̪ˈakiː bˈatkɪ mˈoʒut βɪrˈiːʃɪt̪ɪ zd̪βorˈɪt̪ɪ dʎˈa zβojˈɛjiː dɪt̪ˈɪnɪ plˈan fsɪnˈoβlɛnɲa",
+  "heard": "takʲi batʲi moɾuʲːeʂɛtʂtvrɨ tɛ svɛjɛtʲːɪnɛ plan sɛnovɛnʲa"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10095052411990461296",
+  "text": "Місячна кора становить приблизно 70 км у товщину на ближній стороні та 100 км у товщину на дальній стороні.",
+  "ref": "miːsjˈatʃna kˈora st̪anˈoβɪt prɪblˈɪzno siːmdesjˈat kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa blˈɪʒɲiːj st̪orˈoɲiː t̪ˈa stˈo kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa dˈaʎɲiːj st̪orˈoɲiː",
+  "heard": "mizʲno vɨ prɨblɨʂnasʲi mʲetsʲ kɛlamɛtɾi utovʂinu na blɨʂnʲiʂto ranʲi taʂtoj kilɛtɾi utovʂinu na daʲnʲiʲ sto ranʲi"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bjitsʲ koʂ vjtɛɫɨ ʂanuɫɨ"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.taras.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bʲitsʲ kɔɣɛ tako ɔdɛɾɔnʲi"
+ },
+ {
+  "model": "whisper-ipa-base",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.01",
+  "text": "Але птахи все ще мають багато чого від динозаврів.",
+  "ref": "alˈɛ pt̪ˈaxɪ fsˈɛ ʃtʃˈɛ mˈajut bahˈat̪o tʃˈoho βˈiːd dɪnozˈaβriːβ",
+  "heard": "alʲːjavjutsʲ ɣʲːo vʲetɕjavʲjadʲːo vʲetɕjavjjadʲːo zavrjiv"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10004059102127011984",
+  "text": "Für die besten Aussichten auf Hongkong sollten Sie die Insel verlassen und zum gegenüberliegenden Ufer von Kowloon fahren.",
+  "ref": "fyːɾ diː bˈɛstən ˈaʊszˌɪçtən aʊf hˈɔŋkɔŋ zˌɔltən ziː diː ˈɪnzəl fɛɾlˈasən ʊnt tsʊm ɡeːɡənˌyːbɜlˈiːɡəndən ˈuːfɜ fɔn kˈɔvloːn fˈɑːrən",
+  "heard": "fyːɐdiːbɛstnʔaoszɪçtənaʊfhɔŋkɔŋzɔltnziːdiːɪnzəlfɛɐlasənʊnttsʊmgəgənyːbɛlegɛndənuːfɐfɔnkɔvlunfaːʁən"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10009182821551087671",
+  "text": "Er griff auch alles an, was ins Wasser kam; selbst ein großer Dinosaurier wie der T. Rex war ihm nicht gewachsen.",
+  "ref": "ɛɾ ɡɾˈɪf ˌaʊx ˈaləs ˈan vˈas ɪns vˈasɜ kˌɑːm zˈɛlpst aɪn ɡɾˈoːsɜ dˌiːnoːzaʊrˈiːɾ viː dɛɾ tˈeː rˈɛks vɑːɾ iːm nˈɪçt ɡəvˈaxzən",
+  "heard": "eːɐgɾɪffaʊxaləsʔanvasɪnsvasɐkɑːmzɛlpstɛɪngɾoːsɐdinozɑuːɐiɐviːdɐteːvɑksvaːɐiːmnɪçtgəvaksən"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10014044777125235464",
+  "text": "Wenn Sie den Film „Das Vermächtnis der Tempelritter“ gesehen haben, denken Sie vielleicht, dass auf die Rückseite der Unabhängigkeitserklärung eine Schatzkarte gezeichnet wurde.",
+  "ref": "vˌɛn ziː deːn fˈɪlm das fɛɾmˈɛçtnɪs dɛɾ tˈɛmpəlrˌɪtɜ ɡəzˈeːən hˈɑːbən dˈɛŋkən ziː fɪlˈaɪçt das aʊf diː rˈʏkzaɪtə dɛɾ ˌʊnaphˈɛŋɪçkˌaɪtzɜklˌɛːrʊŋ ˌaɪnə ʃˈatskaɾtə ɡətsˈaɪçnət vˌʊɐdə",
+  "heard": "vənziːdənfɪlmdɑːsfəʀmæːxtnisdəʀtɛmpɛlʀɪtəgeːseːənhɑːbəndəŋkənsiːfɪlaɪxtdɑːsaufdəʀʀʏksaiteːdəʀuːnafhæːŋɪkkaɪtsəʀklæːʀuːŋainəʀʃatsgaʀteːgətsaɪxneːtvʊʀdə"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "ɾɪŋɐkɔllegəntsɔøktənluːnɑeːbn̩falstɾiːbut"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.clemens.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "ɾɪŋɐkɔllegəntsɔltənluːnɑeːbn̩falstɾiːbut"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.01",
+  "text": "Es ist dünner unter den Mare und dicker unter dem Hochland.",
+  "ref": "ɛsɪst dˈʏnɜ ˌʊntɜ deːn mˈɑːrə ʊnt dˈɪkɜ ˌʊntɜ deːm hˈoːxlˌant",
+  "heard": "eːsɪstdʏnəʀʊntəʀdənmɑːʀeːʊnddɪkəʀʊntəʀdeːmhɔxlant"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.1003119935936341070",
+  "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+  "ref": "haʊˈɛvɚ dˈuː tə ðə slˈoʊ kəmjˌuːnɪkˈeɪʃən tʃˈænəlz stˈaɪlz ɪnðə wˈɛst kʊd lˈæɡ bᵻhˌaɪnd baɪ twˈɛnti fˈaɪv tə θˈɜːɾi jˈɪɹ",
+  "heard": "haʊɛvɜ˞djutuðəsl̴oʊkəmjunəkeɪʃəntʃænəl̴zstaɪl̴zɪnðəwɛstkʊdl̴ægbɪhaɪndbaɪtwɛnifaɪvtuθɜ˞dijɪɹz"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10052240106321793346",
+  "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+  "ref": "ˈɔːl nˈaʊnz ɐlˈɔŋsaɪd ðə wˈɜːd sˈaɪ fɔːɹ juː ˈɔːlweɪz bɪɡˈɪn wɪð ɐ kˈæpɪɾəl lˈɛɾɚ ˈiːvən ɪnðə mˈɪdəl əvə sˈɛntəns",
+  "heard": "ɔl̴naʊzəl̴ɔŋsaɪdðəwɜ˞l̴dseɪfɹɜ˞juɔl̴weɪzbɪgɪnwɪθeɪkæpətəl̴l̴ɛtɜ˞ivɪnðəmɪdəl̴əveɪsɛntəns"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10167324587744183095",
+  "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+  "ref": "tə ðə nˈɔːɹθ ænd wɪðˌɪn ˈiːzi ɹˈiːtʃ ɪz ðə ɹoʊmˈæntɪk ænd fˈæsᵻnˌeɪɾɪŋ tˈaʊn ʌv sˈɪntɹə ænd wˌɪtʃ wʌz mˌeɪd fˈeɪməs tə fˈɔːɹənɚz ˈæftɚɹ ɐ ɡlˈoʊɪŋ ɐkˈaʊnt ʌv ɪts splˈɛndɚz ɹᵻkˈɔːɹdᵻd baɪ lˈɔːɹd bˈaɪɹɑːn",
+  "heard": "tuðənɔɹθəndwɪðɪniziɹitʃæzəɹoʊmæntɪkənfæsəneɪtɪŋtaʊnʌvsɛntɹəəndwɪtʃwɑzmeɪdfeɪməstufɔɹənə˞zæftə˞əgloʊɪŋəkaʊntʌvɪtssplɛndə˞əsɹəkɔɹdədbaɪlɔɹdbaɪɹən"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛl̴oʊɹɛsəl̴ɜ˞zɔl̴soʊpeɪdtɹɪbjuttul̴unə"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.daniel.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛloʊɹɛsələ˞zɔlsoʊpeɪdtɹɪbjuttulunə"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.01",
+  "text": "Think of the skiing route as of a similar hiking route.",
+  "ref": "θˈɪŋk ʌvðə skˈiːɪŋ ɹˈaʊt æz əvə sˈɪmɪlɚ hˈaɪkɪŋ ɹˈaʊt",
+  "heard": "θɪŋkʌvðəskiɪŋɹutæzʌvəsɪmələ˞haɪkɪŋɹut"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1001146817223348054",
+  "text": "Se recomienda enfáticamente a los viajeros que se informen sobre cualquier riesgo de clima extremo en el área que visitan, dado que ello puede afectar sus planes de viaje.",
+  "ref": "se rˌekomjˈɛnda enfˈatikamˈente a los βjaxˈeɾos ke se infˈoɾmen sˌoβɾe kwalkjˈeɾ riˈesɣo ðe klˈima ekstɾˈemo en el ˈaɾea ke βisˈitan dˈaðo ke ˈejjo pwˈeðe ˌafektˈaɾ sus plˈanes ðe βjˈaxe",
+  "heard": "sɛɾɛkomiɛndaɛnfatikamɛntɛsigalosbiaxɛroskɛsɛinformɛnsobrɛkwalkiɛrɾixodɛlklimaɛkstrɛmoɛnɛlarɛakɛbisitandadokɛɛʎopwɛdɛafɛktarsusplanɛsdɛbiaxɛ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.10050510856477907332",
+  "text": "El uso adecuado de los blogs «puede empoderar a los alumnos para que sean más analíticos y críticos, a través de la respuesta activa a los contenidos de internet, pueden definir sus posturas en el contexto de los escritos de otros, además de establecer sus perspectivas sobre temas específicos» (Oravec, 2002).",
+  "ref": "el ˈuso ˌaðekwˈaðo ðe los βlˈoɡs pwˈeðe ˌempoðeɾˈaɾ a los alˈumnos pˌaɾa ke sˈean mˈas ˌanalˈitikos i kɾˈitikos a tɾaβˈes ðe la respwˈesta aktˈiβa a los kˌontenˈiðos ðe ˌinteɾnˈet pwˈeðen dˌefinˈiɾ sus postˈuɾas en el kontˈeksto ðe los eskɾˈitos ðe ˈotɾos ˌaðemˈas ðe ˌestaβlesˈeɾ sus pˌeɾspektˈiβas sˌoβɾe tˈemas ˌespesˈifikos ˌoɾaβˈek dˈos mˈil ðˈos",
+  "heard": "ɛlusoɛkwadodɛlosblokspwedɛnpodɛɾasgalosalumnospaɾakɛsɛanmasanalitikosikɾitikosatɾabɛsdɛlaɾɛspwɛstaaktibaloskonteniosdɛintɛɾnetpwedɛndɛfiniɾsuspostuɾasenɛlkontɛkstodɛlosɛskɾitosdɛotɾosadɛmasdɛstablesɛɾsuspɛɾpɛktibassobɾɛtemasɛspesifikosoɾabekdosmildos"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1008205615316519958",
+  "text": "Fue tanta la cantidad de gente que se concentró, que no todos pudieron acceder al funeral en la Plaza de San Pedro.",
+  "ref": "fwˈe tˈanta la kˌantiðˈad ðe xˈɛnte ke se kˌonsentɾˈo ke nˈo tˈoðos puðjˈeɾon ˌakseðˈeɾ al fˌuneɾˈal en la plˈasa ðe sˈam pˈeðɾo",
+  "heard": "fwɛtantalakantidadɛxɛntɛkɛsɛkonsɛntrokɛnotodospudiɛronaksɛdɛralfunɛralɛnlaplasadɛsanpɛdro"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aɛrosmitkansɛloloskonsiɛrtospɛndiɛntɛsdɛsuxira"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.mateo.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aeɾosmitkanseloloskonsieɾtospendjentesdesuxiɾa"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.01",
+  "text": "Imagínese la pista de esquí como una ruta de senderismo.",
+  "ref": "ˌimaxˈinese la pˈista ðe eskˈi kˌomo ˈuna rˈuta ðe sˌendeɾˈismo",
+  "heard": "imaxinasɛlapistadɛɛskikomounaɾutadɛssɛndɛrismo"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10043298898524273336",
+  "text": "L’accident a eu lieu en terrain montagneux, et il semblerait que cela ait été causé par un incendie malveillant.",
+  "ref": "laksidˈɑ̃ a y ljˈø ɑ̃ tɛʁˈɛ̃ mɔ̃tanjˈø e il sɑ̃bləʁˈɛ kə səlˌa ɛt etˈe kozˈe paʁ œ̃n ɛ̃sɑ̃dˈi malvɛjˈɑ̃",
+  "heard": "ɛlaksidɑ̃ayljøɑntɛʁɛ̃mɔ̃taɲøeilsɑ̃bləʁɛkəsəlaɛstetekozepaʁynɛ̃sɑ̃dimalvɛjɑ̃"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10097171356371990207",
+  "text": "Nous sommes d'accord avec la déclaration de l'USOC (Comité olympique des États-Unis) selon laquelle les intérêts de nos athlètes et de nos clubs, ainsi que de leur sport, pourraient être mieux servis. Cela peut être fait en allant de l'avant et en procédant plutôt à des changements significatifs au sein de notre organisation, qu'à la révocation d'accréditation.",
+  "ref": "nu sɔm dakˈɔʁ avˌɛk la- deklaʁasjˈɔ̃ də- lyzˈɔk komitˈe olɛ̃pˈik de-z etˈazynˈi səlˈɔ̃ lakˈɛl le-z ɛ̃teʁˈɛ də- noz atlˈɛtz e də- no klˈœb ɛ̃sˌi kə də- lœʁ spˈɔʁ puʁˈɛt ˈɛtʁ mjˌø sɛʁvˈi səlˌa pˈøt ˈɛtʁ fˈɛt ɑ̃n alˈɑ̃ də- lavˌɑ̃ e ɑ̃ pʁosedˈɑ̃ plytˈoː a de- ʃɑ̃ʒmˈɑ̃ siɲifikatˈifz o sˈɛ̃ də- notʁ ɔʁɡanizasjˈɔ̃ ka la- ʁevokasjˈɔ̃ dakʁeditasjˈɔ̃",
+  "heard": "nussɔməsdakkɔʀdavɛkladeklaʀasjɔndɛlyzɔkkɔmiteɔlɛ̃pikɛdɛsetatsynissɛlɔnlakɛlɛlɛsɛ̃teʀɛtsdɛnɔsatlɛtɛsɛtdɛnɔsklybsɛ̃sikɛdɛlœʀspɔʀtpuʀtɛtɛtɛtɛomjœkssɛʀvisɛlapœtɛtʀɛfɛtɛnalɑ̃tdɛlavɑ̃tɛtɛnpʀɔzedɑ̃tplytotadɛsʃɑ̃ʒɛmɑ̃tsiɲifikatifsosɛndɛnɔtʀəɔʀganizasjɔnkɛlaʀevɔkasjɔndakʀeditasjɔ̃"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10138021779681596478",
+  "text": "Il a ajouté qu’« on ne devrait cependant pas leur demander d’assumer des obligations qui dépassent leur stade de développement, leur responsabilité et leurs capacités. »",
+  "ref": "il a aʒutˈe k ɔ̃ nə- dəvʁˈɛ səpɑ̃dˈɑ̃ pa lœʁ dəmɑ̃dˈe dasymˈe de-z ɔbliɡasjˈɔ̃ ki depˈas lœʁ stˈad də- devlɔpmˈɑ̃ lœʁ ʁɛspɔ̃sabilitˈe e lœʁ kapasitˈe ˌaaksɑ̃siʁkɔ̃flˈɛks",
+  "heard": "ilaʒutekɔ̃nnədəvʁɛsəpɑ̃dɑ̃palœʁdəmɑ̃dedeasymedeɔbligasjɔ̃kidepaslœʁstaddevlɔpɑ̃dəʁɛspɔ̃sabiliteelœʁkapasite"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "leotʁlytœʁɔ̃egalmɑ̃ʁɑ̃dyomaʒaluna"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.etienne.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "leotʁɛslytœsɔ̃egalmɑ̃tɑ̃dyamaʒaluna"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.01",
+  "text": "Une bombe a explosé devant le bureau du gouverneur général.",
+  "ref": "yn bˈɔ̃b a ɛksplozˈe dəvˈɑ̃ lə- byʁˈo dy- ɡuvɛʁnˈœʁ ʒeneʁˈal",
+  "heard": "ynbɔ̃baɛksplozedəvɑ̃ləbyʁodyguvɛʁnœʁʒeneʁal"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10000151032537989529",
+  "text": "Il blog è uno strumento che si prefigge di incoraggiare la collaborazione e sviluppare l'apprendimento degli studenti ben oltre la giornata scolastica normale.",
+  "ref": "il blˈoɡ e ˈuno strʊmˈento ke sɪ prefˈidʒːe dɪ inkoradʒːˈare la kollaboratsiˈone e zvilʊpːˈare lapːrendimˈento dˌeʎɪ stʊdˈɛntɪ bˈɛn ˌoltre la dʒornˈata skolˈastika normˈale",
+  "heard": "iblogɛunostrumentokesiprefidʒedinkoraddʒarelakollaborattsjonezviruparelapprendimentodestudjɛntibenotreadʒornataskolastikanormale"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10011138801715101183",
+  "text": "Sotto il ponte lo spazio in verticale libero è di 15 metri. La costruzione è terminata nell'agosto del 2011, ma l'apertura al traffico è avvenuta solo nel marzo 2017.",
+  "ref": "sˈotːo il pˈonte lo spˈatsio in vertikˈale lˈibero e dɪ kwˈimditʃɪ mˈɛtrɪ la kostrʊtsiˈone e terminˈata nellaɡˈosto del dˈue mˈiːla ˈunditʃɪ ma lapertˈura al trˈaffiko e avvenˈuta sˈolo nel mˈartso dˈue mˈiːla ditʃassˈɛtːe",
+  "heard": "sotːoilpontelospattsjoinvertikaleliberoɛdikuinditʃimɛtrilakostruutsioneterminatanelːagostadeldemileunditʃimalaperturaaltrafːikoɛavonutasolonelmartsodoile"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10017896147709177739",
+  "text": "Se avete visto il film \"Il mistero dei Templari\", potreste pensare che sul retro della Dichiarazione d'Indipendenza sia disegnata una mappa del tesoro.",
+  "ref": "se avˌete vˈisto il fˈilm il mistˈɛro dˌeɪ templˈarɪ potrˈɛste pensˈare ke sʊl rˈɛtro dˌella dikjaɾatsiˈone dindipendˈɛntsa sˌia dizeɲˈata ˌʊna mˈapːa del tezˈɔro",
+  "heard": "seavetevistoilfilmilmistɛrodɛitemplaripotresepensarekesulretrodelːadikarattsjonedindipendentsasiadiseɲataunamapadeltesoro"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nonserveperforsaunoiotːoperʎartʃipelagieilagi"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.lorenzo.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nonsɛrveperfɔrtsaunojɔttperʎiartʃipelagiajlagi"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.01",
+  "text": "È più sottile sotto i mari e più spessa sotto le aree montuose.",
+  "ref": "e pjʊ sotːˈile sˈotːo i mˈarɪ e pjʊ spˈessa sˈotːo le ˈaːree montʊˈoze",
+  "heard": "ɛpiusotːilesotːoimariepiuspesːasotːoleareemontuose"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10042455874761876908",
+  "text": "Volgens Angel (2006) kunnen organisaties beter presteren met een aanpak op basis van het continuümmodel.",
+  "ref": "vˈɔlɣəns ˈɑŋəl tʋˈeː dˌœyzɛnt zˌɛs kˌɵnən ˌɔrɣaːnizˈaːtsis bˈeːtər prɛstˈɪːrən mɛt ən ˈaːnpˌɑk ɔ pˈaːzɪs vɑn hət kˌɔntinˌyɵmoːdˈɛl",
+  "heard": "vɔlɣɛnsɑŋɛltedœznsɛskʏnnɛɔrɣanisaːtiːsbeːtɛrprɛsteːrɛnmɛteːnaːnpɑkɔbaːzɪsvɑnhɛtkɔntiːnyɛmoːdɛl"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.1004717084892689357",
+  "text": "Varkens dragen de ziekte bij zich en dragen het via muggen over op mensen.",
+  "ref": "vˈɑrkəns drˈaːɣən də zˈiktə bɛɪ zɪx ɛn drˈaːɣən hət vˈiaː mˈɵɣən ˈoːvər ɔp mˈɛnsən",
+  "heard": "vɑrkʏstraːɣɛdɛziːktɛbɛjzɪxɛntraːɣɛnhɛtviːrmʏɣɛnoːvɛrɔpmɛnsxɛn"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10152288169439514825",
+  "text": "Bij een verkeersstroom wordt gekeken naar de bewegingen van individuele bestuurders en voertuigen tussen twee punten en de interacties die plaatsvinden tussen de individuen.",
+  "ref": "bɛɪ ən vərkˈɪːrsstrˌoːm ʋɔrt ɣəkˈeːkən naːr də bəʋˈeːɣɪŋən vɑn ˈɪndˌividyˌeːlə bəstˈyrdərs ɛn vˈurtœyɣən tˈɵsən tʋˈeː pˈɵntən ɛn də ˌɪntərˈɑksis di plˈaːtsfɪndən tˈɵsən də ˈɪndˌividˌyən",
+  "heard": "bɛjeːnvɛrkeːrstroːmʋɔrttɣeːkɛkɛnnaːrdɛbeːʋɛɣɪŋɛnvɑnɪndiːvɪdʏeːlɛbɛstyːrdɛrsɛnvuːrtœɥɪɣɛntʏssxɛntʋeːpʏntɛnɛndɛɪnteːrɑktiːdiːplaːtsvɪndɛntʏssxɛndɛɪiːvɪdyɛn"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeːdɛʋɔrsteːlaːrsprɑxttɛhʏldɛaːnluːɛnaː"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.stijn.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeːdɛʋɔrsteːlaːrsprɑxtɛhʏldɛaːnluːnaː"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.01",
+  "text": "Je kunt de skiroute zien als een wandelroute.",
+  "ref": "jə kɵn tə skˈirutə zˈin ɑls ən ʋˈɑndɛlrˌutə",
+  "heard": "jɛkʏntdɛskiːɛruːɛtɛziːnɑlseːnʋɑndɛlruːɛteː"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10003602174340488201",
+  "text": "Podróżni zwiedzający państwa obłożone szczególnie wysokimi podatkami mogą czasem zaoszczędzić sporo pieniędzy, szczególnie na takich towarach jak alkohol i tytoń.",
+  "ref": "pɔdrˈuʒɲi zvʲˌɛdʑajˈɔntsɨ pˈaɲstfa ˌɔbwɔʒˈɔnɛ ʃtʃɛɡˈulɲʲɛ vˌɨsɔkˈimi pˌɔdatkˈami mˈɔɡɔ̃ tʃˈasɛm zˌaɔʃtʃˈɛɲdʑitɕ spˈɔrɔ pʲɛɲʲˈɛndʑɨ ʃtʃɛɡˈulɲʲɛ na tˈakix tɔvˈarax jˈak alkˈɔxɔl i tˈɨtɔɲ",
+  "heard": "podruʒnɪzvjezajontsɨpaaɲstvaobʒonaʃtʃɛgulɲevɨsotkimipodatkamimogontʃasɛmzaotɛndittsporopɛɲenzɨtʃɛgulɲenatakixtovaraxjakalkoolititoɲ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10013271501230525766",
+  "text": "Większość mniejszych wysp to narody niezależne lub sprzymierzone z Francją i słynące jako luksusowe nadmorskie miejscowości wypoczynkowe.",
+  "ref": "vʲˈɛŋkʃɔɕtɕ mɲʲˈɛjʃɨɣ vˈɨsp tɔ narˈɔdɨ ɲʲˌɛzalˈɛʒnɛ lˈup spʃˌɨmjɛʒˈɔnɛ s frˈantsjɔ̃ i swɨnˈɔntsɛ jˈakɔ lˌuksusˈɔvɛ nadmˈɔrskʲɛ mʲˌɛjstsɔvˈɔɕtɕi vˌɨpɔtʃɨŋkˈɔvɛ",
+  "heard": "vjeŋkʃujtɕmɲejʃɨxvɨsptnaradeɲezalɛʒnolubspmiʒonɛstfrantsɪjomisujnontsɛkolukssovɛnadbalskɪmistovoʃtɕivpotʃɨnkova"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10047713455444904767",
+  "text": "Zgodnie z oświadczeniem biura gubernatora wśród rannych było dziewiętnastu policjantów.",
+  "ref": "zɡˈɔdɲʲɛ z ˌɔɕfʲattʃˈɛɲʲɛm bjˈura ɡˌubɛrnatˈɔra fɕrˈut rˈannɨɣ bˌɨwɔ dʑˌɛvʲɛtnˈastu pˌɔlitsjˈantuf",
+  "heard": "skodɲisoʃvetʃɲimburagubɛrnatorafʃruttranɛxpodɪviontnasopolitsɪjntuf"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tagʐɛzapaɕɲitsɨzwuʐɨlixɔwtluɲɛ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.kacper.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tagʐɛzapaɕɲitsɨzwɔʐɨlixɔwtluɲɛ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.01",
+  "text": "Springboks przełamali złą passę pięciu przegranych.",
+  "ref": "sprˈiŋɡbɔks pʃˌɛwamˈali zwˈɔ̃ pˈassɛ pʲˈɛɲtɕu pʃɛɡrˈanɨx",
+  "heard": "sprɨnbɔkspʂɛwamalizwompassɛpʲɛntɕupʂɛgranɨx"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10008174856218516817",
+  "text": "Segundo informações, ele estava na casa dos 20 anos. Em uma declaração, Bieber disse que, \"embora eu não estivesse presente nem diretamente envolvido neste trágico incidente, meus pensamentos e orações estão com a família da vítima\".",
+  "ref": "sˌeɡˈũŋdw ˌiŋfoɾəmasˈõjs ˌely estˌavæ na kˈazæ dʊs vˈiŋtʃy ˈɐ̃nʊs ˈeɪŋ ˌumæ dˌeklaɾasˈɐ̃ʊ̃ bˌiebˈer dʒˈisy ky ˌeɪmbˈɔɾæ eʊ nˌɐ̃ʊ̃ ˌestʃivˈɛsy prˌezˈeɪŋtʃy nˈeɪŋ dʒˌiɾetæmˈeɪŋtʃj ˌeɪŋvowvˈidʊ nˌestʃi trˈaʒikw ˌiŋsidˈeɪŋtʃy meʊs pˌeɪŋsæmˈeɪŋtʊz i ˌoɾasˈõjz estˌɐ̃ʊ̃ koŋ a fˌæmˈiljæ da vˈitʃimæ",
+  "heard": "sɛgndinfoɾmssɛlɛɛʃtavnakazdosvintɛnosɛmumɐdɛklɾasɐ̃w̃bibioɾɛdisɛkɛɛmboɾonɐ̃wtivɛʃsɛpɾɛzɛntɛnɛmdiɾɛtɐmɛntɛɛnvolvidonɛʃtɛtɾaʒikoinsidɛntɛmewspɛnsmɛntosɛoɾassɛʃtɐ̃wkomfamilidvitimɐ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10047022047800689031",
+  "text": "Construída pelos egípcios no século 3 A.C., a Grande Pirâmide é uma das muitas grandes estruturas de pirâmide construídas para honrar faraós mortos.",
+  "ref": "kˌoŋstruˈidæ pˈelʊz ˌeʒˈipsjʊz nʊ sˈɛkulʊ trˈez ˌasˌeˈa ɡrˈɐ̃ŋdʒy pˌiɾˈɐ̃midʒj ɛ ˌumæ daz mwˈiŋtæz ɡrˈɐ̃ŋdʒyz ˌestrutˈuɾæz dʒy pˌiɾˈɐ̃midʒy kˌoŋstruˈidæs pˌaɾæ oŋxˈar fˌaɾaˈɔz mˈɔɾətʊs",
+  "heard": "konstɾuidɐpɛloseʒipsjosnosɛkulotɾisesdɛkɾistoagɾɐndʒipiɾamidiɛudasmujtɐsgɾɐndisestɾutuɾɐsdapiɾɛmidikonstɾuidspaɾɐfumaɾfaɾaosmɔɾtos"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10083615766068544069",
+  "text": "Giancarlo Fisichella perdeu o controle do carro e acabou a corrida logo após a largada.",
+  "ref": "ʒˌiɐ̃ŋkˈaɾəlʊ fˌiziʃˈɛlæ peɾədˈeʊ ʊ kˌoŋtrˈoly dʊ kˈaxw i ˌakabˈow a kˌoxˈidæ lˈɔɡw apˈɔz a lˌaɾəɡˈadæ",
+  "heard": "ʃɛnkarlfizikɛlaperdewkontrolidukavjakabokohidalogapozalargada"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "pɛnsɛnaɾotɐdɛɛʃkikomoumɐɾotɐdɛkɐminɐdɐ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.rafael.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "pɛnsɛnaɾotɐdiskikomoumɐɾotɐdɛkɐminadɐ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.01",
+  "text": "Outros lutadores também prestaram homenagem a Luna.",
+  "ref": "ˈowtrʊz lˌutadˈoɾys tɐ̃mbˈeɪŋ prˌestˈaɾɐ̃ʊ̃ ˌomenˈaʒeɪŋ a lˈunæ",
+  "heard": "owutɾoslutadoɾistɐmbeimpɾestaɾõomenaʒejalunɐ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10000611681338527501",
+  "text": "В древнем Китае использовали уникальный способ обозначения периодов времени; каждый этап Китая или каждая семья, находившаяся у власти, были особой династией.",
+  "ref": "v drʲˈevnʲim kʲitˈɑjɪ ɪspˈoɭzʌvʌɭʲɪ unʲikˈɑɭnyj spˈosʌp ʌbʌznatʃˈenʲija pʲirʲˈiʌdʌf vrʲˈemʲinʲɪ kˈɑʒdyj ɛtˈɑp kʲitˈɑja ˌɪɭʲɪ kˈɑʒdʌja sʲimʲjˈja nʌxʌdʲˈifʃʌjasʲʌ u vɭˈɑsʲtʲɪ bˌyɭʲɪ ʌsˈobʌj dʲinˈɑsʲtʲijij",
+  "heard": "vdrevnɪmkitajispolzəvəlɪunɪkalnɨsposəbabəznatɕenɪjepɪredəfvremenekaʒdɨtapkitajeɪlikaʒdəjesimjanaxɐdifʃɛeseuvl̴astɪbɨlɪasobədinastɪj"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10002861505982796062",
+  "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+  "ref": "mʌdʌɡaskˈɑr namnˈoɡʌ bˈoɭʃy druɡʲˈix ɪ javɭʲˈɑjitsʌ sʌmʌbˈytnym kʌntʲinʲˈentʌm f tˈom ʃto kasˈɑjitsʌ dʲˈikʌj prʲirˈody",
+  "heard": "madagaskɑrnamnogəbolʂedrugixijɪvlæjtsəsamabɨtnɨmkəntsɪnentəmvtoʃtokasajʊtsədikəjprɪrodɨ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10008070632189747443",
+  "text": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+  "ref": "vˈo fsʲˈex naˈutʃnyx vʌprˈosʌx fkɭʲutʃˈɑja psʲixʌɭˈoɡʲiju bˌyɭʲɪ prʲˈinʲʌty vzɡɭʲˈɑdy arʲistˈotʲiɭʲʌ",
+  "heard": "vafsexnautʃnɨxvaprosəxvklʊtʃjepsixologɪjʊbɨlɪprinɪtɨvzgladɛristotsɪle"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʐnarazɭiʈʂatsɣɭaɣoɭɨidapawnʲɛnia"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.sergei.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʐnarazɭitʂatsgɭagoɭɨidapawnʲɛnʲɪa"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.01",
+  "text": "Коллеги-рестлеры тоже отдали Луне дань уважения.",
+  "ref": "kʌɭɭʲˈeɡʲɪrʲistɭʲˈery tˈoʒy ʌddˈɑɭʲɪ ɭunʲˈe dˈɑnʲ uvaʒˈɛnʲija",
+  "heard": "kɑɭigʲɛrɛslʲɛrɨtoʐɨaddaɭiɭunʲɛdanuvaʐɛnʲɪja"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10021730821550109934",
+  "text": "Жінки: усім подорожнім жінкам радять казати, що вони заміжні, незалежно від справжнього сімейного стану.",
+  "ref": "ʒˈiːnkɪ ˈusiːm podorˈoʒɲiːm ʒˈiːnkam rˈadjat kazˈat̪ɪ ʃtʃˈo βonˈɪ zamˈiːʒɲiː nɛzˈalɛʒno βˈiːt spraβʒɲˈoho siːmˈɛjnoho st̪ˈanu",
+  "heard": "zinkiusimpodoroʒnɪminkamradɪtkazatetɕɔnɨzamininɛzavɛʐnovitspravnɪosimɛjnostanʊ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10046655283476675991",
+  "text": "Такі батьки можуть вирішити створити для своєї дитини план всиновлення.",
+  "ref": "t̪ˈakiː bˈatkɪ mˈoʒut βɪrˈiːʃɪt̪ɪ zd̪βorˈɪt̪ɪ dʎˈa zβojˈɛjiː dɪt̪ˈɪnɪ plˈan fsɪnˈoβlɛnɲa",
+  "heard": "tɑkibɑtskimoʐutsvɨraʂɨtastvarɨtɨdɭjasvɑɛdɨtɨnɨpɑnfsɨnʌwvɑnnʲa"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10095052411990461296",
+  "text": "Місячна кора становить приблизно 70 км у товщину на ближній стороні та 100 км у товщину на дальній стороні.",
+  "ref": "miːsjˈatʃna kˈora st̪anˈoβɪt prɪblˈɪzno siːmdesjˈat kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa blˈɪʒɲiːj st̪orˈoɲiː t̪ˈa stˈo kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa dˈaʎɲiːj st̪orˈoɲiː",
+  "heard": "misɪtnakorastanovitprbliznossimdesjatkilomɛtrɪutovʃinunablɨʒnɪjstornitastojkilomɛtrɪutovʃinʊnadanɪjstornɪ"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bitsikolɛɣɨtɑkuʒvidɑlɨʂɑnuluni"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.taras.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bitsikolɛɣɨtakoʒviddalɨʂanluɲi"
+ },
+ {
+  "model": "zipa-cr-large",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.01",
+  "text": "Але птахи все ще мають багато чого від динозаврів.",
+  "ref": "alˈɛ pt̪ˈaxɪ fsˈɛ ʃtʃˈɛ mˈajut bahˈat̪o tʃˈoho βˈiːd dɪnozˈaβriːβ",
+  "heard": "alɛptɛxɨfsjɛʂtɕɛmɑjutɕbɔɣatɔtʂɔɣɔvjɛddɨnazavrʲif"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10004059102127011984",
+  "text": "Für die besten Aussichten auf Hongkong sollten Sie die Insel verlassen und zum gegenüberliegenden Ufer von Kowloon fahren.",
+  "ref": "fyːɾ diː bˈɛstən ˈaʊszˌɪçtən aʊf hˈɔŋkɔŋ zˌɔltən ziː diː ˈɪnzəl fɛɾlˈasən ʊnt tsʊm ɡeːɡənˌyːbɜlˈiːɡəndən ˈuːfɜ fɔn kˈɔvloːn fˈɑːrən",
+  "heard": "fyːʀdiːbɛstənaʊsɪxtənauffʀɔŋkɔŋvɔltənziːdiːɪnseːlfəʀlasənʊndtsuːmgeːgənyːbəʀliːgəndənuːfəʀfoːnkɔvluːnfɑːʀən"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10009182821551087671",
+  "text": "Er griff auch alles an, was ins Wasser kam; selbst ein großer Dinosaurier wie der T. Rex war ihm nicht gewachsen.",
+  "ref": "ɛɾ ɡɾˈɪf ˌaʊx ˈaləs ˈan vˈas ɪns vˈasɜ kˌɑːm zˈɛlpst aɪn ɡɾˈoːsɜ dˌiːnoːzaʊrˈiːɾ viː dɛɾ tˈeː rˈɛks vɑːɾ iːm nˈɪçt ɡəvˈaxzən",
+  "heard": "eːɐgɾɪffaʊxaləsʔanvasɪnsvasɐkɑːmzɛlpstɛɪngɾoːsɐdiːnozauːɐiɐviːdɐteːvɛksvaːɐiːmnɪçtgəvaksən"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10014044777125235464",
+  "text": "Wenn Sie den Film „Das Vermächtnis der Tempelritter“ gesehen haben, denken Sie vielleicht, dass auf die Rückseite der Unabhängigkeitserklärung eine Schatzkarte gezeichnet wurde.",
+  "ref": "vˌɛn ziː deːn fˈɪlm das fɛɾmˈɛçtnɪs dɛɾ tˈɛmpəlrˌɪtɜ ɡəzˈeːən hˈɑːbən dˈɛŋkən ziː fɪlˈaɪçt das aʊf diː rˈʏkzaɪtə dɛɾ ˌʊnaphˈɛŋɪçkˌaɪtzɜklˌɛːrʊŋ ˌaɪnə ʃˈatskaɾtə ɡətsˈaɪçnət vˌʊɐdə",
+  "heard": "vənnsiːdənfɪlmdɑːsfəʀmæːxtniːsdəʀtɛmpɛlʀɪtəʀgeːseːənhɑːbəndəŋkənsiːfɪlaɪxtdɑːsaufdəʀʀʏksaiteːdəʀuːnɑːfhæːŋɪkkaɪtsəʀklæːʀuːŋaineːʃatskaʀteːgeːtsaɪxneːtvʊʀdə"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "ɾɪŋɐkɔllegəntsɔltənluːnɑeːbn̩falstɾiːbut"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.clemens.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "ɾɪŋɛɾkɔllegəntsɔltənluːnɑeːbn̩falstɾiːbut"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.01",
+  "text": "Es ist dünner unter den Mare und dicker unter dem Hochland.",
+  "ref": "ɛsɪst dˈʏnɜ ˌʊntɜ deːn mˈɑːrə ʊnt dˈɪkɜ ˌʊntɜ deːm hˈoːxlˌant",
+  "heard": "ʔeːsɪstdʏnɐʊntɐdeːnmɑːɾəʊntdɪkɐʊntɐdeːmhɔxlant"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.1003119935936341070",
+  "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+  "ref": "haʊˈɛvɚ dˈuː tə ðə slˈoʊ kəmjˌuːnɪkˈeɪʃən tʃˈænəlz stˈaɪlz ɪnðə wˈɛst kʊd lˈæɡ bᵻhˌaɪnd baɪ twˈɛnti fˈaɪv tə θˈɜːɾi jˈɪɹ",
+  "heard": "haʊɛvɜ˞djutuðəsl̴oʊkəmjunəkeɪʃəntʃænəl̴zstaɪl̴zɪnðəwɛstkʊdl̴ægbɪhaɪndbaɪtwɛnifaɪvtuθɜ˞dijɪɹɹz"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10052240106321793346",
+  "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+  "ref": "ˈɔːl nˈaʊnz ɐlˈɔŋsaɪd ðə wˈɜːd sˈaɪ fɔːɹ juː ˈɔːlweɪz bɪɡˈɪn wɪð ɐ kˈæpɪɾəl lˈɛɾɚ ˈiːvən ɪnðə mˈɪdəl əvə sˈɛntəns",
+  "heard": "ɔl̴naʊnzəl̴ɔŋsaɪdðəwɜ˞l̴dɛsseɪfɹɜ˞juɔl̴weɪzbɪgɪnwɪθeɪkæpətəl̴l̴ɛtɜ˞ivɪnðəmɪdəl̴əveɪsɛntəns"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10167324587744183095",
+  "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+  "ref": "tə ðə nˈɔːɹθ ænd wɪðˌɪn ˈiːzi ɹˈiːtʃ ɪz ðə ɹoʊmˈæntɪk ænd fˈæsᵻnˌeɪɾɪŋ tˈaʊn ʌv sˈɪntɹə ænd wˌɪtʃ wʌz mˌeɪd fˈeɪməs tə fˈɔːɹənɚz ˈæftɚɹ ɐ ɡlˈoʊɪŋ ɐkˈaʊnt ʌv ɪts splˈɛndɚz ɹᵻkˈɔːɹdᵻd baɪ lˈɔːɹd bˈaɪɹɑːn",
+  "heard": "tuðənɔɹθəndwɪðæniziɹitʃæzðəɹoʊmæntɪkəndfæsəneɪtɪŋtaʊnʌvsɛntɹəəndwɪtʃwɑzmeɪdfeɪməstufɔɹənə˞zæftə˞əgloʊɪŋəkaʊntʌvɪtssplɛndə˞zɹəkɔɹdədbaɪlɔɹdbaɪɹən"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛl̴oʊɹɛsl̴ɜ˞zɔl̴soʊpeɪdtɹɪbjuttul̴unə"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.daniel.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛloʊɹɛslə˞zɔlsoʊpeɪdtɹɪbjuttulunə"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.01",
+  "text": "Think of the skiing route as of a similar hiking route.",
+  "ref": "θˈɪŋk ʌvðə skˈiːɪŋ ɹˈaʊt æz əvə sˈɪmɪlɚ hˈaɪkɪŋ ɹˈaʊt",
+  "heard": "θɪŋkʌvðəskiɪŋɹuʊtæzʌvəsɪmələ˞haɪkɪŋɹuʊt"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1001146817223348054",
+  "text": "Se recomienda enfáticamente a los viajeros que se informen sobre cualquier riesgo de clima extremo en el área que visitan, dado que ello puede afectar sus planes de viaje.",
+  "ref": "se rˌekomjˈɛnda enfˈatikamˈente a los βjaxˈeɾos ke se infˈoɾmen sˌoβɾe kwalkjˈeɾ riˈesɣo ðe klˈima ekstɾˈemo en el ˈaɾea ke βisˈitan dˈaðo ke ˈejjo pwˈeðe ˌafektˈaɾ sus plˈanes ðe βjˈaxe",
+  "heard": "sɛɾɛkomiɛndaɛnfatikamɛntɛsalosbiaxɛroskɛsɛinformɛnsobrɛkwalkiɛrɾixodɛlklimaɛkstrɛmoɛnɛlarɛakɛbisitandadokɛɛʎopwɛdaafɛktarsusplanɛsdɛbiaxɛ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.10050510856477907332",
+  "text": "El uso adecuado de los blogs «puede empoderar a los alumnos para que sean más analíticos y críticos, a través de la respuesta activa a los contenidos de internet, pueden definir sus posturas en el contexto de los escritos de otros, además de establecer sus perspectivas sobre temas específicos» (Oravec, 2002).",
+  "ref": "el ˈuso ˌaðekwˈaðo ðe los βlˈoɡs pwˈeðe ˌempoðeɾˈaɾ a los alˈumnos pˌaɾa ke sˈean mˈas ˌanalˈitikos i kɾˈitikos a tɾaβˈes ðe la respwˈesta aktˈiβa a los kˌontenˈiðos ðe ˌinteɾnˈet pwˈeðen dˌefinˈiɾ sus postˈuɾas en el kontˈeksto ðe los eskɾˈitos ðe ˈotɾos ˌaðemˈas ðe ˌestaβlesˈeɾ sus pˌeɾspektˈiβas sˌoβɾe tˈemas ˌespesˈifikos ˌoɾaβˈek dˈos mˈil ðˈos",
+  "heard": "elusoekwadodelosblokspwedɛnpodeɾaɾagalosalumnospaɾakeseanmasanalitikosikɾitikosatɾabesdelaɾespwestaaktibasaloskonteniosdeinteɾnetpwdɛndefiniɾsuspostuɾasenelkontekstodeloseskɾitosdeotɾosademasdestableseɾsuspeɾpektibassobɾetemasespesifikosoɾabekdosmildos"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1008205615316519958",
+  "text": "Fue tanta la cantidad de gente que se concentró, que no todos pudieron acceder al funeral en la Plaza de San Pedro.",
+  "ref": "fwˈe tˈanta la kˌantiðˈad ðe xˈɛnte ke se kˌonsentɾˈo ke nˈo tˈoðos puðjˈeɾon ˌakseðˈeɾ al fˌuneɾˈal en la plˈasa ðe sˈam pˈeðɾo",
+  "heard": "fwɛtantalakantidaddɛxɛntɛkɛsɛkonsɛntrokɛnotodospudiɛronaksɛdɛralfunɛralɛnlaplasadɛsanpɛdro"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aɛrosmitkansɛloloskonsiɛrtospɛndiɛntɛsdɛsuxira"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.mateo.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aɛrosmitkansɛloloskonsiɛrtospɛndiɛntɛsdɛsuxira"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.01",
+  "text": "Imagínese la pista de esquí como una ruta de senderismo.",
+  "ref": "ˌimaxˈinese la pˈista ðe eskˈi kˌomo ˈuna rˈuta ðe sˌendeɾˈismo",
+  "heard": "imaxinasɛlapistadɛskikomounaɾutadɛssɛndɛrismo"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10043298898524273336",
+  "text": "L’accident a eu lieu en terrain montagneux, et il semblerait que cela ait été causé par un incendie malveillant.",
+  "ref": "laksidˈɑ̃ a y ljˈø ɑ̃ tɛʁˈɛ̃ mɔ̃tanjˈø e il sɑ̃bləʁˈɛ kə səlˌa ɛt etˈe kozˈe paʁ œ̃n ɛ̃sɑ̃dˈi malvɛjˈɑ̃",
+  "heard": "ɛlaksidɑ̃aøyljøyntɛʁɛ̃mɔ̃taɲøeilsɑ̃bləʁɛkəsəlaɛtetekozepaʁynɛ̃sɑ̃dimalvɛjɑ̃"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10097171356371990207",
+  "text": "Nous sommes d'accord avec la déclaration de l'USOC (Comité olympique des États-Unis) selon laquelle les intérêts de nos athlètes et de nos clubs, ainsi que de leur sport, pourraient être mieux servis. Cela peut être fait en allant de l'avant et en procédant plutôt à des changements significatifs au sein de notre organisation, qu'à la révocation d'accréditation.",
+  "ref": "nu sɔm dakˈɔʁ avˌɛk la- deklaʁasjˈɔ̃ də- lyzˈɔk komitˈe olɛ̃pˈik de-z etˈazynˈi səlˈɔ̃ lakˈɛl le-z ɛ̃teʁˈɛ də- noz atlˈɛtz e də- no klˈœb ɛ̃sˌi kə də- lœʁ spˈɔʁ puʁˈɛt ˈɛtʁ mjˌø sɛʁvˈi səlˌa pˈøt ˈɛtʁ fˈɛt ɑ̃n alˈɑ̃ də- lavˌɑ̃ e ɑ̃ pʁosedˈɑ̃ plytˈoː a de- ʃɑ̃ʒmˈɑ̃ siɲifikatˈifz o sˈɛ̃ də- notʁ ɔʁɡanizasjˈɔ̃ ka la- ʁevokasjˈɔ̃ dakʁeditasjˈɔ̃",
+  "heard": "nusɔməsdakkɔʀdavɛkladeklaʀasjɔndɛlyzɔkkɔmiteɔlɛ̃pikɛdɛsetatsynissɛlɔnlakɛlɛlɛsɛ̃teʀɛtsdɛ̃nnɔsatlɛtɛsɛtdɛnɔsklœbsɛ̃sikɛdɛlœʀspɔʀtspuʀɑ̃ɛtʀɛɛtʀɛmjœkssɛʀvisɛlapœtɛtʀɛfɛtɛnalɑ̃tdɛlavɑ̃tɛtɛnpʀɔzedɑ̃tplytotadɛsʃɑ̃ʒɛmɑ̃tsiɲifikatifsosɛndɛnɔtʀəɔʀganizasjɔnkalaʀevɔkasjɔndakkʀeditasjɔ̃"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10138021779681596478",
+  "text": "Il a ajouté qu’« on ne devrait cependant pas leur demander d’assumer des obligations qui dépassent leur stade de développement, leur responsabilité et leurs capacités. »",
+  "ref": "il a aʒutˈe k ɔ̃ nə- dəvʁˈɛ səpɑ̃dˈɑ̃ pa lœʁ dəmɑ̃dˈe dasymˈe de-z ɔbliɡasjˈɔ̃ ki depˈas lœʁ stˈad də- devlɔpmˈɑ̃ lœʁ ʁɛspɔ̃sabilitˈe e lœʁ kapasitˈe ˌaaksɑ̃siʁkɔ̃flˈɛks",
+  "heard": "ilaʒutekɔ̃nədəvʁɛsəpɑ̃dɑ̃palɔʁdəmɑ̃dedeasymedeɔbligasjɔ̃kidepaslœʁstadədevlɔpɑ̃ləʁɛspɔ̃sabiliteelœʁkapasite"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "leotʁlytœʁɔ̃egalmɑ̃ʁɑ̃dyɔmaʒaluna"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.etienne.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "leotʁlytœʁɔ̃egalmɑ̃ʁɑ̃dyamaʒalyna"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.01",
+  "text": "Une bombe a explosé devant le bureau du gouverneur général.",
+  "ref": "yn bˈɔ̃b a ɛksplozˈe dəvˈɑ̃ lə- byʁˈo dy- ɡuvɛʁnˈœʁ ʒeneʁˈal",
+  "heard": "ynbɔ̃baɛksplozedəvɑ̃ləbyʁodyguvɛʁnœʁʒeneʁal"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10000151032537989529",
+  "text": "Il blog è uno strumento che si prefigge di incoraggiare la collaborazione e sviluppare l'apprendimento degli studenti ben oltre la giornata scolastica normale.",
+  "ref": "il blˈoɡ e ˈuno strʊmˈento ke sɪ prefˈidʒːe dɪ inkoradʒːˈare la kollaboratsiˈone e zvilʊpːˈare lapːrendimˈento dˌeʎɪ stʊdˈɛntɪ bˈɛn ˌoltre la dʒornˈata skolˈastika normˈale",
+  "heard": "iblogɛunostrumentokesiprefidʒedinkoradʒːarelakollaborattsjoneezviruparelaprendimentodeiʎstudjentibenotreadʒornataʃolastikanormale"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10011138801715101183",
+  "text": "Sotto il ponte lo spazio in verticale libero è di 15 metri. La costruzione è terminata nell'agosto del 2011, ma l'apertura al traffico è avvenuta solo nel marzo 2017.",
+  "ref": "sˈotːo il pˈonte lo spˈatsio in vertikˈale lˈibero e dɪ kwˈimditʃɪ mˈɛtrɪ la kostrʊtsiˈone e terminˈata nellaɡˈosto del dˈue mˈiːla ˈunditʃɪ ma lapertˈura al trˈaffiko e avvenˈuta sˈolo nel mˈartso dˈue mˈiːla ditʃassˈɛtːe",
+  "heard": "sotːoilpontelospatsioinvertikaleliberoɛdikuinditʃimetrilakostrutsioneɛterminatanelːagosːaeldemileunditʃimalaperturaaltrafːikoɛvenutasolonelmartsodmleʃa"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10017896147709177739",
+  "text": "Se avete visto il film \"Il mistero dei Templari\", potreste pensare che sul retro della Dichiarazione d'Indipendenza sia disegnata una mappa del tesoro.",
+  "ref": "se avˌete vˈisto il fˈilm il mistˈɛro dˌeɪ templˈarɪ potrˈɛste pensˈare ke sʊl rˈɛtro dˌella dikjaɾatsiˈone dindipendˈɛntsa sˌia dizeɲˈata ˌʊna mˈapːa del tezˈɔro",
+  "heard": "seavetevistoilfilmailmisterodejtemplaripotresːepensarekesulretrodelːadikarasionedindipendensasiadiseɲataunamapːadeltezoro"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nonserveperforsaunojotːoperʎartʃipelagieilagi"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.lorenzo.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nonserveperforsaunojotːoperʎartʃipelagieilagi"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.01",
+  "text": "È più sottile sotto i mari e più spessa sotto le aree montuose.",
+  "ref": "e pjʊ sotːˈile sˈotːo i mˈarɪ e pjʊ spˈessa sˈotːo le ˈaːree montʊˈoze",
+  "heard": "ɛpiusotːilesotːoimariepiuspesːasotːoleareemontuose"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10042455874761876908",
+  "text": "Volgens Angel (2006) kunnen organisaties beter presteren met een aanpak op basis van het continuümmodel.",
+  "ref": "vˈɔlɣəns ˈɑŋəl tʋˈeː dˌœyzɛnt zˌɛs kˌɵnən ˌɔrɣaːnizˈaːtsis bˈeːtər prɛstˈɪːrən mɛt ən ˈaːnpˌɑk ɔ pˈaːzɪs vɑn hət kˌɔntinˌyɵmoːdˈɛl",
+  "heard": "vɔlɣɛnsɑŋɛltʋɛrdœɥzɛnzɛskʏnnɛnɔrɣaːniːsaːtiːsbeːtɛrprɛsteːrɛnmɛteːnaːnpɑkɔpbaːzɪsvɑnhɛtcɔntiːnʏɛmoːdɛl"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.1004717084892689357",
+  "text": "Varkens dragen de ziekte bij zich en dragen het via muggen over op mensen.",
+  "ref": "vˈɑrkəns drˈaːɣən də zˈiktə bɛɪ zɪx ɛn drˈaːɣən hət vˈiaː mˈɵɣən ˈoːvər ɔp mˈɛnsən",
+  "heard": "vɑrkʏstraːɣɛndːɛziːktɛbɛjzɪxɛntraːɣɛnhɛtviːrmʏxɣɛnoːvɛrɔpmɛnsxɛn"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10152288169439514825",
+  "text": "Bij een verkeersstroom wordt gekeken naar de bewegingen van individuele bestuurders en voertuigen tussen twee punten en de interacties die plaatsvinden tussen de individuen.",
+  "ref": "bɛɪ ən vərkˈɪːrsstrˌoːm ʋɔrt ɣəkˈeːkən naːr də bəʋˈeːɣɪŋən vɑn ˈɪndˌividyˌeːlə bəstˈyrdərs ɛn vˈurtœyɣən tˈɵsən tʋˈeː pˈɵntən ɛn də ˌɪntərˈɑksis di plˈaːtsfɪndən tˈɵsən də ˈɪndˌividˌyən",
+  "heard": "bɛjeːnvɛrkeːrstroːmʋɔrtɣeːkɛkɛnnaːrdɛbeːʋɛɣɪŋɛnvɑnɪndiːvɪdʏeːlɛbɛstyːrdɛrsɛnvoːrtœɥɪɣɛntʏssxɛntʋeːpʏntɛnɛndɛɪnteːrɑctiːsdiːplaːtsvɪndɛntʏssxɛndeɪndiːvɪdʏɛn"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeːdɛʋɔrsteːlaːrsprɑxttɛhʏldɛaːnluːnaː"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.stijn.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeːdɛʋɔrsteːlaːrsprɑxtɛhʏldɛaːnlyːnaː"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.01",
+  "text": "Je kunt de skiroute zien als een wandelroute.",
+  "ref": "jə kɵn tə skˈirutə zˈin ɑls ən ʋˈɑndɛlrˌutə",
+  "heard": "jɛkʏntdɛskiːruːtɛziːnɑlseːnʋɑndɛlruːtɛ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10003602174340488201",
+  "text": "Podróżni zwiedzający państwa obłożone szczególnie wysokimi podatkami mogą czasem zaoszczędzić sporo pieniędzy, szczególnie na takich towarach jak alkohol i tytoń.",
+  "ref": "pɔdrˈuʒɲi zvʲˌɛdʑajˈɔntsɨ pˈaɲstfa ˌɔbwɔʒˈɔnɛ ʃtʃɛɡˈulɲʲɛ vˌɨsɔkˈimi pˌɔdatkˈami mˈɔɡɔ̃ tʃˈasɛm zˌaɔʃtʃˈɛɲdʑitɕ spˈɔrɔ pʲɛɲʲˈɛndʑɨ ʃtʃɛɡˈulɲʲɛ na tˈakix tɔvˈarax jˈak alkˈɔxɔl i tˈɨtɔɲ",
+  "heard": "podruʒnɪizvjedzajɔntsɨpaɲstfaobloʒɔnaʃtʃɛguɲjevɨsotkʲimipodatkamimogɔntʃasɛmzaoʃtʃɛndʑitsporopɛɲendzɨʃtʃɛguɲenatakʲixtovaraxjakalkoxolitɨtoɲ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10013271501230525766",
+  "text": "Większość mniejszych wysp to narody niezależne lub sprzymierzone z Francją i słynące jako luksusowe nadmorskie miejscowości wypoczynkowe.",
+  "ref": "vʲˈɛŋkʃɔɕtɕ mɲʲˈɛjʃɨɣ vˈɨsp tɔ narˈɔdɨ ɲʲˌɛzalˈɛʒnɛ lˈup spʃˌɨmjɛʒˈɔnɛ s frˈantsjɔ̃ i swɨnˈɔntsɛ jˈakɔ lˌuksusˈɔvɛ nadmˈɔrskʲɛ mʲˌɛjstsɔvˈɔɕtɕi vˌɨpɔtʃɨŋkˈɔvɛ",
+  "heard": "vjeŋkʃoɕmɲejʃɨxvɨsptnarodoɲɪzalɛʒnɪlubspmiʒonɛsfrantsɪjomitsvujnontsɛakoluksʊsovɛnadbalskʲɛjmjistovoɕtɪvɨpotʃɨnkovɛ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10047713455444904767",
+  "text": "Zgodnie z oświadczeniem biura gubernatora wśród rannych było dziewiętnastu policjantów.",
+  "ref": "zɡˈɔdɲʲɛ z ˌɔɕfʲattʃˈɛɲʲɛm bjˈura ɡˌubɛrnatˈɔra fɕrˈut rˈannɨɣ bˌɨwɔ dʑˌɛvʲɛtnˈastu pˌɔlitsjˈantuf",
+  "heard": "skodɲezoɕvʲatʃɛɲɪmburagubɛrnatorafʃrudtranɨxboodʑɪviontnasʊprɪtsjantuf"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tagʐɛzapaɕɲitsɨzwɔʐɨlixɔwutlʲuɲɛ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.kacper.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tagʐɛzapaɕɲitsɨzwɔʐɨlixɔutluɲɛ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.01",
+  "text": "Springboks przełamali złą passę pięciu przegranych.",
+  "ref": "sprˈiŋɡbɔks pʃˌɛwamˈali zwˈɔ̃ pˈassɛ pʲˈɛɲtɕu pʃɛɡrˈanɨx",
+  "heard": "sprɨnbɔkspʂɛwamalizwompassɛpjɛntɕupʂɛgranɨx"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10008174856218516817",
+  "text": "Segundo informações, ele estava na casa dos 20 anos. Em uma declaração, Bieber disse que, \"embora eu não estivesse presente nem diretamente envolvido neste trágico incidente, meus pensamentos e orações estão com a família da vítima\".",
+  "ref": "sˌeɡˈũŋdw ˌiŋfoɾəmasˈõjs ˌely estˌavæ na kˈazæ dʊs vˈiŋtʃy ˈɐ̃nʊs ˈeɪŋ ˌumæ dˌeklaɾasˈɐ̃ʊ̃ bˌiebˈer dʒˈisy ky ˌeɪmbˈɔɾæ eʊ nˌɐ̃ʊ̃ ˌestʃivˈɛsy prˌezˈeɪŋtʃy nˈeɪŋ dʒˌiɾetæmˈeɪŋtʃj ˌeɪŋvowvˈidʊ nˌestʃi trˈaʒikw ˌiŋsidˈeɪŋtʃy meʊs pˌeɪŋsæmˈeɪŋtʊz i ˌoɾasˈõjz estˌɐ̃ʊ̃ koŋ a fˌæmˈiljæ da vˈitʃimæ",
+  "heard": "sɛgndɐinfoɾmɐssɛlɛɛʃtavɐnakɐzɐdosvintɛɐnosɛumɐdɛklɐɾɐsɐ̃w̃bibiɛɾidʒiʃsɛkɛɛmboɾɐonɐ̃w̃tivɛsɛpɾɛzɛntɛnɛmdiɾɛtɐmɛntɛɛnvolvidonɛʃtɛtɾaʒikoinsidɛntɛmewspɛnsɐmɛntosɛoɾɐssɛʃtɐ̃w̃komɐfɐmiliɐdɐvitimɐ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10047022047800689031",
+  "text": "Construída pelos egípcios no século 3 A.C., a Grande Pirâmide é uma das muitas grandes estruturas de pirâmide construídas para honrar faraós mortos.",
+  "ref": "kˌoŋstruˈidæ pˈelʊz ˌeʒˈipsjʊz nʊ sˈɛkulʊ trˈez ˌasˌeˈa ɡrˈɐ̃ŋdʒy pˌiɾˈɐ̃midʒj ɛ ˌumæ daz mwˈiŋtæz ɡrˈɐ̃ŋdʒyz ˌestrutˈuɾæz dʒy pˌiɾˈɐ̃midʒy kˌoŋstruˈidæs pˌaɾæ oŋxˈar fˌaɾaˈɔz mˈɔɾətʊs",
+  "heard": "konstɾuidɐpɛlosɛʒipsosnosɛkontɾizɛntsdɛkɾistoagɾɐndʒɛpiɾɛmidiɛumɐdasmujtɐsgɾɛndssɛʃtɾutuɾɐsdapiɾɛmidʒikonstɾuidɐspaɾɐunaɾfaɾaoasmoɾtos"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10083615766068544069",
+  "text": "Giancarlo Fisichella perdeu o controle do carro e acabou a corrida logo após a largada.",
+  "ref": "ʒˌiɐ̃ŋkˈaɾəlʊ fˌiziʃˈɛlæ peɾədˈeʊ ʊ kˌoŋtrˈoly dʊ kˈaxw i ˌakabˈow a kˌoxˈidæ lˈɔɡw apˈɔz a lˌaɾəɡˈadæ",
+  "heard": "ʃɛmkarofizɪkɛlaperdewkontroledukaojakabuokohidalogapozalargada"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "pɛnsɛnaʁotɐdʒɛskikomoumɐʁotɐdʒɛkɐmiɲadɐ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.rafael.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "pɛnsɛnaɾotediskikomoumɐʁotɐdɛkaminadɐ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.01",
+  "text": "Outros lutadores também prestaram homenagem a Luna.",
+  "ref": "ˈowtrʊz lˌutadˈoɾys tɐ̃mbˈeɪŋ prˌestˈaɾɐ̃ʊ̃ ˌomenˈaʒeɪŋ a lˈunæ",
+  "heard": "owtɾoslutadoɾɛstɐmbeimpɾestaɾõomenaʒemalunɐ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10000611681338527501",
+  "text": "В древнем Китае использовали уникальный способ обозначения периодов времени; каждый этап Китая или каждая семья, находившаяся у власти, были особой династией.",
+  "ref": "v drʲˈevnʲim kʲitˈɑjɪ ɪspˈoɭzʌvʌɭʲɪ unʲikˈɑɭnyj spˈosʌp ʌbʌznatʃˈenʲija pʲirʲˈiʌdʌf vrʲˈemʲinʲɪ kˈɑʒdyj ɛtˈɑp kʲitˈɑja ˌɪɭʲɪ kˈɑʒdʌja sʲimʲjˈja nʌxʌdʲˈifʃʌjasʲʌ u vɭˈɑsʲtʲɪ bˌyɭʲɪ ʌsˈobʌj dʲinˈɑsʲtʲijij",
+  "heard": "vdrʲevnʲɪmkʲitɑjɪispolʲzəvəlɪunʲɪkalnɨjsposəbəbəznɐtɕɛnʲjepʲerɪjdəfvrʲjemʲenʲikaʒdɨetapkʲitɑjeɪlikaʒdɑjesʲimjanaxɐdʲifʂɨjesʲɛuvl̴ɑstʲɪbɨliasobədʲinastɪjɪ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10002861505982796062",
+  "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+  "ref": "mʌdʌɡaskˈɑr namnˈoɡʌ bˈoɭʃy druɡʲˈix ɪ javɭʲˈɑjitsʌ sʌmʌbˈytnym kʌntʲinʲˈentʌm f tˈom ʃto kasˈɑjitsʌ dʲˈikʌj prʲirˈody",
+  "heard": "madagɐskɑrnamnogabolʲʂɨdrugʲixijɪvlʲæjɛtstsəsamɐbɨtnɨmkantsʲɪnʲɛntəmvtoʂtokasɑjʊtsədʲikəjprirodɨ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10008070632189747443",
+  "text": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+  "ref": "vˈo fsʲˈex naˈutʃnyx vʌprˈosʌx fkɭʲutʃˈɑja psʲixʌɭˈoɡʲiju bˌyɭʲɪ prʲˈinʲʌty vzɡɭʲˈɑdy arʲistˈotʲiɭʲʌ",
+  "heard": "vɑfsʲexnoutʃnɨxvaprosaxfkɭʲutɕɑjepsixol̴ogʲɪjʊbɨliprinʲɪtɨvzglʲadɑristotsʲelʲe"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʐnarazɭiʈʂatsglagolɨidapawnʲɛnʲi"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.sergei.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʐnarazɭitʂatsgɭagolɨidapawnʲɛnʲɪe"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.01",
+  "text": "Коллеги-рестлеры тоже отдали Луне дань уважения.",
+  "ref": "kʌɭɭʲˈeɡʲɪrʲistɭʲˈery tˈoʒy ʌddˈɑɭʲɪ ɭunʲˈe dˈɑnʲ uvaʒˈɛnʲija",
+  "heard": "kɑlʲɛgʲɛrɛslʲɛrɨtoʐɛaddalɪlunʲɛdɑnuvaʐɛnʲ"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10021730821550109934",
+  "text": "Жінки: усім подорожнім жінкам радять казати, що вони заміжні, незалежно від справжнього сімейного стану.",
+  "ref": "ʒˈiːnkɪ ˈusiːm podorˈoʒɲiːm ʒˈiːnkam rˈadjat kazˈat̪ɪ ʃtʃˈo βonˈɪ zamˈiːʒɲiː nɛzˈalɛʒno βˈiːt spraβʒɲˈoho siːmˈɛjnoho st̪ˈanu",
+  "heard": "zinkʲiusʲimpodoroʐnʲɨmzʲinkamrɑdzʲɪtskɐzɑtɨʂtɕɔvɨnɨzamʲiʐnʲinɛzavɛʐnovəutspravnʲɪjusʲimɛjnoustɑnu"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10046655283476675991",
+  "text": "Такі батьки можуть вирішити створити для своєї дитини план всиновлення.",
+  "ref": "t̪ˈakiː bˈatkɪ mˈoʒut βɪrˈiːʃɪt̪ɪ zd̪βorˈɪt̪ɪ dʎˈa zβojˈɛjiː dɪt̪ˈɪnɪ plˈan fsɪnˈoβlɛnɲa",
+  "heard": "tɑkibɑtskimoʐutsvɨrɨʂɨtɨstvarɨtɨdɭʲjasvɑʲɛjdʲɛtɨnɨpɭɑnfsɨnʌwvɑnnʲa"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10095052411990461296",
+  "text": "Місячна кора становить приблизно 70 км у товщину на ближній стороні та 100 км у товщину на дальній стороні.",
+  "ref": "miːsjˈatʃna kˈora st̪anˈoβɪt prɪblˈɪzno siːmdesjˈat kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa blˈɪʒɲiːj st̪orˈoɲiː t̪ˈa stˈo kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa dˈaʎɲiːj st̪orˈoɲiː",
+  "heard": "mizɪʒnakorastanovɪtprɨblɪznostʲimdʲɪsʲatkʲilomɛtrɪutovʃinunabl̴ɪʒnʲɪjstoronitastojkilomɛtrɪutofʃinʊnadaʎnɪjstoroni"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bʲitsikolɛɣɨtɑkoʐvɪdɑlɨʂɑnuluni"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.taras.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bitsikolɛɣɨtakoʐviddalɨʂanluni"
+ },
+ {
+  "model": "zipa-cr-ns-small",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.01",
+  "text": "Але птахи все ще мають багато чого від динозаврів.",
+  "ref": "alˈɛ pt̪ˈaxɪ fsˈɛ ʃtʃˈɛ mˈajut bahˈat̪o tʃˈoho βˈiːd dɪnozˈaβriːβ",
+  "heard": "alɛptaxɨfsɛɕɛmajutɕbaxatotʂɔvovidɨnozavrif"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10004059102127011984",
+  "text": "Für die besten Aussichten auf Hongkong sollten Sie die Insel verlassen und zum gegenüberliegenden Ufer von Kowloon fahren.",
+  "ref": "fyːɾ diː bˈɛstən ˈaʊszˌɪçtən aʊf hˈɔŋkɔŋ zˌɔltən ziː diː ˈɪnzəl fɛɾlˈasən ʊnt tsʊm ɡeːɡənˌyːbɜlˈiːɡəndən ˈuːfɜ fɔn kˈɔvloːn fˈɑːrən",
+  "heard": "fyːʀdiːbɛstənaʊsɪxtənauffhʀɔŋkɔŋkːsɔltənsiːdiːɪnseːlfəʀlasənʊndtsuːmgeːgənyːbəʀliːgəndənuːfəʀfoːnkɔːfːluːmfɑːʀən"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10009182821551087671",
+  "text": "Er griff auch alles an, was ins Wasser kam; selbst ein großer Dinosaurier wie der T. Rex war ihm nicht gewachsen.",
+  "ref": "ɛɾ ɡɾˈɪf ˌaʊx ˈaləs ˈan vˈas ɪns vˈasɜ kˌɑːm zˈɛlpst aɪn ɡɾˈoːsɜ dˌiːnoːzaʊrˈiːɾ viː dɛɾ tˈeː rˈɛks vɑːɾ iːm nˈɪçt ɡəvˈaxzən",
+  "heard": "eːɐgɾɪfaʊxaləsʔanvaːsɪnsvasɐɾkɑːmzɛlpstɛɪngɾoːsɐdiːnoːzauːɾiːɑviːdɐtiːvɛːksvaːɐiːmnɪxtgəvaksən"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10014044777125235464",
+  "text": "Wenn Sie den Film „Das Vermächtnis der Tempelritter“ gesehen haben, denken Sie vielleicht, dass auf die Rückseite der Unabhängigkeitserklärung eine Schatzkarte gezeichnet wurde.",
+  "ref": "vˌɛn ziː deːn fˈɪlm das fɛɾmˈɛçtnɪs dɛɾ tˈɛmpəlrˌɪtɜ ɡəzˈeːən hˈɑːbən dˈɛŋkən ziː fɪlˈaɪçt das aʊf diː rˈʏkzaɪtə dɛɾ ˌʊnaphˈɛŋɪçkˌaɪtzɜklˌɛːrʊŋ ˌaɪnə ʃˈatskaɾtə ɡətsˈaɪçnət vˌʊɐdə",
+  "heard": "vənsiːdənfɪlmdɑːsfəʀmæːxtniːsdəʀtɛmpɛlʀɪtəʀgeːseːənhɑːbəndəŋkənsiːfɪlaɪxtdɑːsaufdəʀʀʏksaiteːdəʀuːnɑːfhæːŋɪkkaɪtsəʀklæːʀuːŋaineːʃatskaʀteːgeːtsaɪxneːtvʊʀdə"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "ɾɪŋɛɾkɔllegəntsɔltənluːnɑeːbnfalstɾiːbuːt"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.clemens.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "ɾɪŋɛɾkɔllegəntsɔltənluːnɑeːbnfalstɾiːbuːt"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.01",
+  "text": "Es ist dünner unter den Mare und dicker unter dem Hochland.",
+  "ref": "ɛsɪst dˈʏnɜ ˌʊntɜ deːn mˈɑːrə ʊnt dˈɪkɜ ˌʊntɜ deːm hˈoːxlˌant",
+  "heard": "eːsɪstdʏnɐʊntɐdeːnmɑːɾəʊntdɪkɐʊntɐdeːmhɔxlant"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.1003119935936341070",
+  "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+  "ref": "haʊˈɛvɚ dˈuː tə ðə slˈoʊ kəmjˌuːnɪkˈeɪʃən tʃˈænəlz stˈaɪlz ɪnðə wˈɛst kʊd lˈæɡ bᵻhˌaɪnd baɪ twˈɛnti fˈaɪv tə θˈɜːɾi jˈɪɹ",
+  "heard": "haʊɛvɜ˞djutuðəsl̴oʊkəmjunəkeɪʃəntʃænəl̴zstaɪl̴zɪnðəwɛstkʊdl̴ægbɪhaɪndbaɪtwɛntifaɪvtuθɜ˞dijɪɹz"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10052240106321793346",
+  "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+  "ref": "ˈɔːl nˈaʊnz ɐlˈɔŋsaɪd ðə wˈɜːd sˈaɪ fɔːɹ juː ˈɔːlweɪz bɪɡˈɪn wɪð ɐ kˈæpɪɾəl lˈɛɾɚ ˈiːvən ɪnðə mˈɪdəl əvə sˈɛntəns",
+  "heard": "hɔʊl̴naʊnzəlɔŋsaɪdðəwɜ˞ldɛsseɪfɹɔ˞juɔl̴weɪzbɪgɪnwɪθeɪkæpətəl̴l̴ɛtɜ˞ivɪnðəmɪdəl̴əveɪsɛntəns"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10167324587744183095",
+  "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+  "ref": "tə ðə nˈɔːɹθ ænd wɪðˌɪn ˈiːzi ɹˈiːtʃ ɪz ðə ɹoʊmˈæntɪk ænd fˈæsᵻnˌeɪɾɪŋ tˈaʊn ʌv sˈɪntɹə ænd wˌɪtʃ wʌz mˌeɪd fˈeɪməs tə fˈɔːɹənɚz ˈæftɚɹ ɐ ɡlˈoʊɪŋ ɐkˈaʊnt ʌv ɪts splˈɛndɚz ɹᵻkˈɔːɹdᵻd baɪ lˈɔːɹd bˈaɪɹɑːn",
+  "heard": "tuðənɔɹθəndwɪðæniziɹitʃæzðəɹoʊmæntɪkəndfæsəneɪtɪŋtaʊnʌvsɛntɹəəndwɪtʃwɑzmeɪdfeɪməstufɔɹəənə˞zæftə˞əgloʊɪŋəkaʊntʌvɪtsplɛndʒə˞əzɹəkɔɹdədbaɪlɔɹdbaɪɹən"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛl̴oʊɹɛsl̴ə˞zɔl̴soʊpeɪdtɹɪbjutulunə"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.daniel.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛl̴oʊɹɛsl̴ə˞zɔlsoʊpeɪdtɹɪbjuttulunə"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.01",
+  "text": "Think of the skiing route as of a similar hiking route.",
+  "ref": "θˈɪŋk ʌvðə skˈiːɪŋ ɹˈaʊt æz əvə sˈɪmɪlɚ hˈaɪkɪŋ ɹˈaʊt",
+  "heard": "θɪŋkʌvðəskiɪŋɹutæzʌvəsɪmələ˞haɪkɪŋɹuʊt"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1001146817223348054",
+  "text": "Se recomienda enfáticamente a los viajeros que se informen sobre cualquier riesgo de clima extremo en el área que visitan, dado que ello puede afectar sus planes de viaje.",
+  "ref": "se rˌekomjˈɛnda enfˈatikamˈente a los βjaxˈeɾos ke se infˈoɾmen sˌoβɾe kwalkjˈeɾ riˈesɣo ðe klˈima ekstɾˈemo en el ˈaɾea ke βisˈitan dˈaðo ke ˈejjo pwˈeðe ˌafektˈaɾ sus plˈanes ðe βjˈaxe",
+  "heard": "seɾekomjendaenfatikamentealosbjaxeroskeseinformensobrekwalkjerɾixodɛlklimaekstremoenelareakebisitandadokeeʎopwedafektarsusplanesdebiaxe"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.10050510856477907332",
+  "text": "El uso adecuado de los blogs «puede empoderar a los alumnos para que sean más analíticos y críticos, a través de la respuesta activa a los contenidos de internet, pueden definir sus posturas en el contexto de los escritos de otros, además de establecer sus perspectivas sobre temas específicos» (Oravec, 2002).",
+  "ref": "el ˈuso ˌaðekwˈaðo ðe los βlˈoɡs pwˈeðe ˌempoðeɾˈaɾ a los alˈumnos pˌaɾa ke sˈean mˈas ˌanalˈitikos i kɾˈitikos a tɾaβˈes ðe la respwˈesta aktˈiβa a los kˌontenˈiðos ðe ˌinteɾnˈet pwˈeðen dˌefinˈiɾ sus postˈuɾas en el kontˈeksto ðe los eskɾˈitos ðe ˈotɾos ˌaðemˈas ðe ˌestaβlesˈeɾ sus pˌeɾspektˈiβas sˌoβɾe tˈemas ˌespesˈifikos ˌoɾaβˈek dˈos mˈil ðˈos",
+  "heard": "elusoaekwadodelosblokkspwedenpoderaraglosalumnosparakeseanmasanalitikosikritikosatrabesdelaɾespwestaaktibaaloskontanidosdeinternetpwdendefiniɾsusposturasenelkontekstodeloseskritosdeotrosademasdestablesersusperpektibassobretemasespesifikosorabekdosmildos"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1008205615316519958",
+  "text": "Fue tanta la cantidad de gente que se concentró, que no todos pudieron acceder al funeral en la Plaza de San Pedro.",
+  "ref": "fwˈe tˈanta la kˌantiðˈad ðe xˈɛnte ke se kˌonsentɾˈo ke nˈo tˈoðos puðjˈeɾon ˌakseðˈeɾ al fˌuneɾˈal en la plˈasa ðe sˈam pˈeðɾo",
+  "heard": "fwɛtantalakantidadɛxɛntɛkɛsɛkonsɛntrokɛnotodospudiɛronaksɛdɛralfunɛralɛnlaplasadɛsanpɛdro"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "airosmitkanseloloskonsiɛrtospɛndiɛntɛsdɛsuxira"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.mateo.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aɛrozmitkansɛloloskonsiɛrtospɛndiɛntɛsdɛsuxira"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.01",
+  "text": "Imagínese la pista de esquí como una ruta de senderismo.",
+  "ref": "ˌimaxˈinese la pˈista ðe eskˈi kˌomo ˈuna rˈuta ðe sˌendeɾˈismo",
+  "heard": "imaxinasɛlapistadɛskikomounarutadɛsenderismo"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10043298898524273336",
+  "text": "L’accident a eu lieu en terrain montagneux, et il semblerait que cela ait été causé par un incendie malveillant.",
+  "ref": "laksidˈɑ̃ a y ljˈø ɑ̃ tɛʁˈɛ̃ mɔ̃tanjˈø e il sɑ̃bləʁˈɛ kə səlˌa ɛt etˈe kozˈe paʁ œ̃n ɛ̃sɑ̃dˈi malvɛjˈɑ̃",
+  "heard": "ɛlaksidɑ̃aɛyljøøyỹtɛʁɛ̃mɔ̃taɲøeilsɑ̃bləʁɛkəsəlaɛstetekozepaʁynɛ̃sɑ̃dimalvɛjɑ̃"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10097171356371990207",
+  "text": "Nous sommes d'accord avec la déclaration de l'USOC (Comité olympique des États-Unis) selon laquelle les intérêts de nos athlètes et de nos clubs, ainsi que de leur sport, pourraient être mieux servis. Cela peut être fait en allant de l'avant et en procédant plutôt à des changements significatifs au sein de notre organisation, qu'à la révocation d'accréditation.",
+  "ref": "nu sɔm dakˈɔʁ avˌɛk la- deklaʁasjˈɔ̃ də- lyzˈɔk komitˈe olɛ̃pˈik de-z etˈazynˈi səlˈɔ̃ lakˈɛl le-z ɛ̃teʁˈɛ də- noz atlˈɛtz e də- no klˈœb ɛ̃sˌi kə də- lœʁ spˈɔʁ puʁˈɛt ˈɛtʁ mjˌø sɛʁvˈi səlˌa pˈøt ˈɛtʁ fˈɛt ɑ̃n alˈɑ̃ də- lavˌɑ̃ e ɑ̃ pʁosedˈɑ̃ plytˈoː a de- ʃɑ̃ʒmˈɑ̃ siɲifikatˈifz o sˈɛ̃ də- notʁ ɔʁɡanizasjˈɔ̃ ka la- ʁevokasjˈɔ̃ dakʁeditasjˈɔ̃",
+  "heard": "nusɔməsdakkɔʀdavɛkladeklaʀasjɔ̃dɛlyzɔkɛkɔmiteɔlɛ̃pikɛdesetatsynissɛlɔnlakɛlɛldɛsɛ̃teʀɛstdɛnɔsatlɛtɛsɛtdɛnɔsklœbsɛ̃sikɛdɛlœʀspɔʀtspuʀɑtɛtɛɛtɛomjœkssɛʀvissɛlapœtɛtʀɛfɛtɛnalɑ̃tdɛlavɑ̃tɛtɛnpʀɔzsedɑ̃tplytotadesʃɑ̃ʒɛmɑ̃ssiɲifikatifssoksɛ̃ndɛnɔtʀəɔʀganizasjɔ̃kəalaʀevɔkasjɔ̃dakʀeditasjɔ̃"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10138021779681596478",
+  "text": "Il a ajouté qu’« on ne devrait cependant pas leur demander d’assumer des obligations qui dépassent leur stade de développement, leur responsabilité et leurs capacités. »",
+  "ref": "il a aʒutˈe k ɔ̃ nə- dəvʁˈɛ səpɑ̃dˈɑ̃ pa lœʁ dəmɑ̃dˈe dasymˈe de-z ɔbliɡasjˈɔ̃ ki depˈas lœʁ stˈad də- devlɔpmˈɑ̃ lœʁ ʁɛspɔ̃sabilitˈe e lœʁ kapasitˈe ˌaaksɑ̃siʁkɔ̃flˈɛks",
+  "heard": "ilaʒutekɔ̃nnədəvʁɛsəpɑ̃dɑ̃palœʁdəmɑ̃dedeasymedeɔbligasjɔ̃kidepaslœʁstaddədevlɔpmɑ̃ləʁɛspɔ̃sabiliteelœʁkapasite"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "leotʁlytœʁɔ̃eegalmɑ̃ʁɑ̃dyɔmaʒaluna"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.etienne.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "leotʁlytœʁɔ̃egalmɑ̃ʁɑ̃dyɔmaʒaluna"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.01",
+  "text": "Une bombe a explosé devant le bureau du gouverneur général.",
+  "ref": "yn bˈɔ̃b a ɛksplozˈe dəvˈɑ̃ lə- byʁˈo dy- ɡuvɛʁnˈœʁ ʒeneʁˈal",
+  "heard": "ynbɔ̃baɛksplozedəvɑ̃ləbyʁodyguvɛʁnœʁʒeneʁal"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10000151032537989529",
+  "text": "Il blog è uno strumento che si prefigge di incoraggiare la collaborazione e sviluppare l'apprendimento degli studenti ben oltre la giornata scolastica normale.",
+  "ref": "il blˈoɡ e ˈuno strʊmˈento ke sɪ prefˈidʒːe dɪ inkoradʒːˈare la kollaboratsiˈone e zvilʊpːˈare lapːrendimˈento dˌeʎɪ stʊdˈɛntɪ bˈɛn ˌoltre la dʒornˈata skolˈastika normˈale",
+  "heard": "iɛlblogɛunonstrumentokesiprefidʒediɛnkoradʒarelakolaboratsioneɛzbiluparaɛlaprendimieɛntodɛjistudjɛntibenotrealdʒornatoɛskolastikanormale"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10011138801715101183",
+  "text": "Sotto il ponte lo spazio in verticale libero è di 15 metri. La costruzione è terminata nell'agosto del 2011, ma l'apertura al traffico è avvenuta solo nel marzo 2017.",
+  "ref": "sˈotːo il pˈonte lo spˈatsio in vertikˈale lˈibero e dɪ kwˈimditʃɪ mˈɛtrɪ la kostrʊtsiˈone e terminˈata nellaɡˈosto del dˈue mˈiːla ˈunditʃɪ ma lapertˈura al trˈaffiko e avvenˈuta sˈolo nel mˈartso dˈue mˈiːla ditʃassˈɛtːe",
+  "heard": "sotoelpontelospatsoiinvertikaleliberoɛdikwinditʃimetrilakonstruksionesterminatanɛllagossadeldemileunditʃimalaaberturaltraffikoɛavolutasolonɛlmartsodemledʃste"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10017896147709177739",
+  "text": "Se avete visto il film \"Il mistero dei Templari\", potreste pensare che sul retro della Dichiarazione d'Indipendenza sia disegnata una mappa del tesoro.",
+  "ref": "se avˌete vˈisto il fˈilm il mistˈɛro dˌeɪ templˈarɪ potrˈɛste pensˈare ke sʊl rˈɛtro dˌella dikjaɾatsiˈone dindipendˈɛntsa sˌia dizeɲˈata ˌʊna mˈapːa del tezˈɔro",
+  "heard": "seavetevistolfilmailmisterodɛjtemplaripotresepensarekesulreitrodɛladikaratsionedindipendɛnsasiadiseɲataaunamapadɛltezoro"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nonsɛrveperfortsaunojɔtoperiiartʃipɛlagiɛjlagi"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.lorenzo.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nonsɛrveperfortsaunojɔttoperiartʃipelagiɛailagi"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.01",
+  "text": "È più sottile sotto i mari e più spessa sotto le aree montuose.",
+  "ref": "e pjʊ sotːˈile sˈotːo i mˈarɪ e pjʊ spˈessa sˈotːo le ˈaːree montʊˈoze",
+  "heard": "ɛpjusottilesottoimariɛpjuspessasotoleareɛmontwoze"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10042455874761876908",
+  "text": "Volgens Angel (2006) kunnen organisaties beter presteren met een aanpak op basis van het continuümmodel.",
+  "ref": "vˈɔlɣəns ˈɑŋəl tʋˈeː dˌœyzɛnt zˌɛs kˌɵnən ˌɔrɣaːnizˈaːtsis bˈeːtər prɛstˈɪːrən mɛt ən ˈaːnpˌɑk ɔ pˈaːzɪs vɑn hət kˌɔntinˌyɵmoːdˈɛl",
+  "heard": "voːrɛnsɑŋəltʋeːdœɪzɛntzɛskʏnənɔraːniːzaːtsiːsbeːtɛrprɛsteːrənmɛteːnaːnpɑkɔpbaːzɪsvɑnhɛtkɔntiːnʏəmoːdɛl"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.1004717084892689357",
+  "text": "Varkens dragen de ziekte bij zich en dragen het via muggen over op mensen.",
+  "ref": "vˈɑrkəns drˈaːɣən də zˈiktə bɛɪ zɪx ɛn drˈaːɣən hət vˈiaː mˈɵɣən ˈoːvər ɔp mˈɛnsən",
+  "heard": "fɑːrkəstraːxɛndədːziːktəːbɛjzɪxɛntraːɣɛnhɛtviːrmʏxxɛnoːvɛrɔpmɛnsxən"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10152288169439514825",
+  "text": "Bij een verkeersstroom wordt gekeken naar de bewegingen van individuele bestuurders en voertuigen tussen twee punten en de interacties die plaatsvinden tussen de individuen.",
+  "ref": "bɛɪ ən vərkˈɪːrsstrˌoːm ʋɔrt ɣəkˈeːkən naːr də bəʋˈeːɣɪŋən vɑn ˈɪndˌividyˌeːlə bəstˈyrdərs ɛn vˈurtœyɣən tˈɵsən tʋˈeː pˈɵntən ɛn də ˌɪntərˈɑksis di plˈaːtsfɪndən tˈɵsən də ˈɪndˌividˌyən",
+  "heard": "bɛjeːnvɛrkeːrstroːmʋɔttɣeːkɛːkənaːdeːbeːʋɛɣɪŋənvɑnɪndiːvɪːdʏeːleːbɛstyːrdɛnsɛːnvuːrtœɥɪxəːntʏssxɛntveːpʏntɛnɛndeːɪnteːrɑktiːdiːplaːtsvɪndəntʏsʃəndeːɪnvɪdiːviːdʏːən"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeːdəvɔrseːlaːrsprɑxtɛːhʏldəaːnluːnaː"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.stijn.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeːdeːvɔrssteːlaːrsprɑxtdeːhʏldeːaːnluːnaː"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.01",
+  "text": "Je kunt de skiroute zien als een wandelroute.",
+  "ref": "jə kɵn tə skˈirutə zˈin ɑls ən ʋˈɑndɛlrˌutə",
+  "heard": "jəːkʏntdeːskiːrhuːtəːziːnɑlseːnvɑndɛlruːtəː"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10003602174340488201",
+  "text": "Podróżni zwiedzający państwa obłożone szczególnie wysokimi podatkami mogą czasem zaoszczędzić sporo pieniędzy, szczególnie na takich towarach jak alkohol i tytoń.",
+  "ref": "pɔdrˈuʒɲi zvʲˌɛdʑajˈɔntsɨ pˈaɲstfa ˌɔbwɔʒˈɔnɛ ʃtʃɛɡˈulɲʲɛ vˌɨsɔkˈimi pˌɔdatkˈami mˈɔɡɔ̃ tʃˈasɛm zˌaɔʃtʃˈɛɲdʑitɕ spˈɔrɔ pʲɛɲʲˈɛndʑɨ ʃtʃɛɡˈulɲʲɛ na tˈakix tɔvˈarax jˈak alkˈɔxɔl i tˈɨtɔɲ",
+  "heard": "padruʐnijzvʲɪzaʲɔntsɨpɑnstfaɔboʐownaʂʈʂɛgunʲɛvɨsʌotkimipodɑtkamimogunʈʂɑsnɨmzawʂʈʂɛndzitszɛsporopʲɛnʲɛndzɨʂʈʂɛgunʲɛnɑtɑkixtovaraxʲɛakalkoxolitɨtoniu"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10013271501230525766",
+  "text": "Większość mniejszych wysp to narody niezależne lub sprzymierzone z Francją i słynące jako luksusowe nadmorskie miejscowości wypoczynkowe.",
+  "ref": "vʲˈɛŋkʃɔɕtɕ mɲʲˈɛjʃɨɣ vˈɨsp tɔ narˈɔdɨ ɲʲˌɛzalˈɛʒnɛ lˈup spʃˌɨmjɛʒˈɔnɛ s frˈantsjɔ̃ i swɨnˈɔntsɛ jˈakɔ lˌuksusˈɔvɛ nadmˈɔrskʲɛ mʲˌɛjstsɔvˈɔɕtɕi vˌɨpɔtʃɨŋkˈɔvɛ",
+  "heard": "vʲɛŋkʂusmnʲɛjʂɨxvɨɛsputanarodanʲɛzraɭɛʐnɨʲubspmʲiʐɑnɨxsfɛfrantsɨɪwmitsvɨnɔntsɨʲjakuɭuksusovɨnɑdbanskajmistsʌvostsivɨpaʈʂɨnkovɨ"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10047713455444904767",
+  "text": "Zgodnie z oświadczeniem biura gubernatora wśród rannych było dziewiętnastu policjantów.",
+  "ref": "zɡˈɔdɲʲɛ z ˌɔɕfʲattʃˈɛɲʲɛm bjˈura ɡˌubɛrnatˈɔra fɕrˈut rˈannɨɣ bˌɨwɔ dʑˌɛvʲɛtnˈastu pˌɔlitsjˈantuf",
+  "heard": "skɔdnizɛusvʲɪʈʂɛnʲimburagubɛrnatorafsrudtrɑnɨxpodzʲɛvʲiɔnnɑsuparitsʲɛntuf"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tɑkʐɑzɑpasnitsɨzvʌʐɨɭixowtɭʲunʲɛ"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.kacper.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tɑkʐɑzapaʂnitsɨzvuʐɨɭixowtɭunʲa"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.01",
+  "text": "Springboks przełamali złą passę pięciu przegranych.",
+  "ref": "sprˈiŋɡbɔks pʃˌɛwamˈali zwˈɔ̃ pˈassɛ pʲˈɛɲtɕu pʃɛɡrˈanɨx",
+  "heard": "sprɨnbokspʂɨwɑmɑɭizɛvompɑssapʲɛntsupʂagrɑnɨx"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10008174856218516817",
+  "text": "Segundo informações, ele estava na casa dos 20 anos. Em uma declaração, Bieber disse que, \"embora eu não estivesse presente nem diretamente envolvido neste trágico incidente, meus pensamentos e orações estão com a família da vítima\".",
+  "ref": "sˌeɡˈũŋdw ˌiŋfoɾəmasˈõjs ˌely estˌavæ na kˈazæ dʊs vˈiŋtʃy ˈɐ̃nʊs ˈeɪŋ ˌumæ dˌeklaɾasˈɐ̃ʊ̃ bˌiebˈer dʒˈisy ky ˌeɪmbˈɔɾæ eʊ nˌɐ̃ʊ̃ ˌestʃivˈɛsy prˌezˈeɪŋtʃy nˈeɪŋ dʒˌiɾetæmˈeɪŋtʃj ˌeɪŋvowvˈidʊ nˌestʃi trˈaʒikw ˌiŋsidˈeɪŋtʃy meʊs pˌeɪŋsæmˈeɪŋtʊz i ˌoɾasˈõjz estˌɐ̃ʊ̃ koŋ a fˌæmˈiljæ da vˈitʃimæ",
+  "heard": "segwundainfoɾmasioneseliestavanakazodosvintʃieanosɛnunadeklaɾasionbibeɾidʒistikiinboɾejonowntʃivesipɾezɛntʃinɛindʒiɾektamentʃeinvolvidonestʃetɾaʒikoinsidentʃemeospensamjentosioɾasonjesestaownkomnafamiljadavitʃima"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10047022047800689031",
+  "text": "Construída pelos egípcios no século 3 A.C., a Grande Pirâmide é uma das muitas grandes estruturas de pirâmide construídas para honrar faraós mortos.",
+  "ref": "kˌoŋstruˈidæ pˈelʊz ˌeʒˈipsjʊz nʊ sˈɛkulʊ trˈez ˌasˌeˈa ɡrˈɐ̃ŋdʒy pˌiɾˈɐ̃midʒj ɛ ˌumæ daz mwˈiŋtæz ɡrˈɐ̃ŋdʒyz ˌestrutˈuɾæz dʒy pˌiɾˈɐ̃midʒy kˌoŋstruˈidæs pˌaɾæ oŋxˈar fˌaɾaˈɔz mˈɔɾətʊs",
+  "heard": "koonstrwuidapɛɾloseʒipsosnosɛkuldostrizɛnsdɛkɾistoagɾandʒɛpiɾamidʒɛɛunadasmujtasgɾandʒsɛsɛstɾuktuɾasdapiɾɛɾmidʒiɛkonstɾwuidaspaɾafffumxarfaɾaoasmwɔɾrtos"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10083615766068544069",
+  "text": "Giancarlo Fisichella perdeu o controle do carro e acabou a corrida logo após a largada.",
+  "ref": "ʒˌiɐ̃ŋkˈaɾəlʊ fˌiziʃˈɛlæ peɾədˈeʊ ʊ kˌoŋtrˈoly dʊ kˈaxw i ˌakabˈow a kˌoxˈidæ lˈɔɡw apˈɔz a lˌaɾəɡˈadæ",
+  "heard": "tʃemkarlofizikɛlaperdewkontroledukawwjakabowakohidalogapɔzalargada"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "pɛnsinahɔtadʒiskikomoumahɔtadʒikamiɲada"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.rafael.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "bɛnsenahɔtedʒiskikomoumahɔtadʒɛkaminada"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.01",
+  "text": "Outros lutadores também prestaram homenagem a Luna.",
+  "ref": "ˈowtrʊz lˌutadˈoɾys tɐ̃mbˈeɪŋ prˌestˈaɾɐ̃ʊ̃ ˌomenˈaʒeɪŋ a lˈunæ",
+  "heard": "owtroslutadorɛstambeimprɛstaronomenadʒeɛnaluna"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10000611681338527501",
+  "text": "В древнем Китае использовали уникальный способ обозначения периодов времени; каждый этап Китая или каждая семья, находившаяся у власти, были особой династией.",
+  "ref": "v drʲˈevnʲim kʲitˈɑjɪ ɪspˈoɭzʌvʌɭʲɪ unʲikˈɑɭnyj spˈosʌp ʌbʌznatʃˈenʲija pʲirʲˈiʌdʌf vrʲˈemʲinʲɪ kˈɑʒdyj ɛtˈɑp kʲitˈɑja ˌɪɭʲɪ kˈɑʒdʌja sʲimʲjˈja nʌxʌdʲˈifʃʌjasʲʌ u vɭˈɑsʲtʲɪ bˌyɭʲɪ ʌsˈobʌj dʲinˈɑsʲtʲijij",
+  "heard": "vdrɛvnimkitɑjispʌɭzavɑɭiwunikɑɭnɨjsposapɑbaznaʈʂɛnnʲɛpʲɛrijadafvrʲɛmʲɛnikɑʐdɨɛtapkitɑʲɛiɭikaʐdɑʲɛsimjanaxadzifʂɨausɛɛawvɭɑstsibɨɭiasobɨjdzinastsiɪj"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10002861505982796062",
+  "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+  "ref": "mʌdʌɡaskˈɑr namnˈoɡʌ bˈoɭʃy druɡʲˈix ɪ javɭʲˈɑjitsʌ sʌmʌbˈytnym kʌntʲinʲˈentʌm f tˈom ʃto kasˈɑjitsʌ dʲˈikʌj prʲirˈody",
+  "heard": "madagɑskarnɑmnogaboɭʂɨdrugixijɪvɭʲɪɛtstsasamabɨtnɨmkantsinʲɛntamxtoʂtopasaʲutsadzikajpʲɛrɨrodɨ"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10008070632189747443",
+  "text": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+  "ref": "vˈo fsʲˈex naˈutʃnyx vʌprˈosʌx fkɭʲutʃˈɑja psʲixʌɭˈoɡʲiju bˌyɭʲɪ prʲˈinʲʌty vzɡɭʲˈɑdy arʲistˈotʲiɭʲʌ",
+  "heard": "vɑfsiɛxnawʈʂnɨxvaprosaxfkɭʲuʈʂɑʲɛpsixaɭʌgiuwbɨɭiprɨnjiatɨxzɛgɭʲɪadɑjɛristʌtsʲɛlʲɛ"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʐnarazɭiʈʂatsgɭagoɭɨidapawnʲɛnʲia"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.sergei.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʐnarazɭiʈʂatsgɭagoɭɨidapawnʲɛnia"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.01",
+  "text": "Коллеги-рестлеры тоже отдали Луне дань уважения.",
+  "ref": "kʌɭɭʲˈeɡʲɪrʲistɭʲˈery tˈoʒy ʌddˈɑɭʲɪ ɭunʲˈe dˈɑnʲ uvaʒˈɛnʲija",
+  "heard": "kɑɭʲigʲɛrɛsɭʲɛrɨtoʐɨaddaɭiɭunʲɛadɑnuvaʐɛnnʲɛ"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10021730821550109934",
+  "text": "Жінки: усім подорожнім жінкам радять казати, що вони заміжні, незалежно від справжнього сімейного стану.",
+  "ref": "ʒˈiːnkɪ ˈusiːm podorˈoʒɲiːm ʒˈiːnkam rˈadjat kazˈat̪ɪ ʃtʃˈo βonˈɪ zamˈiːʒɲiː nɛzˈalɛʒno βˈiːt spraβʒɲˈoho siːmˈɛjnoho st̪ˈanu",
+  "heard": "zinkiwsimpadʌroʐnɨmzinkamrɑdzɪtskazɑtɨsʲɔvonɨzɑmiʐninazavɛʐnɑvatsprawʐnʲɛwusimɛjnɑvustɑnu"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10046655283476675991",
+  "text": "Такі батьки можуть вирішити створити для своєї дитини план всиновлення.",
+  "ref": "t̪ˈakiː bˈatkɪ mˈoʒut βɪrˈiːʃɪt̪ɪ zd̪βorˈɪt̪ɪ dʎˈa zβojˈɛjiː dɪt̪ˈɪnɪ plˈan fsɪnˈoβlɛnɲa",
+  "heard": "tɑkibɑtskimoʐatsvɨrɨʂɨtsɑstvrɨtɨdɭʲjasvɑʲɛjdɨɛtɨnɨpɭɑnfsɨnʌwvɑnnʲa"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10095052411990461296",
+  "text": "Місячна кора становить приблизно 70 км у товщину на ближній стороні та 100 км у товщину на дальній стороні.",
+  "ref": "miːsjˈatʃna kˈora st̪anˈoβɪt prɪblˈɪzno siːmdesjˈat kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa blˈɪʒɲiːj st̪orˈoɲiː t̪ˈa stˈo kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa dˈaʎɲiːj st̪orˈoɲiː",
+  "heard": "mʲizʲɪʐʂnakɔrɑstanovitprɨbɭɨznɑstsimdʲɪsʲjatkʲiɭʌmʲɛtrɨjjutorʂinuwnɑbɭɨʐnʲijstorɨnitɑstojkiɭamɛtrikutowvfʂinunadɑrnʲijstorɨnij"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bʲiɛtsikoɭɛɣɛtakuʐvʲɛdɑɭɨʂɑnuɭuni"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.taras.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bitsikolɛɣɛtɑkoʐviddɛɭɨʂɑnuɭuni"
+ },
+ {
+  "model": "zipa-cr-small",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.01",
+  "text": "Але птахи все ще мають багато чого від динозаврів.",
+  "ref": "alˈɛ pt̪ˈaxɪ fsˈɛ ʃtʃˈɛ mˈajut bahˈat̪o tʃˈoho βˈiːd dɪnozˈaβriːβ",
+  "heard": "ɑlɭɛptɑxifsɑjaʂʂʲɛmɑʲutsbaɣɑtuʈʂɑvʌvidɨnɑzɑvrif"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10004059102127011984",
+  "text": "Für die besten Aussichten auf Hongkong sollten Sie die Insel verlassen und zum gegenüberliegenden Ufer von Kowloon fahren.",
+  "ref": "fyːɾ diː bˈɛstən ˈaʊszˌɪçtən aʊf hˈɔŋkɔŋ zˌɔltən ziː diː ˈɪnzəl fɛɾlˈasən ʊnt tsʊm ɡeːɡənˌyːbɜlˈiːɡəndən ˈuːfɜ fɔn kˈɔvloːn fˈɑːrən",
+  "heard": "fyːɐdiːbɛstnaʊsɪxtənaʊfhɔŋkɔŋkzɔltn̩ziːdiːɪnzeːlfəʀlasənʊndtsuːmgəgənyːbəʀliːgəndənuːfɐfoːnkɔvluːnfɑːʀən"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10009182821551087671",
+  "text": "Er griff auch alles an, was ins Wasser kam; selbst ein großer Dinosaurier wie der T. Rex war ihm nicht gewachsen.",
+  "ref": "ɛɾ ɡɾˈɪf ˌaʊx ˈaləs ˈan vˈas ɪns vˈasɜ kˌɑːm zˈɛlpst aɪn ɡɾˈoːsɜ dˌiːnoːzaʊrˈiːɾ viː dɛɾ tˈeː rˈɛks vɑːɾ iːm nˈɪçt ɡəvˈaxzən",
+  "heard": "eːɐgɾɪffaʊxaləsʔanvasɪnsvasɐkɑːmzɛlpstɛɪngɾoːsɐdiːnozaoɾiːɐviːdɐteːvɛksvaːɐiːmnɪçtgəvaksən"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "de",
+  "kind": "fleurs",
+  "id": "fleurs.de.10014044777125235464",
+  "text": "Wenn Sie den Film „Das Vermächtnis der Tempelritter“ gesehen haben, denken Sie vielleicht, dass auf die Rückseite der Unabhängigkeitserklärung eine Schatzkarte gezeichnet wurde.",
+  "ref": "vˌɛn ziː deːn fˈɪlm das fɛɾmˈɛçtnɪs dɛɾ tˈɛmpəlrˌɪtɜ ɡəzˈeːən hˈɑːbən dˈɛŋkən ziː fɪlˈaɪçt das aʊf diː rˈʏkzaɪtə dɛɾ ˌʊnaphˈɛŋɪçkˌaɪtzɜklˌɛːrʊŋ ˌaɪnə ʃˈatskaɾtə ɡətsˈaɪçnət vˌʊɐdə",
+  "heard": "vənsiːdənfɪlmdɑːsfəʀmæːxtniːsdəʀtɛmpɛlʀɪtəʀgeːseːənhɑːbəndəŋkənsiːfɪlaɪxtdɑːsaufdəʀʀʏksaiteːdəʀuːnɑːfæːŋɪkkaɪtsəʀklæːʀuːŋaineːʃatsgaʀteːgeːtsaɪxneːtvʊʀdə"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "ɾɪŋɐkɔllegəntsɔltənluːnɑeːbnfalstɾiːbuːt"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.clemens.00",
+  "text": "Ringer-Kollegen zollten Luna ebenfalls Tribut.",
+  "ref": "rˈɪŋɜkɔlˈeːɡən tsˈɔltən lˈuːnɑː ˈeːbənfˌals tɾˈiːbuːt",
+  "heard": "ɾɪŋɛɾkɔllegəntsɔltənluːnɑeːbnfalstɾiːbuːt"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "de",
+  "kind": "tts",
+  "id": "tts.de.lena.01",
+  "text": "Es ist dünner unter den Mare und dicker unter dem Hochland.",
+  "ref": "ɛsɪst dˈʏnɜ ˌʊntɜ deːn mˈɑːrə ʊnt dˈɪkɜ ˌʊntɜ deːm hˈoːxlˌant",
+  "heard": "ʔeːsɪstdʏnɐʊntɐdeːnmɑːɾeʊntdɪkɐʊntɐdeːmhɔxlant"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.1003119935936341070",
+  "text": "However, due to the slow communication channels, styles in the west could lag behind by 25 to 30 year.",
+  "ref": "haʊˈɛvɚ dˈuː tə ðə slˈoʊ kəmjˌuːnɪkˈeɪʃən tʃˈænəlz stˈaɪlz ɪnðə wˈɛst kʊd lˈæɡ bᵻhˌaɪnd baɪ twˈɛnti fˈaɪv tə θˈɜːɾi jˈɪɹ",
+  "heard": "haʊɛvɜ˞djutuðəsl̴oʊkəmjunəkeɪʃəntʃænəl̴zstaɪl̴zɪnðəwɛstkʊdl̴ægbɪhaɪndbaɪtwɛntifaɪvtuθɜ˞dijɪɹz"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10052240106321793346",
+  "text": "All nouns, alongside the word Sie for you, always begin with a capital letter, even in the middle of a sentence.",
+  "ref": "ˈɔːl nˈaʊnz ɐlˈɔŋsaɪd ðə wˈɜːd sˈaɪ fɔːɹ juː ˈɔːlweɪz bɪɡˈɪn wɪð ɐ kˈæpɪɾəl lˈɛɾɚ ˈiːvən ɪnðə mˈɪdəl əvə sˈɛntəns",
+  "heard": "hoʊl̴naʊzəl̴ɔŋsaɪdðəwɜ˞l̴dseɪfɹɜ˞juɔl̴weɪzbɪgɪnwɪθeɪkæpətəl̴l̴ɛtɜ˞ivɪnɪnðəmɪdəl̴əveɪsɛntəns"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "en",
+  "kind": "fleurs",
+  "id": "fleurs.en.10167324587744183095",
+  "text": "To the north and within easy reach is the romantic and fascinating town of Sintra and which was made famous to foreigners after a glowing account of its splendours recorded by Lord Byron.",
+  "ref": "tə ðə nˈɔːɹθ ænd wɪðˌɪn ˈiːzi ɹˈiːtʃ ɪz ðə ɹoʊmˈæntɪk ænd fˈæsᵻnˌeɪɾɪŋ tˈaʊn ʌv sˈɪntɹə ænd wˌɪtʃ wʌz mˌeɪd fˈeɪməs tə fˈɔːɹənɚz ˈæftɚɹ ɐ ɡlˈoʊɪŋ ɐkˈaʊnt ʌv ɪts splˈɛndɚz ɹᵻkˈɔːɹdᵻd baɪ lˈɔːɹd bˈaɪɹɑːn",
+  "heard": "tuðənɔɹθəndwɪðɪniziɹitʃɪzəɹoʊmæntɪkəndfæsəneɪtɪŋtaʊnəvsɪntɹəəndwɪtʃwɑzmeɪdfeɪməstufɔɹənə˞zæftə˞əgloʊɪŋəkaʊntəvɪtssplɛndʒə˞ɪzɹəkɔɹdədbaɪlɔɹdbaɪɹən"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛl̴oʊɹɛsl̴ɜ˞zɔl̴soʊpeɪdtɹɪbjuttul̴unə"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.daniel.00",
+  "text": "Fellow wrestlers also paid tribute to Luna.",
+  "ref": "fˈɛloʊ ɹˈɛslɚz ˈɔːlsoʊ pˈeɪd tɹˈɪbjuːt tə lˈuːnə",
+  "heard": "fɛl̴oʊɹɛslə˞zɔlsoʊpeɪdtɹɪbjuttulunə"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "en",
+  "kind": "tts",
+  "id": "tts.en.skylar.01",
+  "text": "Think of the skiing route as of a similar hiking route.",
+  "ref": "θˈɪŋk ʌvðə skˈiːɪŋ ɹˈaʊt æz əvə sˈɪmɪlɚ hˈaɪkɪŋ ɹˈaʊt",
+  "heard": "θɪŋkəvðəskiɪŋɹaʊtæzəveɪsɪməl̴ɜ˞haɪkɪŋɹaʊt"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1001146817223348054",
+  "text": "Se recomienda enfáticamente a los viajeros que se informen sobre cualquier riesgo de clima extremo en el área que visitan, dado que ello puede afectar sus planes de viaje.",
+  "ref": "se rˌekomjˈɛnda enfˈatikamˈente a los βjaxˈeɾos ke se infˈoɾmen sˌoβɾe kwalkjˈeɾ riˈesɣo ðe klˈima ekstɾˈemo en el ˈaɾea ke βisˈitan dˈaðo ke ˈejjo pwˈeðe ˌafektˈaɾ sus plˈanes ðe βjˈaxe",
+  "heard": "seɾekomjendaenfatikamentealosbjaxeɾoskeseinfoɾmensobɾekwalkjeɾɾixodelklimaekstɾemoenelaɾeakebisitandadokeesopwedoafektaɾsusplanesdebjaxe"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.10050510856477907332",
+  "text": "El uso adecuado de los blogs «puede empoderar a los alumnos para que sean más analíticos y críticos, a través de la respuesta activa a los contenidos de internet, pueden definir sus posturas en el contexto de los escritos de otros, además de establecer sus perspectivas sobre temas específicos» (Oravec, 2002).",
+  "ref": "el ˈuso ˌaðekwˈaðo ðe los βlˈoɡs pwˈeðe ˌempoðeɾˈaɾ a los alˈumnos pˌaɾa ke sˈean mˈas ˌanalˈitikos i kɾˈitikos a tɾaβˈes ðe la respwˈesta aktˈiβa a los kˌontenˈiðos ðe ˌinteɾnˈet pwˈeðen dˌefinˈiɾ sus postˈuɾas en el kontˈeksto ðe los eskɾˈitos ðe ˈotɾos ˌaðemˈas ðe ˌestaβlesˈeɾ sus pˌeɾspektˈiβas sˌoβɾe tˈemas ˌespesˈifikos ˌoɾaβˈek dˈos mˈil ðˈos",
+  "heard": "elusoekwadodelosblokspwedenpodeɾaɾalosalumnospaɾakeseanmasanalitikosikɾitikosatɾabesdelaɾespwestaaktibaaloskontenidosdeinteɾnetpwedendefiniɾsuspostuɾasenelkontekstodeloseskɾitosdeotɾosademasestableseɾsuspeɾpektibassobɾetemasespesifikosoɾabekdosmildos"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "es",
+  "kind": "fleurs",
+  "id": "fleurs.es.1008205615316519958",
+  "text": "Fue tanta la cantidad de gente que se concentró, que no todos pudieron acceder al funeral en la Plaza de San Pedro.",
+  "ref": "fwˈe tˈanta la kˌantiðˈad ðe xˈɛnte ke se kˌonsentɾˈo ke nˈo tˈoðos puðjˈeɾon ˌakseðˈeɾ al fˌuneɾˈal en la plˈasa ðe sˈam pˈeðɾo",
+  "heard": "fwɛtantalakantiadɛxɛntɛkɛsɛkonsɛntɾokenotodospudjɛronaksɛdɛralfunɛralɛnlaplasadɛsanpɛdɾo"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "irnsmitkansɛloloskonsiɛrtospendjɛntɛsdɛsuxira"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.mateo.00",
+  "text": "Aerosmith canceló los conciertos pendientes de su gira.",
+  "ref": "ˌaeɾosmˈit kˌanselˈo los konsjˈeɾtos pendjˈɛntes ðe su xˈiɾa",
+  "heard": "aeɾonsmitkanseloloskonsieɾtospendjentesdesuxiɾa"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "es",
+  "kind": "tts",
+  "id": "tts.es.ximena.01",
+  "text": "Imagínese la pista de esquí como una ruta de senderismo.",
+  "ref": "ˌimaxˈinese la pˈista ðe eskˈi kˌomo ˈuna rˈuta ðe sˌendeɾˈismo",
+  "heard": "imaxinasɛlapistadɛɛskikomounaɾutadɛssɛndɛrismo"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10043298898524273336",
+  "text": "L’accident a eu lieu en terrain montagneux, et il semblerait que cela ait été causé par un incendie malveillant.",
+  "ref": "laksidˈɑ̃ a y ljˈø ɑ̃ tɛʁˈɛ̃ mɔ̃tanjˈø e il sɑ̃bləʁˈɛ kə səlˌa ɛt etˈe kozˈe paʁ œ̃n ɛ̃sɑ̃dˈi malvɛjˈɑ̃",
+  "heard": "ɛlaksidɑ̃ayljøyyntɛʁɛ̃mɔ̃taɲøeilsɑ̃bləʁɛkəsəlaɛetekozepaʁynɛ̃sɑ̃dimalvɛjɑ̃"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10097171356371990207",
+  "text": "Nous sommes d'accord avec la déclaration de l'USOC (Comité olympique des États-Unis) selon laquelle les intérêts de nos athlètes et de nos clubs, ainsi que de leur sport, pourraient être mieux servis. Cela peut être fait en allant de l'avant et en procédant plutôt à des changements significatifs au sein de notre organisation, qu'à la révocation d'accréditation.",
+  "ref": "nu sɔm dakˈɔʁ avˌɛk la- deklaʁasjˈɔ̃ də- lyzˈɔk komitˈe olɛ̃pˈik de-z etˈazynˈi səlˈɔ̃ lakˈɛl le-z ɛ̃teʁˈɛ də- noz atlˈɛtz e də- no klˈœb ɛ̃sˌi kə də- lœʁ spˈɔʁ puʁˈɛt ˈɛtʁ mjˌø sɛʁvˈi səlˌa pˈøt ˈɛtʁ fˈɛt ɑ̃n alˈɑ̃ də- lavˌɑ̃ e ɑ̃ pʁosedˈɑ̃ plytˈoː a de- ʃɑ̃ʒmˈɑ̃ siɲifikatˈifz o sˈɛ̃ də- notʁ ɔʁɡanizasjˈɔ̃ ka la- ʁevokasjˈɔ̃ dakʁeditasjˈɔ̃",
+  "heard": "nussɔməsdakɔʀdavɛkladeklaʀasjɔndɛlyzɔkkɔmiteɔlɛ̃pikɛdɛsetatsynissɛlɔnlakɛlɛlɛsɛ̃teʀɛtdɑ̃nɔsatlɛtɛsɛtdɔnɔsklœbsɛ̃sikɛdɛlœʀspɔʀtpuʀtɛtɛɛtʀɛomjœkssɛʀvisɛlapœtɛtʀɛfɛtɛnalɑ̃tdɛlavɑ̃tɛtɛnpʀɔsedɑ̃tplytotadɛsʃɑ̃ʒɛmɑ̃tssiɲifikatifsosɛndɛnɔtʀɛɔʀganizasjɔnkalaʀevɔkasjɔndakkʀeditasjɔ̃"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "fr",
+  "kind": "fleurs",
+  "id": "fleurs.fr.10138021779681596478",
+  "text": "Il a ajouté qu’« on ne devrait cependant pas leur demander d’assumer des obligations qui dépassent leur stade de développement, leur responsabilité et leurs capacités. »",
+  "ref": "il a aʒutˈe k ɔ̃ nə- dəvʁˈɛ səpɑ̃dˈɑ̃ pa lœʁ dəmɑ̃dˈe dasymˈe de-z ɔbliɡasjˈɔ̃ ki depˈas lœʁ stˈad də- devlɔpmˈɑ̃ lœʁ ʁɛspɔ̃sabilitˈe e lœʁ kapasitˈe ˌaaksɑ̃siʁkɔ̃flˈɛks",
+  "heard": "ilaʒutekəɔ̃nədəvʁɛsəpɑ̃dɑ̃palœʁdəmɑ̃dedeasymedeɔbligasjɔ̃kidepaslœʁstadədevlɔpɑ̃leʁɛspɔ̃sabiliteelœʁkapasite"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "leotʁlytœʁɔ̃egalmɑ̃ʁɑ̃dyɔmaʒaluna"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.etienne.00",
+  "text": "Les autres lutteurs ont également rendu hommage à Luna.",
+  "ref": "le-z otʁ lytˈœʁz ˈɔ̃t eɡalmˈɑ̃ ʁɑ̃dˈy ɔmˈaʒ a lynˈa",
+  "heard": "leotʁlytœʁɔ̃egalmɑ̃ʁɑ̃dyɔmaʒaluna"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "fr",
+  "kind": "tts",
+  "id": "tts.fr.ines.01",
+  "text": "Une bombe a explosé devant le bureau du gouverneur général.",
+  "ref": "yn bˈɔ̃b a ɛksplozˈe dəvˈɑ̃ lə- byʁˈo dy- ɡuvɛʁnˈœʁ ʒeneʁˈal",
+  "heard": "ynbɔ̃baɛksplozedəvɑ̃ləbyʁodyguvɛʁnœʁʒeneʁal"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10000151032537989529",
+  "text": "Il blog è uno strumento che si prefigge di incoraggiare la collaborazione e sviluppare l'apprendimento degli studenti ben oltre la giornata scolastica normale.",
+  "ref": "il blˈoɡ e ˈuno strʊmˈento ke sɪ prefˈidʒːe dɪ inkoradʒːˈare la kollaboratsiˈone e zvilʊpːˈare lapːrendimˈento dˌeʎɪ stʊdˈɛntɪ bˈɛn ˌoltre la dʒornˈata skolˈastika normˈale",
+  "heard": "ilblɔgɛunostrumentokesiprefidʒediinkoradʒːarelakollaboratsjoneezvilupparelapprendimentodeʎstudentibenotrealdʒornataskolastikanormale"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10011138801715101183",
+  "text": "Sotto il ponte lo spazio in verticale libero è di 15 metri. La costruzione è terminata nell'agosto del 2011, ma l'apertura al traffico è avvenuta solo nel marzo 2017.",
+  "ref": "sˈotːo il pˈonte lo spˈatsio in vertikˈale lˈibero e dɪ kwˈimditʃɪ mˈɛtrɪ la kostrʊtsiˈone e terminˈata nellaɡˈosto del dˈue mˈiːla ˈunditʃɪ ma lapertˈura al trˈaffiko e avvenˈuta sˈolo nel mˈartso dˈue mˈiːla ditʃassˈɛtːe",
+  "heard": "sotːoilpontelospatsioinvertikaleliberoɛdikuinditʃimetrilakostrutsioneɛterminatanelːagosːadeldemileunditʃimalaperturaaltrafːikoɛavːonutasolonelmartsode"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "it",
+  "kind": "fleurs",
+  "id": "fleurs.it.10017896147709177739",
+  "text": "Se avete visto il film \"Il mistero dei Templari\", potreste pensare che sul retro della Dichiarazione d'Indipendenza sia disegnata una mappa del tesoro.",
+  "ref": "se avˌete vˈisto il fˈilm il mistˈɛro dˌeɪ templˈarɪ potrˈɛste pensˈare ke sʊl rˈɛtro dˌella dikjaɾatsiˈone dindipendˈɛntsa sˌia dizeɲˈata ˌʊna mˈapːa del tezˈɔro",
+  "heard": "seavetevistoilfilmailmisterodeitemplaripotresːepensarekesulretrodelːadikaratsionediindipendensasiadiseɲataunamapːadeltesoro"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nonserveperforsaunojɔttoperʎartʃipɛlagiɛjlagi"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.lorenzo.00",
+  "text": "Non serve per forza uno yacht per gli arcipelaghi e i laghi.",
+  "ref": "non sˈɛrve per fˈɔrtsa ˈuno jˈɔt̪ per ʎɪ artʃipˈɛlaɡɪ e i lˈaɡɪ",
+  "heard": "nonserveperforsaunojɔttoperʎartʃipelagieilagi"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "it",
+  "kind": "tts",
+  "id": "tts.it.elena.01",
+  "text": "È più sottile sotto i mari e più spessa sotto le aree montuose.",
+  "ref": "e pjʊ sotːˈile sˈotːo i mˈarɪ e pjʊ spˈessa sˈotːo le ˈaːree montʊˈoze",
+  "heard": "ɛpjusottilesottoimariepjuspessasotoleareemontuoze"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10042455874761876908",
+  "text": "Volgens Angel (2006) kunnen organisaties beter presteren met een aanpak op basis van het continuümmodel.",
+  "ref": "vˈɔlɣəns ˈɑŋəl tʋˈeː dˌœyzɛnt zˌɛs kˌɵnən ˌɔrɣaːnizˈaːtsis bˈeːtər prɛstˈɪːrən mɛt ən ˈaːnpˌɑk ɔ pˈaːzɪs vɑn hət kˌɔntinˌyɵmoːdˈɛl",
+  "heard": "vɔlɣɛnsɑŋɛltʋɛrdœɥsɛnzɛskʏnnɛnɔrɣaːniːsaːtiːsbeːtɛrprɛsteːɛrɛnmɛteːnaːnpɑkɔpbaːzɪsvɑnhɛtcɔntiːnyːɛmoːdɛl"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.1004717084892689357",
+  "text": "Varkens dragen de ziekte bij zich en dragen het via muggen over op mensen.",
+  "ref": "vˈɑrkəns drˈaːɣən də zˈiktə bɛɪ zɪx ɛn drˈaːɣən hət vˈiaː mˈɵɣən ˈoːvər ɔp mˈɛnsən",
+  "heard": "vɑrkɛstraːɣɛndɛziːktɛbɛjzɪxɛntraːɣɛnhɛtviːrmʏxɣɛnoːvɛrɔpmɛnsxɛn"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "nl",
+  "kind": "fleurs",
+  "id": "fleurs.nl.10152288169439514825",
+  "text": "Bij een verkeersstroom wordt gekeken naar de bewegingen van individuele bestuurders en voertuigen tussen twee punten en de interacties die plaatsvinden tussen de individuen.",
+  "ref": "bɛɪ ən vərkˈɪːrsstrˌoːm ʋɔrt ɣəkˈeːkən naːr də bəʋˈeːɣɪŋən vɑn ˈɪndˌividyˌeːlə bəstˈyrdərs ɛn vˈurtœyɣən tˈɵsən tʋˈeː pˈɵntən ɛn də ˌɪntərˈɑksis di plˈaːtsfɪndən tˈɵsən də ˈɪndˌividˌyən",
+  "heard": "bɛjeːnvɛrkeːrstroːmʋɔrttɣeːkɛkɛnnaːrdɛbeːʋɛɣɪŋɛnvɑnɪndiːvɪdʏeːlɛbɛstyːrdɛrsɛnvuːrtœɥɪɣɛntʏssxɛntʋeːpʏntɛnɛndɛɪnteːrɑctiːsdiːplaːtsvɪndɛntʏssxɛndɛɪnviːdiːvɪdʏɛn"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeːdɛʋɔrsteːlaːrsprɑxttɛhʏldɛaːnluːnɑ"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.stijn.00",
+  "text": "Ook medeworstelaars brachten hulde aan Luna.",
+  "ref": "oːk mˈeːdəʋˌɔrstəlˌaːrs brˈɑxtən hˈɵldə aːn lˈynaː",
+  "heard": "oːkmeːdɛʋɔrsteːlaːrsprɑxtdɛhʏldɛaːnluːnaː"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "nl",
+  "kind": "tts",
+  "id": "tts.nl.noa.01",
+  "text": "Je kunt de skiroute zien als een wandelroute.",
+  "ref": "jə kɵn tə skˈirutə zˈin ɑls ən ʋˈɑndɛlrˌutə",
+  "heard": "jɛkʏntdɛskiːɛruːɛtɛnziːnɑlseːnʋɑndɛlruːttɛ"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10003602174340488201",
+  "text": "Podróżni zwiedzający państwa obłożone szczególnie wysokimi podatkami mogą czasem zaoszczędzić sporo pieniędzy, szczególnie na takich towarach jak alkohol i tytoń.",
+  "ref": "pɔdrˈuʒɲi zvʲˌɛdʑajˈɔntsɨ pˈaɲstfa ˌɔbwɔʒˈɔnɛ ʃtʃɛɡˈulɲʲɛ vˌɨsɔkˈimi pˌɔdatkˈami mˈɔɡɔ̃ tʃˈasɛm zˌaɔʃtʃˈɛɲdʑitɕ spˈɔrɔ pʲɛɲʲˈɛndʑɨ ʃtʃɛɡˈulɲʲɛ na tˈakix tɔvˈarax jˈak alkˈɔxɔl i tˈɨtɔɲ",
+  "heard": "podruʒnizvʲɪzajɔntsipaɲsvaoboʒɔnəʃtʃɛgunʲevɨsotkimipɔdatkamimogʊmtʃasnɨmzaʊʃtɛndʲitsporopɛnjɛnzɨʂtɛguninatakixtovarakjakalkoxɔl̴ititon"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10013271501230525766",
+  "text": "Większość mniejszych wysp to narody niezależne lub sprzymierzone z Francją i słynące jako luksusowe nadmorskie miejscowości wypoczynkowe.",
+  "ref": "vʲˈɛŋkʃɔɕtɕ mɲʲˈɛjʃɨɣ vˈɨsp tɔ narˈɔdɨ ɲʲˌɛzalˈɛʒnɛ lˈup spʃˌɨmjɛʒˈɔnɛ s frˈantsjɔ̃ i swɨnˈɔntsɛ jˈakɔ lˌuksusˈɔvɛ nadmˈɔrskʲɛ mʲˌɛjstsɔvˈɔɕtɕi vˌɨpɔtʃɨŋkˈɔvɛ",
+  "heard": "vʲɛŋkʂosmnʲɛjʂɨxvesptnarodənizɐlɛʐnəl̴upspiʐənesfrantsɪjʊmitvɨnantsɛkolksovenadbal̴skimistovostsivəpatʃɪnkovə"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pl",
+  "kind": "fleurs",
+  "id": "fleurs.pl.10047713455444904767",
+  "text": "Zgodnie z oświadczeniem biura gubernatora wśród rannych było dziewiętnastu policjantów.",
+  "ref": "zɡˈɔdɲʲɛ z ˌɔɕfʲattʃˈɛɲʲɛm bjˈura ɡˌubɛrnatˈɔra fɕrˈut rˈannɨɣ bˌɨwɔ dʑˌɛvʲɛtnˈastu pˌɔlitsjˈantuf",
+  "heard": "skodnizoʃvʲattʃɛnʲɪmburagʊbɛrnatorafɕruttranɨxpodziviwnasʊpərtsɛntuf"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tagʐɨzapaɕnitsɨzvoʐɨlixawtlun"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.kacper.00",
+  "text": "Także zapaśnicy złożyli hołd Lunie.",
+  "ref": "tˈaɡʒɛ zˌapaɕɲˈitsɨ zwɔʒˈɨli xˈɔwt lˈuɲʲɛ",
+  "heard": "tagʐɛzapaɕnitsɨzvoʐɨlixowtlun"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pl",
+  "kind": "tts",
+  "id": "tts.pl.ewa.01",
+  "text": "Springboks przełamali złą passę pięciu przegranych.",
+  "ref": "sprˈiŋɡbɔks pʃˌɛwamˈali zwˈɔ̃ pˈassɛ pʲˈɛɲtɕu pʃɛɡrˈanɨx",
+  "heard": "springbokspʂɛwamalizvompassɛpʲɛntsupʂagrɑnɨx"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10008174856218516817",
+  "text": "Segundo informações, ele estava na casa dos 20 anos. Em uma declaração, Bieber disse que, \"embora eu não estivesse presente nem diretamente envolvido neste trágico incidente, meus pensamentos e orações estão com a família da vítima\".",
+  "ref": "sˌeɡˈũŋdw ˌiŋfoɾəmasˈõjs ˌely estˌavæ na kˈazæ dʊs vˈiŋtʃy ˈɐ̃nʊs ˈeɪŋ ˌumæ dˌeklaɾasˈɐ̃ʊ̃ bˌiebˈer dʒˈisy ky ˌeɪmbˈɔɾæ eʊ nˌɐ̃ʊ̃ ˌestʃivˈɛsy prˌezˈeɪŋtʃy nˈeɪŋ dʒˌiɾetæmˈeɪŋtʃj ˌeɪŋvowvˈidʊ nˌestʃi trˈaʒikw ˌiŋsidˈeɪŋtʃy meʊs pˌeɪŋsæmˈeɪŋtʊz i ˌoɾasˈõjz estˌɐ̃ʊ̃ koŋ a fˌæmˈiljæ da vˈitʃimæ",
+  "heard": "segundiinformasonselistavanakasadosvintʃeanːosenumadeklarasonbiberidʒisːikiinboreonontʃivesːipresentʃineindiretamenteinvolvidonestʃetradʒikoinsidentʃimeospensamentosiorasonisestankonafamiljadavitʃima"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10047022047800689031",
+  "text": "Construída pelos egípcios no século 3 A.C., a Grande Pirâmide é uma das muitas grandes estruturas de pirâmide construídas para honrar faraós mortos.",
+  "ref": "kˌoŋstruˈidæ pˈelʊz ˌeʒˈipsjʊz nʊ sˈɛkulʊ trˈez ˌasˌeˈa ɡrˈɐ̃ŋdʒy pˌiɾˈɐ̃midʒj ɛ ˌumæ daz mwˈiŋtæz ɡrˈɐ̃ŋdʒyz ˌestrutˈuɾæz dʒy pˌiɾˈɐ̃midʒy kˌoŋstruˈidæs pˌaɾæ oŋxˈar fˌaɾaˈɔz mˈɔɾətʊs",
+  "heard": "konstruidapeloseʒipsosnosɛkulotrizɛnsdikristoagrandʒipiramidʒiɛunadasmujtasgrandesɛstruturasdapidɛlidʒikonstruidasparaumxarfaraoɐsmɔrtos"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pt",
+  "kind": "fleurs",
+  "id": "fleurs.pt.10083615766068544069",
+  "text": "Giancarlo Fisichella perdeu o controle do carro e acabou a corrida logo após a largada.",
+  "ref": "ʒˌiɐ̃ŋkˈaɾəlʊ fˌiziʃˈɛlæ peɾədˈeʊ ʊ kˌoŋtrˈoly dʊ kˈaxw i ˌakabˈow a kˌoxˈidæ lˈɔɡw apˈɔz a lˌaɾəɡˈadæ",
+  "heard": "ʃɛnkarlfizikɛlaperdewkontroledukaweakavuwakoidalɔgoapɔzalargada"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "pɛnsinahɔtadʒiskikomoumahɔtadʒikamiɲad"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.rafael.00",
+  "text": "Pense na rota de esqui como uma rota de caminhada.",
+  "ref": "pˈeɪŋsy na xˈɔtæ dʒj eskˈi kˌomʊ ˌumæ xˈɔtæ dʒy kˌæmiɲˈadæ",
+  "heard": "pensenahɔtedʒiskikomoumaxɔtedʒkaminada"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "pt",
+  "kind": "tts",
+  "id": "tts.pt.larissa.01",
+  "text": "Outros lutadores também prestaram homenagem a Luna.",
+  "ref": "ˈowtrʊz lˌutadˈoɾys tɐ̃mbˈeɪŋ prˌestˈaɾɐ̃ʊ̃ ˌomenˈaʒeɪŋ a lˈunæ",
+  "heard": "otroslutadorɛstəmbeimprestaronomenaʒenaluna"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10000611681338527501",
+  "text": "В древнем Китае использовали уникальный способ обозначения периодов времени; каждый этап Китая или каждая семья, находившаяся у власти, были особой династией.",
+  "ref": "v drʲˈevnʲim kʲitˈɑjɪ ɪspˈoɭzʌvʌɭʲɪ unʲikˈɑɭnyj spˈosʌp ʌbʌznatʃˈenʲija pʲirʲˈiʌdʌf vrʲˈemʲinʲɪ kˈɑʒdyj ɛtˈɑp kʲitˈɑja ˌɪɭʲɪ kˈɑʒdʌja sʲimʲjˈja nʌxʌdʲˈifʃʌjasʲʌ u vɭˈɑsʲtʲɪ bˌyɭʲɪ ʌsˈobʌj dʲinˈɑsʲtʲijij",
+  "heard": "vdrɛvnimkʲɪtajispolzvəliunikalnɨsposəpabaznɐtɕenʲepʲɪriadafvremʲɪnikaʐdɨɛtapkitajəɪlikaʐdɑjəsimjanaxɐdzifʂɨjesʲaʊvl̴astsibɨliɐsobɨdʲinastʲɪj"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10002861505982796062",
+  "text": "Мадагаскар намного больше других и  является самобытным континентом в том, что касается дикой природы.",
+  "ref": "mʌdʌɡaskˈɑr namnˈoɡʌ bˈoɭʃy druɡʲˈix ɪ javɭʲˈɑjitsʌ sʌmʌbˈytnym kʌntʲinʲˈentʌm f tˈom ʃto kasˈɑjitsʌ dʲˈikʌj prʲirˈody",
+  "heard": "madagɐskarnamnogəbolʂɨdrugʲixijɪvlʲæjʊtsəsamɐbɨtnɨmkəntsinɛntəmvtoʂtokɐsajʊtsədʲikəjprirodɨ"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "ru",
+  "kind": "fleurs",
+  "id": "fleurs.ru.10008070632189747443",
+  "text": "Во всех научных вопросах, включая психологию, были приняты взгляды Аристотеля.",
+  "ref": "vˈo fsʲˈex naˈutʃnyx vʌprˈosʌx fkɭʲutʃˈɑja psʲixʌɭˈoɡʲiju bˌyɭʲɪ prʲˈinʲʌty vzɡɭʲˈɑdy arʲistˈotʲiɭʲʌ",
+  "heard": "vɑfsexnautɕnɨxvɐprosaxvklʲutɕæjepsixɐl̴ogʲɪjʊbɨliprinʲitɨvzglʲadɛristotsil"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʐnarazlitɕætsgl̴agol̴iidapawnenia"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.sergei.00",
+  "text": "Важно различать глаголы и дополнения.",
+  "ref": "vˈɑʒnʌ rʌzɭʲitʃˈɑtʲ ɡɭaɡˈoɭy ɪ dʌpʌɭnʲˈenʲija",
+  "heard": "vɑʐnarazlitɕætgl̴agol̴əidapalneniɛ"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "ru",
+  "kind": "tts",
+  "id": "tts.ru.tatiana.01",
+  "text": "Коллеги-рестлеры тоже отдали Луне дань уважения.",
+  "ref": "kʌɭɭʲˈeɡʲɪrʲistɭʲˈery tˈoʒy ʌddˈɑɭʲɪ ɭunʲˈe dˈɑnʲ uvaʒˈɛnʲija",
+  "heard": "kalɛgirɛsl̴ɛrɨtoʐɨɐddalil̴unʲɪdanuvaʐɛnʲɛ"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10021730821550109934",
+  "text": "Жінки: усім подорожнім жінкам радять казати, що вони заміжні, незалежно від справжнього сімейного стану.",
+  "ref": "ʒˈiːnkɪ ˈusiːm podorˈoʒɲiːm ʒˈiːnkam rˈadjat kazˈat̪ɪ ʃtʃˈo βonˈɪ zamˈiːʒɲiː nɛzˈalɛʒno βˈiːt spraβʒɲˈoho siːmˈɛjnoho st̪ˈanu",
+  "heard": "ʐinkiusimpəduroʐnimzinkamrɑdzatskazatɛʂtovonɨzamiʐninazavɛʐnɑvitsprawdnivasimɛjnəvəstɑnu"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10046655283476675991",
+  "text": "Такі батьки можуть вирішити створити для своєї дитини план всиновлення.",
+  "ref": "t̪ˈakiː bˈatkɪ mˈoʒut βɪrˈiːʃɪt̪ɪ zd̪βorˈɪt̪ɪ dʎˈa zβojˈɛjiː dɪt̪ˈɪnɪ plˈan fsɪnˈoβlɛnɲa",
+  "heard": "tɑkibɑtskimoʐutsvɨrɛʂɨtastvɐrɨtɨdlʲasvɐiditɨnɨpl̴ɑnfsɨnovɑn"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "uk",
+  "kind": "fleurs",
+  "id": "fleurs.uk.10095052411990461296",
+  "text": "Місячна кора становить приблизно 70 км у товщину на ближній стороні та 100 км у товщину на дальній стороні.",
+  "ref": "miːsjˈatʃna kˈora st̪anˈoβɪt prɪblˈɪzno siːmdesjˈat kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa blˈɪʒɲiːj st̪orˈoɲiː t̪ˈa stˈo kˌaˈɛm ˈu t̪ofʃtʃˈɪnu nˈa dˈaʎɲiːj st̪orˈoɲiː",
+  "heard": "misʲɪtɕnakorastanovitprəbl̴ɪznəstimdʲɪsatkʲɪl̴omɛtriutovɕinunɐbl̴ɨʐnistorənitastojkil̴omɛtriutofɕinʊnədalnəjstorni"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bitsikolɛɣɛtakuʐvidɑl̴iʂanul̴uni"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.taras.00",
+  "text": "Бійці-колеги також віддали шану Луні.",
+  "ref": "bˈiːjtsiːkolˈɛhɪ t̪ˈakoʒ βiːddˈalɪ ʃˈanu lˈuɲiː",
+  "heard": "bitsikolɛɣetakoʐviddal̴ɨʂanl̴uni"
+ },
+ {
+  "model": "zipa-t-small",
+  "lang": "uk",
+  "kind": "tts",
+  "id": "tts.uk.yaryna.01",
+  "text": "Але птахи все ще мають багато чого від динозаврів.",
+  "ref": "alˈɛ pt̪ˈaxɪ fsˈɛ ʃtʃˈɛ mˈajut bahˈat̪o tʃˈoho βˈiːd dɪnozˈaβriːβ",
+  "heard": "ɐl̴ɛptɐxifsɛɕtɕɛmajʊtsbaɣatutʃovovʲɛddɛnozavrif"
+ }
+]
