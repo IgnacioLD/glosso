@@ -271,12 +271,52 @@ object LanguagePacks {
     )
 
     /**
+     * Spanish from Spain (Castilian): θ for z/c, vosotros, Spain vocabulary.
+     * References come from espeak-ng `es`, phonemized per sentence like Russian,
+     * since its allophones depend on the word before (`el dedo` is `el ðˈeðo`).
+     * espeak writes the falling diphthongs with `ɪ` (`hoy` is `ˈoɪ`) and never a
+     * voiced `z`, so neither the inventory nor the matrix rely on one.
+     *
+     * Scored by the multilingual model on the server. On native Cartesia clips it
+     * puts 11% at 98 or more (docs/ADD_LANGUAGE.md, section 10), so the score is
+     * indicative: [LanguagePack.experimental]. The matrix still treats the tap and
+     * the trill (`pero`/`perro`) as near-equal (0.9); calibrate it on real speech
+     * before making that contrast count.
+     */
+    val SPANISH = LanguagePack(
+        code = "es",
+        displayName = "Spanish",
+        nativeName = "Español",
+        flag = "🇪🇸",
+        experimental = true,
+        g2pKind = G2PKind.LEXICON,
+        g2pAsset = "es.lexicon",
+        phonemizerLocale = "es",
+        phonemeInventory = setOf(
+            "a", "e", "ɛ", "i", "ɪ", "o", "u", "j", "w",
+            "p", "b", "β", "t", "d", "ð", "k", "ɡ", "ɣ",
+            "f", "θ", "s", "x", "tʃ", "ʝ",
+            "m", "n", "ɲ", "ŋ", "l", "ʎ", "ɾ", "r",
+        ),
+        similarityKey = "es",
+        errorRulesKey = "es",
+        accents = listOf(AccentOption("es-ES", "Spain")),
+        defaultAccent = "es-ES",
+        voices = listOf(
+            VoiceModel("c0c374aa-09be-42d9-9828-4d2d7df86962", "es", "es-ES", VoiceGender.FEMALE, "Isabel"),
+            VoiceModel("fb936dd1-66ea-43a0-86bd-18a6203dcda2", "es", "es-ES", VoiceGender.FEMALE, "Rosa"),
+            VoiceModel("b5aa8098-49ef-475d-89b0-c9262ecf33fd", "es", "es-ES", VoiceGender.MALE, "Luis"),
+            VoiceModel("58e531e3-b212-49df-adee-c335a19c2429", "es", "es-ES", VoiceGender.MALE, "Gonzalo"),
+        ),
+    )
+
+    /**
      * Every wired pack, English first. French, German and Russian stay here
      * (with their G2P, rules and similarity matrix) so resolution, publishing,
      * scoring and the multi-language tests work; each is [offered] only once its
      * `content/<code>` bank ships.
      */
-    val all: List<LanguagePack> = listOf(ENGLISH, FRENCH, GERMAN, RUSSIAN)
+    val all: List<LanguagePack> = listOf(ENGLISH, FRENCH, GERMAN, RUSSIAN, SPANISH)
 
     val default: LanguagePack get() = ENGLISH
 

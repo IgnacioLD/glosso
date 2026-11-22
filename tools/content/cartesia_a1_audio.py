@@ -131,6 +131,17 @@ PALETTES = {
             ("dmitri", "888b7df4-e165-4852-bfec-0ab2b96aaa46"),
         ],
     },
+    # Spain (Castilian); picked by the owner from Cartesia's es-ES voices.
+    "es-ES": {
+        "FEMALE": [
+            ("isabel", "c0c374aa-09be-42d9-9828-4d2d7df86962"),
+            ("rosa", "fb936dd1-66ea-43a0-86bd-18a6203dcda2"),
+        ],
+        "MALE": [
+            ("luis", "b5aa8098-49ef-475d-89b0-c9262ecf33fd"),
+            ("gonzalo", "58e531e3-b212-49df-adee-c335a19c2429"),
+        ],
+    },
 }
 DEFAULT_ACCENT = "en-GB"
 
@@ -497,7 +508,7 @@ class CartesiaClient:
 # are written. en-GB and en-US are not listed on purpose: their clips are
 # published as rendered, and normalising only the new ones would make one voice
 # jump in level between clips.
-NORMALIZED_ACCENTS = {"ru-RU"}
+NORMALIZED_ACCENTS = {"ru-RU", "es-ES"}
 TARGET_PEAK_DB = -2.0
 
 

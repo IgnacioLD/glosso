@@ -151,6 +151,15 @@ LANGUAGES = {
         "voices": "ru-RU-female,ru-RU-male",
         "renderer": "cartesia",
     },
+    "es": {
+        "narrators": {
+            "es-ES-female": "c0c374aa-09be-42d9-9828-4d2d7df86962",
+            "es-ES-male": "b5aa8098-49ef-475d-89b0-c9262ecf33fd",
+        },
+        "accents": ("es-ES",),
+        "voices": "es-ES-female,es-ES-male",
+        "renderer": "cartesia",
+    },
 }
 
 KINDS = {

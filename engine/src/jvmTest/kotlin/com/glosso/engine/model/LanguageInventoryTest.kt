@@ -33,7 +33,7 @@ class LanguageInventoryTest {
             .entries.associate { (token, id) -> token to id.jsonPrimitive.int }
     }
 
-    private val lexiconPacks = listOf(LanguagePacks.FRENCH, LanguagePacks.GERMAN, LanguagePacks.RUSSIAN)
+    private val lexiconPacks = listOf(LanguagePacks.FRENCH, LanguagePacks.GERMAN, LanguagePacks.RUSSIAN, LanguagePacks.SPANISH)
 
     private fun unresolved(symbols: Iterable<String>): List<String> =
         symbols.filter { ModelInventory.resolve(it, vocab) == null }
@@ -50,8 +50,8 @@ class LanguageInventoryTest {
     }
 
     @Test
-    fun `every german and russian matrix symbol is a model vocabulary token`() {
-        for (pack in listOf(LanguagePacks.GERMAN, LanguagePacks.RUSSIAN)) {
+    fun `every german, russian and spanish matrix symbol is a model vocabulary token`() {
+        for (pack in listOf(LanguagePacks.GERMAN, LanguagePacks.RUSSIAN, LanguagePacks.SPANISH)) {
             val symbols = PhoneticComparator.similarityMatrix(pack.similarityKey).keys.flatten().toSet()
             assertEquals(emptyList(), unresolved(symbols), "${pack.code}: matrix symbols the model cannot emit")
         }
