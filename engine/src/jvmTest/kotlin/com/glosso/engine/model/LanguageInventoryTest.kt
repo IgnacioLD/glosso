@@ -58,8 +58,8 @@ class LanguageInventoryTest {
     }
 
     @Test
-    fun `every german and russian rule symbol is a model vocabulary token`() {
-        for (pack in listOf(LanguagePacks.GERMAN, LanguagePacks.RUSSIAN)) {
+    fun `every german - russian and spanish rule symbol is a model vocabulary token`() {
+        for (pack in listOf(LanguagePacks.GERMAN, LanguagePacks.RUSSIAN, LanguagePacks.SPANISH)) {
             val symbols = ErrorRules.symbols(pack.code)
             assertTrue(symbols.isNotEmpty(), "${pack.code} has no error rules")
             assertEquals(emptyList(), unresolved(symbols), "${pack.code}: rule symbols the model cannot emit")

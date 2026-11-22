@@ -13,8 +13,8 @@ import com.glosso.engine.model.PhonemeErrorModel
  *
  * Rules are per language, selected through the [LanguagePacks] registry, so the
  * same (reference, produced) pair can be taught differently in English and
- * French. English keys use the symbols CMUdict emits; French, German and Russian
- * keys use the ones espeak-ng emits. Lookups ignore vowel length so the same rule
+ * French. English keys use the symbols CMUdict emits; French, German, Russian and
+ * Spanish keys use the ones espeak-ng emits. Lookups ignore vowel length so the same rule
  * also matches a phonemizer that writes /iː/ instead of /i/.
  *
  * Unknown languages return an empty list: never invent a rule for a language we
@@ -243,6 +243,21 @@ object ErrorRules {
         ),
     )
 
+    /**
+     * Castilian Spanish, for English, French and German speakers: the R/RR split,
+     * the Spain Z, Ñ and J, and the soft B/D/G between vowels. espeak-ng symbols.
+     */
+    private val esSubstitutions: List<Sub> = listOf(
+        Sub("r", "ɾ", "es.rr.r", "RR (perro) is coming out as a single tap (pero). Trill it: let the tongue tip flap several times.", listOf("perro", "pero")),
+        Sub("ɾ", "r", "es.r.rr", "R between vowels (pero) is one quick tap of the tongue, not a trill (perro).", listOf("pero", "perro")),
+        Sub("θ", "s", "es.z.s", "Z and CE/CI (caza) are coming out as S (casa). In Spain, put your tongue tip between your teeth.", listOf("caza", "casa")),
+        Sub("ɲ", "n", "es.ny.n", "Ñ (caña) is coming out as N (cana). Press the middle of your tongue against the palate.", listOf("caña", "cana")),
+        Sub("x", "k", "es.j.k", "J (jota) is coming out as K (cota). Let the air rub at the back of your mouth instead of stopping it.", listOf("jota", "cota")),
+        Sub("β", "b", "es.b.soft", "B between vowels (lobo) is soft: the lips almost touch and the air keeps flowing.", listOf("lobo", "bobo")),
+        Sub("ð", "d", "es.d.soft", "D between vowels (nada) is soft, close to TH in 'this'. Don't stop the air.", listOf("nada", "dado")),
+        Sub("ɣ", "ɡ", "es.g.soft", "G between vowels (lago) is soft: the back of the tongue almost touches, and the air keeps flowing.", listOf("lago", "gato")),
+    )
+
     private class RuleSet(
         val language: String,
         val substitutions: List<Sub>,
@@ -266,6 +281,7 @@ object ErrorRules {
         RuleSet("fr", frSubstitutions, frDeletions),
         RuleSet("de", deSubstitutions, deDeletions),
         RuleSet("ru", ruSubstitutions, ruDeletions),
+        RuleSet("es", esSubstitutions, emptyMap()),
     ).associateBy { it.language }
 
     /** The curated set for a supported language, or null when none exists. */
