@@ -29,7 +29,7 @@ Un `LanguagePack` (en `engine/.../model/LanguagePack.kt`) declara, por idioma:
 | `phonemizerLocale` | Locale para el pipeline (p. ej. `fr-fr`) |
 | `phonemeInventory` | Simbolos IPA esperados (documentacion/validacion) |
 | `similarityKey` | Bucket de la matriz en `PhoneticComparator` (`en`, `fr`, `de`, `ru`, `es`, `la`) |
-| `errorRulesKey` | Bucket de reglas en `ErrorRules` (`en`, `fr`, `de`, `ru`) |
+| `errorRulesKey` | Bucket de reglas en `ErrorRules` (`en`, `fr`, `de`, `ru`, `es`) |
 | `accents` / `defaultAccent` / `voices` | Voces offline y acentos disponibles |
 
 **El modelo desplegado NO sirve para otros idiomas** (medido el 2026-10-01 con
