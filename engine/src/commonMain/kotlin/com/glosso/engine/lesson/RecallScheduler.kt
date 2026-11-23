@@ -1,5 +1,6 @@
 package com.glosso.engine.lesson
 
+import com.glosso.engine.model.DialogueModel
 import kotlinx.serialization.Serializable
 
 /**
@@ -40,6 +41,31 @@ data class RecallCard(
 
     /** The IPA to show the learner: the textbook form when present, else the reference. */
     val displayPhonetic: String get() = displayIpa.ifBlank { ipa }
+}
+
+/**
+ * This card with the current content of its line, from [dialogue] already worded
+ * for [accent]; its place on the ladder is kept. A line that no longer exists
+ * leaves the card as stored, which still pairs its own text and clip.
+ */
+fun RecallCard.worded(dialogue: DialogueModel, accent: String): RecallCard {
+    val index = ref.substringAfter("#t", "").toIntOrNull() ?: return this
+    val turn = dialogue.turns.getOrNull(index) ?: return this
+    val partner = dialogue.turns.getOrNull(index - 1)?.takeIf { hasPartner }
+    return copy(
+        text = turn.text,
+        ipa = turn.ipa,
+        displayIpa = turn.displayIpa,
+        accentIpa = turn.accentIpa,
+        audio = turn.audio.ifEmpty { audio },
+        cues = turn.translations.ifEmpty { cues },
+        speaker = turn.speaker,
+        partnerSpeaker = partner?.speaker ?: partnerSpeaker,
+        partnerText = partner?.text ?: partnerText,
+        partnerAudio = partner?.audio?.ifEmpty { null } ?: partnerAudio,
+        partnerTranslations = partner?.translations?.ifEmpty { null } ?: partnerTranslations,
+        accent = accent,
+    )
 }
 
 /**

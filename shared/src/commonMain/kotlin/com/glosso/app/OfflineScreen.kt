@@ -31,6 +31,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -201,6 +202,11 @@ private fun SpaceCard(bytes: Long, count: Int, onFree: () -> Unit) {
 
 @Composable
 private fun OfflineRow(meta: OfflineMeta, labels: Map<String, String>, onDelete: () -> Unit) {
+    // The index keeps the title it was downloaded under; the pack reads in the current accent.
+    val accent by VoicePreferences.accentFlow.collectAsState()
+    val title by produceState(meta.title, meta.id, accent) {
+        value = OfflineStore.bundle(meta.id)?.lesson?.title ?: meta.title
+    }
     Row(
         modifier = Modifier.fillMaxWidth().padding(vertical = Space.x12),
         verticalAlignment = Alignment.CenterVertically,
@@ -213,7 +219,7 @@ private fun OfflineRow(meta: OfflineMeta, labels: Map<String, String>, onDelete:
             )
             Spacer(Modifier.height(Space.x8))
             Text(
-                meta.title,
+                title,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 maxLines = 2,

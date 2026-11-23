@@ -278,7 +278,7 @@ private fun SoundsSection(
                     // so the row is not a second set of targets doing the same thing.
                     weak.forEach { stat ->
                         SoundDial(
-                            phoneme = "/${stat.phoneme}/",
+                            phoneme = "/${shownSound(stat.phoneme)}/",
                             accuracy = stat.accuracy,
                             modifier = Modifier.weight(1f),
                         )

@@ -18,6 +18,34 @@ class SpeakPlannerTest {
     private fun dialogue(vararg turns: DialogueTurn) = DialogueModel(id = "en.dialogue.x.001", title = "X", turns = turns.toList())
 
     @Test
+    fun `a stored review card takes the wording of the accent the learner has now`() {
+        val british = dialogue(turn("Mum", "Is it a holiday?"), turn("Ben", "Yes, at the weekend."))
+        val card = SpeakPlanner.cards(british, "lesson", "es").first().copy(accent = "en-GB", step = 2, dueDay = 9)
+        val american = dialogue(
+            turn("Mom", "Is it a vacation?").copy(displayIpa = ""),
+            turn("Ben", "Yes, on the weekend.", ipa = "us").copy(accentIpa = mapOf("en-GB" to "ref")),
+        )
+
+        val worded = card.worded(american, "en-US")
+
+        assertEquals("Yes, on the weekend.", worded.text)
+        assertEquals("us", worded.ipa)
+        assertEquals(mapOf("en-GB" to "ref"), worded.accentIpa)
+        assertEquals("Is it a vacation?", worded.partnerText)
+        assertEquals("Mom", worded.partnerSpeaker)
+        assertEquals("en-US", worded.accent)
+        assertEquals(2, worded.step)
+        assertEquals(9, worded.dueDay)
+    }
+
+    @Test
+    fun `a review card whose line no longer exists stays as it was`() {
+        val card = SpeakPlanner.cards(dialogue(turn("Mum", "Hello there."), turn("Ben", "I'm fine, thanks.")), "lesson", "es")
+            .first().copy(ref = "en.dialogue.x.001#t9", accent = "en-GB")
+        assertEquals(card, card.worded(dialogue(turn("Mum", "Hi.")), "en-US"))
+    }
+
+    @Test
     fun `the learner plays the character who answers and each line keeps the one that prompts it`() {
         val plan = SpeakPlanner.plan(
             dialogue(

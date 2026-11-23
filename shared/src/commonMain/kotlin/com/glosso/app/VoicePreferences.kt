@@ -1,12 +1,24 @@
 package com.glosso.app
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import com.glosso.app.platform.KeyValueStore
 import com.glosso.app.platform.PlatformContext
 import com.glosso.app.platform.keyValueStore
 import com.glosso.engine.model.LanguagePack
+import com.glosso.engine.model.LanguagePacks
+import com.glosso.engine.phonetics.AccentSymbols
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+
+/** A sound as the learner's accent writes it; see [AccentSymbols]. */
+@Composable
+internal fun shownSound(phone: String): String {
+    val accent by VoicePreferences.accentFlow.collectAsState()
+    return AccentSymbols.shown(phone, accent)
+}
 
 /**
  * The reference accent for the whole app, scoped to the target language: each
@@ -23,7 +35,12 @@ object VoicePreferences {
     /** Written by older versions, when the learner picked the voice's gender; now dropped. */
     private const val LEGACY_GENDER = "gender"
 
+    /** The default language's accent, and what older versions wrote for every language. */
+    private const val ACCENT = "accent"
+
     private lateinit var prefs: KeyValueStore
+
+    private var languageCode = ""
 
     private val accentState = MutableStateFlow("en-GB")
 
@@ -40,32 +57,30 @@ object VoicePreferences {
         }
 
     fun init(context: PlatformContext) {
-        prefs = keyValueStore(context, FILE)
-        val pack = LanguagePreferences.current
-        accent = prefs.getString("accent") ?: pack.defaultAccent
+        init(keyValueStore(context, FILE), LanguagePreferences.current)
+    }
+
+    internal fun init(store: KeyValueStore, pack: LanguagePack) {
+        prefs = store
         if (prefs.contains(LEGACY_GENDER)) prefs.edit { remove(LEGACY_GENDER) }
-        normalize(pack)
+        onLanguageChanged(pack)
     }
 
     fun set(accent: String) {
         this.accent = accent
-        persist()
+        if (::prefs.isInitialized) prefs.edit { putString(keyFor(languageCode), accent) }
     }
 
-    /** Re-points the reference accent when the target language changes. */
-    fun onLanguageChanged(pack: LanguagePack) = normalize(pack)
-
-    /** Keeps the accent valid for [pack], falling back to the one it ships by default. */
-    private fun normalize(pack: LanguagePack) {
-        if (pack.accents.none { it.code == accent }) {
-            accent = pack.defaultAccent
-            persist()
+    /** Each language keeps its own accent, so visiting another one never changes it. */
+    fun onLanguageChanged(pack: LanguagePack) {
+        languageCode = pack.code
+        accent = if (::prefs.isInitialized) {
+            listOfNotNull(prefs.getString(keyFor(pack.code)), prefs.getString(ACCENT))
+                .firstOrNull { saved -> pack.accents.any { it.code == saved } } ?: pack.defaultAccent
+        } else {
+            pack.accents.firstOrNull { it.code == accent }?.code ?: pack.defaultAccent
         }
     }
 
-    private fun persist() {
-        if (::prefs.isInitialized) {
-            prefs.edit { putString("accent", accent) }
-        }
-    }
+    private fun keyFor(code: String) = if (code == LanguagePacks.default.code) ACCENT else "${ACCENT}_$code"
 }

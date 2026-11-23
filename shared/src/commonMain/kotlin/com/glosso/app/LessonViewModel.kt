@@ -15,6 +15,7 @@ import com.glosso.app.audio.playbackFor
 import com.glosso.app.resources.*
 import com.glosso.engine.lesson.RecallCard
 import com.glosso.engine.lesson.RecallVerdict
+import com.glosso.engine.lesson.worded
 import com.glosso.engine.lesson.SpeakPlanner
 import com.glosso.engine.model.ArticleModel
 import com.glosso.engine.model.DialogueModel
@@ -30,6 +31,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 import org.jetbrains.compose.resources.getString
 
 /**
@@ -174,6 +176,8 @@ data class LessonState(
     val drillsPending: Boolean
         get() = drillsLoading || (loading && drills.isEmpty())
 }
+
+private const val REVIEW_WORDING_TIMEOUT_MS = 2_000L
 
 class LessonViewModel(private val services: AppServices) : ViewModel() {
 
@@ -341,6 +345,25 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         }
     }
 
+    /**
+     * Stored review cards in the learner's accent and the current course text. A
+     * slow or missing connection keeps a card as stored, whose text and clip agree.
+     */
+    private suspend fun inCurrentWording(cards: List<RecallCard>): List<RecallCard> {
+        if (cards.isEmpty()) return cards
+        val stored = cards.map { it.lessonId }.distinct().mapNotNull { OfflineStore.bundle(it)?.dialogue }
+        val missing = cards.map { it.ref.substringBefore("#t") }.distinct() - stored.map { it.id }.toSet()
+        val fetched = if (missing.isEmpty()) {
+            emptyList()
+        } else {
+            withTimeoutOrNull(REVIEW_WORDING_TIMEOUT_MS) { runCatching { api.dialoguesByIds(missing) }.getOrNull() }.orEmpty()
+        }
+        val dialogues = (stored + fetched).associateBy { it.id }
+        return cards.map { card ->
+            dialogues[card.ref.substringBefore("#t")]?.let { card.worded(it, VoicePreferences.accent) } ?: card
+        }
+    }
+
     /** Fetches everything the lesson needs: its base, its exercises, its words. */
     fun openLesson(lesson: LessonModel, startStep: LessonStep = LessonStep.BASE) {
         // A retry reopens the same lesson; only a new one is a start.
@@ -356,7 +379,7 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
             // it goes straight to where it was.
             val fromStart = startStep <= LessonStep.BASE
             val due = if (fromStart) {
-                recall.due(LanguagePreferences.current.code, platform.uiLanguage)
+                inCurrentWording(recall.due(LanguagePreferences.current.code, platform.uiLanguage))
             } else {
                 emptyList()
             }

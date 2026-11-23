@@ -9,6 +9,7 @@ import com.glosso.engine.drills.DrillPlanner
 import com.glosso.engine.model.DrillModel
 import com.glosso.engine.model.PhonemeErrorModel
 import com.glosso.engine.model.PhoneticProfileModel
+import com.glosso.engine.model.forAccent
 import com.glosso.engine.phonetics.PhoneticLoop
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -118,12 +119,12 @@ class PracticeViewModel(private val services: AppServices) : ViewModel() {
             _state.value = _state.value.copy(drillUnavailable = false, previousScore = previous)
             trackFocus(feedback.profile)
         }
-        // Reload whenever the target language changes (collect emits the current
-        // one immediately, so this is also the first load).
+        // Reload whenever the language or the accent changes (collect emits the
+        // current one immediately, so this is also the first load).
         viewModelScope.launch {
             api.ensureAssetVersion()
-            LanguagePreferences.code.collect { code ->
-                profiles.setLanguage(code)
+            contentReloadSignal(LanguagePreferences.code, UiLanguage.current).collect {
+                profiles.setLanguage(LanguagePreferences.code.value)
                 load()
             }
         }
@@ -131,7 +132,11 @@ class PracticeViewModel(private val services: AppServices) : ViewModel() {
 
     fun load() {
         viewModelScope.launch {
-            _state.value = _state.value.copy(loading = true, error = null)
+            // The held drills stay on screen during the reload: keep them in the accent their audio plays in.
+            val pack = LanguagePreferences.current
+            _state.value = _state.value.let { s ->
+                s.copy(loading = true, error = null, drills = s.drills.map { it.forAccent(VoicePreferences.accent, pack.defaultAccent) })
+            }
             profiles.await()
             val profile = profiles.current?.takeIf { it.stats.isNotEmpty() }
             runCatching {

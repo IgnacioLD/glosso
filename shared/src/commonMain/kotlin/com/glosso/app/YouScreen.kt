@@ -292,7 +292,7 @@ private fun PronunciationPanel(
                 Spacer(Modifier.height(Space.x16))
                 moved.forEach { (phoneme, from, to) ->
                     Text(
-                        text = stringResource(Res.string.you_sound_delta, phoneme, from, to),
+                        text = stringResource(Res.string.you_sound_delta, shownSound(phoneme), from, to),
                         style = GlossoType.MonoIPA,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -309,7 +309,7 @@ private fun SoundBarRow(stat: PhonemeStatModel, todayDelta: Int?) {
     val color = accuracyColor(stat.accuracy)
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
-            text = "/${stat.phoneme}/",
+            text = "/${shownSound(stat.phoneme)}/",
             style = GlossoType.MonoIPA,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.widthIn(min = 52.dp),
@@ -393,7 +393,7 @@ private fun WorkOnCard(stat: PhonemeStatModel, onPractice: () -> Unit) {
         Column(Modifier.padding(Space.x20)) {
             if (showPhonetics) {
                 Text(
-                    text = "/${stat.phoneme}/",
+                    text = "/${shownSound(stat.phoneme)}/",
                     style = MaterialTheme.typography.headlineMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
@@ -405,7 +405,7 @@ private fun WorkOnCard(stat: PhonemeStatModel, onPractice: () -> Unit) {
             Spacer(Modifier.height(Space.x16))
             PrimaryButton(
                 text = if (showPhonetics) {
-                    stringResource(Res.string.you_practise_sound, stat.phoneme)
+                    stringResource(Res.string.you_practise_sound, shownSound(stat.phoneme))
                 } else {
                     stringResource(Res.string.you_practise_sound_plain)
                 },
@@ -465,7 +465,7 @@ private fun PracticeRow(item: PracticeItem) {
             when (item.kind) {
                 PracticeKind.SOUND -> Text(
                     text = if (showPhonetics) {
-                        item.phoneme.orEmpty()
+                        shownSound(item.phoneme.orEmpty())
                     } else {
                         stringResource(Res.string.you_plan_sound)
                     },
@@ -535,7 +535,7 @@ private fun SoundTrendCard(trend: PhonemeTrend) {
             ) {
                 Text(
                     if (showPhonetics) {
-                        stringResource(Res.string.you_trend_title, trend.phoneme)
+                        stringResource(Res.string.you_trend_title, shownSound(trend.phoneme))
                     } else {
                         stringResource(Res.string.you_trend_title_plain)
                     },
@@ -619,7 +619,7 @@ private fun PatternNote(pattern: PhonemePattern) {
         Column(Modifier.padding(horizontal = Space.x16, vertical = Space.x12)) {
             Text(
                 if (showPhonetics) {
-                    stringResource(Res.string.you_pattern_title, pattern.phoneme)
+                    stringResource(Res.string.you_pattern_title, shownSound(pattern.phoneme))
                 } else {
                     stringResource(Res.string.you_pattern_title_plain)
                 },
@@ -819,7 +819,7 @@ private fun FocusNote(stat: PhonemeStatModel) {
         ) {
             if (showPhonetics) {
                 Text(
-                    stat.phoneme,
+                    shownSound(stat.phoneme),
                     style = GlossoType.MonoIPA,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )
