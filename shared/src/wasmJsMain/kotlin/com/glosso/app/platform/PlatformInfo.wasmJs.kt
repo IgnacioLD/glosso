@@ -13,12 +13,12 @@ private object WebPlatformInfo : PlatformInfo {
     override val isTablet: Boolean? get() = null
     override val isDarkMode: Boolean get() = window.matchMedia("(prefers-color-scheme: dark)").matches
 
-    /** The first of the browser's languages the app ships (en, es, fr, de). */
+    /** The first of the browser's languages the app ships (en, es, fr, de, ru, hi, ar). */
     override val uiLanguage: String
         get() = browserLanguages().split(',').map { it.substringBefore('-').lowercase() }
             .firstOrNull { it in SHIPPED } ?: "en"
 
-    private val SHIPPED = setOf("en", "es", "fr", "de")
+    private val SHIPPED = setOf("en", "es", "fr", "de", "ru", "hi", "ar")
 }
 
 actual fun observeUiLanguage(context: PlatformContext, onChange: (String) -> Unit) {

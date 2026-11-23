@@ -44,7 +44,7 @@ fun parseLicenseCatalog(raw: String): LicenseCatalog = catalogJson.decodeFromStr
 suspend fun loadLicenseCatalog(): LicenseCatalog =
     parseLicenseCatalog(Res.readBytes("files/licenses.json").decodeToString())
 
-private val PRIVACY_LOCALES = setOf("en", "es", "fr", "de")
+private val PRIVACY_LOCALES = setOf("en", "es", "fr", "de", "ru", "hi", "ar")
 
 /** The privacy policy in [uiLanguage] (the interface language), falling back to English. */
 suspend fun loadPrivacyText(uiLanguage: String): String {

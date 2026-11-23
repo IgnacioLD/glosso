@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="practice_work_on_count_plain">
+        <item quantity="one">%1$d звук стоит подтянуть</item>
+        <item quantity="few">%1$d звука стоит подтянуть</item>
+        <item quantity="many">%1$d звуков стоит подтянуть</item>
+        <item quantity="other">%1$d звука стоит подтянуть</item>
+    </plurals>
+    <string name="practice_work_on_many">Стоит подтянуть звуки (%1$d): %2$s</string>
+    <string name="practice_tap_example">Нажмите на слово, чтобы услышать его</string>
+    <string name="practice_error_in_word">В слове «%1$s»</string>
+    <string name="practice_example_wrong">Прозвучало как</string>
+    <string name="practice_example_right">Должно звучать</string>
+
+    <string name="practice_progress_up">Уже лучше</string>
+    <string name="practice_progress_up_detail">+%1$d к прошлой попытке</string>
+    <string name="practice_progress_same">Примерно как в прошлый раз</string>
+    <string name="practice_progress_down">Продолжайте</string>
+    <string name="practice_progress_down_detail">На %1$d меньше, чем в прошлый раз. Каждый повтор всё равно идёт на пользу.</string>
+
+    <string name="sound_guide_theta">«th» в слове «think»: кончик языка между зубами, мягкий выдох.</string>
+    <string name="sound_guide_eth">Звонкий «th» в слове «this»: язык между зубами, голос вибрирует.</string>
+    <string name="sound_guide_s">«s» в слове «sun»: язык сразу за зубами, ровный свист.</string>
+    <string name="sound_guide_z">«z» в слове «zoo»: как «s», но с голосом.</string>
+    <string name="sound_guide_sh">«sh» в слове «she»: язык чуть назад, губы слегка округлены, мягкое шипение.</string>
+    <string name="sound_guide_ch">«ch» в слове «cheap»: быстрый «t», сразу переходящий в «sh».</string>
+    <string name="sound_guide_j">«j» в слове «jeep»: быстрый «d», сразу переходящий в звонкий «sh».</string>
+    <string name="sound_guide_r">«r» в слове «right»: загните кончик языка назад или оттяните язык вглубь, не касаясь нёба.</string>
+    <string name="sound_guide_l">«l» в слове «light»: кончик языка касается нёба за зубами.</string>
+    <string name="sound_guide_w">«w» в слове «west»: округлите губы, как для быстрого «у».</string>
+    <string name="sound_guide_v">«v» в слове «vest»: нижняя губа у верхних зубов, с голосом.</string>
+    <string name="sound_guide_b">«b» в слове «best»: сомкните губы и раскройте их с голосом.</string>
+    <string name="sound_guide_ng">«ng» в слове «sing»: задняя часть языка поднята к мягкому нёбу, воздух идёт через нос.</string>
+    <string name="sound_guide_n">«n» в слове «sin»: кончик языка за зубами, воздух идёт через нос.</string>
+    <string name="sound_guide_ih">Краткий «i» в слове «ship»: расслабленно и быстро.</string>
+    <string name="sound_guide_iy">Долгий «ee» в слове «sheep»: тяните звук, губы как в улыбке.</string>
+    <string name="sound_guide_ae">«a» в слове «bad»: рот широко открыт, губы расслаблены.</string>
+    <string name="sound_guide_eh">«e» в слове «bed»: рот приоткрыт, губы расслаблены.</string>
+    <string name="sound_guide_ah">«u» в слове «cup»: коротко, в середине рта, расслабленно.</string>
+    <string name="sound_guide_aa">«o» в слове «cop»: рот широко открыт, звук в глубине.</string>
+    <string name="sound_guide_uh">Краткий «oo» в слове «pull»: коротко и расслабленно, губы слегка округлены.</string>
+    <string name="sound_guide_uw">Долгий «oo» в слове «pool»: плотно округлите губы и тяните звук.</string>
+    <string name="sound_guide_ao">«aw» в слове «bought»: открытый, округлённый, из глубины рта.</string>
+    <string name="sound_guide_ow">«o» в слове «boat»: плавный переход от «о» к «у».</string>
+    <string name="sound_guide_ey">«a» в слове «late»: плавный переход от «э» к «и».</string>
+    <string name="sound_guide_h">«h» в слове «house»: лёгкий выдох перед гласным.</string>
+    <string name="sound_guide_an">Носовой «an» в слове «dans»: открытый, губы не округлены, воздух идёт через нос.</string>
+    <string name="sound_guide_on">Носовой «on» в слове «bon»: губы округлены, воздух идёт через нос.</string>
+    <string name="sound_guide_in">Носовой «in» в слове «vin»: язык впереди, губы не округлены, воздух идёт через нос.</string>
+    <string name="sound_guide_un">Носовой «un» в слове «brun»: губы округлены, язык впереди, воздух идёт через нос.</string>
+    <string name="sound_guide_y">Французский «u» в слове «tu»: скажите «и» и округлите губы.</string>
+    <string name="sound_guide_eu_closed">Закрытый «eu» в слове «peu»: округлите губы, произнося «э».</string>
+    <string name="sound_guide_eu_open">Открытый «eu» в слове «peur»: губы округлены, челюсть немного опущена.</string>
+    <string name="sound_guide_r_fr">Французский «r» в слове «rue»: мягкое трение в глубине горла, без раската.</string>
+    <string name="sound_guide_zh">«j» в слове «je»: как «sh», но с голосом.</string>
+    <string name="sound_guide_gn">«gn» в слове «agneau»: средняя часть языка прижата к нёбу.</string>
+    <string name="sound_guide_ui">«ui» в слове «nuit»: быстрый переход от округлённого звука к переднему.</string>
+    <string name="sound_guide_schwa">Лёгкий «e» в слове «petit»: слабый безударный звук, произносится бегло.</string>
+</resources>

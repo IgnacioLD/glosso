@@ -7,6 +7,7 @@ import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
+import com.glosso.app.platform.currentUiLanguage
 import com.glosso.app.platform.rememberReduceMotion
 
 private val GlossoShapes = Shapes(
@@ -31,7 +32,8 @@ fun GlossoTheme(
     val colorScheme = if (darkTheme) GlossoDarkColorScheme else GlossoLightColorScheme
     val extended = if (darkTheme) DarkExtended else LightExtended
     val fonts = GlossoFonts.rememberFamilies()
-    val typography = remember(fonts) { glossoTypography(fonts) }
+    val uiLanguage = currentUiLanguage()
+    val typography = remember(fonts, uiLanguage) { glossoTypography(fonts).forScript(uiLanguage) }
 
     CompositionLocalProvider(
         LocalGlossoColors provides extended,

@@ -180,19 +180,21 @@ internal fun DeckControls(
             // (German, a larger font) wraps under its own button instead of
             // pushing into its neighbour.
             Row(Modifier.weight(1f), verticalAlignment = Alignment.Top) {
+                val normalLabel = stringResource(Res.string.practice_normal)
+                val slowLabel = stringResource(Res.string.practice_slow)
                 DeckButton(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(labelShare(normalLabel)),
                     icon = Icons.Outlined.GraphicEq,
-                    label = stringResource(Res.string.practice_normal),
+                    label = normalLabel,
                     enabled = canPlay,
                     playing = state.playing && active == DeckAudio.NORMAL,
                     onClick = { active = DeckAudio.NORMAL; onPlay(false) },
                 )
                 if (state.hasSlow) {
                     DeckButton(
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(labelShare(slowLabel)),
                         icon = Icons.Outlined.SlowMotionVideo,
-                        label = stringResource(Res.string.practice_slow),
+                        label = slowLabel,
                         enabled = canPlay,
                         playing = state.playing && active == DeckAudio.SLOW,
                         onClick = { active = DeckAudio.SLOW; onPlay(true) },
@@ -240,6 +242,9 @@ internal fun DeckControls(
         }
     }
 }
+
+/** A share of the side that keeps a single long word (Russian "Медленно") from breaking mid-word. */
+private fun labelShare(label: String): Float = maxOf(label.length, 6).toFloat()
 
 /** One line that names the moment: say it, recording, listening. Cross-fades. */
 @Composable

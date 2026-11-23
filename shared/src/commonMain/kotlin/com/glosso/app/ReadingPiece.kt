@@ -52,6 +52,7 @@ import com.glosso.app.designsystem.GlossoColors
 import com.glosso.app.designsystem.Radius
 import com.glosso.app.designsystem.Sizes
 import com.glosso.app.designsystem.Space
+import com.glosso.app.designsystem.practised
 import com.glosso.app.resources.*
 import com.glosso.engine.model.WordModel
 import org.jetbrains.compose.resources.StringResource
@@ -374,7 +375,7 @@ private fun ParagraphRow(
         Column(Modifier.weight(1f)) {
             Text(
                 text = text,
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge.practised(),
                 color = MaterialTheme.colorScheme.onSurface,
             )
         }

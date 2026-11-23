@@ -20,6 +20,11 @@ import kotlin.test.assertTrue
  */
 class EnGbReferenceTest {
 
+    private companion object {
+        /** The reported sentence as en_gb_reference.py wrote it, pinned because the course no longer uses it. */
+        const val REPORTED_IPA = "ðə bˈɪn ɪz nˈiə ðə ɡˈeɪt"
+    }
+
     private val reference = HashMap<String, String>()
     private val available: Boolean
 
@@ -40,15 +45,15 @@ class EnGbReferenceTest {
     }
 
     @Test
-    fun `the reported sentence no longer requires a coda r`() {
-        val ipa = ref("en.ih.iy.airport.001")
+    fun `a published sentence with near does not require a coda r`() {
+        val ipa = ref("en.ao.ow.restaurant.002")
         assertTrue("ɹ" !in ipa, "the en-GB reference must not carry the American coda r: $ipa")
         assertTrue("nˈiə" in ipa, "near is the en-GB /nɪə/: $ipa")
     }
 
     @Test
     fun `a british reading of the reported sentence reaches perfect`() {
-        val ipa = ref("en.ih.iy.airport.001")
+        val ipa = REPORTED_IPA
         for (actual in listOf(
             "ðə bɪn ɪz niə ðə ɡeɪt",
             "ðəbɪnɪzniəðəɡeɪt",
@@ -65,7 +70,7 @@ class EnGbReferenceTest {
         // The server fuses the CMUdict reading as an accepted alternate, so US
         // speakers are not punished by the en-GB canonical. This mirrors
         // withG2pVariants: the client word first, the dictionary reading after.
-        val ipa = ref("en.ih.iy.airport.001")
+        val ipa = REPORTED_IPA
         val words = ipa.split(" ")
         val variants = words.map { if (it == "nˈiə") listOf("nˈiə", "nˈɪɹ") else listOf(it) }
         val result = PhoneticComparator.calculateScoringResult(

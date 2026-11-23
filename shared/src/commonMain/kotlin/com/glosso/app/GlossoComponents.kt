@@ -90,6 +90,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
@@ -97,6 +98,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.SubcomposeAsyncImage
@@ -217,7 +219,8 @@ internal fun TopHeader(
                 WordmarkText(
                     Modifier.graphicsLayer {
                         val c = collapse().coerceIn(0f, 1f)
-                        alpha = 1f - c
+                        // Out before the title comes in: a list that stops mid-way never shows both.
+                        alpha = (1f - 2f * c).coerceIn(0f, 1f)
                         translationY = -c * shift
                     },
                 )
@@ -233,7 +236,7 @@ internal fun TopHeader(
                         .clearAndSetSemantics {}
                         .graphicsLayer {
                             val c = collapse().coerceIn(0f, 1f)
-                            alpha = c
+                            alpha = (2f * c - 1f).coerceIn(0f, 1f)
                             translationY = (1f - c) * shift
                         },
                 )
@@ -507,6 +510,7 @@ fun ProgressLine(fraction: Float, modifier: Modifier = Modifier) {
 internal fun ProgressTrack(progress: () -> Float, modifier: Modifier = Modifier) {
     val shape = RoundedCornerShape(Radius.full)
     val fill = MaterialTheme.colorScheme.primary
+    val rtl = LocalLayoutDirection.current == LayoutDirection.Rtl
     Box(
         modifier
             .fillMaxWidth()
@@ -525,7 +529,7 @@ internal fun ProgressTrack(progress: () -> Float, modifier: Modifier = Modifier)
                 .clip(shape)
                 .graphicsLayer {
                     scaleX = progress().coerceIn(0f, 1f)
-                    transformOrigin = TransformOrigin(0f, 0.5f)
+                    transformOrigin = TransformOrigin(if (rtl) 1f else 0f, 0.5f)
                 }
                 .background(fill),
         )

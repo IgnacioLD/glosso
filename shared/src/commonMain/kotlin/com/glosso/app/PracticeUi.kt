@@ -45,6 +45,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -56,12 +57,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.glosso.app.designsystem.GlossoColors
 import com.glosso.app.designsystem.GlossoType
@@ -70,6 +73,7 @@ import com.glosso.app.designsystem.Radius
 import com.glosso.app.designsystem.Sizes
 import com.glosso.app.designsystem.Space
 import com.glosso.app.designsystem.levelColor
+import com.glosso.app.designsystem.practised
 import com.glosso.app.resources.*
 import com.glosso.engine.model.MasteryLevel
 import com.glosso.engine.model.MatchStatusModel
@@ -150,7 +154,7 @@ internal fun DrillCard(
         }
         Text(
             text = text,
-            style = MaterialTheme.typography.displaySmall,
+            style = MaterialTheme.typography.displaySmall.practised(),
             color = MaterialTheme.colorScheme.onSurface,
             modifier = if (tappable) {
                 Modifier.clickable(
@@ -343,28 +347,31 @@ internal fun ResultCard(
             // Each word carries its level as an underline, so the sentence stays
             // readable in one color and the slips still jump out. The letters that
             // did not land are marked in red inside the word on top of that.
-            FlowRow(
-                horizontalArrangement = Arrangement.spacedBy(Space.x12),
-                verticalArrangement = Arrangement.spacedBy(Space.x8),
-            ) {
-                feedback.words.forEach { word ->
-                    val color = levelColor(word.level.name)
-                    Text(
-                        text = wordText(word),
-                        style = MaterialTheme.typography.titleLarge,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier
-                            .drawBehind {
-                                val h = 3.dp.toPx()
-                                drawRoundRect(
-                                    color = color,
-                                    topLeft = androidx.compose.ui.geometry.Offset(0f, size.height - h),
-                                    size = androidx.compose.ui.geometry.Size(size.width, h),
-                                    cornerRadius = androidx.compose.ui.geometry.CornerRadius(h, h),
-                                )
-                            }
-                            .padding(bottom = Space.x4),
-                    )
+            // The words of the sentence run in its own order in any interface.
+            CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+                FlowRow(
+                    horizontalArrangement = Arrangement.spacedBy(Space.x12),
+                    verticalArrangement = Arrangement.spacedBy(Space.x8),
+                ) {
+                    feedback.words.forEach { word ->
+                        val color = levelColor(word.level.name)
+                        Text(
+                            text = wordText(word),
+                            style = MaterialTheme.typography.titleLarge,
+                            color = MaterialTheme.colorScheme.onSurface,
+                            modifier = Modifier
+                                .drawBehind {
+                                    val h = 3.dp.toPx()
+                                    drawRoundRect(
+                                        color = color,
+                                        topLeft = androidx.compose.ui.geometry.Offset(0f, size.height - h),
+                                        size = androidx.compose.ui.geometry.Size(size.width, h),
+                                        cornerRadius = androidx.compose.ui.geometry.CornerRadius(h, h),
+                                    )
+                                }
+                                .padding(bottom = Space.x4),
+                        )
+                    }
                 }
             }
         }
@@ -480,7 +487,7 @@ private fun ProsodySection(prosody: ProsodyBonusModel) {
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(
                     text = "+${prosody.points}",
-                    style = MaterialTheme.typography.headlineSmall,
+                    style = MaterialTheme.typography.headlineSmall.practised(),
                     color = GlossoColors.accentText,
                 )
                 Spacer(Modifier.width(Space.x12))
@@ -531,37 +538,40 @@ private fun SoundTile(sound: PhoneticLoop.SoundScore, modifier: Modifier = Modif
         border = cardBorder(),
         modifier = modifier,
     ) {
-        Column(Modifier.padding(horizontal = Space.x12, vertical = Space.x12)) {
-            Row(verticalAlignment = Alignment.Bottom) {
-                Text(
-                    text = "/${sound.phoneme}/",
-                    style = GlossoType.MonoIPA,
-                    color = MaterialTheme.colorScheme.onSurface,
-                    maxLines = 1,
-                    modifier = Modifier.weight(1f),
-                )
-                Text(
-                    text = "${sound.score}",
-                    style = MaterialTheme.typography.labelLarge,
-                    color = color,
-                    maxLines = 1,
-                )
-            }
-            Spacer(Modifier.height(Space.x8))
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .height(3.dp)
-                    .clip(RoundedCornerShape(Radius.full))
-                    .background(MaterialTheme.colorScheme.outline),
-            ) {
+        // The symbol, its number and the meter read as one left-to-right unit.
+        CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
+            Column(Modifier.padding(horizontal = Space.x12, vertical = Space.x12)) {
+                Row(verticalAlignment = Alignment.Bottom) {
+                    Text(
+                        text = "/${shownSound(sound.phoneme)}/",
+                        style = GlossoType.MonoIPA,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        maxLines = 1,
+                        modifier = Modifier.weight(1f),
+                    )
+                    Text(
+                        text = "${sound.score}",
+                        style = MaterialTheme.typography.labelLarge,
+                        color = color,
+                        maxLines = 1,
+                    )
+                }
+                Spacer(Modifier.height(Space.x8))
                 Box(
                     Modifier
-                        .fillMaxWidth((sound.score / 100f).coerceIn(0f, 1f))
+                        .fillMaxWidth()
                         .height(3.dp)
                         .clip(RoundedCornerShape(Radius.full))
-                        .background(color),
-                )
+                        .background(MaterialTheme.colorScheme.outline),
+                ) {
+                    Box(
+                        Modifier
+                            .fillMaxWidth((sound.score / 100f).coerceIn(0f, 1f))
+                            .height(3.dp)
+                            .clip(RoundedCornerShape(Radius.full))
+                            .background(color),
+                    )
+                }
             }
         }
     }
@@ -628,7 +638,7 @@ private fun DiagnosisCards(
 private fun diagnosisHeading(errors: List<PhonemeErrorModel>, showPhonetics: Boolean): String {
     // The heading counts sounds, not cards: two different slips on /θ/ are
     // two fixes for one sound.
-    val sounds = errors.map { it.phoneme }.distinct()
+    val sounds = errors.map { it.phoneme }.distinct().map { shownSound(it) }
     return when {
         sounds.size == 1 && showPhonetics -> stringResource(Res.string.practice_work_on, sounds.first())
         sounds.size == 1 -> stringResource(Res.string.practice_work_on_plain)
@@ -688,8 +698,8 @@ private fun DiagnosisCard(
             Text(
                 text = when {
                     showPhonetics && error.actual != null ->
-                        stringResource(Res.string.practice_diagnosis_sub, error.phoneme, error.actual ?: "")
-                    showPhonetics -> stringResource(Res.string.practice_diagnosis_dropped, error.phoneme)
+                        stringResource(Res.string.practice_diagnosis_sub, shownSound(error.phoneme), shownSound(error.actual.orEmpty()))
+                    showPhonetics -> stringResource(Res.string.practice_diagnosis_dropped, shownSound(error.phoneme))
                     error.actual != null -> stringResource(Res.string.practice_diagnosis_sub_plain)
                     else -> stringResource(Res.string.practice_diagnosis_dropped_plain)
                 },
@@ -727,7 +737,7 @@ private fun DiagnosisCard(
                     Spacer(Modifier.width(Space.x8))
                     Text(
                         if (showPhonetics) {
-                            stringResource(Res.string.practice_practise_sound, error.phoneme)
+                            stringResource(Res.string.practice_practise_sound, shownSound(error.phoneme))
                         } else {
                             stringResource(Res.string.practice_practise_sound_plain)
                         },
@@ -828,7 +838,7 @@ private fun ContrastColumn(
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = contrastWord(word, other, color),
-                style = MaterialTheme.typography.titleMedium,
+                style = MaterialTheme.typography.titleMedium.practised(),
                 color = color,
             )
             if (playable) {
@@ -1153,9 +1163,9 @@ internal fun NotEvaluatedCard() {
 private fun defaultErrorTitle(error: PhonemeErrorModel): String {
     val actual = error.actual
     return if (actual != null) {
-        stringResource(Res.string.error_phoneme_note, error.phoneme, actual)
+        stringResource(Res.string.error_phoneme_note, shownSound(error.phoneme), shownSound(actual))
     } else {
-        stringResource(Res.string.error_phoneme_dropped, error.phoneme)
+        stringResource(Res.string.error_phoneme_dropped, shownSound(error.phoneme))
     }
 }
 
@@ -1174,9 +1184,9 @@ private fun FocusTrend(focus: FocusPractice) {
         Column {
             Text(
                 text = if (focus.improved) {
-                    stringResource(Res.string.practice_improved, focus.phoneme)
+                    stringResource(Res.string.practice_improved, shownSound(focus.phoneme))
                 } else {
-                    stringResource(Res.string.practice_trend, focus.phoneme)
+                    stringResource(Res.string.practice_trend, shownSound(focus.phoneme))
                 },
                 style = MaterialTheme.typography.labelLarge,
                 color = if (focus.improved) GlossoColors.success else MaterialTheme.colorScheme.onSurface,

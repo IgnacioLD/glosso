@@ -50,4 +50,4 @@ interface PlatformActions {
 expect fun rememberPlatformActions(): PlatformActions
 
 /** The language tags the in-app picker offers; "" means "follow the system". */
-val APP_LOCALE_TAGS = listOf("", "en", "es", "fr", "de")
+val APP_LOCALE_TAGS = listOf("", "en", "es", "fr", "de", "ru", "hi", "ar")

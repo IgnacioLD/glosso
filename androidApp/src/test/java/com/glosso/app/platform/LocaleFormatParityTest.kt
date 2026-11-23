@@ -70,6 +70,14 @@ class LocaleFormatParityTest {
     }
 
     @Test
+    fun `Arabic numbers use Western digits`() {
+        for (tag in listOf("ar", "ar-EG", "ar-SA")) {
+            val text = formatDecimal(12.5, 1, tag)
+            assertEquals(tag, "125", text.filter { it.isDigit() })
+        }
+    }
+
+    @Test
     fun `formatBytes fixed strings`() {
         assertEquals("341.8 MB", formatBytes(358_357_774L, "en"))
         assertEquals("341,8 MB", formatBytes(358_357_774L, "es"))

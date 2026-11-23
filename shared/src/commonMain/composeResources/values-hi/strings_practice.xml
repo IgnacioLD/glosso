@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="practice_work_on_count_plain">
+        <item quantity="one">%1$d साउंड पर काम करना है</item>
+        <item quantity="other">%1$d साउंड पर काम करना है</item>
+    </plurals>
+    <string name="practice_work_on_many">%1$d साउंड पर काम करना है: %2$s</string>
+    <string name="practice_tap_example">सुनने के लिए किसी शब्द पर टैप करें</string>
+    <string name="practice_error_in_word">"%1$s" में</string>
+    <string name="practice_example_wrong">ऐसा सुनाई दिया</string>
+    <string name="practice_example_right">ऐसा होना चाहिए</string>
+    <string name="practice_progress_up">बेहतर हो रहा है</string>
+    <string name="practice_progress_up_detail">पिछली कोशिश से +%1$d</string>
+    <string name="practice_progress_same">पिछली कोशिश जैसा ही</string>
+    <string name="practice_progress_down">लगे रहें</string>
+    <string name="practice_progress_down_detail">पिछली कोशिश से %1$d कम। हर बार दोहराने का फ़ायदा होता है।</string>
+    <string name="sound_guide_theta">"think" का "th": जीभ की नोक दाँतों के बीच रखें और हल्के से फूँक मारें।</string>
+    <string name="sound_guide_eth">"this" का "th": जीभ दाँतों के बीच रखें और साथ में गले से आवाज़ निकालें।</string>
+    <string name="sound_guide_s">"sun" का "s": जीभ दाँतों के ठीक पीछे रखें और लगातार "स्स्स" बोलें।</string>
+    <string name="sound_guide_z">"zoo" का "z": "s" जैसा, लेकिन गले से आवाज़ के साथ।</string>
+    <string name="sound_guide_sh">"she" का "sh": जीभ थोड़ी पीछे, होंठ हल्के गोल, नरम "श" जैसा साउंड।</string>
+    <string name="sound_guide_ch">"cheap" का "ch": एक तेज़ "t" और उसके तुरंत बाद "sh"।</string>
+    <string name="sound_guide_j">"jeep" का "j": एक तेज़ "d" और उसके तुरंत बाद आवाज़ वाला "sh"।</string>
+    <string name="sound_guide_r">"right" का "r": जीभ को पीछे मोड़ें या समेटें, पर तालू को न छुएँ।</string>
+    <string name="sound_guide_l">"light" का "l": जीभ की नोक से दाँतों के पीछे तालू को छुएँ।</string>
+    <string name="sound_guide_w">"west" का "w": होंठ गोल करें, जैसे जल्दी से "उ" बोल रहे हों।</string>
+    <string name="sound_guide_v">"vest" का "v": निचला होंठ ऊपर के दाँतों से लगाएँ और आवाज़ निकालें।</string>
+    <string name="sound_guide_b">"best" का "b": दोनों होंठ दबाएँ, फिर आवाज़ के साथ खोलें।</string>
+    <string name="sound_guide_ng">"sing" का "ng": जीभ का पिछला हिस्सा नरम तालू तक उठता है और हवा नाक से निकलती है।</string>
+    <string name="sound_guide_n">"sin" का "n": जीभ की नोक दाँतों के पीछे, हवा नाक से।</string>
+    <string name="sound_guide_ih">"ship" का छोटा "i": ढीला और तेज़।</string>
+    <string name="sound_guide_iy">"sheep" का लंबा "ee": इसे खींचें और मुस्कुराते हुए बोलें।</string>
+    <string name="sound_guide_ae">"bad" का "a": जबड़ा पूरा खोलें, होंठ ढीले रखें।</string>
+    <string name="sound_guide_eh">"bed" का "e": जबड़ा थोड़ा खुला, होंठ ढीले।</string>
+    <string name="sound_guide_ah">"cup" का "u": छोटा, मुँह के बीच से, ढीला।</string>
+    <string name="sound_guide_aa">"cop" का "o": मुँह पूरा खुला, साउंड पीछे से।</string>
+    <string name="sound_guide_uh">"pull" का छोटा "oo": छोटा और ढीला, होंठ हल्के गोल।</string>
+    <string name="sound_guide_uw">"pool" का लंबा "oo": होंठ अच्छी तरह गोल करें और इसे खींचें।</string>
+    <string name="sound_guide_ao">"bought" का "aw": खुला और गोल, मुँह के पिछले हिस्से से।</string>
+    <string name="sound_guide_ow">"boat" का "o": "ओ" बोलते हुए "ऊ" तक जाएँ।</string>
+    <string name="sound_guide_ey">"late" का "a": "ए" बोलते हुए "ई" तक जाएँ।</string>
+    <string name="sound_guide_h">"house" का "h": स्वर से पहले हल्की साँस छोड़ें।</string>
+    <string name="sound_guide_an">"dans" का नाक वाला "an": खुला, होंठ गोल नहीं, हवा नाक से।</string>
+    <string name="sound_guide_on">"bon" का नाक वाला "on": होंठ गोल, हवा नाक से।</string>
+    <string name="sound_guide_in">"vin" का नाक वाला "in": जीभ आगे, होंठ गोल नहीं, हवा नाक से।</string>
+    <string name="sound_guide_un">"brun" का नाक वाला "un": होंठ गोल, जीभ आगे, हवा नाक से।</string>
+    <string name="sound_guide_y">"tu" का फ़्रेंच "u": "ई" बोलें और होंठ गोल कर लें।</string>
+    <string name="sound_guide_eu_closed">"peu" का बंद "eu": "ए" बोलते हुए होंठ गोल करें।</string>
+    <string name="sound_guide_eu_open">"peur" का खुला "eu": होंठ गोल, जबड़ा थोड़ा नीचे।</string>
+    <string name="sound_guide_r_fr">"rue" का फ़्रेंच "r": गले के पिछले हिस्से में हल्की रगड़, जीभ कंपन नहीं करती।</string>
+    <string name="sound_guide_zh">"je" का "j": "sh" जैसा, लेकिन आवाज़ के साथ।</string>
+    <string name="sound_guide_gn">"agneau" का "gn": जीभ का बीच वाला हिस्सा तालू से लगाएँ।</string>
+    <string name="sound_guide_ui">"nuit" का "ui": होंठ गोल रखते हुए जीभ जल्दी से आगे लाएँ।</string>
+    <string name="sound_guide_schwa">"petit" का हल्का "e": नरम "अ" जैसा, जल्दी से बोला जाता है।</string>
+</resources>

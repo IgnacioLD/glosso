@@ -346,6 +346,8 @@
     <string name="settings_lang_de">Alemán</string>
     <string name="settings_lang_ru">Ruso</string>
     <string name="settings_lang_zh">Chino</string>
+    <string name="settings_lang_ar">Árabe</string>
+    <string name="settings_lang_hi">Hindi</string>
     <string name="settings_accent_us">Estadounidense</string>
     <string name="settings_accent_uk">Británico</string>
     <string name="settings_about">Acerca de</string>

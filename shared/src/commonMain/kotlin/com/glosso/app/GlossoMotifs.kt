@@ -51,6 +51,7 @@ import com.glosso.app.designsystem.GlossoType
 import com.glosso.app.designsystem.LocalReduceMotion
 import com.glosso.app.designsystem.Motion
 import com.glosso.app.designsystem.levelColor
+import com.glosso.app.designsystem.practised
 import com.glosso.app.resources.*
 import com.glosso.engine.model.MasteryLevel
 import com.glosso.engine.model.ScoringConfig
@@ -130,7 +131,7 @@ internal fun ScoreRing(
             )
             Text(
                 text = stringResource(Res.string.score_out_of),
-                style = MaterialTheme.typography.labelMedium,
+                style = MaterialTheme.typography.labelMedium.practised(),
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         }

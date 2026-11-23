@@ -12,6 +12,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.unit.sp
 import com.glosso.app.resources.*
 import org.jetbrains.compose.resources.Font
@@ -130,13 +131,14 @@ object GlossoType {
         fontFeatureSettings = "tnum",
     )
 
-    /** IPA transcription. Always monospaced. */
+    /** IPA transcription. Always monospaced, and left to right in any interface. */
     val MonoIPA: TextStyle @Composable get() = TextStyle(
         fontFamily = GlossoFonts.Mono,
         fontWeight = FontWeight.Normal,
         fontSize = 15.sp,
         lineHeight = 22.sp,
         letterSpacing = 0.sp,
+        textDirection = TextDirection.Ltr,
     )
 
     /** A figure in a row (a percentage, minutes): bold UI face, tabular digits. */
@@ -274,3 +276,49 @@ internal fun glossoTypography(fonts: GlossoFontFamilies): Typography = Typograph
         ),
     )
 }
+
+/**
+ * For the text being practised: it keeps its own direction inside a
+ * right-to-left interface, even when it starts with a digit or a quote.
+ */
+internal fun TextStyle.practised(): TextStyle = copy(textDirection = TextDirection.Ltr)
+
+/** The interface languages written in a connected script with tall marks. */
+internal fun isTallScript(uiLanguage: String): Boolean = uiLanguage == "ar" || uiLanguage == "hi"
+
+/**
+ * The scale for an interface in Arabic or Devanagari. Tracking breaks the
+ * joins between letters, and the marks above and below the line need more
+ * leading than the Latin faces the scale was drawn for.
+ */
+internal fun Typography.forScript(uiLanguage: String): Typography {
+    if (!isTallScript(uiLanguage)) return this
+    // Content direction: English lesson text inside an Arabic interface keeps its full stop
+    // at the end. Start would then follow the text, so Arabic screens align right explicitly.
+    val align = if (uiLanguage == "ar") TextAlign.Right else TextAlign.Unspecified
+    fun TextStyle.open() = copy(
+        letterSpacing = 0.sp,
+        lineHeight = lineHeight * TALL_SCRIPT_LEADING,
+        textDirection = TextDirection.Content,
+        textAlign = align,
+    )
+    return copy(
+        displayLarge = displayLarge.open(),
+        displayMedium = displayMedium.open(),
+        displaySmall = displaySmall.open(),
+        headlineLarge = headlineLarge.open(),
+        headlineMedium = headlineMedium.open(),
+        headlineSmall = headlineSmall.open(),
+        titleLarge = titleLarge.open(),
+        titleMedium = titleMedium.open(),
+        titleSmall = titleSmall.open(),
+        bodyLarge = bodyLarge.open(),
+        bodyMedium = bodyMedium.open(),
+        bodySmall = bodySmall.open(),
+        labelLarge = labelLarge.open(),
+        labelMedium = labelMedium.open(),
+        labelSmall = labelSmall.open(),
+    )
+}
+
+private const val TALL_SCRIPT_LEADING = 1.2f
