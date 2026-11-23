@@ -4,7 +4,7 @@ kotlin = "2.4.21"
 # compileSdk 37 (targetSdk stays 36). compose-bom below is the androidx BOM on the
 # same Compose line (1.12), so the app and :shared agree.
 compose-multiplatform = "1.12.2"
-agp = "9.5.1"
+agp = "9.5.2"
 # One Ktor version everywhere: Kotlin/Native needs every Ktor module on the same
 # version (a mismatched Darwin engine can link and fail at the first response), so
 # :shared also pins iOS and web through ktor-bom.
