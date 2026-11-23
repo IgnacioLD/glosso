@@ -457,6 +457,9 @@ internal fun appLocaleDisplay(tag: String): String = when (tag) {
     "es" -> stringResource(Res.string.settings_lang_es)
     "fr" -> stringResource(Res.string.settings_lang_fr)
     "de" -> stringResource(Res.string.settings_lang_de)
+    "ru" -> stringResource(Res.string.settings_lang_ru)
+    "hi" -> stringResource(Res.string.settings_lang_hi)
+    "ar" -> stringResource(Res.string.settings_lang_ar)
     else -> tag
 }
 

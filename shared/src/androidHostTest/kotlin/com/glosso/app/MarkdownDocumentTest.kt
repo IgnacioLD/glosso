@@ -73,7 +73,8 @@ class MarkdownDocumentTest {
     @Test
     fun boldAndCodeBecomeSpans() {
         val text = markdownInline("a **b** `c`", SpanStyle())
-        assertEquals("a b c", text.text)
+        // The code span is bidi-isolated, so it keeps its order inside right-to-left text.
+        assertEquals("a b ⁦c⁩", text.text)
         assertTrue(text.spanStyles.any { it.item.fontWeight == FontWeight.SemiBold })
     }
 }

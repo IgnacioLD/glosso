@@ -66,6 +66,9 @@ PRIVACY_SOURCES = {
     "es": ROOT / "docs/PRIVACY.md",
     "fr": ROOT / "tools/licensing/privacy/privacy.fr.md",
     "de": ROOT / "tools/licensing/privacy/privacy.de.md",
+    "ru": ROOT / "tools/licensing/privacy/privacy.ru.md",
+    "hi": ROOT / "tools/licensing/privacy/privacy.hi.md",
+    "ar": ROOT / "tools/licensing/privacy/privacy.ar.md",
 }
 PRIVACY_ASSET_DIR = RESOURCE_FILES / "privacy"
 
@@ -86,6 +89,9 @@ TEXT_FILES = {
     "OFL-PlusJakartaSans": "licenses/fonts/OFL-PlusJakartaSans.txt",
     "OFL-JetBrainsMono": "licenses/fonts/OFL-JetBrainsMono.txt",
     "OFL-NotoSansMono": "licenses/fonts/OFL-NotoSansMono.txt",
+    "OFL-NotoSans": "licenses/fonts/OFL-NotoSans.txt",
+    "OFL-NotoSansDevanagari": "licenses/fonts/OFL-NotoSansDevanagari.txt",
+    "OFL-NotoSansArabic": "licenses/fonts/OFL-NotoSansArabic.txt",
     "BSD-3-Clause": "licenses/BSD-3-Clause.txt",
 }
 # Licence id -> text key, when there is a redistributable text.
@@ -267,6 +273,36 @@ COMPONENTS = [
         text="OFL-NotoSansMono",
         url="https://github.com/notofonts/latin-greek-cyrillic",
         usage="IPA symbols JetBrains Mono lacks, in the web app only (a browser has no system font to fall back on).",
+        distribution="web",
+    ),
+    dict(
+        id="font:NotoSans-Cyrillic",
+        name="Noto Sans (Cyrillic subset)",
+        author="2022 The Noto Project Authors",
+        license="OFL-1.1",
+        text="OFL-NotoSans",
+        url="https://github.com/notofonts/latin-greek-cyrillic",
+        usage="Russian interface text, in the web app only (a browser has no system font to fall back on).",
+        distribution="web",
+    ),
+    dict(
+        id="font:NotoSans-Devanagari",
+        name="Noto Sans Devanagari (subset)",
+        author="2022 The Noto Project Authors",
+        license="OFL-1.1",
+        text="OFL-NotoSansDevanagari",
+        url="https://github.com/notofonts/devanagari",
+        usage="Hindi interface text, in the web app only (a browser has no system font to fall back on).",
+        distribution="web",
+    ),
+    dict(
+        id="font:NotoSans-Arabic",
+        name="Noto Sans Arabic (subset)",
+        author="2022 The Noto Project Authors",
+        license="OFL-1.1",
+        text="OFL-NotoSansArabic",
+        url="https://github.com/notofonts/arabic",
+        usage="Arabic interface text, in the web app only (a browser has no system font to fall back on).",
         distribution="web",
     ),
     # --- Web app bundle (npm and wasm, outside the Android classpath) ---------

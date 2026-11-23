@@ -13,8 +13,12 @@ import java.util.Locale
 private fun localeOf(languageTag: String?): Locale =
     languageTag?.let(Locale::forLanguageTag) ?: Locale.getDefault()
 
+/** Arabic defaults to Arabic-Indic digits in some regions; scores and sizes use one digit set. */
+private fun westernDigits(locale: Locale): Locale =
+    if (locale.language == "ar") Locale.Builder().setLocale(locale).setUnicodeLocaleKeyword("nu", "latn").build() else locale
+
 actual fun formatDecimal(value: Double, decimals: Int, languageTag: String?): String =
-    NumberFormat.getNumberInstance(localeOf(languageTag)).apply {
+    NumberFormat.getNumberInstance(westernDigits(localeOf(languageTag))).apply {
         minimumFractionDigits = decimals
         maximumFractionDigits = decimals
         isGroupingUsed = false

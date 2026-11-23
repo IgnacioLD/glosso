@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Downloads (background service and its notification) -->
+    <string name="download_channel_name">डाउनलोड</string>
+    <string name="download_channel_description">ऐप से बाहर जाने पर भी डाउनलोड चलता रहता है।</string>
+
+</resources>

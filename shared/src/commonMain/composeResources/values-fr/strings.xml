@@ -362,6 +362,8 @@
     <string name="settings_lang_de">Allemand</string>
     <string name="settings_lang_ru">Russe</string>
     <string name="settings_lang_zh">Chinois</string>
+    <string name="settings_lang_ar">Arabe</string>
+    <string name="settings_lang_hi">Hindi</string>
     <string name="settings_accent_us">Américain</string>
     <string name="settings_accent_uk">Britannique</string>
     <string name="settings_about">À propos</string>

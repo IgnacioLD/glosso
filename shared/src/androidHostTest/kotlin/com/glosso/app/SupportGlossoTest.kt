@@ -48,7 +48,7 @@ class SupportGlossoTest {
 
     @Test
     fun `the support copy exists in every app language, without em dashes`() {
-        for (tag in listOf("en", "es", "fr", "de")) {
+        for (tag in listOf("en", "es", "fr", "de", "ru", "hi", "ar")) {
             val strings = LocalizedStrings(Locale.forLanguageTag(tag))
             for (key in listOf(Res.string.support_title, Res.string.support_subtitle, Res.string.support_link)) {
                 val value = strings.getString(key)

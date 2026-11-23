@@ -23,6 +23,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import com.glosso.app.designsystem.Radius
 import com.glosso.app.designsystem.Space
+import com.glosso.app.designsystem.practised
 import com.glosso.app.resources.*
 import com.glosso.engine.model.LessonNote
 import com.glosso.engine.model.NoteExample
@@ -110,7 +111,7 @@ private fun NoteExampleLine(example: NoteExample) {
             }
             Text(
                 text = example.text,
-                style = MaterialTheme.typography.bodyLarge,
+                style = MaterialTheme.typography.bodyLarge.practised(),
                 color = if (wrong) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.onSurface,
                 textDecoration = if (wrong) TextDecoration.LineThrough else null,
             )

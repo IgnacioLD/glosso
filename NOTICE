@@ -137,6 +137,27 @@ Noto Sans Mono (IPA subset)
                has no system font to fall back on). Subset to U+0250-036F and
                U+1D00-1DBF.
 
+Noto Sans (Cyrillic subset)
+  Source:      https://github.com/notofonts/latin-greek-cyrillic
+  Copyright:   2022 The Noto Project Authors
+  License:     SIL Open Font License 1.1 (see licenses/fonts/OFL-NotoSans.txt)
+  Used as:     Russian interface text, in the web app only. Subset to
+               U+0400-04FF and U+2116.
+
+Noto Sans Devanagari (subset)
+  Source:      https://github.com/notofonts/devanagari
+  Copyright:   2022 The Noto Project Authors
+  License:     SIL Open Font License 1.1 (see licenses/fonts/OFL-NotoSansDevanagari.txt)
+  Used as:     Hindi interface text, in the web app only. Subset to
+               U+0900-097F, U+200C-200D, U+20B9 and U+25CC.
+
+Noto Sans Arabic (subset)
+  Source:      https://github.com/notofonts/arabic
+  Copyright:   2022 The Noto Project Authors
+  License:     SIL Open Font License 1.1 (see licenses/fonts/OFL-NotoSansArabic.txt)
+  Used as:     Arabic interface text, in the web app only. Subset to
+               U+0600-06FF, U+200C-200F and U+25CC.
+
 stb_vorbis 1.22
   Source:      https://github.com/nothings/stb (vendored in shared/src/nativeInterop/stb_vorbis)
   Copyright:   2017 Sean Barrett

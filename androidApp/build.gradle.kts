@@ -94,7 +94,7 @@ android {
 
         // Ship only the locales the app is translated into, so the APK does not
         // carry every AndroidX/Play Services translation.
-        androidResources.localeFilters += listOf("en", "es", "fr", "de")
+        androidResources.localeFilters += listOf("en", "es", "fr", "de", "ru", "hi", "ar")
 
         // Extra points for rhythm and intonation (engine ProsodyBonus), computed
         // on-device against the item's reference audio. Off by default, like

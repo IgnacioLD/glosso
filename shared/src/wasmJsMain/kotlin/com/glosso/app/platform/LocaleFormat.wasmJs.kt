@@ -25,13 +25,13 @@ actual fun currentLocaleTag(): String = remember { navigatorLanguage() }
 private fun intlDecimal(value: Double, decimals: Int, tag: String): String = js(
     """new Intl.NumberFormat(tag || undefined, {
         minimumFractionDigits: decimals, maximumFractionDigits: decimals,
-        useGrouping: false, roundingMode: 'halfEven' }).format(value)""",
+        useGrouping: false, roundingMode: 'halfEven', numberingSystem: 'latn' }).format(value)""",
 )
 
 private fun intlLanguage(tag: String): String = js("new Intl.Locale(tag || navigator.language || 'en').language")
 
 private fun intlDate(epochDay: Double, tag: String, options: String): String = js(
-    "new Intl.DateTimeFormat(tag || undefined, Object.assign({ timeZone: 'UTC' }, JSON.parse(options))).format(new Date(epochDay * 86400000))",
+    "new Intl.DateTimeFormat(tag || undefined, Object.assign({ timeZone: 'UTC', numberingSystem: 'latn' }, JSON.parse(options))).format(new Date(epochDay * 86400000))",
 )
 
 internal fun navigatorLanguage(): String = js("navigator.language || 'en'")

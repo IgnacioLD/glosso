@@ -12,6 +12,7 @@ import com.glosso.app.audio.Player
 import com.glosso.engine.model.ExerciseModel
 import com.glosso.engine.model.StoryModel
 import com.glosso.engine.model.WordModel
+import com.glosso.engine.model.forAccent
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -137,6 +138,8 @@ class StoriesViewModel(
             _state.value = _state.value.copy(
                 loading = true,
                 error = null,
+                // A failed reload keeps this list: it must still match the accent of the audio.
+                stories = _state.value.stories.map { it.forAccent(VoicePreferences.accent) },
                 reading = null,
                 vocabulary = emptyMap(),
                 word = null,

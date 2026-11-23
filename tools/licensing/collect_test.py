@@ -83,7 +83,7 @@ class TestPrivacyLocales(unittest.TestCase):
                 )
 
     def test_all_app_locales_are_covered(self):
-        self.assertEqual(set(collect.PRIVACY_SOURCES), {"en", "es", "fr", "de"})
+        self.assertEqual(set(collect.PRIVACY_SOURCES), {"en", "es", "fr", "de", "ru", "hi", "ar"})
 
 
 class TestAssetIntegrity(unittest.TestCase):

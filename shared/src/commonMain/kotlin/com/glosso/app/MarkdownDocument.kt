@@ -100,7 +100,8 @@ internal fun markdownInline(text: String, code: SpanStyle): AnnotatedString = bu
             }
             text[i] == '`' && text.indexOf('`', i + 1) > i -> {
                 val end = text.indexOf('`', i + 1)
-                withStyle(code) { append(text.substring(i + 1, end)) }
+                // Isolated, so a path like /v1/events keeps its order inside right-to-left text.
+                withStyle(code) { append("\u2066" + text.substring(i + 1, end) + "\u2069") }
                 i = end + 1
             }
             else -> {

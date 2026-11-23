@@ -106,6 +106,7 @@ import com.glosso.app.designsystem.Motion
 import com.glosso.app.designsystem.Radius
 import com.glosso.app.designsystem.Sizes
 import com.glosso.app.designsystem.Space
+import com.glosso.app.designsystem.practised
 import com.glosso.app.download.DownloadStatus
 import com.glosso.app.resources.*
 import com.glosso.engine.model.LessonModel
@@ -1067,7 +1068,7 @@ private fun VocabularyWord(word: WordModel, onPlay: () -> Unit) {
     ) {
         Text(
             text = word.lemma,
-            style = MaterialTheme.typography.bodyLarge,
+            style = MaterialTheme.typography.bodyLarge.practised(),
             color = if (hasAudio) GlossoColors.accentText
             else MaterialTheme.colorScheme.onSurfaceVariant,
         )
@@ -1147,7 +1148,7 @@ internal fun DialogueTurn(
                     if (current && playing) PlayingBars(modifier = Modifier.height(14.dp))
                 }
                 Spacer(Modifier.height(Space.x4))
-                Text(text, style = MaterialTheme.typography.bodyLarge, color = MaterialTheme.colorScheme.onSurface)
+                Text(text, style = MaterialTheme.typography.bodyLarge.practised(), color = MaterialTheme.colorScheme.onSurface)
                 if (showPhonetics && ipa.isNotBlank()) {
                     Spacer(Modifier.height(Space.x4))
                     Text(
