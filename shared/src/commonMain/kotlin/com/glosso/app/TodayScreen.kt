@@ -43,7 +43,6 @@ import com.glosso.app.resources.*
 import com.glosso.engine.model.LessonModel
 import com.glosso.engine.model.PhonemeStatModel
 import com.glosso.engine.phonetics.PhoneticProfile
-import org.jetbrains.compose.resources.pluralStringResource
 import org.jetbrains.compose.resources.stringResource
 
 /** How many weak sounds Today offers to review; the planner caps the same way. */
@@ -77,7 +76,6 @@ fun TodayScreen(
     LaunchedEffect(Unit) { DailyReminder.ensureInitialized(context) }
 
     val weak = profile?.let { PhoneticProfile.weakest(it, limit = WEAK_LIMIT) }.orEmpty()
-    val hasProfile = !profile?.stats.isNullOrEmpty()
 
     val scroll = rememberScrollState()
     val collapse = rememberCollapse(scroll)
@@ -89,7 +87,13 @@ fun TodayScreen(
             title = stringResource(Res.string.today_title),
             eyebrow = dateLine,
             collapse = { collapse.value },
-            trailing = { StreakChip(days = progress.shownDailyStreak()) },
+            trailing = {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    StreakChip(days = progress.shownDailyStreak())
+                    Spacer(Modifier.width(Space.x12))
+                    CourseSwitcher()
+                }
+            },
         )
 
         Column(
@@ -122,13 +126,9 @@ fun TodayScreen(
             Spacer(Modifier.height(Space.x40))
             StaggeredAppear(index = 1) {
                 Column {
-                    SectionLabel(stringResource(Res.string.today_sounds))
+                    SectionLabel(stringResource(Res.string.library_practice_title))
                     Spacer(Modifier.height(Space.x16))
-                    SoundsSection(
-                        weak = weak,
-                        hasProfile = hasProfile,
-                        onReview = onReviewSounds,
-                    )
+                    PracticeSection(weak = weak, onPractice = onReviewSounds)
                 }
             }
 
@@ -242,58 +242,48 @@ private fun LessonCard(
  * second card competing for the eye: the home has a single primary action, so
  * this section never carries a gold button and never repeats "Start".
  */
+/**
+ * Free practice, always one tap from the first screen: loose sentences for a
+ * spare minute, planned from the sounds the learner misses or has practised
+ * least. The weak sounds, once there are any, say what the session will work on.
+ */
 @Composable
-private fun SoundsSection(
+private fun PracticeSection(
     weak: List<PhonemeStatModel>,
-    hasProfile: Boolean,
-    onReview: () -> Unit,
+    onPractice: () -> Unit,
 ) {
     val showPhonetics by PhoneticsPreferences.visible.collectAsState()
-    when {
-        !hasProfile -> Text(
-            text = stringResource(Res.string.today_sounds_no_profile),
+    Column {
+        Text(
+            text = stringResource(Res.string.today_practice_desc),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
         )
-
-        weak.isEmpty() -> Text(
-            text = stringResource(Res.string.today_sounds_clear),
-            style = MaterialTheme.typography.bodyMedium,
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-        )
-
-        else -> Column {
-            if (showPhonetics) {
-                Text(
-                    text = stringResource(Res.string.today_sounds_hint),
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                )
-                Spacer(Modifier.height(Space.x20))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.spacedBy(Space.x12),
-                ) {
-                    // Read-only dials: the one action is the review button below,
-                    // so the row is not a second set of targets doing the same thing.
-                    weak.forEach { stat ->
-                        SoundDial(
-                            phoneme = "/${shownSound(stat.phoneme)}/",
-                            accuracy = stat.accuracy,
-                            modifier = Modifier.weight(1f),
-                        )
-                    }
-                    // Keep dials the same width whether there are one, two or three.
-                    repeat(WEAK_LIMIT - weak.size) { Spacer(Modifier.weight(1f)) }
+        Spacer(Modifier.height(Space.x20))
+        if (showPhonetics && weak.isNotEmpty()) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(Space.x12),
+            ) {
+                // Read-only dials: the one action is the button below, so the row
+                // is not a second set of targets doing the same thing.
+                weak.forEach { stat ->
+                    SoundDial(
+                        phoneme = "/${shownSound(stat.phoneme)}/",
+                        accuracy = stat.accuracy,
+                        modifier = Modifier.weight(1f),
+                    )
                 }
-                Spacer(Modifier.height(Space.x20))
+                // Keep dials the same width whether there are one, two or three.
+                repeat(WEAK_LIMIT - weak.size) { Spacer(Modifier.weight(1f)) }
             }
-            SecondaryButton(onClick = onReview, modifier = Modifier.fillMaxWidth()) {
-                Text(
-                    pluralStringResource(Res.plurals.today_review, weak.size, weak.size),
-                    style = MaterialTheme.typography.labelLarge,
-                )
-            }
+            Spacer(Modifier.height(Space.x20))
+        }
+        SecondaryButton(onClick = onPractice, modifier = Modifier.fillMaxWidth()) {
+            Text(
+                text = stringResource(Res.string.today_practice_start),
+                style = MaterialTheme.typography.labelLarge,
+            )
         }
     }
 }

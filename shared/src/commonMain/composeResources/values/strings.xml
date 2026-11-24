@@ -44,14 +44,8 @@
     <string name="today_start">Start</string>
     <string name="today_continue">Continue</string>
     <string name="today_browse">See the course</string>
-    <string name="today_sounds">Sounds to work on</string>
-    <string name="today_sounds_no_profile">Your profile isn't ready yet. Say a few phrases and it will fill in.</string>
-    <string name="today_sounds_clear">No weak sounds right now.</string>
-    <string name="today_sounds_hint">Weakest first, from your own recordings.</string>
-    <plurals name="today_review">
-        <item quantity="one">Review %1$d sound</item>
-        <item quantity="other">Review %1$d sounds</item>
-    </plurals>
+    <string name="today_practice_desc">Loose sentences for a spare minute. Glosso picks the sounds you need most.</string>
+    <string name="today_practice_start">Practise now</string>
     <string name="today_reminder_title">A few days have passed</string>
     <!-- Always shown for 2 or more days (REMINDER_AFTER_DAYS), so the plural is
          not ambiguous; lint cannot see the caller's guard. -->

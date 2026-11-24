@@ -34,14 +34,8 @@
     <string name="today_start">Starten</string>
     <string name="today_continue">Weiter</string>
     <string name="today_browse">Zum Kurs</string>
-    <string name="today_sounds">Laute zum Üben</string>
-    <string name="today_sounds_no_profile">Dein Profil ist noch nicht bereit. Sag ein paar Sätze und es füllt sich.</string>
-    <string name="today_sounds_clear">Derzeit keine schwachen Laute.</string>
-    <string name="today_sounds_hint">Die schwächsten zuerst, aus deinen eigenen Aufnahmen.</string>
-    <plurals name="today_review">
-        <item quantity="one">%1$d Laut wiederholen</item>
-        <item quantity="other">%1$d Laute wiederholen</item>
-    </plurals>
+    <string name="today_practice_desc">Einzelne Sätze für zwischendurch. Glosso wählt die Laute, die du am meisten brauchst.</string>
+    <string name="today_practice_start">Jetzt üben</string>
     <string name="today_reminder_title">Ein paar Tage sind vergangen</string>
     <string name="today_reminder_body">%1$d Tage seit deiner letzten Übung. Keine Eile: dein Plan ist noch da.</string>
     <string name="today_settings">Einstellungen</string>

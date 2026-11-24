@@ -34,15 +34,8 @@
     <string name="today_start">Empezar</string>
     <string name="today_continue">Continuar</string>
     <string name="today_browse">Ver el curso</string>
-    <string name="today_sounds">Sonidos que trabajar</string>
-    <string name="today_sounds_no_profile">Tu perfil aún no está listo. Di unas frases y se completará.</string>
-    <string name="today_sounds_clear">Ahora mismo no hay sonidos débiles.</string>
-    <string name="today_sounds_hint">De más flojo a menos, con tus propias grabaciones.</string>
-    <plurals name="today_review">
-        <item quantity="one">Repasar %1$d sonido</item>
-        <item quantity="many">Repasar %1$d sonidos</item>
-        <item quantity="other">Repasar %1$d sonidos</item>
-    </plurals>
+    <string name="today_practice_desc">Frases sueltas para un rato libre. Glosso elige los sonidos que más necesitas.</string>
+    <string name="today_practice_start">Practicar ahora</string>
     <string name="today_reminder_title">Han pasado unos días</string>
     <string name="today_reminder_body">%1$d días desde tu última práctica. Sin prisa: tu plan sigue aquí.</string>
     <string name="today_settings">Ajustes</string>

@@ -93,4 +93,24 @@ class LessonNotesValidationTest {
             .copy(l10n = emptyMap())
         assertFalse(ContentValidator.validateLesson(plain, setOf("d1"), emptySet(), emptySet(), setOf("e1", "e2"), emptySet(), "ru").problems.any { it.code == "notes" })
     }
+
+    @Test
+    fun `an example needs no meaning in the course's own language`() {
+        // The Spanish course shown in Spanish: the example already is Spanish.
+        val spanish = lesson(
+            listOf(
+                note(
+                    examples = listOf(NoteExample("¡Buenas!", mapOf("en" to "Hi!"))),
+                    l10n = mapOf("es" to mapOf("title" to "Tú o usted", "body" to "Con desconocidos se usa usted.")),
+                ),
+            ),
+        ).copy(
+            id = "es.lesson.greetings.001",
+            language = "es",
+            l10n = mapOf("es" to mapOf("title" to "Saludar", "objective" to "Saludar a alguien.")),
+        )
+        val found = ContentValidator.validateLesson(spanish, setOf("d1"), emptySet(), emptySet(), setOf("e1", "e2"), emptySet(), "es")
+            .problems.filter { it.code == "notes" }.map { it.detail }
+        assertEquals(emptyList(), found)
+    }
 }

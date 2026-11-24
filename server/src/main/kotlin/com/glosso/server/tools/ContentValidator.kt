@@ -228,7 +228,8 @@ object ContentValidator {
             }
             for ((j, example) in note.examples.withIndex()) {
                 if (example.text.isBlank()) problems += problem("notes", "note $i example $j blank text")
-                for (language in uiLanguages + glossLanguage(lesson.language)) {
+                // An example needs no meaning in the language it is written in.
+                for (language in uiLanguages + glossLanguage(lesson.language) - lesson.language) {
                     if (example.translations[language].isNullOrBlank()) {
                         problems += problem("notes", "note $i example $j has no $language translation")
                     }

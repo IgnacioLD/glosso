@@ -37,18 +37,8 @@
     <string name="today_start">ابدأ</string>
     <string name="today_continue">متابعة</string>
     <string name="today_browse">عرض الدورة</string>
-    <string name="today_sounds">أصوات للتدريب</string>
-    <string name="today_sounds_no_profile">ملفك ليس جاهزًا بعد. انطق بعض العبارات ليكتمل.</string>
-    <string name="today_sounds_clear">لا توجد أصوات ضعيفة حاليًا.</string>
-    <string name="today_sounds_hint">الأضعف أولًا، بناءً على تسجيلاتك.</string>
-    <plurals name="today_review">
-        <item quantity="zero">لا توجد أصوات للمراجعة</item>
-        <item quantity="one">راجع صوتًا واحدًا</item>
-        <item quantity="two">راجع صوتين</item>
-        <item quantity="few">راجع %1$d أصوات</item>
-        <item quantity="many">راجع %1$d صوتًا</item>
-        <item quantity="other">راجع %1$d صوت</item>
-    </plurals>
+    <string name="today_practice_desc">جمل قصيرة لوقت فراغك. يختار Glosso الأصوات التي تحتاج إليها أكثر.</string>
+    <string name="today_practice_start">تدرّب الآن</string>
     <string name="today_reminder_title">مرّت بضعة أيام</string>
     <string name="today_reminder_body">عدد الأيام منذ آخر تدريب لك: %1$d. لا داعي للعجلة، فخطتك ما زالت بانتظارك.</string>
     <string name="today_settings">الإعدادات</string>

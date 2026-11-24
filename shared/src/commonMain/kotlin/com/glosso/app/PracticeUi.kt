@@ -314,7 +314,8 @@ internal fun ResultCard(
     previousScore: Int? = null,
 ) {
     val accent = levelColor(feedback.level.name)
-    val sounds = PhoneticLoop.breakdown(feedback.alignment)
+    // Only what needs work: a sound that landed perfectly adds noise, not help.
+    val sounds = PhoneticLoop.breakdown(feedback.alignment).filter { it.score < PhoneticLoop.PERFECT_SCORE }
     val showPhonetics by PhoneticsPreferences.visible.collectAsState()
     val haptics = rememberHaptics()
     LaunchedEffect(feedback) { haptics.press() }
@@ -344,9 +345,9 @@ internal fun ResultCard(
 
         if (feedback.words.isNotEmpty()) {
             Spacer(Modifier.height(Space.x24))
-            // Each word carries its level as an underline, so the sentence stays
-            // readable in one color and the slips still jump out. The letters that
-            // did not land are marked in red inside the word on top of that.
+            // Only the words that slipped carry an underline in their level's
+            // color, so the sentence stays clean and the slips jump out. The
+            // letters that did not land are marked in red inside the word.
             // The words of the sentence run in its own order in any interface.
             CompositionLocalProvider(LocalLayoutDirection provides LayoutDirection.Ltr) {
                 FlowRow(
@@ -355,12 +356,14 @@ internal fun ResultCard(
                 ) {
                     feedback.words.forEach { word ->
                         val color = levelColor(word.level.name)
+                        val slipped = word.level != MasteryLevel.PERFECT && word.level != MasteryLevel.MASTERED
                         Text(
                             text = wordText(word),
                             style = MaterialTheme.typography.titleLarge,
                             color = MaterialTheme.colorScheme.onSurface,
                             modifier = Modifier
                                 .drawBehind {
+                                    if (!slipped) return@drawBehind
                                     val h = 3.dp.toPx()
                                     drawRoundRect(
                                         color = color,

@@ -150,9 +150,7 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
                 selected = language,
                 onSelect = { code ->
                     OfferedLanguages.orNull(code)?.takeIf { it.code != language }?.let { newPack ->
-                        UsageEvents.settingChanged("target_language", newPack.code)
-                        LanguagePreferences.set(newPack.code)
-                        VoicePreferences.onLanguageChanged(newPack)
+                        switchCourse(newPack)
                         language = newPack.code
                         accent = VoicePreferences.accent
                     }
