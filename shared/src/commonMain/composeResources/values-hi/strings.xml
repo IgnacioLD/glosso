@@ -37,14 +37,8 @@
     <string name="today_start">शुरू करें</string>
     <string name="today_continue">जारी रखें</string>
     <string name="today_browse">कोर्स देखें</string>
-    <string name="today_sounds">जिन साउंड पर काम करना है</string>
-    <string name="today_sounds_no_profile">आपकी प्रोफ़ाइल अभी तैयार नहीं है। कुछ वाक्य बोलें, यह अपने आप बन जाएगी।</string>
-    <string name="today_sounds_clear">अभी कोई कमज़ोर साउंड नहीं है।</string>
-    <string name="today_sounds_hint">आपकी अपनी रिकॉर्डिंग से, सबसे कमज़ोर साउंड पहले।</string>
-    <plurals name="today_review">
-        <item quantity="one">%1$d साउंड दोहराएँ</item>
-        <item quantity="other">%1$d साउंड दोहराएँ</item>
-    </plurals>
+    <string name="today_practice_desc">खाली समय के लिए छोटे वाक्य। Glosso वे ध्वनियाँ चुनता है जिनकी आपको सबसे ज़्यादा ज़रूरत है।</string>
+    <string name="today_practice_start">अभी अभ्यास करें</string>
     <string name="today_reminder_title">कुछ दिन हो गए</string>
     <string name="today_reminder_body" tools:ignore="PluralsCandidate">आपकी पिछली प्रैक्टिस को %1$d दिन हो गए। कोई जल्दी नहीं, आपका प्लान यहीं है।</string>
     <string name="today_settings">सेटिंग्स</string>

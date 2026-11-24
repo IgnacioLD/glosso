@@ -95,4 +95,41 @@ class DrillPlannerTest {
 
         assertNull(DrillPlanner.drillForError(error, bank.drills))
     }
+
+    /** θ fails always, ʃ half the time, æ is mastered, ŋ was never tried but the course trains it a lot. */
+    private val wideBank = DrillBank(
+        drills = (1..6).map { drill("th.$it", "θ", "t$it") } +
+            (1..6).map { drill("sh.$it", "ʃ", "t$it") } +
+            (1..6).map { drill("ng.$it", "ŋ", "t$it") } +
+            (1..2).map { drill("ae.$it", "æ", "t$it") },
+    )
+    private val wideProfile = PhoneticProfileModel(
+        stats = listOf(
+            PhonemeStatModel("θ", attempts = 10, correct = 0, errors = mapOf("s" to 10)),
+            PhonemeStatModel("ʃ", attempts = 10, correct = 5),
+            PhonemeStatModel("æ", attempts = 20, correct = 20),
+        ),
+    )
+
+    @Test
+    fun `the sound missed most gets the most drills`() {
+        val counts = DrillPlanner.plan(wideProfile, wideBank, limit = 10).drills.groupingBy { it.target }.eachCount()
+        assertTrue(counts.getValue("θ") > counts.getValue("ʃ"), counts.toString())
+        assertEquals(10, counts.values.sum())
+    }
+
+    @Test
+    fun `an important sound never practised is still covered`() {
+        val targets = DrillPlanner.plan(wideProfile, wideBank, limit = 10).drills.map { it.target }
+        assertTrue("ŋ" in targets, targets.toString())
+    }
+
+    @Test
+    fun `a mastered sound only fills what is left`() {
+        val ten = DrillPlanner.plan(wideProfile, wideBank, limit = 10).drills.map { it.target }
+        assertTrue("æ" !in ten, ten.toString())
+        val all = DrillPlanner.plan(wideProfile, wideBank, limit = 20).drills
+        assertEquals(20, all.size)
+        assertEquals(all.size, all.map { it.id }.toSet().size)
+    }
 }

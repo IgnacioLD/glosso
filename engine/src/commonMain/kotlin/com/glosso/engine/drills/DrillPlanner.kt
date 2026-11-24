@@ -20,6 +20,16 @@ object DrillPlanner {
     const val DEFAULT_LIMIT = 3
 
     /**
+     * Shares [limit] drills out across the sounds the (filtered) bank trains, in
+     * proportion to each sound's priority:
+     * - need: how often the learner misses it (an untried sound counts as half);
+     * - importance: how much of the course trains it, so key sounds get covered;
+     * - practice gap: sounds practised little are brought back.
+     * Slots go one at a time to the sound with the highest priority divided by
+     * the drills it already has, so the weakest sound gets the most practice while
+     * the important and neglected ones still come up. A sound mastered over many
+     * attempts only fills what is left.
+     *
      * @param themes only pick drills in these themes (empty = any).
      * @param targets only pick drills training these sounds (empty = any); a
      *   lesson sets this to its own sounds so practice stays on-topic.
@@ -37,23 +47,61 @@ object DrillPlanner {
         seenIds: Set<String> = emptySet(),
         knownThemes: List<ThemeModel> = emptyList(),
     ): DrillPlanModel {
-        val weak = PhoneticProfile.weakest(profile, limit = (limit * 2).coerceAtLeast(4))
+        val pool = bank.drills.filter { d ->
+            (themes.isEmpty() || d.theme in themes) &&
+                (targets.isEmpty() || targets.any { samePhone(it, d.target) }) &&
+                (level == null || d.level == level) &&
+                d.id !in seenIds
+        }
+        val sounds = mutableListOf<String>()
+        pool.forEach { d -> if (sounds.none { samePhone(it, d.target) }) sounds += d.target }
+        val coverage = sounds.associateWith { s -> bank.drills.count { samePhone(it.target, s) } }
+        val maxCoverage = coverage.values.maxOrNull()?.coerceAtLeast(1) ?: 1
+        val priority = sounds.associateWith { s ->
+            soundPriority(profile.stats.firstOrNull { samePhone(it.phoneme, s) }, coverage.getValue(s).toDouble() / maxCoverage)
+        }
+
         val chosen = mutableListOf<DrillModel>()
         val usedIds = mutableSetOf<String>()
         val usedThemes = mutableSetOf<String>()
-
-        for (stat in weak) {
-            if (chosen.size >= limit) break
-            val pick = pickFor(stat, bank.drills, themes, targets, level, seenIds + usedIds, usedThemes)
-                ?: continue
+        val given = sounds.associateWith { 0 }.toMutableMap()
+        val exhausted = mutableSetOf<String>()
+        while (chosen.size < limit) {
+            val sound = sounds
+                .filter { it !in exhausted }
+                .maxWithOrNull(compareBy<String> { priority.getValue(it) / (1 + given.getValue(it)) }.thenByDescending { it })
+                ?: break
+            val stat = profile.stats.firstOrNull { samePhone(it.phoneme, sound) } ?: PhonemeStatModel(sound)
+            val pick = pickFor(stat, pool, emptySet(), emptySet(), null, usedIds, usedThemes)
+            if (pick == null) {
+                exhausted += sound
+                continue
+            }
             chosen += pick
             usedIds += pick.id
             usedThemes += pick.theme
+            given[sound] = given.getValue(sound) + 1
         }
 
         val available = suggestedThemes(profile, bank, knownThemes)
         return DrillPlanModel(drills = chosen, themes = available)
     }
+
+    /**
+     * 0..1, see [plan]. A sound with too few attempts to judge counts as half
+     * missed; one mastered over [MASTERED_ATTEMPTS] tries keeps only a token
+     * weight so it is revisited after everything else.
+     */
+    internal fun soundPriority(stat: PhonemeStatModel?, importance: Double): Double {
+        val attempts = stat?.attempts ?: 0
+        val judged = attempts >= PhoneticProfile.MIN_ATTEMPTS
+        val need = if (judged) (100 - stat!!.accuracy) / 100.0 else 0.5
+        if (judged && need == 0.0 && attempts >= MASTERED_ATTEMPTS) return 0.01
+        val gap = 1.0 / (1 + attempts)
+        return 0.6 * need + 0.25 * importance + 0.15 * gap
+    }
+
+    private const val MASTERED_ATTEMPTS = 10
 
     /**
      * The reviewed drill that best trains one diagnosed error: the same sound,

@@ -34,15 +34,8 @@
     <string name="today_start">Commencer</string>
     <string name="today_continue">Continuer</string>
     <string name="today_browse">Voir le cours</string>
-    <string name="today_sounds">Sons à travailler</string>
-    <string name="today_sounds_no_profile">Ton profil n'est pas encore prêt. Dis quelques phrases et il se remplira.</string>
-    <string name="today_sounds_clear">Aucun son faible pour l'instant.</string>
-    <string name="today_sounds_hint">Les plus faibles d'abord, d'après tes propres enregistrements.</string>
-    <plurals name="today_review">
-        <item quantity="one">Revoir %1$d son</item>
-        <item quantity="many">Revoir %1$d sons</item>
-        <item quantity="other">Revoir %1$d sons</item>
-    </plurals>
+    <string name="today_practice_desc">Des phrases courtes pour un moment libre. Glosso choisit les sons dont tu as le plus besoin.</string>
+    <string name="today_practice_start">S'entraîner maintenant</string>
     <string name="today_reminder_title">Quelques jours ont passé</string>
     <string name="today_reminder_body">%1$d jours depuis ta dernière pratique. Pas de pression : ton programme est toujours là.</string>
     <string name="today_settings">Réglages</string>

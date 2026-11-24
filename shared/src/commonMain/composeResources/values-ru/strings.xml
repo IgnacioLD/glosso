@@ -34,16 +34,8 @@
     <string name="today_start">Начать</string>
     <string name="today_continue">Продолжить</string>
     <string name="today_browse">Открыть курс</string>
-    <string name="today_sounds">Над чем поработать</string>
-    <string name="today_sounds_no_profile">Ваш профиль ещё не готов. Произнесите несколько фраз, и он заполнится.</string>
-    <string name="today_sounds_clear">Слабых звуков сейчас нет.</string>
-    <string name="today_sounds_hint">Сначала самые слабые, по вашим записям.</string>
-    <plurals name="today_review">
-        <item quantity="one">Повторить %1$d звук</item>
-        <item quantity="few">Повторить %1$d звука</item>
-        <item quantity="many">Повторить %1$d звуков</item>
-        <item quantity="other">Повторить %1$d звука</item>
-    </plurals>
+    <string name="today_practice_desc">Отдельные фразы для свободной минуты. Glosso выбирает звуки, которые нужны вам больше всего.</string>
+    <string name="today_practice_start">Практиковаться</string>
     <string name="today_reminder_title">Прошло несколько дней</string>
     <string name="today_reminder_body">Дней без занятий: %1$d. Не спешите, ваш план никуда не делся.</string>
     <string name="today_settings">Настройки</string>
