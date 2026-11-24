@@ -322,6 +322,8 @@
     <string name="settings_target_language">Изучаемый язык</string>
     <string name="settings_target_language_desc">Язык, который вы учите. От него зависят материалы, упражнения и аудио.</string>
     <string name="settings_language">Язык</string>
+    <string name="language_experimental_label">%1$s - экспериментально</string>
+    <string name="language_experimental_note">Экспериментальный язык: оценка приблизительная и может быть низкой даже у носителей.</string>
     <string name="settings_reference_accent">Эталонный акцент</string>
     <string name="settings_reference_accent_desc">Акцент всех записей и уроков.</string>
     <string name="settings_accent">Акцент</string>

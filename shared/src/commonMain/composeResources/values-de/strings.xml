@@ -338,6 +338,8 @@
     <string name="settings_target_language">Zielsprache</string>
     <string name="settings_target_language_desc">Die Sprache, die du lernst. Inhalt, Übungen und Audio richten sich danach.</string>
     <string name="settings_language">Sprache</string>
+    <string name="language_experimental_label">%1$s - experimentell</string>
+    <string name="language_experimental_note">Experimentelle Sprache: Die Bewertung ist nur ein Richtwert und kann selbst bei Muttersprachlern niedrig ausfallen.</string>
     <string name="settings_reference_accent">Referenzakzent</string>
     <string name="settings_reference_accent_desc">Der Akzent aller Aufnahmen und Lektionen.</string>
     <string name="settings_accent">Akzent</string>

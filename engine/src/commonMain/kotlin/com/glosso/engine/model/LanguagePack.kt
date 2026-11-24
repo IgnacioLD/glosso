@@ -326,7 +326,7 @@ object LanguagePacks {
      * French and German are deliberately absent until theirs do. See
      * docs/ADD_LANGUAGE.md.
      */
-    val offered: List<LanguagePack> = listOf(ENGLISH, RUSSIAN)
+    val offered: List<LanguagePack> = listOf(ENGLISH, RUSSIAN, SPANISH)
 
     /**
      * Resolves a client language code to a known pack. Accepts region forms
