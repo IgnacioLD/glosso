@@ -10,6 +10,7 @@
     <string name="error_load_message">Mira tu conexión e inténtalo de nuevo.</string>
     <string name="error_offline">Sin conexión. Comprueba tu red e inténtalo de nuevo.</string>
     <string name="error_server">No se pudo contactar con el servidor. Inténtalo en un momento.</string>
+    <string name="error_clock">La fecha y la hora del móvil parecen incorrectas, así que las conexiones seguras fallan. Activa la fecha y hora automáticas y vuelve a intentarlo.</string>
     <string name="offline_banner">Sin conexión</string>
     <string name="offline_nudge_body">Puedes seguir practicando sin conexión. Descarga el modelo una vez (unos %1$s).</string>
     <string name="offline_nudge_cta">Descargar modelo</string>

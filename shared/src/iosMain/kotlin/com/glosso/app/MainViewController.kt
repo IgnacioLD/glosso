@@ -100,6 +100,7 @@ private object IosHost {
         OfflineStore.downloader = downloader
         IosOnDeviceScorer.init(downloader)
         DeviceId.init(context)
+        TrustedClock.init(context)
         ApiCache.init(context)
         OfflineStore.init(context)
         ProductConfigRepository.init(context)

@@ -36,6 +36,7 @@ class GlossoApplication : Application(), SingletonImageLoader.Factory {
         wireSharedCode()
         ServerPreferences.init(this, BuildConfig.API_BASE_URL)
         DeviceId.init(this)
+        TrustedClock.init(this)
         Analytics.init(this)
         CrashReporter.install(this)
         ApiCache.init(this)

@@ -69,6 +69,23 @@ internal fun downloadStatusText(item: DownloadItemState): String = when (item.st
     }
 }
 
+/**
+ * One line for a download that is waiting, for the offline strip: there it can
+ * only be waiting for a connection, so a progress bar would say nothing.
+ */
+@Composable
+internal fun PendingDownloadLine(item: DownloadItemState, modifier: Modifier = Modifier) {
+    Row(modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
+        Text(
+            "${item.title} · ${downloadStatusText(item)}",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            modifier = Modifier.weight(1f),
+        )
+        DownloadControls(item)
+    }
+}
+
 /** A compact block for one active download, for the offline drawer. */
 @Composable
 internal fun ActiveDownloadRow(item: DownloadItemState, modifier: Modifier = Modifier) {

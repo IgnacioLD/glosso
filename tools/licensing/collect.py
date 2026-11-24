@@ -118,7 +118,15 @@ LICENSE_NAMES = {
     "proprietary": "Proprietary",
 }
 
+# One canonical URL per licence id: a POM's own URL string only existed when that
+# POM happened to be in the local Gradle cache, so the catalogue changed by machine.
 LICENSE_URLS = {
+    "Apache-2.0": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+    "MIT": "https://opensource.org/license/mit",
+    "BSD-2-Clause": "https://opensource.org/license/bsd-2-clause",
+    "BSD-3-Clause": "https://opensource.org/license/bsd-3-clause",
+    "EPL-1.0": "https://www.eclipse.org/legal/epl-v10.html",
+    "OFL-1.1": "https://openfontlicense.org/open-font-license-official-text/",
     "Android-SDK": "https://developer.android.com/studio/terms.html",
     "Play-Core-ToS": "https://developer.android.com/guide/playcore/in-app-review",
     "CC-BY-2.0-FR": "https://creativecommons.org/licenses/by/2.0/fr/",
@@ -586,6 +594,7 @@ def _auto_component(module_id, version=None, scope="app"):
         author = _group_author(group)
         if licence:
             name = LICENSE_NAMES[licence]
+            url = LICENSE_URLS.get(licence) or url
             notice = None
         else:
             licence, name = raw_name or "unknown", raw_name or "Unknown licence"

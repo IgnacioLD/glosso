@@ -1,6 +1,10 @@
 package com.glosso.app.platform
 
-actual fun todayEpochDay(): Long = localEpochDay().toLong()
+actual fun monotonicMillis(): Long = performanceNow().toLong()
 
-private fun localEpochDay(): Double =
-    js("Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 86400000)")
+actual fun epochDayAt(epochMillis: Long): Long = localEpochDay(epochMillis.toDouble()).toLong()
+
+private fun performanceNow(): Double = js("performance.now()")
+
+private fun localEpochDay(epochMillis: Double): Double =
+    js("Math.floor((epochMillis - new Date(epochMillis).getTimezoneOffset() * 60000) / 86400000)")
