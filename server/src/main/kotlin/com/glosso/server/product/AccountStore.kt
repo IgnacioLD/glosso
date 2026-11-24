@@ -69,5 +69,8 @@ interface AccountStore : AutoCloseable {
     /** The providers [userId] is linked to, sorted; never the subjects. */
     fun linkedProviders(userId: UUID): List<String>
 
+    /** Erases the device's user and everything hanging from it; false when there was none. */
+    fun deleteUser(deviceId: String): Boolean
+
     override fun close() {}
 }

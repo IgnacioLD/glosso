@@ -1150,6 +1150,34 @@ fun Application.module(
                         )
                     }
                 }
+
+                // "Delete my account" (GDPR art. 17): the usage data first, so a
+                // failure leaves the account in place and the learner can retry.
+                delete("/account") {
+                    val store = accountStore ?: return@delete call.respond(
+                        HttpStatusCode.ServiceUnavailable,
+                        ErrorResponse("Accounts are not configured"),
+                    )
+                    val deviceId = call.deviceIdOrNull()
+                        ?: return@delete call.respond(
+                            HttpStatusCode.BadRequest,
+                            ErrorResponse("X-Device-Id is required"),
+                        )
+                    try {
+                        withContext(Dispatchers.IO) {
+                            mirror?.erase(deviceId)
+                            analytics?.deleteDevice(deviceId)
+                            store.deleteUser(deviceId)
+                        }
+                    } catch (e: Exception) {
+                        logger.error(e) { "account delete failed" }
+                        return@delete call.respond(
+                            HttpStatusCode.ServiceUnavailable,
+                            ErrorResponse("Account storage is unavailable"),
+                        )
+                    }
+                    call.respond(HttpStatusCode.NoContent)
+                }
             }
 
             rateLimit(RateLimitName("score")) {

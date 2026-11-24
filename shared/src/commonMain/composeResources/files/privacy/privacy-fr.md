@@ -1,126 +1,89 @@
-# Confidentialité et analytique - Glosso
+# Politique de confidentialité de Glosso
 
-Résumé des données que le produit traite et de la manière dont cela est déclaré
-dans Google Play. Ne constitue pas un avis juridique.
+Dernière mise à jour : 24 novembre 2026.
 
-## Audio
+## Responsable du traitement
 
-- L'audio est envoyé au serveur **uniquement** pour reconnaître et évaluer la
-  prononciation.
-- Il est traité en mémoire et **supprimé à la fin de la requête**. Il n'est ni
-  conservé, ni journalisé, ni réutilisé.
-- En mode hors ligne (phase ultérieure), l'audio ne quitte pas l'appareil.
+Ignacio Loyola est le responsable du traitement de vos données dans Glosso.
+Contact : privacy@glossostudio.com. Si vous avez besoin d'une adresse postale pour
+exercer vos droits, demandez-la à cette adresse e-mail.
 
-## Analytique first-party (`/v1/events`)
+## Quelles données nous traitons et pourquoi
 
-Nous recueillons des événements produit dans notre propre base de données
-(Postgres, `glosso.analytics_event`). **Aucun partage avec des tiers.**
+| Données | Finalité | Base légale | Durée |
+|---|---|---|---|
+| Audio de vos essais | Reconnaître et noter votre prononciation | Fournir le service que vous demandez | Traité en mémoire et supprimé à la fin de la requête. Avec la notation sur l'appareil, il ne quitte jamais le téléphone |
+| Identifiant aléatoire d'installation, profil d'apprentissage et avantages | Faire fonctionner l'application et conserver votre niveau | Fournir le service | Jusqu'à la suppression de votre compte |
+| Identifiant opaque de votre compte Google, si vous choisissez de continuer avec Google | Transférer votre compte vers un autre téléphone | Fournir le service | Jusqu'à la suppression de votre compte |
+| Statistiques d'utilisation et rapports de plantage | Améliorer le cours et corriger les erreurs | Votre consentement | 180 jours, avec une purge quotidienne |
+| Adresse IP et données techniques de connexion | Fournir l'application, limiter les abus et protéger le service | Intérêt légitime pour la sécurité | Notre serveur ne la conserve pas dans ses journaux. Cloudflare la traite comme indiqué ci-dessous |
+| E-mails que vous nous envoyez | Vous répondre et traiter vos demandes | Intérêt légitime à vous répondre et, pour l'exercice des droits, obligation légale | Le temps nécessaire pour les traiter et justifier la réponse |
 
-| Donnée | Exemple | Pourquoi |
-|---|---|---|
-| Identifiant d'installation aléatoire | UUID aléatoire créé au premier lancement | Compter les appareils uniques |
-| Identifiant de session | UUID aléatoire | Regrouper les événements d'une session |
-| Version de l'app / plateforme | `1.0.0`, `android` | Compatibilité |
-| Langue pratiquée | `en_GB` | Amélioration du cours |
-| Nom et propriétés de l'événement | `score_attempt`, `score`, `level` | Analyser l'usage et la difficulté |
+Nous ne conservons ni votre e-mail, ni votre nom, ni votre photo Google, et nous ne
+demandons aucun accès à Gmail, Drive ou à d'autres services. Nous ne collectons ni
+l'identifiant publicitaire, ni l'IMEI, ni l'adresse MAC, ni le modèle ou la marque
+de l'appareil, ni la localisation précise, ni les contacts, ni les SMS. Il n'y a
+pas de publicité, nous ne vendons pas de données et nous ne prenons aucune décision
+automatisée produisant des effets juridiques à votre égard.
 
-**Nous ne recueillons pas** : Advertising ID, IMEI, MAC, `ANDROID_ID` comme
-identifiant stable, modèle ou marque de l'appareil, localisation précise,
-contacts, SMS, texte libre de l'utilisateur, messages d'erreur, ni l'audio.
+Vos leçons et votre progression sont enregistrées sur votre appareil.
 
-Le serveur **ne stocke pas l'IP** dans la table d'événements. Les événements
-serveur (`score_attempt`, `503`, erreurs) sont enregistrés de la même manière,
-sans audio.
+## Statistiques d'utilisation
 
-## Compte : continuer avec Google (facultatif)
+Elles restent désactivées tant que vous ne les acceptez pas. Si vous refusez,
+l'application fonctionne de la même façon. Vous pouvez changer d'avis à tout moment
+dans Réglages > Statistiques d'utilisation.
 
-Il permet d'emporter le compte sur un nouveau téléphone. Il est facultatif ; l'app fonctionne de la même façon sans lui.
+- **Dans l'application mobile**, elles sont envoyées avec un identifiant aléatoire
+  d'installation.
+- **Sur le web** (app.glossostudio.com), elles sont envoyées sans cet identifiant et
+  ne peuvent donc pas être reliées à vous. Votre réponse est conservée dans ce
+  navigateur.
 
-- **Continuer avec Google** : l'utilisateur choisit un compte Google du
-  téléphone (Android Credential Manager). Seule l'identité est demandée : le
-  serveur vérifie l'ID token et conserve **uniquement** l'identifiant opaque que
-  Google attribue au compte (`sub`). Il ne conserve **ni** l'e-mail, ni le nom,
-  ni la photo, ni le token, et ne demande aucun accès à Gmail, Drive ou à un
-  autre service. L'e-mail n'est affiché que sur le téléphone.
+Elles comprennent : ouvertures et durée de session, onboarding, écrans vus, leçons
+et étapes, exercices (type et tranche de note), audio écouté (type et vitesse,
+jamais votre enregistrement), histoires lues, série, réglages modifiés,
+téléchargements, autorisations accordées ou non, résultat de la connexion avec
+Google, vitesse de notation et erreurs par type. Ainsi que le contexte : version du
+système, téléphone ou tablette, mode sombre, langue et accent.
 
-## Conservation
+Les rapports de plantage comprennent le type d'erreur et la pile d'appels technique
+(classe, méthode, fichier et ligne), jamais le message d'erreur ni ce que vous
+écrivez. Les statistiques ne contiennent jamais d'audio ni de texte libre.
 
-- Configurable via `GLOSSO_ANALYTICS_RETENTION_DAYS` (par défaut **180 jours**).
-- Purge au démarrage du serveur.
+## Qui intervient
 
-## Sécurité
+- **Hostinger** héberge notre serveur en France.
+- **Cloudflare** protège et achemine le trafic de l'application en tant que
+  sous-traitant. Il voit votre adresse IP et vos données de connexion et peut les
+  traiter hors de l'Espace économique européen avec les garanties prévues par ses
+  conditions de traitement des données, comme les clauses contractuelles types de
+  l'UE.
+- **Google** vérifie votre identité si vous choisissez de continuer avec Google,
+  selon sa propre politique de confidentialité.
+- **E-mail :** si vous nous écrivez, votre message passe par Cloudflare et est conservé dans une boîte Google.
+- **Ko-fi** n'intervient que si vous ouvrez le lien facultatif de don, qui quitte
+  l'application et relève de sa propre politique.
 
-- **TLS obligatoire** : l'app ne parle au point de terminaison qu'en HTTPS.
-- `/metrics`, `/stats`, `/admin/events` et `/v1/events/summary` sont protégés par
-  un jeton (`GLOSSO_ADMIN_TOKEN`) ; sans jeton, ils restent fermés.
-- Limite de taille des événements et de l'audio ; en-têtes de sécurité (HSTS,
-  `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`).
+## Vos droits
 
-## Déclaration Google Play (Data safety)
+Vous pouvez demander l'accès, la rectification, l'effacement, la limitation et la
+portabilité, et vous opposer au traitement, en écrivant à privacy@glossostudio.com.
+Vous pouvez retirer votre consentement à tout moment, sans effet sur le traitement
+antérieur.
 
-- **Données collectées / Infos personnelles / ID utilisateur** : oui,
-  uniquement si l'utilisateur continue avec Google (facultatif) : l'identifiant
-  du compte Google.
-- **Données collectées / Activité dans l'app** : "Other actions" -> oui
-  (événements d'usage).
-- **Données collectées / Appareil ou autres ID** : "Device or other IDs" -> oui
-  (identifiant d'installation aléatoire).
-- **Données collectées / Infos et performances de l'app** : "Crash logs" et
-  "Diagnostics" -> oui, à partir de l'app 2.5.4 (type d'erreur, endroit du
-  code et pile d'appels technique sans messages ni données utilisateur ;
-  vitesse de notation, version d'Android, téléphone ou tablette). Non partagé,
-  facultatif, pour l'analytique et le fonctionnement de l'app.
-- **Partage avec des tiers** : non.
-- **Chiffré en transit** : oui.
-- **Suppression des données** : prévoir un canal de support et, le cas échéant,
-  un bouton in-app pour réinitialiser l'id et supprimer les données associées.
+Dans l'application, Réglages propose **Supprimer mes données d'utilisation** et
+**Supprimer mon compte et mes données**. Si vous estimez que nous avons mal traité
+vos données, vous pouvez saisir l'Agence espagnole de protection des données
+(www.aepd.es) ou l'autorité de votre pays.
 
-## Votre choix
+## Mineurs
 
-- Sur l'application web (app.glossostudio.com), les statistiques d'utilisation
-  restent désactivées tant que vous ne les acceptez pas dans le message de la
-  première visite, et elles sont enregistrées sans identifiant d'installation :
-  elles ne peuvent donc pas être reliées à vous. Votre réponse est conservée dans ce navigateur et peut être
-  modifiée à tout moment dans Réglages > Statistiques d'utilisation.
-- Les statistiques d'utilisation sont activées par défaut et l'accueil le
-  signale. Elles se désactivent à tout moment dans Réglages > Statistiques
-  d'utilisation ; l'app fonctionne exactement pareil sans elles et le serveur
-  cesse alors aussi d'enregistrer l'événement de note de cet appareil.
-- « Supprimer mes données d'utilisation », au même endroit, efface tous les
-  événements de cet appareil sur notre serveur.
-- Les événements envoyés par l'app : ouverture, durée de session, accueil
-  commencé et terminé, leçon commencée, terminée ou quittée, exercice terminé
-  (type, tranche de note de 10 points, maîtrisé ou non), essai de prononciation
-  noté sur le téléphone (tranche de note, maîtrisé ou non, identifiants des
-  règles d'erreur) et micro refusé.
+Si vous avez moins de 16 ans, veuillez refuser les statistiques d'utilisation. Si
+vous êtes parent ou tuteur et pensez qu'un mineur nous a fourni des données,
+écrivez-nous et nous les supprimerons.
 
-À partir de l'app 2.5.4, l'app envoie aussi :
+## Modifications
 
-- À l'ouverture de l'app, le contexte : version d'Android, téléphone ou
-  tablette, mode sombre activé ou non, si le modèle optionnel sur l'appareil
-  est installé, langue de l'interface et accent choisi. Jamais le modèle de
-  l'appareil, la marque ni un identifiant matériel.
-- La vitesse de notation (millisecondes) et si l'essai a été noté sur le
-  téléphone.
-- Écrans vus (parmi une liste fixe), étapes de leçon atteintes, audio écouté
-  (quel type d'audio, normal ou lent, et la réécoute de votre propre
-  enregistrement, jamais l'enregistrement), résultats de « À toi » et de la
-  révision (retrouvée, partielle, pas cette phrase, révélée), histoires
-  ouvertes et part lue (pourcentage), et la durée de la série quotidienne.
-- Réglages modifiés (lequel et sa nouvelle valeur : langue apprise, accent,
-  langue de l'interface, transcription phonétique, traductions, rappel
-  quotidien, téléchargements en Wi-Fi uniquement).
-- Téléchargements de leçons ou du modèle (commencé, terminé ou échoué, taille
-  en Mo, code d'erreur court) et modèle supprimé.
-- Erreurs visibles par type (notation échouée, hors ligne, non évalué, micro,
-  contenu, audio) et rapports de plantage : le type d'erreur, l'endroit du code
-  de l'app et la pile d'appels technique (classe, méthode, fichier et ligne),
-  envoyés au lancement suivant pour les plantages fatals ; jamais le message
-  d'erreur, le contenu ni rien de ce que vous saisissez.
-- Autorisation des notifications accordée ou non et résultat de la connexion
-  avec Google (réussie, annulée, aucun compte, échouée).
-
-Le tout avec les mêmes règles : uniquement des valeurs oui/non, des nombres
-bornés et des identifiants, jamais de texte libre ni d'audio ; conservé 180
-jours, et « Supprimer mes données d'utilisation » efface tout, rapports de
-plantage compris. Le serveur rejette tout autre événement.
+Si cette politique change de manière importante, nous l'indiquerons dans
+l'application.

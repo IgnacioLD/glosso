@@ -97,6 +97,20 @@ class AnalyticsTest {
     }
 
     @Test
+    fun `events queued before the prompt are never sent, even after accepting`() {
+        status = null
+        Analytics.track("lesson_started")
+        Analytics.flush()
+        sent.clear()
+        status = 202
+
+        relaunchAskingConsent()
+        assertFalse(File(app.filesDir, "analytics_queue.json").exists())
+        Analytics.setEnabled(app, true)
+        assertEquals(listOf("app_open"), names())
+    }
+
+    @Test
     fun `declining consent is remembered and sends nothing`() {
         relaunchAskingConsent()
         Analytics.setEnabled(app, false)

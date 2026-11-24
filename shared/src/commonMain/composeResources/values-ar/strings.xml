@@ -660,4 +660,17 @@
     <string name="server_error_unreachable">تعذّر الوصول إلى هذا الخادم. تحقق من العنوان ومن اتصالك.</string>
     <string name="server_error_not_glosso">هذا العنوان يستجيب، لكنه ليس خادم Glosso.</string>
     <string name="about_server">الخادم: %1$s</string>
+    <string name="usage_consent_title">هل تساعدنا في تحسين Glosso؟</string>
+    <string name="usage_consent_body">إذا وافقت، يرسل Glosso إلى خوادمنا الخاصة إحصاءات استخدام مجهولة، مثل الدروس المكتملة وفئات الدرجات. لا تحمل هذه الإحصاءات أي معرّف يربطها بك. لا صوت ولا إعلانات ولا بيع للبيانات. يعمل التطبيق بالطريقة نفسها إذا رفضت، ويمكنك تغيير اختيارك في أي وقت من الإعدادات.</string>
+    <string name="usage_consent_body_linked">إذا وافقت، يرسل Glosso إلى خوادمنا الخاصة إحصاءات استخدام، مثل الدروس المكتملة وفئات الدرجات والتقارير التقنية عن الأعطال، مرتبطة بمعرّف تثبيت عشوائي، وذلك لتحسين الدورة. لا صوت ولا إعلانات. يعمل التطبيق بالطريقة نفسها إذا رفضت، ويمكنك تغيير اختيارك في أي وقت من الإعدادات. إذا كان عمرك أقل من 16 عامًا، فاضغط على رفض.</string>
+    <string name="usage_consent_accept">موافقة</string>
+    <string name="usage_consent_decline">رفض</string>
+    <string name="settings_account_delete">حذف حسابي وبياناتي</string>
+    <string name="settings_account_delete_title">هل تريد حذف حسابك؟</string>
+    <string name="settings_account_delete_body">سيؤدي هذا إلى حذف حسابك وربطك بحساب Google وملفك الشخصي والمزايا المرتبطة بالحساب وبيانات استخدامك من خوادمنا نهائيًا. لا يمكن التراجع عن ذلك. تبقى الدروس والتقدّم المحفوظة على هذا الهاتف إلى أن تزيل التطبيق.</string>
+    <string name="settings_account_delete_confirm">حذف</string>
+    <string name="settings_account_delete_cancel">إلغاء</string>
+    <string name="settings_account_deleted">تم حذف حسابك وبياناتك.</string>
+    <string name="settings_account_delete_failed">تعذّر حذف الحساب. تحقق من الاتصال وحاول مرة أخرى.</string>
+    <string name="settings_usage_desc_anonymous">أحداث مجهولة، مثل الدروس المكتملة وفئات الدرجات، تُرسل إلى خوادم Glosso فقط. لا تحمل أي معرّف يربطها بك. لا صوت ولا إعلانات ولا بيع للبيانات.</string>
 </resources>

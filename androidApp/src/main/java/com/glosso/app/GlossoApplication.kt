@@ -58,6 +58,7 @@ class GlossoApplication : Application(), SingletonImageLoader.Factory {
         Analytics.traceSender = { appApi.sendCrashTrace(it) }
         Analytics.onDeviceModel = { OnDeviceScorer.available() }
         Analytics.defaultEnabled = BuildConfig.USAGE_STATISTICS_DEFAULT
+        Analytics.askConsent = BuildConfig.USAGE_STATISTICS_ASK
         ProductConfigRepository.api = { appApi }
         OfflineStore.downloader = DownloadManager
         Flavor.install()

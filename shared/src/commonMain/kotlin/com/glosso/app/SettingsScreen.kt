@@ -34,10 +34,12 @@ import androidx.compose.material.icons.outlined.Dns
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.PhoneAndroid
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -86,6 +88,8 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
     val wifiOnly by WifiOnlyPreference.enabled.collectAsState()
     val shareUsage by Analytics.enabled.collectAsState()
     var usageErase by remember { mutableStateOf<Boolean?>(null) }
+    var confirmAccountDelete by remember { mutableStateOf(false) }
+    var accountDeleted by remember { mutableStateOf<Boolean?>(null) }
     val scope = rememberCoroutineScope()
     LaunchedEffect(Unit) { DailyReminder.ensureInitialized(context) }
 
@@ -360,7 +364,7 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
                 Spacer(Modifier.height(Space.x8))
                 Text(
                     stringResource(
-                        if (Analytics.askConsent) Res.string.settings_usage_desc_anonymous
+                        if (Analytics.anonymous) Res.string.settings_usage_desc_anonymous
                         else Res.string.settings_usage_desc,
                     ),
                     style = MaterialTheme.typography.bodyMedium,
@@ -376,7 +380,7 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
                     Switch(checked = shareUsage, onCheckedChange = { Analytics.setEnabled(context, it) })
                 }
                 // Anonymous events are tied to nobody, so there is nothing of "mine" to delete.
-                if (!Analytics.askConsent) {
+                if (!Analytics.anonymous) {
                     Spacer(Modifier.height(Space.x8))
                     QuietTextButton(
                         text = stringResource(Res.string.settings_usage_erase),
@@ -406,6 +410,45 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
                 )
                 Spacer(Modifier.height(Space.x32))
             }
+            QuietTextButton(
+                text = stringResource(Res.string.settings_account_delete),
+                onClick = { confirmAccountDelete = true },
+                modifier = Modifier.offset(x = -Space.x12),
+            )
+            accountDeleted?.let { deleted ->
+                Text(
+                    stringResource(if (deleted) Res.string.settings_account_deleted else Res.string.settings_account_delete_failed),
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
+            }
+            if (confirmAccountDelete) {
+                AlertDialog(
+                    onDismissRequest = { confirmAccountDelete = false },
+                    title = { Text(stringResource(Res.string.settings_account_delete_title)) },
+                    text = { Text(stringResource(Res.string.settings_account_delete_body)) },
+                    confirmButton = {
+                        TextButton(
+                            colors = accentTextButtonColors(),
+                            onClick = {
+                                confirmAccountDelete = false
+                                scope.launch {
+                                    val deleted = runCatching { appApi.deleteAccount() }.getOrDefault(false)
+                                    // New statistics would need a new consent.
+                                    if (deleted) Analytics.setEnabled(context, false)
+                                    accountDeleted = deleted
+                                }
+                            },
+                        ) { Text(stringResource(Res.string.settings_account_delete_confirm)) }
+                    },
+                    dismissButton = {
+                        TextButton(colors = accentTextButtonColors(), onClick = { confirmAccountDelete = false }) {
+                            Text(stringResource(Res.string.settings_account_delete_cancel))
+                        }
+                    },
+                )
+            }
+            Spacer(Modifier.height(Space.x20))
             Hairline()
             Spacer(Modifier.height(Space.x20))
             SectionLabel(stringResource(Res.string.settings_advanced))

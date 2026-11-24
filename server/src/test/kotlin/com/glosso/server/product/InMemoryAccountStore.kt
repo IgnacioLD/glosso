@@ -42,6 +42,12 @@ class InMemoryAccountStore : AccountStore {
     override fun linkedProviders(userId: UUID): List<String> =
         links.filterValues { it == userId }.keys.map { it.first }.sorted()
 
+    override fun deleteUser(deviceId: String): Boolean {
+        val user = users.remove(deviceId) ?: return false
+        links.values.removeAll { it == user.id }
+        return true
+    }
+
     /** Same merge rules as the JDBC store, for the state this fake keeps. */
     private fun moveAccount(accountUserId: UUID, deviceId: String): UserIdentity? {
         val entry = users.entries.firstOrNull { it.value.id == accountUserId } ?: return null

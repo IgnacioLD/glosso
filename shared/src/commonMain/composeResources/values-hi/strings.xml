@@ -645,4 +645,17 @@
     <string name="server_error_unreachable">उस सर्वर से संपर्क नहीं हो सका। पता और अपना कनेक्शन जाँचें।</string>
     <string name="server_error_not_glosso">यह पता जवाब देता है, लेकिन यह Glosso सर्वर नहीं है।</string>
     <string name="about_server">सर्वर: %1$s</string>
+    <string name="usage_consent_title">Glosso को बेहतर बनाने में मदद करेंगे?</string>
+    <string name="usage_consent_body">अगर आप स्वीकार करते हैं, तो Glosso इस्तेमाल के अनाम आँकड़े, जैसे पूरे किए गए पाठ और स्कोर की श्रेणियाँ, हमारे अपने सर्वर पर भेजेगा। इनमें ऐसी कोई आईडी नहीं होती जो इन्हें आपसे जोड़े। कोई ऑडियो नहीं, कोई विज्ञापन नहीं, आपका डेटा कभी बेचा नहीं जाता। अस्वीकार करने पर भी ऐप वैसे ही काम करेगा, और आप इसे कभी भी सेटिंग में बदल सकते हैं।</string>
+    <string name="usage_consent_body_linked">अगर आप स्वीकार करते हैं, तो Glosso कोर्स को बेहतर बनाने के लिए इस्तेमाल के आँकड़े, जैसे पूरे किए गए पाठ, स्कोर की श्रेणियाँ और क्रैश की तकनीकी रिपोर्ट, एक रैंडम इंस्टॉलेशन आईडी के साथ हमारे अपने सर्वर पर भेजेगा। कोई ऑडियो नहीं, कोई विज्ञापन नहीं। अस्वीकार करने पर भी ऐप वैसे ही काम करेगा, और आप इसे कभी भी सेटिंग में बदल सकते हैं। अगर आपकी उम्र 16 साल से कम है, तो कृपया अस्वीकार करें पर टैप करें।</string>
+    <string name="usage_consent_accept">स्वीकार करें</string>
+    <string name="usage_consent_decline">अस्वीकार करें</string>
+    <string name="settings_account_delete">मेरा खाता और डेटा डिलीट करें</string>
+    <string name="settings_account_delete_title">अपना खाता डिलीट करें?</string>
+    <string name="settings_account_delete_body">इससे हमारे सर्वर से आपका खाता, Google से जुड़ाव, प्रोफ़ाइल, खाते से जुड़े लाभ और इस्तेमाल का डेटा हमेशा के लिए मिट जाएगा। इसे वापस नहीं किया जा सकता। इस फ़ोन पर सहेजे गए पाठ और प्रगति ऐप अनइंस्टॉल करने तक बने रहेंगे।</string>
+    <string name="settings_account_delete_confirm">डिलीट करें</string>
+    <string name="settings_account_delete_cancel">रद्द करें</string>
+    <string name="settings_account_deleted">आपका खाता और डेटा डिलीट कर दिया गया है।</string>
+    <string name="settings_account_delete_failed">खाता डिलीट नहीं हो सका। अपना कनेक्शन जाँचें और फिर से कोशिश करें।</string>
+    <string name="settings_usage_desc_anonymous">अनाम इवेंट, जैसे पूरे किए गए पाठ और स्कोर की श्रेणियाँ, जो सिर्फ़ Glosso के सर्वर पर भेजे जाते हैं। इनमें ऐसी कोई आईडी नहीं होती जो इन्हें आपसे जोड़े। कोई ऑडियो नहीं, कोई विज्ञापन नहीं, आपका डेटा कभी बेचा नहीं जाता।</string>
 </resources>

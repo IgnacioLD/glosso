@@ -385,7 +385,7 @@
     <string name="about_title">Über</string>
     <string name="about_version">Version %1$s (%2$d)</string>
     <string name="about_privacy_title">Datenschutz</string>
-    <string name="about_privacy_detail">Wir speichern dein Audio nicht: Es wird im Speicher bewertet und dann verworfen. Kein Konto nötig, keine Werbung und keine Dritten.</string>
+    <string name="about_privacy_detail">Wir speichern dein Audio nicht: Es wird im Speicher bewertet und dann verworfen. Kein Konto nötig, keine Werbung und kein Verkauf von Daten.</string>
     <string name="about_privacy_link">Datenschutzerklärung</string>
     <string name="about_licenses_title">Lizenzen</string>
     <string name="about_licenses_intro">Glosso basiert auf Open-Source-Komponenten und Inhalten Dritter. Ihre Lizenzen und Namensnennungen sind hier in der App aufgeführt.</string>
@@ -596,9 +596,9 @@
     <string name="google_error_no_account">Auf diesem Handy ist kein Google-Konto. Füge eins in den Systemeinstellungen hinzu.</string>
     <string name="google_error_failed">Die Anmeldung mit Google hat nicht geklappt. Versuch es noch einmal.</string>
     <string name="google_error_conflict">Dieses Handy ist schon mit einem anderen Google-Konto verknüpft. Melde dich mit diesem an.</string>
-    <string name="onboarding_analytics_notice">Glosso sendet Nutzungsstatistiken, verknüpft mit einer zufälligen Installations-ID, an unsere eigenen Server (ohne Werbung, ohne Dritte), um den Kurs zu verbessern. Du kannst das in den Einstellungen abschalten.</string>
+    <string name="onboarding_analytics_notice">Glosso sendet Nutzungsstatistiken, verknüpft mit einer zufälligen Installations-ID, an unsere eigenen Server (ohne Werbung, ohne Datenverkauf), um den Kurs zu verbessern. Du kannst das in den Einstellungen abschalten.</string>
     <string name="settings_usage">Nutzungsstatistiken</string>
-    <string name="settings_usage_desc">Ereignisse wie abgeschlossene Lektionen, Punktebereiche und der technische Aufrufstapel bei Abstürzen und Fehlern (ohne Meldungen oder Benutzerdaten), verknüpft mit einer zufälligen Installations-ID und nur an die Server von Glosso gesendet. Kein Audio, keine Werbung, keine Dritten.</string>
+    <string name="settings_usage_desc">Ereignisse wie abgeschlossene Lektionen, Punktebereiche und der technische Aufrufstapel bei Abstürzen und Fehlern (ohne Meldungen oder Benutzerdaten), verknüpft mit einer zufälligen Installations-ID und nur an die Server von Glosso gesendet. Kein Audio, keine Werbung, kein Datenverkauf.</string>
     <string name="settings_usage_toggle">Nutzungsstatistiken teilen</string>
     <string name="settings_usage_erase">Meine Nutzungsdaten löschen</string>
     <string name="settings_usage_erased">Deine Nutzungsdaten wurden gelöscht.</string>
@@ -608,7 +608,7 @@
     <string name="import_model_incomplete">Ein Teil des Pakets fehlt noch. Wähle beide Dateien: das Modell (.onnx) und phoneme_vocab.json.</string>
     <string name="import_model_rejected">Eine Datei gehört nicht zum Bewertungsmodell von Glosso oder ist beschädigt. Wähle das Modell (.onnx) und phoneme_vocab.json.</string>
     <string name="import_model_failed">Die Datei konnte nicht gelesen werden. Versuch es noch einmal.</string>
-    <string name="onboarding_analytics_notice_off">Nutzungsstatistiken sind aus. Wenn du helfen willst, den Kurs zu verbessern, kannst du sie in den Einstellungen einschalten: Sie gehen nur an unsere eigenen Server (ohne Werbung, ohne Dritte), verknüpft mit einer zufälligen Installations-ID.</string>
+    <string name="onboarding_analytics_notice_off">Nutzungsstatistiken sind aus. Wenn du helfen willst, den Kurs zu verbessern, kannst du sie in den Einstellungen einschalten: Sie gehen nur an unsere eigenen Server (ohne Werbung, ohne Datenverkauf), verknüpft mit einer zufälligen Installations-ID.</string>
     <string name="settings_advanced">Erweitert</string>
     <string name="settings_server">Server</string>
     <string name="settings_server_default">Standard: %1$s</string>
@@ -628,8 +628,16 @@
     <string name="server_error_not_glosso">Diese Adresse antwortet, ist aber kein Glosso-Server.</string>
     <string name="about_server">Server: %1$s</string>
     <string name="usage_consent_title">Hilfst du uns, Glosso zu verbessern?</string>
-    <string name="usage_consent_body">Wenn du zustimmst, sendet Glosso anonyme Nutzungsstatistiken, etwa abgeschlossene Lektionen und Punktebereiche, an unsere eigenen Server. Sie enthalten keine ID, die sie mit dir verknüpft. Kein Audio, keine Werbung, keine Dritten. Die App funktioniert auch bei Ablehnung genauso, und du kannst das jederzeit in den Einstellungen ändern.</string>
-    <string name="settings_usage_desc_anonymous">Anonyme Ereignisse wie abgeschlossene Lektionen und Punktebereiche, die nur an die Server von Glosso gehen. Sie enthalten keine ID, die sie mit dir verknüpft. Kein Audio, keine Werbung, keine Dritten.</string>
+    <string name="usage_consent_body">Wenn du zustimmst, sendet Glosso anonyme Nutzungsstatistiken, etwa abgeschlossene Lektionen und Punktebereiche, an unsere eigenen Server. Sie enthalten keine ID, die sie mit dir verknüpft. Kein Audio, keine Werbung, kein Datenverkauf. Die App funktioniert auch bei Ablehnung genauso, und du kannst das jederzeit in den Einstellungen ändern.</string>
+    <string name="settings_usage_desc_anonymous">Anonyme Ereignisse wie abgeschlossene Lektionen und Punktebereiche, die nur an die Server von Glosso gehen. Sie enthalten keine ID, die sie mit dir verknüpft. Kein Audio, keine Werbung, kein Datenverkauf.</string>
+    <string name="usage_consent_body_linked">Wenn du zustimmst, sendet Glosso Nutzungsstatistiken, etwa abgeschlossene Lektionen, Punktebereiche und technische Absturzberichte, verknüpft mit einer zufälligen Installations-ID an unsere eigenen Server, um den Kurs zu verbessern. Kein Audio, keine Werbung. Die App funktioniert auch bei Ablehnung genauso, und du kannst das jederzeit in den Einstellungen ändern. Wenn du unter 16 bist, tippe bitte auf Ablehnen.</string>
+    <string name="settings_account_delete">Mein Konto und meine Daten löschen</string>
+    <string name="settings_account_delete_title">Konto löschen?</string>
+    <string name="settings_account_delete_body">Dadurch werden dein Konto, deine Google-Verknüpfung, dein Profil, an das Konto gebundene Vorteile und deine Nutzungsdaten endgültig von unseren Servern gelöscht. Das kann nicht rückgängig gemacht werden. Lektionen und Fortschritt auf diesem Handy bleiben, bis du die App deinstallierst.</string>
+    <string name="settings_account_delete_confirm">Löschen</string>
+    <string name="settings_account_delete_cancel">Abbrechen</string>
+    <string name="settings_account_deleted">Dein Konto und deine Daten wurden gelöscht.</string>
+    <string name="settings_account_delete_failed">Das Konto konnte nicht gelöscht werden. Prüfe deine Verbindung und versuche es erneut.</string>
     <string name="usage_consent_accept">Zustimmen</string>
     <string name="usage_consent_decline">Ablehnen</string>
 </resources>

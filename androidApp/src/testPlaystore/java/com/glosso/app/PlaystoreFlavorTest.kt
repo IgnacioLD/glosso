@@ -4,7 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertSame
 import org.junit.Test
 
-/** The Google Play build keeps Sign in with Google and statistics on by default, as before. */
+/** The Google Play build keeps Sign in with Google and asks before sending statistics. */
 class PlaystoreFlavorTest {
 
     @Test
@@ -16,7 +16,8 @@ class PlaystoreFlavorTest {
     }
 
     @Test
-    fun `usage statistics keep their default on`() {
-        assertEquals(true, BuildConfig.USAGE_STATISTICS_DEFAULT)
+    fun `usage statistics stay off until the learner accepts the prompt`() {
+        assertEquals(false, BuildConfig.USAGE_STATISTICS_DEFAULT)
+        assertEquals(true, BuildConfig.USAGE_STATISTICS_ASK)
     }
 }

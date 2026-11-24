@@ -122,19 +122,19 @@ class PrivacyLocaleTest {
     @Test
     @Config(qualifiers = "en")
     fun `english privacy is in english`() {
-        assertTrue(privacy().contains("Privacy and analytics"))
+        assertTrue(privacy().contains("Glosso privacy policy"))
     }
 
     @Test
     @Config(qualifiers = "es")
     fun `spanish privacy is in spanish`() {
-        assertTrue(privacy().contains("Privacidad"))
+        assertTrue(privacy().contains("Política de privacidad"))
     }
 
     @Test
     @Config(qualifiers = "fr")
     fun `french privacy is in french`() {
-        assertTrue(privacy().contains("Confidentialité"))
+        assertTrue(privacy().contains("Politique de confidentialité"))
     }
 
     @Test
@@ -146,6 +146,6 @@ class PrivacyLocaleTest {
     @Test
     @Config(qualifiers = "ja")
     fun `an unsupported locale falls back to english`() {
-        assertTrue(privacy().contains("Privacy and analytics"))
+        assertTrue(privacy().contains("Glosso privacy policy"))
     }
 }

@@ -124,17 +124,20 @@ android {
     // Two distributions of the same app. `playstore` is the Google Play build and
     // keeps Sign in with Google (Play services). `fdroid` ships no non-free
     // library: no Play services, no googleid, so "Change phone" is hidden, and
-    // usage statistics start off until the learner turns them on (F-Droid's
-    // Tracking anti-feature). See docs/FDROID.md.
+    // usage statistics stay off until the learner turns them on in Settings
+    // (F-Droid's Tracking anti-feature, docs/FDROID.md). The Play build also
+    // starts off, and asks once: the install id needs consent first (ePrivacy).
     flavorDimensions += "distribution"
     productFlavors {
         create("playstore") {
             dimension = "distribution"
-            buildConfigField("boolean", "USAGE_STATISTICS_DEFAULT", "true")
+            buildConfigField("boolean", "USAGE_STATISTICS_DEFAULT", "false")
+            buildConfigField("boolean", "USAGE_STATISTICS_ASK", "true")
         }
         create("fdroid") {
             dimension = "distribution"
             buildConfigField("boolean", "USAGE_STATISTICS_DEFAULT", "false")
+            buildConfigField("boolean", "USAGE_STATISTICS_ASK", "false")
         }
     }
 

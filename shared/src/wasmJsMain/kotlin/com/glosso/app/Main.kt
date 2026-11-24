@@ -147,6 +147,7 @@ private fun wire(): AppServices {
     DeviceId.init(context)
     Analytics.defaultEnabled = false
     Analytics.askConsent = true
+    Analytics.anonymous = true
     Analytics.init(context)
     ApiCache.init(context)
     OfflineStore.init(context)
