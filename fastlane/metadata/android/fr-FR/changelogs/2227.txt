@@ -1,0 +1,6 @@
+Première version sur F-Droid.
+- Sans bibliothèques Google : pas de services Play ni de connexion Google (« Changer de téléphone » n'est pas disponible).
+- Les statistiques d'utilisation sont désactivées au départ ; activez-les dans les Réglages.
+- Importez le modèle d'évaluation hors ligne depuis un fichier, vérifié avant installation.
+- Les séries et les jours suivent l'heure du serveur, pas l'horloge du téléphone.
+- Un téléchargement du modèle lancé hors ligne indique maintenant qu'il attend.

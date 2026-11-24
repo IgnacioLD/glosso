@@ -43,7 +43,7 @@ android {
     }
     val releaseSigning = if (hasReleaseKeystore) signingConfigs.getByName("release") else null
 
-    val baseVersionName = "2.5.4"
+    val baseVersionName = "2.5.5"
 
     defaultConfig {
         applicationId = "me.shirobyte42.glosso"
@@ -58,7 +58,8 @@ android {
         // 2222 is 2.5.0: American English, "Your turn" and spaced review.
         // 2223 is 2.5.1: Russian A1 rewritten from Russian culture.
         // 2226 is 2.5.4: the v2 usage statistics and crash reports.
-        versionCode = 2226
+        // 2227 is 2.5.5: the first F-Droid release; server-anchored time for streaks.
+        versionCode = 2227
         versionName = baseVersionName
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
