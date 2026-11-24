@@ -25,6 +25,8 @@ import kotlin.concurrent.Volatile
 import kotlin.io.encoding.Base64
 import kotlin.time.TimeSource
 import kotlinx.io.IOException
+import io.ktor.client.network.sockets.SocketTimeoutException
+import io.ktor.client.plugins.HttpRequestTimeoutException
 import org.jetbrains.compose.resources.getString
 
 /** Everything about one spoken attempt: the recorder, the cloud score and the
@@ -311,7 +313,7 @@ class PracticeEngine(
                     if (e is CancellationException) throw e
                     // The score is a cloud call. A dead connection reads as an
                     // IOException: say so plainly instead of leaking a stack trace.
-                    val offline = e is IOException
+                    val offline = e.isOffline()
                     // Offline with no on-device pack: the take is not scored and
                     // cannot be, but the learner can install the pack and try
                     // again, so the UI is told to offer it.
@@ -490,7 +492,7 @@ class PracticeEngine(
                 }
                 .onFailure { e ->
                     if (e is CancellationException) throw e
-                    val offline = e is IOException
+                    val offline = e.isOffline()
                     val needsModel = offline && onDevice.supported && onDeviceLanguage() && !onDevice.available()
                     _state.value = _state.value.copy(
                         scoring = false,
@@ -530,3 +532,11 @@ private const val MAX_LATENCY_MS = 120_000L
  */
 fun referenceAudioPath(audio: Map<String, String>): String? =
     audio.clipFor(VoicePreferences.accent)
+
+/**
+ * A connection that could not be made or broke. A timeout is an IOException in
+ * Ktor too, but it means a slow server on a working connection, so it is not
+ * reported (or shown) as offline.
+ */
+internal fun Throwable.isOffline(): Boolean =
+    this is IOException && this !is HttpRequestTimeoutException && this !is SocketTimeoutException

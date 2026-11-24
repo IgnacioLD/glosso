@@ -34,6 +34,9 @@ import io.ktor.client.request.setBody
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
+import kotlinx.coroutines.delay
+import kotlin.random.Random
+import io.ktor.client.plugins.timeout
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.contentType
 import io.ktor.http.fromHttpToGmtDate
@@ -334,13 +337,15 @@ class GlossoApi(
         }.body<List<DrillModel>>().map { it.forAccent(accent, authoredAccent) }
 
     suspend fun score(request: ScoreRequest): PronunciationFeedback {
-        val response = client.post("$baseUrl/v1/score") {
-            noCache()
-            contentType(ContentType.Application.Json)
-            // Only sent when the build carries a key; an empty key means an
-            // open server and no header, exactly the old behaviour.
-            if (apiKey.isNotBlank()) headers { append(API_KEY_HEADER, apiKey) }
-            setBody(request)
+        var response = postScore(request)
+        // Busy: the server queues takes and answers 503 before our timeout runs
+        // out. Retry after its Retry-After, with jitter so a burst of phones does
+        // not come back in step.
+        repeat(SCORE_BUSY_RETRIES) {
+            if (response.status != HttpStatusCode.ServiceUnavailable) return@repeat
+            val waitSeconds = response.headers[HttpHeaders.RetryAfter]?.toLongOrNull() ?: 2L
+            delay(waitSeconds.coerceIn(1L, 5L) * 1_000 + Random.nextLong(0, 1_000))
+            response = postScore(request)
         }
         // The engine rejects recordings with no usable speech. The API answers
         // 422 for that - and its tiny body would otherwise deserialize into an
@@ -349,7 +354,24 @@ class GlossoApi(
         if (response.status == HttpStatusCode.UnprocessableEntity) {
             return PronunciationFeedback(evaluated = false)
         }
+        // Any other failure is the server's, never a 0/100 decoded from an error body.
+        if (!response.status.isSuccess()) error("Scoring failed: HTTP ${response.status.value}")
         return response.body()
+    }
+
+    private suspend fun postScore(request: ScoreRequest) = client.post("$baseUrl/v1/score") {
+        noCache()
+        contentType(ContentType.Application.Json)
+        // Only sent when the build carries a key; an empty key means an
+        // open server and no header, exactly the old behaviour.
+        if (apiKey.isNotBlank()) headers { append(API_KEY_HEADER, apiKey) }
+        // Longer than the server's queue wait plus a slow inference, so a busy
+        // server answers (503) instead of the phone giving up mid-wait.
+        timeout {
+            requestTimeoutMillis = SCORE_TIMEOUT_MS
+            socketTimeoutMillis = SCORE_TIMEOUT_MS
+        }
+        setBody(request)
     }
 
     /** A practice plan for this learner: weakest sound first, on-theme and on-target. */
@@ -664,6 +686,12 @@ class GlossoApi(
 
 /** Shared client credential the scoring oracle expects; see [GlossoApi.apiKey]. */
 private const val API_KEY_HEADER = "X-Api-Key"
+
+/** A score waits for the server queue (12 s at most) plus one inference. */
+internal const val SCORE_TIMEOUT_MS = 30_000L
+
+/** Retries of a take the server was too busy to admit. */
+private const val SCORE_BUSY_RETRIES = 2
 
 /** The device identity the server keys the user by; see [GlossoApi.deviceIdProvider]. */
 private const val DEVICE_ID_HEADER = "X-Device-Id"

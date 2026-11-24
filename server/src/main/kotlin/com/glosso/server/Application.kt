@@ -51,9 +51,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.withContext
-import kotlinx.coroutines.withTimeoutOrNull
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonElement
@@ -728,10 +726,14 @@ fun Application.module(
     // test shows the host benefits from it.
     val maxConcurrent = System.getenv("GLOSSO_MAX_CONCURRENT")?.toIntOrNull()?.coerceAtLeast(1)
         ?: 1
-    val queueWaitMs = System.getenv("GLOSSO_QUEUE_WAIT_MS")?.toLongOrNull() ?: 30_000L
-    val inferenceSlots = Semaphore(maxConcurrent)
+    // Below the app's 30 s score timeout minus a slow inference, so a busy server
+    // answers 503 (the app retries) instead of the phone timing out mid-wait.
+    val queueWaitMs = System.getenv("GLOSSO_QUEUE_WAIT_MS")?.toLongOrNull() ?: 12_000L
+    // Beyond this many waiting takes the server answers 503 at once (the app retries).
+    val maxQueued = System.getenv("GLOSSO_MAX_QUEUED")?.toIntOrNull()?.coerceAtLeast(0) ?: 8
+    val inferenceGate = InferenceGate(maxConcurrent, maxQueued, queueWaitMs)
     val inFlight = AtomicInteger(0)
-    logger.info { "Inference gate: maxConcurrent=$maxConcurrent, queueWaitMs=$queueWaitMs" }
+    logger.info { "Inference gate: maxConcurrent=$maxConcurrent, maxQueued=$maxQueued, queueWaitMs=$queueWaitMs" }
 
     // First-party analytics: the store the caller passed (the production
     // overload builds it from the environment); null disables it cleanly.
@@ -1297,10 +1299,7 @@ fun Application.module(
 
                         // Suspend while waiting for a slot; never block a thread, or the
                         // dispatcher starves and inference collapses.
-                        val admitted = withTimeoutOrNull(queueWaitMs) {
-                            inferenceSlots.acquire()
-                            true
-                        } ?: false
+                        val admitted = inferenceGate.admit()
                         if (!admitted) {
                             scoreBusy.increment()
                             call.response.header(HttpHeaders.RetryAfter, "2")
@@ -1334,7 +1333,7 @@ fun Application.module(
                             analysis.recognition.ipa
                         } finally {
                             inFlight.decrementAndGet()
-                            inferenceSlots.release()
+                            inferenceGate.release()
                         }
                     } else if (!request.actualIpa.isNullOrBlank()) {
                         request.actualIpa
@@ -1474,10 +1473,7 @@ fun Application.module(
                             ErrorResponse("Recognition model is not ready"),
                         )
                     }
-                    val admitted = withTimeoutOrNull(queueWaitMs) {
-                        inferenceSlots.acquire()
-                        true
-                    } ?: false
+                    val admitted = inferenceGate.admit()
                     if (!admitted) {
                         scoreBusy.increment()
                         call.response.header(HttpHeaders.RetryAfter, "2")
@@ -1491,7 +1487,7 @@ fun Application.module(
                         withContext(Dispatchers.Default) { recognizer.recognize(request.audioBase64) }
                     } finally {
                         inFlight.decrementAndGet()
-                        inferenceSlots.release()
+                        inferenceGate.release()
                     }
                     if (ipa.isNullOrBlank()) {
                         scoreError.increment()
@@ -1550,10 +1546,7 @@ fun Application.module(
                             ErrorResponse("Recognition model is not ready"),
                         )
                     }
-                    val admitted = withTimeoutOrNull(queueWaitMs) {
-                        inferenceSlots.acquire()
-                        true
-                    } ?: false
+                    val admitted = inferenceGate.admit()
                     if (!admitted) {
                         scoreBusy.increment()
                         call.response.header(HttpHeaders.RetryAfter, "2")
@@ -1567,7 +1560,7 @@ fun Application.module(
                         withContext(Dispatchers.Default) { recognizer.analyze(request.audioBase64, expectedIpa) }
                     } finally {
                         inFlight.decrementAndGet()
-                        inferenceSlots.release()
+                        inferenceGate.release()
                     }
                     if (analysis == null) {
                         scoreError.increment()
@@ -2250,7 +2243,8 @@ fun Application.module(
                 mapOf(
                     "inFlight" to inFlight.get(),
                     "maxConcurrent" to maxConcurrent,
-                    "availableSlots" to inferenceSlots.availablePermits,
+                    "availableSlots" to inferenceGate.availablePermits,
+                    "queued" to inferenceGate.queued,
                 ),
             )
         }
