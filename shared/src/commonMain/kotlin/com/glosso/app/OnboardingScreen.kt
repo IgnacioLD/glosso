@@ -56,6 +56,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -99,7 +101,7 @@ fun OnboardingScreen(onFinish: () -> Unit) {
     val requestNotifications = rememberNotificationPermissionRequest()
 
     var page by remember { mutableIntStateOf(0) }
-    var targetLanguage by remember { mutableStateOf(LanguagePreferences.current.code) }
+    val targetLanguage by LanguagePreferences.code.collectAsState()
 
     // Usage statistics: once per onboarding, and whether it ended by the start
     // button after the seed or by one of the skips.
@@ -216,10 +218,8 @@ fun OnboardingScreen(onFinish: () -> Unit) {
                     0 -> PromisePage(
                         targetLanguage = targetLanguage,
                         onTargetLanguage = { code ->
-                            LanguagePreferences.set(code)
-                            OfferedLanguages.orNull(code)?.let { VoicePreferences.onLanguageChanged(it) }
+                            OfferedLanguages.orNull(code)?.let(::switchCourse)
                             ProfileStore.get(context).setLanguage(code)
-                            targetLanguage = code
                         },
                     )
 
@@ -258,11 +258,15 @@ private fun PromisePage(
     onTargetLanguage: (String) -> Unit,
 ) {
     val scroll = rememberScrollState()
+    // Never shrinks: a course without accents would otherwise pull the list out from under the finger.
+    var tallest by remember { mutableIntStateOf(0) }
     Column(
         modifier = Modifier
             .fillMaxSize()
             .scrollEdgeFade(scroll)
             .verticalScroll(scroll)
+            .onSizeChanged { tallest = maxOf(tallest, it.height) }
+            .heightIn(min = with(LocalDensity.current) { tallest.toDp() })
             .padding(horizontal = Space.gutter)
             .padding(top = Space.x24),
     ) {

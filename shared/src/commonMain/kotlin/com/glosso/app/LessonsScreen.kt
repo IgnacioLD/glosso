@@ -174,6 +174,8 @@ fun LessonsScreen(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         StreakChip(days = progress.shownDailyStreak())
                         Spacer(Modifier.width(Space.x12))
+                        CourseSwitcher()
+                        Spacer(Modifier.width(Space.x12))
                         LevelButton(
                             level = state.level,
                             pickable = state.levels.size > 1,

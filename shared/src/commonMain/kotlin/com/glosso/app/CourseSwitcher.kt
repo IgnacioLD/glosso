@@ -44,8 +44,9 @@ import org.jetbrains.compose.resources.stringResource
 internal fun switchCourse(pack: LanguagePack) {
     if (pack.code == LanguagePreferences.code.value) return
     UsageEvents.settingChanged("target_language", pack.code)
-    LanguagePreferences.set(pack.code)
+    // Voice first: setting the language wakes the loaders, which read the accent.
     VoicePreferences.onLanguageChanged(pack)
+    LanguagePreferences.set(pack.code)
 }
 
 /**

@@ -1,6 +1,9 @@
-Erste Version auf F-Droid.
-- Ohne Google-Bibliotheken: keine Play-Dienste und keine Google-Anmeldung („Handy wechseln" ist nicht verfügbar).
-- Nutzungsstatistiken sind zunächst aus; schalte sie in den Einstellungen ein.
-- Importiere das Offline-Bewertungsmodell aus einer Datei, vor der Installation geprüft.
-- Serien und Tage zählen nach der Serverzeit, nicht nach der Uhr des Handys.
-- Ein offline gestarteter Modell-Download zeigt jetzt, dass er wartet.
+- Neu: Spanisch lernen (experimentell) und ein umfangreicherer Russischkurs.
+- Kurs mit einem Tipp unter Heute oder Lektionen wechseln.
+- Freies Üben ist jetzt unter Heute.
+- Das Üben konzentriert sich auf deine schwierigsten Laute.
+- Klarere Korrekturen und gemischte Antworten.
+- Jede Sprache steht unter ihrem eigenen Namen.
+- Flüssigerer Startbildschirm.
+- Serien zählen nach Serverzeit, nicht nach der Handyuhr.
+- Ein Download ohne Verbindung zeigt nun, dass er wartet.

@@ -1,6 +1,9 @@
-Primera versión en F-Droid.
-- Sin bibliotecas de Google: sin servicios de Play ni inicio de sesión con Google ("Cambiar de móvil" no está disponible).
-- Las estadísticas de uso empiezan desactivadas; actívalas en Ajustes.
-- Importa el modelo de puntuación sin conexión desde un archivo, verificado antes de instalarlo.
-- Las rachas y los días se cuentan con la hora del servidor, no con el reloj del móvil.
-- Una descarga del modelo iniciada sin conexión ahora muestra que está esperando.
+- Nuevo: aprende español (experimental) y un curso de ruso más completo.
+- Cambia de curso con un toque desde Hoy o Lecciones.
+- La práctica libre ahora está en Hoy.
+- La práctica se centra en los sonidos que más fallas.
+- Correcciones más claras y respuestas barajadas.
+- Cada idioma aparece con su propio nombre.
+- Pantalla de bienvenida más fluida.
+- Las rachas usan la hora del servidor, no la del móvil.
+- Una descarga del modelo sin conexión ahora indica que está esperando.

@@ -68,7 +68,7 @@ import org.jetbrains.compose.resources.stringResource
 
 @Composable
 fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()) {
-    var language by remember { mutableStateOf(LanguagePreferences.current.code) }
+    val language by LanguagePreferences.code.collectAsState()
     val pack = LanguagePacks.byCode(language)
     var accent by remember(language) { mutableStateOf(VoicePreferences.accent) }
     val scorer by vm.state.collectAsState()
@@ -151,7 +151,6 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
                 onSelect = { code ->
                     OfferedLanguages.orNull(code)?.takeIf { it.code != language }?.let { newPack ->
                         switchCourse(newPack)
-                        language = newPack.code
                         accent = VoicePreferences.accent
                     }
                 },

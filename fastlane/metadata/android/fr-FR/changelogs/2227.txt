@@ -1,6 +1,9 @@
-Première version sur F-Droid.
-- Sans bibliothèques Google : pas de services Play ni de connexion Google (« Changer de téléphone » n'est pas disponible).
-- Les statistiques d'utilisation sont désactivées au départ ; activez-les dans les Réglages.
-- Importez le modèle d'évaluation hors ligne depuis un fichier, vérifié avant installation.
-- Les séries et les jours suivent l'heure du serveur, pas l'horloge du téléphone.
-- Un téléchargement du modèle lancé hors ligne indique maintenant qu'il attend.
+- Nouveau : apprenez l'espagnol (expérimental), et un cours de russe plus complet.
+- Changez de cours en un geste depuis Aujourd'hui ou Leçons.
+- La pratique libre est maintenant sur Aujourd'hui.
+- La pratique cible les sons que vous ratez le plus.
+- Corrections plus claires et réponses mélangées.
+- Chaque langue apparaît sous son propre nom.
+- Écran d'accueil plus fluide.
+- Les séries suivent l'heure du serveur, pas celle du téléphone.
+- Un téléchargement hors ligne indique son attente.
