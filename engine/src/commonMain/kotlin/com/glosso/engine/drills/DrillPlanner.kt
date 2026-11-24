@@ -20,15 +20,14 @@ object DrillPlanner {
     const val DEFAULT_LIMIT = 3
 
     /**
-     * Shares [limit] drills out across the sounds the (filtered) bank trains, in
-     * proportion to each sound's priority:
-     * - need: how often the learner misses it (an untried sound counts as half);
-     * - importance: how much of the course trains it, so key sounds get covered;
-     * - practice gap: sounds practised little are brought back.
-     * Slots go one at a time to the sound with the highest priority divided by
-     * the drills it already has, so the weakest sound gets the most practice while
-     * the important and neglected ones still come up. A sound mastered over many
-     * attempts only fills what is left.
+     * Builds a session of [limit] drills from the (filtered) bank in two shares:
+     * - about [WEAK_SHARE] of it for the sounds the learner misses, the worst
+     *   sound getting the most drills (up to [MAX_PER_SOUND]);
+     * - the rest for sounds not practised enough to judge, most important first
+     *   (importance = how much of the course trains the sound), one drill each.
+     * The two shares alternate so a session never drills one sound in a row for
+     * long. Whatever one share cannot fill goes to the other, and a sound the
+     * learner already gets right only fills what is left.
      *
      * @param themes only pick drills in these themes (empty = any).
      * @param targets only pick drills training these sounds (empty = any); a
@@ -55,53 +54,61 @@ object DrillPlanner {
         }
         val sounds = mutableListOf<String>()
         pool.forEach { d -> if (sounds.none { samePhone(it, d.target) }) sounds += d.target }
-        val coverage = sounds.associateWith { s -> bank.drills.count { samePhone(it.target, s) } }
-        val maxCoverage = coverage.values.maxOrNull()?.coerceAtLeast(1) ?: 1
-        val priority = sounds.associateWith { s ->
-            soundPriority(profile.stats.firstOrNull { samePhone(it.phoneme, s) }, coverage.getValue(s).toDouble() / maxCoverage)
-        }
+        fun stat(sound: String) = profile.stats.firstOrNull { samePhone(it.phoneme, sound) }
+        fun judged(sound: String) = (stat(sound)?.attempts ?: 0) >= PhoneticProfile.MIN_ATTEMPTS
+        val importance = sounds.associateWith { s -> bank.drills.count { samePhone(it.target, s) } }
+
+        // Missed sounds, weighted by how often they are missed.
+        val weak = sounds.filter { judged(it) && stat(it)!!.accuracy < 100 }
+            .associateWith { (100 - stat(it)!!.accuracy).toDouble() }
+        // Sounds with too few attempts to judge: the course's key sounds first.
+        val untried = sounds.filter { !judged(it) }
+            .sortedWith(compareByDescending<String> { importance.getValue(it) }.thenBy { stat(it)?.attempts ?: 0 }.thenBy { it })
+        val right = sounds.filter { judged(it) && stat(it)!!.accuracy == 100 }.sortedBy { it }
 
         val chosen = mutableListOf<DrillModel>()
-        val usedIds = mutableSetOf<String>()
         val usedThemes = mutableSetOf<String>()
-        val given = sounds.associateWith { 0 }.toMutableMap()
-        val exhausted = mutableSetOf<String>()
+        val given = mutableMapOf<String, Int>()
+        fun take(sound: String): Boolean {
+            val pick = pickFor(stat(sound) ?: PhonemeStatModel(sound), pool, chosen.map { it.id }.toSet(), usedThemes)
+                ?: return false
+            chosen += pick
+            usedThemes += pick.theme
+            given[sound] = (given[sound] ?: 0) + 1
+            return true
+        }
+        val dry = mutableSetOf<String>()
+        // The weak sound that most deserves the next drill: its weight divided by
+        // the drills it already has, so the worst sound leads without taking all.
+        fun nextWeak(cap: Int): String? = weak.keys
+            .filter { it !in dry && (given[it] ?: 0) < cap }
+            .maxWithOrNull(compareBy<String> { weak.getValue(it) / (1 + (given[it] ?: 0)) }.thenByDescending { it })
+        fun nextUntried(): String? = untried.firstOrNull { it !in dry && (given[it] ?: 0) == 0 }
+
+        val weakSlots = if (weak.isEmpty()) 0 else (limit * WEAK_SHARE + 0.999).toInt().coerceIn(1, limit)
+        var weakGiven = 0
         while (chosen.size < limit) {
-            val sound = sounds
-                .filter { it !in exhausted }
-                .maxWithOrNull(compareBy<String> { priority.getValue(it) / (1 + given.getValue(it)) }.thenByDescending { it })
+            // Keeps the weak share spread through the session instead of up front.
+            val wantWeak = weakGiven < weakSlots && weakGiven * limit <= chosen.size * weakSlots
+            val sound = (if (wantWeak) nextWeak(MAX_PER_SOUND) else nextUntried())
+                ?: nextUntried().takeIf { wantWeak }
+                ?: nextWeak(MAX_PER_SOUND)
+                ?: nextWeak(Int.MAX_VALUE)
+                ?: (untried + right).firstOrNull { it !in dry }
                 ?: break
-            val stat = profile.stats.firstOrNull { samePhone(it.phoneme, sound) } ?: PhonemeStatModel(sound)
-            val pick = pickFor(stat, pool, emptySet(), emptySet(), null, usedIds, usedThemes)
-            if (pick == null) {
-                exhausted += sound
+            if (!take(sound)) {
+                dry += sound
                 continue
             }
-            chosen += pick
-            usedIds += pick.id
-            usedThemes += pick.theme
-            given[sound] = given.getValue(sound) + 1
+            if (sound in weak) weakGiven++
         }
 
         val available = suggestedThemes(profile, bank, knownThemes)
         return DrillPlanModel(drills = chosen, themes = available)
     }
 
-    /**
-     * 0..1, see [plan]. A sound with too few attempts to judge counts as half
-     * missed; one mastered over [MASTERED_ATTEMPTS] tries keeps only a token
-     * weight so it is revisited after everything else.
-     */
-    internal fun soundPriority(stat: PhonemeStatModel?, importance: Double): Double {
-        val attempts = stat?.attempts ?: 0
-        val judged = attempts >= PhoneticProfile.MIN_ATTEMPTS
-        val need = if (judged) (100 - stat!!.accuracy) / 100.0 else 0.5
-        if (judged && need == 0.0 && attempts >= MASTERED_ATTEMPTS) return 0.01
-        val gap = 1.0 / (1 + attempts)
-        return 0.6 * need + 0.25 * importance + 0.15 * gap
-    }
-
-    private const val MASTERED_ATTEMPTS = 10
+    private const val WEAK_SHARE = 0.6
+    private const val MAX_PER_SOUND = 3
 
     /**
      * The reviewed drill that best trains one diagnosed error: the same sound,
@@ -126,18 +133,12 @@ object DrillPlanner {
     private fun pickFor(
         stat: PhonemeStatModel,
         drills: List<DrillModel>,
-        themes: Set<String>,
-        targets: Set<String>,
-        level: String?,
         excludedIds: Set<String>,
         usedThemes: Set<String>,
     ): DrillModel? {
         val typical = stat.typicalError?.takeIf { it != PhoneticProfile.DROPPED }
         return drills.asSequence()
             .filter { samePhone(it.target, stat.phoneme) }
-            .filter { themes.isEmpty() || it.theme in themes }
-            .filter { targets.isEmpty() || targets.any { t -> samePhone(t, it.target) } }
-            .filter { level == null || it.level == level }
             .filter { it.id !in excludedIds }
             .sortedWith(
                 compareByDescending<DrillModel> {
