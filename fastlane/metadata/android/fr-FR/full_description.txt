@@ -1,6 +1,6 @@
 Glosso est un cours de langues qui mesure vraiment votre prononciation. Il écoute chaque essai, reconnaît les sons que vous avez réellement produits, les compare aux sons attendus et vous dit exactement quel son corriger.
 
-Langues : anglais (britannique et américain), français, allemand et russe.
+Cours : anglais (britannique et américain), ainsi que russe et espagnol en cours expérimentaux pour débutants.
 
 <b>Ce que vous obtenez</b>
 <ul>

@@ -1,6 +1,6 @@
 Glosso is a language course that measures your pronunciation for real. It listens to each take, recognizes the sounds you actually made, compares them with the expected ones and tells you exactly which sound to fix.
 
-Languages: English (British and American), French, German and Russian.
+Courses: English (British and American), plus Russian and Spanish as experimental beginner courses.
 
 <b>What you get</b>
 <ul>

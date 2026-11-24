@@ -1,6 +1,6 @@
 Glosso ist ein Sprachkurs, der deine Aussprache wirklich misst. Er hört jeden Versuch, erkennt die Laute, die du tatsächlich gesprochen hast, vergleicht sie mit den erwarteten und sagt dir genau, welchen Laut du verbessern solltest.
 
-Sprachen: Englisch (britisch und amerikanisch), Französisch, Deutsch und Russisch.
+Kurse: Englisch (britisch und amerikanisch), dazu Russisch und Spanisch als experimentelle Anfängerkurse.
 
 <b>Was du bekommst</b>
 <ul>

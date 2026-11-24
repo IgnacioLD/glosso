@@ -1,6 +1,6 @@
 Glosso es un curso de idiomas que mide tu pronunciación de verdad. Escucha cada intento, reconoce los sonidos que has hecho de verdad, los compara con los esperados y te dice exactamente qué sonido corregir.
 
-Idiomas: inglés (británico y americano), francés, alemán y ruso.
+Cursos: inglés (británico y americano), además de ruso y español como cursos experimentales de nivel inicial.
 
 <b>Qué incluye</b>
 <ul>
