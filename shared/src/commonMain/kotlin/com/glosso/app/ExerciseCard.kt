@@ -102,7 +102,11 @@ fun ExerciseCard(
     // beginner cannot type a script they are only starting to read.
     val wordBank = exercise.type == "fill-blank" && exercise.options.isNotEmpty()
     val isChoice = exercise.type == "multiple-choice" || exercise.type == "true-false" || wordBank
-    val options = if (exercise.type == "true-false") listOf("true", "false") else exercise.options
+    // The content usually lists the answer first, so choices are shuffled once per
+    // exercise; true/false keeps its fixed order.
+    val options = remember(exercise.id, exercise.options) {
+        if (exercise.type == "true-false") listOf("true", "false") else exercise.options.shuffled()
+    }
     val allWords = remember(exercise.id) {
         exercise.prompt.trim().split(Regex("\\s+")).filter { it.isNotBlank() }
     }
