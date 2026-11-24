@@ -430,7 +430,8 @@ Que NO esta validado:
 Que esta cableado:
 
 - Pack `RUSSIAN` (`experimental`, `ru.lexicon`, acento `ru-RU`, voces Cartesia
-  Tatiana, Irina, Sergei, Dmitri). En `LanguagePacks.offered` desde el
+  Tatiana, Natalia, Sergei, Alexei; Irina y Dmitri desaparecieron de Cartesia el
+  2026-11). En `LanguagePacks.offered` desde el
   2026-10-02 por decision del dueno: el curso (188 lecciones autoradas, A1 a B2)
   se ofrece en todas las builds. Sigue sin revision de un hablante nativo y lejos de la
   regla "un nativo saca >= 98" (4 % de los clips de referencia de los drills,

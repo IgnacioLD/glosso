@@ -124,11 +124,11 @@ PALETTES = {
     "ru-RU": {
         "FEMALE": [
             ("tatiana", "064b17af-d36b-4bfb-b003-be07dba1b649"),
-            ("irina", "642014de-c0e3-4133-adc0-36b5309c23e6"),
+            ("natalia", "7a62541e-5492-410e-95ff-3abd096fce87"),
         ],
         "MALE": [
             ("sergei", "1e4176b1-3db9-44d6-a601-4fe68b041942"),
-            ("dmitri", "888b7df4-e165-4852-bfec-0ab2b96aaa46"),
+            ("alexei", "069ff31a-5524-4945-a403-f746ee617507"),
         ],
     },
     # Spain (Castilian); picked by the owner from Cartesia's es-ES voices.
