@@ -359,12 +359,9 @@
     <string name="settings_language_system">System default</string>
     <string name="settings_lang_en">English</string>
     <string name="settings_lang_es">Spanish</string>
-    <string name="settings_lang_fr">French</string>
     <string name="settings_lang_de">German</string>
     <string name="settings_lang_ru">Russian</string>
     <string name="settings_lang_zh">Chinese</string>
-    <string name="settings_lang_ar">Arabic</string>
-    <string name="settings_lang_hi">Hindi</string>
     <string name="settings_accent_us">American</string>
     <string name="settings_accent_uk">British</string>
     <string name="settings_about">About</string>

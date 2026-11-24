@@ -357,12 +357,9 @@
     <string name="settings_language_system">لغة النظام</string>
     <string name="settings_lang_en">الإنجليزية</string>
     <string name="settings_lang_es">الإسبانية</string>
-    <string name="settings_lang_fr">الفرنسية</string>
     <string name="settings_lang_de">الألمانية</string>
     <string name="settings_lang_ru">الروسية</string>
     <string name="settings_lang_zh">الصينية</string>
-    <string name="settings_lang_ar">العربية</string>
-    <string name="settings_lang_hi">الهندية</string>
     <string name="settings_accent_us">الأمريكية</string>
     <string name="settings_accent_uk">البريطانية</string>
     <string name="settings_about">حول التطبيق</string>
