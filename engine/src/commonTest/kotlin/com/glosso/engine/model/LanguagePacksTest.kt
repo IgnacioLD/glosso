@@ -22,7 +22,7 @@ class LanguagePacksTest {
     @Test
     fun `the wired packs are english - french - german - russian and spanish`() {
         assertEquals(listOf("en", "fr", "de", "ru", "es"), LanguagePacks.all.map { it.code })
-        assertEquals(listOf("en", "ru"), LanguagePacks.offered.map { it.code })
+        assertEquals(listOf("en", "ru", "es"), LanguagePacks.offered.map { it.code })
     }
 
     @Test

@@ -320,6 +320,8 @@
     <string name="settings_target_language">Idioma objetivo</string>
     <string name="settings_target_language_desc">El idioma que estudias. El contenido, los ejercicios y el audio lo siguen.</string>
     <string name="settings_language">Idioma</string>
+    <string name="language_experimental_label">%1$s - experimental</string>
+    <string name="language_experimental_note">Idioma experimental: la nota es orientativa y puede salir baja incluso a nativos.</string>
     <string name="settings_reference_accent">Acento de referencia</string>
     <string name="settings_reference_accent_desc">El acento de todas las grabaciones y lecciones.</string>
     <string name="settings_accent">Acento</string>

@@ -61,6 +61,7 @@ import com.glosso.app.designsystem.Sizes
 import com.glosso.app.designsystem.Space
 import com.glosso.app.download.WifiOnlyPreference
 import com.glosso.app.resources.*
+import com.glosso.engine.model.LanguagePack
 import com.glosso.engine.model.LanguagePacks
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -144,7 +145,7 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
             SettingChoice(
                 label = stringResource(Res.string.settings_language),
                 options = OfferedLanguages.all.map {
-                    it.code to languageDisplay(it.code, it.displayName, it.nativeName)
+                    it.code to languageDisplay(it)
                 },
                 selected = language,
                 onSelect = { code ->
@@ -157,6 +158,7 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
                     }
                 },
             )
+            ExperimentalLanguageNote(language)
 
             if (actions.appLocaleSupported) {
                 SectionBreak()
@@ -508,16 +510,29 @@ internal fun appLocaleDisplay(tag: String): String = when (tag) {
 
 /** Localized display names for the language picker, with the native name in brackets. */
 @Composable
-internal fun languageDisplay(code: String, displayName: String, nativeName: String): String {
-    val localized = when (code) {
+internal fun languageDisplay(pack: LanguagePack): String {
+    val localized = when (pack.code) {
         "en" -> stringResource(Res.string.settings_lang_en)
         "de" -> stringResource(Res.string.settings_lang_de)
         "es" -> stringResource(Res.string.settings_lang_es)
         "ru" -> stringResource(Res.string.settings_lang_ru)
         "zh" -> stringResource(Res.string.settings_lang_zh)
-        else -> displayName
+        else -> pack.displayName
     }
-    return if (localized == nativeName) localized else "$localized ($nativeName)"
+    val name = if (localized == pack.nativeName) localized else "$localized (${pack.nativeName})"
+    return if (pack.experimental) stringResource(Res.string.language_experimental_label, name) else name
+}
+
+/** Says why the score of a language without a tuned model can be low even for a native speaker. */
+@Composable
+internal fun ExperimentalLanguageNote(code: String) {
+    if (OfferedLanguages.orNull(code)?.experimental != true) return
+    Spacer(Modifier.height(Space.x8))
+    Text(
+        text = stringResource(Res.string.language_experimental_note),
+        style = MaterialTheme.typography.bodySmall,
+        color = MaterialTheme.colorScheme.onSurfaceVariant,
+    )
 }
 
 @Composable

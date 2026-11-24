@@ -331,7 +331,7 @@ private fun TargetLanguageChoice(selected: String, onSelect: (String) -> Unit) {
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = languageDisplay(pack.code, pack.displayName, pack.nativeName),
+                text = languageDisplay(pack),
                 style = MaterialTheme.typography.bodyLarge,
                 fontWeight = if (active) FontWeight.Bold else FontWeight.Medium,
                 color = if (active) MaterialTheme.colorScheme.onSurface
@@ -348,6 +348,7 @@ private fun TargetLanguageChoice(selected: String, onSelect: (String) -> Unit) {
         }
         Hairline()
     }
+    ExperimentalLanguageNote(selected)
 }
 
 /**

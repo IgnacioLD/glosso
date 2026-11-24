@@ -382,7 +382,7 @@ inventario. `experimental = true` en el pack hasta validarlo.
   siguen ahi pero no pueden disparar con una referencia de espeak. espeak tambien
   escribe `anjˈo` para "agneau" (y `ɲ` solo a final de palabra) y deja un guion
   final en los cliticos (`ʒə-`), que el scorer ignora.
-- **No se ofrece en la app:** `LanguagePacks.offered` solo incluye ingles y ruso hasta que
+- **No se ofrece en la app:** `LanguagePacks.offered` solo incluye ingles, ruso y espanol hasta que
   el banco `content/fr` este listo. El pack sigue en `LanguagePacks.all` y
   `LanguagePreferences` no lo acepta aunque quede guardado de una build anterior.
 - **Sin validar:** reconocimiento con audio real en frances. Antes de ofrecerlo:

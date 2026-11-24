@@ -331,6 +331,8 @@
     <string name="settings_target_language">सीखने की भाषा</string>
     <string name="settings_target_language_desc">वह भाषा जो आप सीख रहे हैं। कॉन्टेंट, ड्रिल और ऑडियो इसी के हिसाब से होते हैं।</string>
     <string name="settings_language">भाषा</string>
+    <string name="language_experimental_label">%1$s - प्रायोगिक</string>
+    <string name="language_experimental_note">प्रायोगिक भाषा: स्कोर अनुमानित है और मूल वक्ताओं का भी कम आ सकता है।</string>
     <string name="settings_reference_accent">रेफ़रेंस एक्सेंट</string>
     <string name="settings_reference_accent_desc">हर रिकॉर्डिंग और हर लेसन का एक्सेंट।</string>
     <string name="settings_accent">एक्सेंट</string>

@@ -343,6 +343,8 @@
     <string name="settings_target_language">لغة التعلّم</string>
     <string name="settings_target_language_desc">اللغة التي تدرسها، ويعتمد عليها المحتوى والتمارين والصوت.</string>
     <string name="settings_language">اللغة</string>
+    <string name="language_experimental_label">%1$s - تجريبي</string>
+    <string name="language_experimental_note">لغة تجريبية: الدرجة تقريبية وقد تكون منخفضة حتى للناطقين الأصليين.</string>
     <string name="settings_reference_accent">اللهجة المرجعية</string>
     <string name="settings_reference_accent_desc">لهجة كل التسجيلات وكل الدروس.</string>
     <string name="settings_accent">اللهجة</string>
