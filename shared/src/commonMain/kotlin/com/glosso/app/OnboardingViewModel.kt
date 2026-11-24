@@ -5,9 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.glosso.engine.model.DrillModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 
 /** How many reviewed phrases the seed step asks the learner to say. */
@@ -76,34 +77,33 @@ class OnboardingViewModel(private val services: AppServices) : ViewModel() {
             )
             _seed.value = _seed.value.copy(previousScore = previous)
         }
-        load()
-        // The first page lets the learner pick the accent, and the phrases are
-        // worded per accent: fetch them again in the one just chosen.
+        // The first page picks the course and the accent, and the phrases (and
+        // their clips) belong to both: fetch again on any change. Latest wins, so
+        // the brief accent-before-language step never leaves the old course's
+        // phrases on screen.
         viewModelScope.launch {
-            VoicePreferences.accentFlow.drop(1).collect { load() }
+            contentReloadSignal(LanguagePreferences.code, UiLanguage.current).collectLatest { fetch() }
         }
     }
 
     fun load() {
-        viewModelScope.launch {
-            _seed.value = _seed.value.copy(loading = true, error = null)
-            // The bank is paged in row order, so the first few drills repeat the
-            // same sounds. Fetch a wide page and pick one phrase per trained
-            // sound, so the profile starts with breadth instead of two sounds.
-            runCatching { api.drills(limit = OnboardingSeed.POOL) }
-                .onSuccess { pool ->
-                    _seed.value = SeedState(
-                        loading = false,
-                        drills = OnboardingSeed.select(pool, ONBOARDING_SEED_PHRASES),
-                    )
-                }
-                .onFailure {
-                    _seed.value = SeedState(
-                        loading = false,
-                        error = networkOrServerError(services.connectivity),
-                    )
-                }
+        viewModelScope.launch { fetch() }
+    }
+
+    private suspend fun fetch() {
+        _seed.value = _seed.value.copy(loading = true, error = null)
+        // The bank is paged in row order, so the first few drills repeat the
+        // same sounds. Fetch a wide page and pick one phrase per trained
+        // sound, so the profile starts with breadth instead of two sounds.
+        val pool = try {
+            api.drills(limit = OnboardingSeed.POOL)
+        } catch (e: CancellationException) {
+            throw e // a newer course or accent took over
+        } catch (_: Exception) {
+            _seed.value = SeedState(loading = false, error = networkOrServerError(services.connectivity))
+            return
         }
+        _seed.value = SeedState(loading = false, drills = OnboardingSeed.select(pool, ONBOARDING_SEED_PHRASES))
     }
 
     fun play(slow: Boolean = false) {

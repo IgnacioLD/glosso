@@ -10,6 +10,7 @@
     <string name="error_load_message">Vérifie ta connexion et réessaie.</string>
     <string name="error_offline">Hors ligne. Vérifie ton réseau et réessaie.</string>
     <string name="error_server">Impossible de joindre le serveur. Réessaie dans un instant.</string>
+    <string name="error_clock">La date et l'heure du téléphone semblent incorrectes, donc les connexions sécurisées échouent. Active la date et l'heure automatiques, puis réessaie.</string>
     <string name="offline_banner">Hors ligne</string>
     <string name="offline_nudge_body">Tu peux continuer à t'entraîner sans connexion. Télécharge le modèle une fois (environ %1$s).</string>
     <string name="offline_nudge_cta">Télécharger le modèle</string>

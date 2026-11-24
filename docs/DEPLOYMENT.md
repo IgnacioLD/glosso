@@ -66,7 +66,8 @@ sudo systemctl enable --now glosso-server
 | `GLOSSO_ASSETS_DIR` | `data/assets` | Carpeta de assets estaticos |
 | `GLOSSO_BOOTSTRAP` | (vacio) | `1` descarga modelo/vocab/CMUdict en el primer arranque |
 | `GLOSSO_MAX_CONCURRENT` | `1` | Reconocimientos simultaneos admitidos |
-| `GLOSSO_QUEUE_WAIT_MS` | `30000` | Espera maxima en cola antes de devolver 503 |
+| `GLOSSO_QUEUE_WAIT_MS` | `12000` | Espera maxima en cola antes de devolver 503; menor que el timeout de puntuacion de la app (30 s) |
+| `GLOSSO_MAX_QUEUED` | `8` | Puntuaciones en espera como maximo; con la cola llena el servidor responde 503 al instante y la app reintenta |
 | `GLOSSO_DEBUG` | (vacio) | `1` activa logs del engine (fonemas) |
 | `GLOSSO_ADMIN_TOKEN` | (vacio) | Token que protege `/metrics`, `/stats` y las vistas de analitica. Sin el, cerrados |
 | `GLOSSO_API_KEY` | (vacio) | Credencial de cliente (`X-Api-Key`) que protege `/v1/score`. Sin ella, scoring abierto (dev/emulador). **No definir en produccion hasta que la app envie la cabecera** |

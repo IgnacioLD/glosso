@@ -10,6 +10,7 @@
     <string name="error_load_message">Prüfe deine Verbindung und versuche es erneut.</string>
     <string name="error_offline">Offline. Prüfe deine Verbindung und versuche es erneut.</string>
     <string name="error_server">Der Server ist nicht erreichbar. Versuche es gleich erneut.</string>
+    <string name="error_clock">Datum und Uhrzeit des Handys scheinen falsch zu sein, deshalb schlagen sichere Verbindungen fehl. Schalte automatisches Datum und Uhrzeit ein und versuche es erneut.</string>
     <string name="offline_banner">Offline</string>
     <string name="offline_nudge_body">Du kannst ohne Verbindung weiterüben. Lade das Modell einmal herunter (etwa %1$s).</string>
     <string name="offline_nudge_cta">Modell herunterladen</string>

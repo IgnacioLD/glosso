@@ -1,5 +1,7 @@
 package com.glosso.app
 
+import com.glosso.app.download.DownloadIds
+import com.glosso.app.download.LocalDownloader
 import com.glosso.app.platform.currentPlatformContext
 import com.glosso.app.platform.rememberConnectivity
 import com.glosso.app.platform.PlatformBackHandler
@@ -248,6 +250,10 @@ fun GlossoApp() {
     val scorer by scoringVm.state.collectAsState()
     val offlineHintDismissed by OfflineModelHint.dismissed.collectAsState()
     val requestNotifications = rememberNotificationPermissionRequest()
+    val downloads by LocalDownloader.current.state.collectAsState()
+    // Started from the offline strip, the download waits for a connection; the
+    // strip keeps showing it so the tap visibly did something.
+    val modelDownload = downloads.item(DownloadIds.MODEL)?.takeIf { it.isActive }
 
     // The offline strip's offer is a one-time tip, not a loop: it only appears
     // while offline without the model, and never again once hidden or started.
@@ -359,7 +365,8 @@ fun GlossoApp() {
 
     // A wide window (a tablet, a desktop browser) gets the tabs as a side rail
     // and the screens at a phone's reading width, centred.
-    BoxWithConstraints(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+    // Not composed behind the welcome: it would redraw and reload on every language tap.
+    if (onboardingDone) BoxWithConstraints(Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
         val wide = maxWidth >= Sizes.wideLayout
         val bottomBar = showBar && !wide
         Row(Modifier.fillMaxSize()) {
@@ -464,6 +471,11 @@ fun GlossoApp() {
                             },
                             onHide = { OfflineModelHint.dismiss(context) },
                         )
+                    } else if (modelDownload != null) {
+                        PendingDownloadLine(
+                            modelDownload,
+                            Modifier.padding(start = Space.gutter, end = Space.x4, bottom = Space.x4),
+                        )
                     }
                 }
                 if (bottomBar) {
@@ -477,12 +489,11 @@ fun GlossoApp() {
         AchievementOverlay(modifier = Modifier.align(Alignment.TopCenter))
     }
 
-    // First run only: the short welcome, over the course, until it is dismissed.
-    // The guard keeps a tap on its empty areas from reaching the app behind.
+    // First run only: the short welcome, until it is dismissed.
     if (!onboardingDone) {
         TrackScreen("onboarding")
         Box(
-            Modifier.fillMaxSize().consumePointerEvents().background(MaterialTheme.colorScheme.background),
+            Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.TopCenter,
         ) {
             Box(Modifier.widthIn(max = Sizes.contentMaxWidth)) {

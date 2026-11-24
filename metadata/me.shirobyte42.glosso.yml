@@ -17,16 +17,19 @@ RepoType: git
 Repo: https://github.com/IgnacioLD/glosso.git
 
 Builds:
-  - versionName: 2.5.4
-    versionCode: 2226
-    commit: v2.5.4
+  - versionName: 2.5.5
+    versionCode: 2227
+    commit: v2.5.5
     subdir: androidApp
+    rm:
+      - shared/src/wasmJsMain/resources/stb_vorbis.wasm
     gradle:
       - fdroid
     gradleprops:
       - glosso.ios=false
+      - glosso.web=false
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
-CurrentVersion: 2.5.4
-CurrentVersionCode: 2226
+CurrentVersion: 2.5.5
+CurrentVersionCode: 2227

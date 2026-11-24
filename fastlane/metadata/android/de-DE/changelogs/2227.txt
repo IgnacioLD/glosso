@@ -1,0 +1,9 @@
+- Neu: Spanisch lernen (experimentell) und ein umfangreicherer Russischkurs.
+- Kurs mit einem Tipp unter Heute oder Lektionen wechseln.
+- Freies Üben ist jetzt unter Heute.
+- Das Üben konzentriert sich auf deine schwierigsten Laute.
+- Klarere Korrekturen und gemischte Antworten.
+- Jede Sprache steht unter ihrem eigenen Namen.
+- Flüssigerer Startbildschirm.
+- Serien zählen nach Serverzeit, nicht nach der Handyuhr.
+- Ein Download ohne Verbindung zeigt nun, dass er wartet.

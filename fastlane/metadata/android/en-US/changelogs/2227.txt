@@ -1,0 +1,9 @@
+- New: learn Spanish (experimental), and a fuller Russian course.
+- Switch course in one tap from Today or Lessons.
+- Free practice is now on Today.
+- Practice focuses on the sounds you miss most.
+- Clearer corrections and shuffled answers.
+- Each language appears under its own name.
+- Smoother first-run screen.
+- Streaks count by the server's time, not the phone's clock.
+- A model download started offline now shows that it is waiting.

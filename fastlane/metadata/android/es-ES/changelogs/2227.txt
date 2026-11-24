@@ -1,0 +1,9 @@
+- Nuevo: aprende español (experimental) y un curso de ruso más completo.
+- Cambia de curso con un toque desde Hoy o Lecciones.
+- La práctica libre ahora está en Hoy.
+- La práctica se centra en los sonidos que más fallas.
+- Correcciones más claras y respuestas barajadas.
+- Cada idioma aparece con su propio nombre.
+- Pantalla de bienvenida más fluida.
+- Las rachas usan la hora del servidor, no la del móvil.
+- Una descarga del modelo sin conexión ahora indica que está esperando.

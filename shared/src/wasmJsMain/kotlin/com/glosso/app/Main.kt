@@ -149,6 +149,7 @@ private fun wire(): AppServices {
     Analytics.askConsent = true
     Analytics.anonymous = true
     Analytics.init(context)
+    TrustedClock.init(context)
     ApiCache.init(context)
     OfflineStore.init(context)
     ProductConfigRepository.init(context)
