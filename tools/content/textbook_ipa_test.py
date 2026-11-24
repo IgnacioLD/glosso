@@ -57,6 +57,32 @@ class RewriteTest(unittest.TestCase):
             self.assertEqual(once, textbook_ipa.to_textbook(once), ipa)
 
 
+class WeakArticleTest(unittest.TestCase):
+    def test_the_article_is_a_schwa_not_the_letter_name(self):
+        self.assertEqual(
+            "hˈæv ə ɡˈʊd flˈaɪt",
+            textbook_ipa.weak_article("Have a good flight!", "hˈæv ˈeɪ ɡˈʊd flˈaɪt"),
+        )
+
+    def test_a_capital_a_is_the_article_only_at_the_start_of_a_sentence(self):
+        self.assertEqual(
+            "ə mˈæn ˈɪz hˈɪə",
+            textbook_ipa.weak_article("A man is here.", "ˈeɪ mˈæn ˈɪz hˈɪə"),
+        )
+        self.assertEqual(
+            "ɡˈəʊ. ə kˈæt",
+            textbook_ipa.weak_article("Go. A cat", "ɡˈəʊ. ˈeɪ kˈæt"),
+        )
+        self.assertEqual(
+            "plˈæn ˈeɪ",
+            textbook_ipa.weak_article("plan A", "plˈæn ˈeɪ"),
+        )
+
+    def test_misaligned_display_is_left_alone(self):
+        self.assertEqual("ˈeɪ", textbook_ipa.weak_article("a b", "ˈeɪ"))
+        self.assertIsNone(textbook_ipa.weak_article("a", None))
+
+
 class GoldenTest(unittest.TestCase):
     """The owner's hard cases, pinned so the notation cannot drift."""
 
