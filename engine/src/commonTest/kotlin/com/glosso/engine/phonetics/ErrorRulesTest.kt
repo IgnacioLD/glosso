@@ -134,11 +134,21 @@ class ErrorRulesTest {
 
     @Test
     fun `rule ids are unique and carry their language prefix`() {
-        for (language in listOf("de", "ru")) {
+        for (language in listOf("de", "ru", "es")) {
             val ids = ErrorRules.ruleIds(language)
             assertEquals(ids.size, ids.toSet().size, "$language: duplicate rule id")
             assertTrue(ids.all { it.startsWith("$language.") }, "$language: $ids")
         }
+    }
+
+    @Test
+    fun `spanish teaches the trill - the spain z and the soft consonants`() {
+        assertEquals("es.rr.r", ErrorRules.ruleFor("r", "ɾ", "es-ES")?.id)
+        assertEquals("es.r.rr", ErrorRules.ruleFor("ɾ", "r", "es")?.id)
+        assertEquals("es.z.s", ErrorRules.ruleFor("θ", "s", "es")?.id)
+        assertEquals("es.d.soft", ErrorRules.ruleFor("ð", "d", "es")?.id)
+        // English /θ/ said as /s/ is a different lesson from the Spanish one.
+        assertEquals("en.th.stopping", ErrorRules.ruleFor("θ", "s", "en")?.id)
     }
 
     @Test

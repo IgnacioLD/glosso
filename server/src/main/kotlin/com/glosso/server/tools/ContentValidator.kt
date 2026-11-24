@@ -53,7 +53,8 @@ object ContentValidator {
         if (word.lemma.isBlank()) problems += problem("lemma", "blank lemma")
         if (word.lemma != word.lemma.lowercase()) problems += problem("lemma", "lemma not lowercase: ${word.lemma}")
         if (word.pos != null && word.pos !in POS) problems += problem("pos", "unknown pos ${word.pos}")
-        if ((word.translations["es"] ?: "").isBlank()) problems += problem("translations", "missing es translation")
+        val gloss = glossLanguage(expectedLanguage)
+        if ((word.translations[gloss] ?: "").isBlank()) problems += problem("translations", "missing $gloss translation")
         if (word.examples.isEmpty()) problems += problem("examples", "no examples")
         return result(problems)
     }
@@ -193,8 +194,11 @@ object ContentValidator {
     /** Longest translated note body: French and German run about a fifth longer than Spanish. */
     const val MAX_TRANSLATED_NOTE_WORDS = 110
 
-    /** The base interface language notes are written in. */
-    private const val NOTE_BASE_LANGUAGE = "es"
+    /**
+     * The language a course is authored and glossed in: Spanish, the learners'
+     * language, except for the Spanish course itself, which is glossed in English.
+     */
+    fun glossLanguage(target: String): String = if (target == "es") "en" else "es"
 
     /**
      * The culture notes of a lesson: short, complete and in every interface
@@ -224,7 +228,7 @@ object ContentValidator {
             }
             for ((j, example) in note.examples.withIndex()) {
                 if (example.text.isBlank()) problems += problem("notes", "note $i example $j blank text")
-                for (language in uiLanguages + NOTE_BASE_LANGUAGE) {
+                for (language in uiLanguages + glossLanguage(lesson.language)) {
                     if (example.translations[language].isNullOrBlank()) {
                         problems += problem("notes", "note $i example $j has no $language translation")
                     }

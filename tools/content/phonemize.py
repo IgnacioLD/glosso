@@ -71,7 +71,7 @@ STRESS_MARK = "\u0301"
 # word ("в центре" is `f tsˈɛntrʲi`), which is how a native says it and what the
 # acoustic model, trained on espeak-ng sentences, writes. espeak-ng keeps one
 # chunk per word for these; when it does not, the item falls back to word by word.
-SENTENCE_LEVEL = {"ru"}
+SENTENCE_LEVEL = {"ru", "es"}
 
 CLITICS = {
     "ru": {"в": "v", "к": "k", "с": "s", "б": "b", "ж": "ʒ"},
