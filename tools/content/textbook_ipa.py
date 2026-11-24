@@ -84,6 +84,31 @@ def to_textbook(ipa):
     return out
 
 
+def weak_article(text, display):
+    """Write the article "a" as /ə/, not the letter name /eɪ/.
+
+    The reference is phonemized word by word, and espeak-ng reads "a" alone as
+    the letter. A capital "A" is the article only at the start of a sentence
+    ("A man..."), not inside one ("plan A"). The display is left as it is when
+    its chunks do not line up one to one with the words.
+    """
+    if not display:
+        return display
+    import phonemize
+
+    words = [(raw, phonemize.normalize_word(raw)) for raw in text.split()]
+    words = [(raw, word) for raw, word in words if word]
+    chunks = display.split()
+    if len(words) != len(chunks):
+        return display
+    out = []
+    for i, ((raw, word), chunk) in enumerate(zip(words, chunks)):
+        starts_sentence = i == 0 or words[i - 1][0][-1] in ".!?:"
+        article = word == "a" and ("a" in raw or starts_sentence)
+        out.append("ə" if article and chunk.strip("ˈˌ") == "eɪ" else chunk)
+    return " ".join(out)
+
+
 def assert_textbook(ipa):
     """Raise when a rewritten string still carries an espeak-only symbol."""
     leftover = TEXTBOOK_ONLY.intersection(ipa)
@@ -243,10 +268,12 @@ def apply_to_banks(bank_dir, records):
             displays = []
             for item in bank.get(list_key, []):
                 if folder == "dialogues":
-                    for i in range(len(item.get("turns", []))):
-                        displays.append(by_key.get(f'{item["id"]}#t{i}'))
+                    for i, turn in enumerate(item.get("turns", [])):
+                        display = by_key.get(f'{item["id"]}#t{i}')
+                        displays.append(weak_article(turn.get("text", ""), display))
                 else:
-                    displays.append(by_key.get(item.get("id")))
+                    said = item.get("text") or " ".join(item.get("paragraphs", []))
+                    displays.append(weak_article(said, by_key.get(item.get("id"))))
             gaps += sum(1 for d in displays if not d)
             new_text, count, changed = _insert_display(text, displays)
             if count != len(displays):
