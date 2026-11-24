@@ -34,8 +34,9 @@ import okio.Path
  * advertising id, no text the learner wrote and no audio; the server keeps only
  * the events and properties of its catalogue.
  *
- * On by default with a notice in onboarding ([defaultEnabled]; the F-Droid build
- * starts with it off, and the web sends nothing until the learner accepts, [askConsent]); the learner can turn it off (or on) in Settings, which drops the queue and tells the server (`X-Analytics: off`) not
+ * Nothing is sent before the learner opts in: the Play and web builds ask once
+ * ([askConsent]), the F-Droid build waits for the Settings switch. The learner can
+ * change it in Settings, which drops the queue and tells the server (`X-Analytics: off`) not
  * to record the score event either. Best-effort: nothing here can block the UI,
  * a take or a launch, and every failure is silent.
  */
@@ -57,8 +58,11 @@ object Analytics {
     /** Whether a new install sends statistics before the learner chooses; set by the app before [init]. */
     var defaultEnabled: Boolean = true
 
-    /** Whether this build asks first and sends anonymous statistics (the web); set by the app before [init]. */
+    /** Whether this build asks before sending anything; set by the app before [init]. */
     var askConsent: Boolean = false
+
+    /** Whether the server stores this build's events without the install id (the web); set before [init]. */
+    var anonymous: Boolean = false
 
     private val _enabled = MutableStateFlow(true)
     val enabled: StateFlow<Boolean> = _enabled.asStateFlow()
@@ -115,7 +119,13 @@ object Analytics {
             val saved = runCatching {
                 json.decodeFromString(serializer, files.fileSystem.read(file) { readUtf8() })
             }.getOrDefault(emptyList())
-            queueLock.withLock { queue.addAll(saved.takeLast(MAX_QUEUE)) }
+            if (_consentPending.value) {
+                // Queued by a version that did not ask: consent cannot cover it afterwards.
+                runCatching { files.fileSystem.delete(file) }
+                PendingCrash.clear(context)
+            } else {
+                queueLock.withLock { queue.addAll(saved.takeLast(MAX_QUEUE)) }
+            }
         }
         // A crash of the previous run, stored by the crash handler as it happened.
         PendingCrash.take(context)?.let { crash ->
@@ -324,6 +334,7 @@ object Analytics {
         _enabled.value = true
         defaultEnabled = true
         askConsent = false
+        anonymous = false
         _consentPending.value = false
         sessionId = null
         foregroundSince = 0

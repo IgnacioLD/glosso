@@ -1,120 +1,79 @@
-# Privacy and analytics - Glosso
+# Glosso privacy policy
 
-Summary of what data the product processes and how it is declared in Google
-Play. Not legal advice.
+Last updated: 24 November 2026.
 
-## Audio
+## Controller
 
-- Audio is sent to the server **only** to recognise and score pronunciation.
-- It is processed in memory and **discarded when the request ends**. It is not
-  stored, logged or reused.
-- In offline mode (a later phase) the audio never leaves the device.
+Ignacio Loyola is the controller of your data in Glosso.
+Contact: privacy@glossostudio.com. If you need a postal address to exercise your
+rights, ask for it at that email.
 
-## First-party analytics (`/v1/events`)
+## What data we process and why
 
-We collect product events in our own database (Postgres,
-`glosso.analytics_event`). **It is not shared with third parties.**
+| Data | Purpose | Legal basis | How long |
+|---|---|---|---|
+| Audio of your attempts | Recognise and score your pronunciation | Providing the service you request | Processed in memory and discarded when the request ends. With on-device scoring, it never leaves the phone |
+| Random installation id, learning profile and benefits | Run the app and keep your level | Providing the service | Until you delete your account |
+| Opaque id of your Google account, if you choose to continue with Google | Carry your account to another phone | Providing the service | Until you delete your account |
+| Usage statistics and crash reports | Improve the course and fix errors | Your consent | 180 days, with a daily purge |
+| IP address and technical connection data | Deliver the app, limit abuse and protect the service | Legitimate interest in security | Our server does not keep it in its logs. Cloudflare processes it as described below |
+| Emails you send us | Reply and handle your requests | Legitimate interest in replying and, for rights requests, legal obligation | As long as needed to resolve them and evidence the reply |
 
-| Data | Example | Why |
-|---|---|---|
-| Random installation id | Random UUID created on first launch | Count unique devices |
-| Session id | Random UUID | Group events from one session |
-| App version / platform | `1.0.0`, `android` | Compatibility |
-| Language practised | `en_GB` | Course improvement |
-| Event name and properties | `score_attempt`, `score`, `level` | Analyse usage and difficulty |
+We do not store your Google email, name or photo, and we ask for no access to
+Gmail, Drive or other services. We do not collect the Advertising ID, IMEI, MAC,
+device model or brand, precise location, contacts or SMS. There are no ads, we do
+not sell data, and we make no automated decisions with legal effects on you.
 
-**We do not collect**: Advertising ID, IMEI, MAC, `ANDROID_ID` as a stable
-identifier, device model or brand, precise location, contacts, SMS, free-form
-user text, error messages, or audio.
+Your lessons and progress are stored on your device.
 
-The server **does not store the IP** in the events table. Server events
-(`score_attempt`, `503`, errors) are recorded the same way, without audio.
+## Usage statistics
 
-## Account: Continue with Google (optional)
+They stay off until you accept them. If you decline, the app works the same. You
+can change your choice at any time in Settings > Usage statistics.
 
-It carries the account to a new phone. It is
-optional; the app works the same without it.
+- **In the mobile app** they are sent with a random installation id.
+- **On the web** (app.glossostudio.com) they are sent without that id, so they
+  cannot be linked to you. Your answer is kept in that browser.
 
-- **Continue with Google**: the user picks a Google account on the phone
-  (Android Credential Manager). Only the identity is requested: the server
-  verifies the ID token and stores **only** the opaque id Google assigns to the
-  account (`sub`). It does **not** store the email, name, photo or the token,
-  and it asks for no access to Gmail, Drive or any other service. The email is
-  shown on the phone itself only.
+They include: app opens and session length, onboarding, screens viewed, lessons
+and steps, exercises (kind and score band), audio played (kind and speed, never
+your recording), stories read, streak, settings changed, downloads, permissions
+granted or not, the result of signing in with Google, scoring speed and errors by
+type. Also the context: system version, phone or tablet, dark mode, language and
+accent.
 
-## Retention
+Crash reports include the error type and the technical call stack (class, method,
+file and line), never the error message or anything you type. Statistics never
+include audio or free text.
 
-- Configurable with `GLOSSO_ANALYTICS_RETENTION_DAYS` (default **180 days**).
-- Purged when the server starts.
+## Who is involved
 
-## Security
+- **Hostinger** hosts our server in France.
+- **Cloudflare** protects and delivers the app's traffic as a processor. It sees
+  your IP and connection data and may process them outside the European Economic
+  Area under the safeguards in its data processing terms, such as the EU standard
+  contractual clauses.
+- **Google** verifies your identity if you choose to continue with Google, under
+  its own privacy policy.
+- **Email:** if you write to us, your message passes through Cloudflare and is stored in a Google mailbox.
+- **Ko-fi** is only involved if you open the optional donation link, which leaves
+  the app and is governed by its own policy.
 
-- **TLS required**: the app only talks to the endpoint over HTTPS.
-- `/metrics`, `/stats`, `/admin/events` and `/v1/events/summary` are protected
-  with a token (`GLOSSO_ADMIN_TOKEN`); without a token they are closed.
-- Size limit for events and audio; security headers (HSTS,
-  `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`).
+## Your rights
 
-## Google Play declaration (Data safety)
+You can request access, rectification, erasure, restriction and portability, and
+object to processing, by writing to privacy@glossostudio.com. You can withdraw
+your consent at any time, without affecting earlier processing.
 
-- **Data collected / Personal info / User IDs**: yes, only if the user
-  continues with Google (optional): the Google account id.
-- **Data collected / App activity**: "Other actions" -> yes (usage events).
-- **Data collected / Device or other IDs**: "Device or other IDs" -> yes
-  (random installation id).
-- **Data collected / App info and performance**: "Crash logs" and
-  "Diagnostics" -> yes, from app 2.5.4 (error type, place in the code and
-  technical call stack without messages or user data; scoring speed, Android
-  version, phone or tablet). Not shared, optional, for analytics and app
-  functionality.
-- **Shared with third parties**: no.
-- **Encrypted in transit**: yes.
-- **Data deletion**: provide a support channel and, if applicable, an in-app
-  button to reset the id and delete the associated data.
+In the app, Settings offers **Delete my usage data** and **Delete my account and
+data**. If you think we have mishandled your data, you can complain to the Spanish
+Data Protection Agency (www.aepd.es) or the authority in your country.
 
-## Your choice
+## Children
 
-- On the web app (app.glossostudio.com), usage statistics stay off until you
-  accept them in the prompt on your first visit, and they are stored with no
-  installation id, so they cannot be linked to you. Your answer is kept in this
-  browser and can be changed at any time in Settings > Usage statistics.
-- Usage statistics are on by default and the onboarding says so. They can be
-  turned off at any time in Settings > Usage statistics; the app works exactly
-  the same without them, and the server then stops recording the score event
-  for this device too.
-- "Delete my usage data" in the same place erases every event of this device on
-  our server.
-- The events the app sends: app opened, session length, onboarding started and
-  finished, lesson started, finished or left, exercise finished (kind, a
-  10-point score band, mastered or not), pronunciation attempt scored on the
-  phone (score band, mastered or not, ids of the error rules) and microphone
-  permission denied.
+If you are under 16, please decline usage statistics. If you are a parent or
+guardian and believe a child has given us data, write to us and we will delete it.
 
-From app 2.5.4, the app also sends:
+## Changes
 
-- On app open, the context: Android version, phone or tablet, dark mode on or
-  off, whether the optional on-device model is installed, interface language
-  and chosen accent. Never the device model, the brand or a hardware
-  identifier.
-- Scoring speed (milliseconds) and whether the take was scored on the phone.
-- Screens viewed (from a fixed list), lesson steps reached, audio played
-  (which kind of audio, normal or slow, and replaying your own recording,
-  never the recording), "Your turn" and review results (recalled, partial,
-  not that phrase, revealed), stories opened and how much was read
-  (percentage), and the daily streak length.
-- Settings changed (which one and its new value: target language, accent,
-  interface language, phonetic transcription, translations, daily reminder,
-  Wi-Fi-only downloads).
-- Downloads of lessons or the model (started, finished or failed, size in MB,
-  short error code) and model deleted.
-- Visible errors by type (scoring failed, offline, not evaluated,
-  microphone, content, audio) and crash reports: the type of error, the place
-  in the app's code where it happened and the technical call stack (class,
-  method, file and line), sent on the next launch for fatal crashes;
-  never the error message, the content or anything you type.
-- Notification permission granted or not and the result of signing in with
-  Google (success, cancelled, no account, failed).
-
-All of it under the same rules: only yes/no values, bounded numbers and ids,
-never free text or audio; kept 180 days, and "Delete my usage data" erases
-all of it, crash reports included. The server discards any other event.
+If this policy changes in an important way, we will say so in the app.

@@ -386,7 +386,7 @@
     <string name="about_title">À propos</string>
     <string name="about_version">Version %1$s (%2$d)</string>
     <string name="about_privacy_title">Confidentialité</string>
-    <string name="about_privacy_detail">Nous ne conservons pas ton audio : il est noté en mémoire puis supprimé. Sans compte obligatoire, sans publicité et sans tiers.</string>
+    <string name="about_privacy_detail">Nous ne conservons pas ton audio : il est noté en mémoire puis supprimé. Sans compte obligatoire, sans publicité et sans vente de données.</string>
     <string name="about_privacy_link">Politique de confidentialité</string>
     <string name="about_licenses_title">Licences</string>
     <string name="about_licenses_intro">Glosso s'appuie sur des composants open source et des ressources tierces. Leurs licences et attributions sont listées ici, dans l'application.</string>
@@ -598,9 +598,9 @@
     <string name="google_error_no_account">Aucun compte Google sur ce téléphone. Ajoutes-en un dans les réglages du système.</string>
     <string name="google_error_failed">Impossible de se connecter avec Google. Réessaie.</string>
     <string name="google_error_conflict">Ce téléphone est déjà lié à un autre compte Google. Connecte-toi avec celui-là.</string>
-    <string name="onboarding_analytics_notice">Glosso envoie des statistiques d'utilisation, liées à un identifiant d'installation aléatoire, à nos propres serveurs (sans publicité ni tiers) pour améliorer le cours. Vous pouvez le désactiver dans les Réglages.</string>
+    <string name="onboarding_analytics_notice">Glosso envoie des statistiques d'utilisation, liées à un identifiant d'installation aléatoire, à nos propres serveurs (sans publicité ni vente de données) pour améliorer le cours. Vous pouvez le désactiver dans les Réglages.</string>
     <string name="settings_usage">Statistiques d'utilisation</string>
-    <string name="settings_usage_desc">Des événements comme les leçons terminées, les tranches de note et la pile d'appels technique des plantages et erreurs (sans messages ni données utilisateur), liés à un identifiant d'installation aléatoire et envoyés uniquement aux serveurs de Glosso. Sans audio, sans publicité, sans tiers.</string>
+    <string name="settings_usage_desc">Des événements comme les leçons terminées, les tranches de note et la pile d'appels technique des plantages et erreurs (sans messages ni données utilisateur), liés à un identifiant d'installation aléatoire et envoyés uniquement aux serveurs de Glosso. Sans audio, sans publicité, sans vente de données.</string>
     <string name="settings_usage_toggle">Partager les statistiques d'utilisation</string>
     <string name="settings_usage_erase">Supprimer mes données d'utilisation</string>
     <string name="settings_usage_erased">Vos données d'utilisation ont été supprimées.</string>
@@ -610,7 +610,7 @@
     <string name="import_model_incomplete">Une partie du pack manque encore. Choisissez les deux fichiers : le modèle (.onnx) et phoneme_vocab.json.</string>
     <string name="import_model_rejected">Un fichier ne fait pas partie du modèle d'évaluation de Glosso ou il est endommagé. Choisissez le modèle (.onnx) et phoneme_vocab.json.</string>
     <string name="import_model_failed">Impossible de lire ce fichier. Réessayez.</string>
-    <string name="onboarding_analytics_notice_off">Les statistiques d'utilisation sont désactivées. Pour aider à améliorer le cours, vous pouvez les activer dans les Réglages : elles ne vont qu'à nos propres serveurs (sans publicité ni tiers), liées à un identifiant d'installation aléatoire.</string>
+    <string name="onboarding_analytics_notice_off">Les statistiques d'utilisation sont désactivées. Pour aider à améliorer le cours, vous pouvez les activer dans les Réglages : elles ne vont qu'à nos propres serveurs (sans publicité ni vente de données), liées à un identifiant d'installation aléatoire.</string>
     <string name="settings_advanced">Avancé</string>
     <string name="settings_server">Serveur</string>
     <string name="settings_server_default">Par défaut : %1$s</string>
@@ -630,8 +630,16 @@
     <string name="server_error_not_glosso">Cette adresse répond, mais ce n'est pas un serveur Glosso.</string>
     <string name="about_server">Serveur : %1$s</string>
     <string name="usage_consent_title">Nous aider à améliorer Glosso ?</string>
-    <string name="usage_consent_body">Si vous acceptez, Glosso envoie des statistiques d'utilisation anonymes, comme les leçons terminées et les tranches de score, à nos propres serveurs. Elles ne portent aucun identifiant qui les relie à vous. Pas d'audio, pas de publicité, aucun tiers. L'application fonctionne de la même façon si vous refusez, et vous pouvez changer ce choix à tout moment dans les Réglages.</string>
-    <string name="settings_usage_desc_anonymous">Des événements anonymes, comme les leçons terminées et les tranches de score, envoyés uniquement aux serveurs de Glosso. Ils ne portent aucun identifiant qui les relie à vous. Pas d'audio, pas de publicité, aucun tiers.</string>
+    <string name="usage_consent_body">Si vous acceptez, Glosso envoie des statistiques d'utilisation anonymes, comme les leçons terminées et les tranches de score, à nos propres serveurs. Elles ne portent aucun identifiant qui les relie à vous. Pas d'audio, pas de publicité, aucune vente de données. L'application fonctionne de la même façon si vous refusez, et vous pouvez changer ce choix à tout moment dans les Réglages.</string>
+    <string name="settings_usage_desc_anonymous">Des événements anonymes, comme les leçons terminées et les tranches de score, envoyés uniquement aux serveurs de Glosso. Ils ne portent aucun identifiant qui les relie à vous. Pas d'audio, pas de publicité, aucune vente de données.</string>
+    <string name="usage_consent_body_linked">Si vous acceptez, Glosso envoie des statistiques d'utilisation, comme les leçons terminées, les tranches de score et les rapports techniques de plantage, à nos propres serveurs, liées à un identifiant d'installation aléatoire, pour améliorer le cours. Pas d'audio, pas de publicité. L'application fonctionne de la même façon si vous refusez, et vous pouvez changer ce choix à tout moment dans les Réglages. Si vous avez moins de 16 ans, appuyez sur Refuser.</string>
+    <string name="settings_account_delete">Supprimer mon compte et mes données</string>
+    <string name="settings_account_delete_title">Supprimer votre compte ?</string>
+    <string name="settings_account_delete_body">Cela efface définitivement de nos serveurs votre compte, votre lien Google, votre profil, les avantages liés au compte et vos données d'utilisation. Cette action est irréversible. Les leçons et la progression enregistrées sur ce téléphone restent jusqu'à la désinstallation de l'application.</string>
+    <string name="settings_account_delete_confirm">Supprimer</string>
+    <string name="settings_account_delete_cancel">Annuler</string>
+    <string name="settings_account_deleted">Votre compte et vos données ont été supprimés.</string>
+    <string name="settings_account_delete_failed">Impossible de supprimer le compte. Vérifiez votre connexion et réessayez.</string>
     <string name="usage_consent_accept">Accepter</string>
     <string name="usage_consent_decline">Refuser</string>
 </resources>

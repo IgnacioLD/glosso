@@ -9,6 +9,7 @@ import com.glosso.server.product.NimbusGoogleIdTokenVerifier
 import com.glosso.server.product.ProductConfig
 import io.ktor.client.HttpClient
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
+import io.ktor.client.request.delete
 import io.ktor.client.request.get
 import io.ktor.client.request.header
 import io.ktor.client.request.post
@@ -81,6 +82,22 @@ class GoogleSignInRouteTest {
             contentType(ContentType.Application.Json)
             setBody(GoogleSignInRequest(token))
         }
+
+    @Test
+    fun `deleting the account erases the user and its Google link`() = testApplication {
+        val store = storeWithOldPhone()
+        app(store)
+        val client = createClient { install(ContentNegotiation) { json() } }
+        signIn(client, "old-phone", GoogleTokens.sign(google, "sub-1", nonce(client, "old-phone")))
+        val account = assertNotNull(store.identityOf("old-phone"))
+
+        assertEquals(HttpStatusCode.BadRequest, client.delete("/v1/account").status)
+        val deleted = client.delete("/v1/account") { header("X-Device-Id", "old-phone") }
+
+        assertEquals(HttpStatusCode.NoContent, deleted.status)
+        assertNull(store.identityOf("old-phone"))
+        assertEquals(emptyList(), store.linkedProviders(account.id))
+    }
 
     @Test
     fun `signing in with Google on a new phone moves the account there`() = testApplication {

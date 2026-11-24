@@ -227,6 +227,15 @@ class JdbcAccountStore(private val dataSource: DataSource) : AccountStore {
         }
     }
 
+    // Profiles, needs, entitlements, grants and links all cascade from the user.
+    override fun deleteUser(deviceId: String): Boolean =
+        dataSource.connection.use { connection ->
+            connection.prepareStatement("delete from glosso.users where device_id = ?").use { statement ->
+                statement.setString(1, deviceId)
+                statement.executeUpdate() > 0
+            }
+        }
+
     private fun userIdOfDevice(connection: Connection, deviceId: String): UUID? =
         connection.prepareStatement("select id from glosso.users where device_id = ?").use { statement ->
             statement.setString(1, deviceId)

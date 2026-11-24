@@ -375,6 +375,10 @@ class GlossoApi(
     suspend fun deleteEvents(): Boolean =
         client.delete("$baseUrl/v1/events") { noCache() }.status.isSuccess()
 
+    /** Erases this device's account, its Google link and its usage events on the server. */
+    suspend fun deleteAccount(): Boolean =
+        client.delete("$baseUrl/v1/account") { noCache() }.status.isSuccess()
+
     /** Sends a crash or error trace and answers the HTTP status. */
     suspend fun sendCrashTrace(trace: CrashTrace): Int =
         client.post("$baseUrl/v1/crash-traces") {

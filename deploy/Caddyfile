@@ -57,6 +57,17 @@
 				request>headers>Authorization replace REDACTED
 				request>headers>X-Api-Key replace REDACTED
 				request>headers>X-Ingest-Token replace REDACTED
+				# Personal data (GDPR minimisation): no IP or install id in the log.
+				# Rate limits read the IP from the live request, not from here.
+				request>remote_ip delete
+				request>remote_port delete
+				request>client_ip delete
+				request>headers>Cf-Connecting-Ip delete
+				request>headers>True-Client-Ip delete
+				request>headers>X-Forwarded-For delete
+				request>headers>X-Real-Ip delete
+				request>headers>Cf-Ipcountry delete
+				request>headers>X-Device-Id delete
 			}
 		}
 	}

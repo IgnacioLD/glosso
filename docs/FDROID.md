@@ -4,7 +4,7 @@ The Android app has two product flavors in `:androidApp`:
 
 | Flavor | For | Differences |
 |---|---|---|
-| `playstore` | Google Play | Sign in with Google ("Change phone"), through Credential Manager and Play services. Usage statistics on by default, with the onboarding notice. |
+| `playstore` | Google Play | Sign in with Google ("Change phone"), through Credential Manager and Play services. Usage statistics stay off until the learner accepts the consent prompt. |
 | `fdroid` | F-Droid | No Google library at all, so "Change phone" is hidden. Usage statistics off until the learner turns them on in Settings. |
 
 Everything else (lessons, cloud and on-device scoring, the model download and

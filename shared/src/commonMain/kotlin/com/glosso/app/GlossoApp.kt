@@ -496,7 +496,13 @@ fun GlossoApp() {
         AlertDialog(
             onDismissRequest = {},
             title = { Text(stringResource(Res.string.usage_consent_title)) },
-            text = { Text(stringResource(Res.string.usage_consent_body)) },
+            text = {
+                Text(
+                    stringResource(
+                        if (Analytics.anonymous) Res.string.usage_consent_body else Res.string.usage_consent_body_linked,
+                    ),
+                )
+            },
             confirmButton = {
                 TextButton(colors = accentTextButtonColors(), onClick = { Analytics.setEnabled(context, true) }) {
                     Text(stringResource(Res.string.usage_consent_accept))
