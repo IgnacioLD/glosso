@@ -493,20 +493,25 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
 /** The address without its scheme, as a learner reads it: `glosso.example.org:8443`. */
 internal fun serverHost(base: String): String = base.substringAfter("://")
 
+/**
+ * An interface language under its own name, whatever the app is set to now:
+ * someone who landed in a language they cannot read still recognises theirs.
+ */
 @Composable
-internal fun appLocaleDisplay(tag: String): String = when (tag) {
-    "" -> stringResource(Res.string.settings_language_system)
-    "en" -> stringResource(Res.string.settings_lang_en)
-    "es" -> stringResource(Res.string.settings_lang_es)
-    "fr" -> stringResource(Res.string.settings_lang_fr)
-    "de" -> stringResource(Res.string.settings_lang_de)
-    "ru" -> stringResource(Res.string.settings_lang_ru)
-    "hi" -> stringResource(Res.string.settings_lang_hi)
-    "ar" -> stringResource(Res.string.settings_lang_ar)
-    else -> tag
-}
+internal fun appLocaleDisplay(tag: String): String =
+    if (tag.isEmpty()) stringResource(Res.string.settings_language_system) else NATIVE_LANGUAGE_NAMES[tag] ?: tag
 
-/** Localized display names for the language picker, with the native name in brackets. */
+private val NATIVE_LANGUAGE_NAMES = mapOf(
+    "en" to "English",
+    "es" to "Español",
+    "fr" to "Français",
+    "de" to "Deutsch",
+    "ru" to "Русский",
+    "hi" to "हिन्दी",
+    "ar" to "العربية",
+)
+
+/** A course under its own name first, with the interface's name for it in brackets. */
 @Composable
 internal fun languageDisplay(pack: LanguagePack): String {
     val localized = when (pack.code) {
@@ -517,7 +522,7 @@ internal fun languageDisplay(pack: LanguagePack): String {
         "zh" -> stringResource(Res.string.settings_lang_zh)
         else -> pack.displayName
     }
-    val name = if (localized == pack.nativeName) localized else "$localized (${pack.nativeName})"
+    val name = if (localized == pack.nativeName) localized else "${pack.nativeName} ($localized)"
     return if (pack.experimental) stringResource(Res.string.language_experimental_label, name) else name
 }
 

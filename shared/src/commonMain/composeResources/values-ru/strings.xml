@@ -338,12 +338,9 @@
     <string name="settings_language_system">Как в системе</string>
     <string name="settings_lang_en">Английский</string>
     <string name="settings_lang_es">Испанский</string>
-    <string name="settings_lang_fr">Французский</string>
     <string name="settings_lang_de">Немецкий</string>
     <string name="settings_lang_ru">Русский</string>
     <string name="settings_lang_zh">Китайский</string>
-    <string name="settings_lang_ar">Арабский</string>
-    <string name="settings_lang_hi">Хинди</string>
     <string name="settings_accent_us">Американский</string>
     <string name="settings_accent_uk">Британский</string>
     <string name="settings_about">О приложении</string>
