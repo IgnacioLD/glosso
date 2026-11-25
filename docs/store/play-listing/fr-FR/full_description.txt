@@ -1,0 +1,45 @@
+Apprenez l'anglais en le parlant, en sachant exactement comment vous sonnez. Glosso est un cours d'anglais construit autour de votre propre voix : à chaque leçon vous lisez, écoutez, répondez et parlez, et votre prononciation est mesurée son par son. Sans publicité. Sans compte obligatoire.
+
+POURQUOI GLOSSO
+- Un cours complet de A1 à B2 : plus de 220 leçons avec dialogues, histoires et articles
+- Anglais américain ou britannique : choisissez votre accent, tout le cours suit
+- À vous : écoutez une réplique et répondez de mémoire, en anglais
+- Révision au bon moment : les phrases que vous avez dites reviennent quelques jours plus tard
+- Nouveau : un cours de russe A1 construit à partir de la culture russe, avec des notes culturelles dans chaque leçon
+- Nouveau : un cours d'espagnol A1 d'Espagne, dans une première version expérimentale
+- Prononciation notée mot par mot et son par son (API)
+- Notation sur l'appareil : téléchargez le modèle et pratiquez hors ligne
+- Privé par conception : sans publicité ni traceurs tiers
+
+* DES LEÇONS QUI FONT PARLER
+Chaque leçon commence par un dialogue, une histoire ou un article à lire et à écouter ligne par ligne. Viennent ensuite des exercices, une étape où vous répondez de mémoire, puis des exercices de prononciation sur les sons de la leçon.
+
+* ANGLAIS AMÉRICAIN OU BRITANNIQUE
+Choisissez l'accent que vous voulez apprendre. Les textes, l'orthographe, la transcription phonétique et les voix de référence changent ensemble : « Mom » et « favorite » en anglais américain, « Mum » et « favourite » en anglais britannique.
+
+* À VOUS
+Glosso vous donne l'idée dans votre langue et vous dites la phrase en anglais, sans la lire. La phrase apparaît une fois que vous l'avez dite. C'est ce qui se rapproche le plus d'une vraie conversation quand on s'entraîne seul.
+
+* UNE PRONONCIATION MESURÉE
+Parlez et recevez une note pour chaque mot et chaque son. Voyez exactement quel son vous a échappé, réécoutez la référence et réessayez. Si un enregistrement ne peut pas être évalué, l'application vous le dit au lieu de vous donner une mauvaise note.
+
+* RÉVISION AU BON MOMENT
+Les phrases que vous avez dites reviennent dans les leçons suivantes : le lendemain, quelques jours après, puis quelques semaines après. C'est ainsi qu'elles restent.
+
+* PRIVÉ ET HORS LIGNE
+Glosso peut noter votre voix sur votre appareil. Téléchargez le modèle une fois et pratiquez sans connexion : en avion, dans le métro, à la maison. Dans la bêta actuelle, la notation peut passer par notre serveur, et l'application vous en informe. Votre audio sert uniquement à noter votre tentative : jamais vendu, jamais utilisé pour la publicité.
+
+* VOTRE PROGRESSION
+Voyez quels sons vous maîtrisez et lesquels demandent du travail, avec votre propre tendance dans le temps, des séries quotidiennes et des succès.
+
+* LANGUES
+Le cours d'anglais (américain et britannique, niveaux A1 à B2) est disponible aujourd'hui, et le cours de russe est nouveau au niveau A1, écrit à partir de la culture russe, A2 à B2 arriveront plus tard ; la notation en russe demande une connexion. Un cours d'espagnol A1 d'Espagne est aussi nouveau, en version expérimentale. L'interface est traduite en anglais, espagnol, français, allemand, russe, hindi et arabe. D'autres cours sont prévus ; le français et l'allemand arrivent ensuite.
+
+IDÉAL POUR
+- Ceux qui veulent être compris quand ils parlent anglais
+- Ceux qui préparent l'oral d'un examen (IELTS, TOEFL, PTE et autres)
+- Les professionnels et les orateurs
+- Les immigrés et expatriés qui s'adaptent à un nouveau pays
+- Les enseignants et tuteurs de prononciation ou d'accent
+
+Glosso est en bêta ouverte et gratuit pendant sa croissance. Téléchargez-le et parlez avec plus d'assurance : un retour honnête et privé, sur votre téléphone.
