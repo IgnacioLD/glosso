@@ -7,7 +7,7 @@ POR QUÉ GLOSSO
 - Pronunciación puntuada palabra por palabra y sonido a sonido (IPA)
 - Repaso en el momento justo: las frases que dijiste vuelven días después
 - Puntuación en el dispositivo: descarga el modelo y practica sin conexión
-- Nuevo: un curso de ruso A1 hecho desde la cultura rusa, con notas de cultura en cada lección
+- Nuevo: un curso de ruso de A1 a B2 hecho desde la cultura rusa, con notas de cultura en cada lección
 - Nuevo: un curso de español A1 de España, en una primera versión experimental
 - Privado por diseño: sin anuncios ni rastreadores de terceros
 
@@ -33,7 +33,7 @@ Glosso puede puntuar tu voz en tu dispositivo. Descarga el modelo una vez y prac
 Ves qué sonidos dominas y cuáles necesitan trabajo, con tu propia tendencia en el tiempo, rachas diarias y logros.
 
 * IDIOMAS
-El curso de inglés (americano y británico, niveles A1 a B2) está disponible hoy, y el curso de ruso es nuevo en el nivel A1, escrito desde la cultura rusa, y A2 a B2 llegarán más adelante; para puntuar en ruso hace falta conexión. También es nuevo un curso de español A1 de España, en versión experimental. La interfaz está traducida a inglés, español, francés, alemán, ruso, hindi y árabe. Habrá más cursos: francés y alemán son los siguientes.
+El curso de inglés (americano y británico, niveles A1 a B2) está disponible hoy, y también el nuevo curso de ruso, de A1 a B2, escrito desde la cultura rusa; para puntuar en ruso hace falta conexión. También es nuevo un curso de español A1 de España, en versión experimental. La interfaz está traducida a inglés, español, francés, alemán, ruso, hindi y árabe. Habrá más cursos: francés y alemán son los siguientes.
 
 IDEAL PARA
 - Quien quiere que se le entienda al hablar inglés

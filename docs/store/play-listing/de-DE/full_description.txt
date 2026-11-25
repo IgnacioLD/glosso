@@ -5,7 +5,7 @@ WARUM GLOSSO
 - Amerikanisches oder britisches Englisch: Du wählst den Akzent, der ganze Kurs folgt
 - Du bist dran: Hör einen Satz und antworte aus dem Kopf, auf Englisch
 - Wiederholung zur richtigen Zeit: Gesagte Sätze kommen Tage später zurück
-- Neu: ein Russischkurs A1 aus der russischen Kultur heraus, mit Kulturnotizen in jeder Lektion
+- Neu: ein Russischkurs von A1 bis B2 aus der russischen Kultur heraus, mit Kulturnotizen in jeder Lektion
 - Neu: ein Spanischkurs A1 aus Spanien, in einer ersten experimentellen Version
 - Aussprache bewertet Wort für Wort und Laut für Laut (IPA)
 - Bewertung auf dem Gerät: Modell herunterladen und offline üben
@@ -33,7 +33,7 @@ Glosso kann deine Stimme auf deinem Gerät bewerten. Lade das Modell einmal heru
 Sieh, welche Laute du beherrschst und welche Arbeit brauchen, mit deinem eigenen Trend über die Zeit, täglichen Serien und Erfolgen.
 
 * SPRACHEN
-Der Englischkurs (amerikanisch und britisch, Niveaus A1 bis B2) ist heute verfügbar, und der Russischkurs ist neu auf Niveau A1, aus der russischen Kultur heraus geschrieben, A2 bis B2 folgen später; die Bewertung auf Russisch braucht eine Verbindung. Neu ist auch ein Spanischkurs A1 aus Spanien, in einer experimentellen Version. Die Oberfläche ist auf Englisch, Spanisch, Französisch, Deutsch, Russisch, Hindi und Arabisch übersetzt. Weitere Kurse sind geplant; Französisch und Deutsch kommen als Nächstes.
+Der Englischkurs (amerikanisch und britisch, Niveaus A1 bis B2) ist heute verfügbar, ebenso der neue Russischkurs von A1 bis B2, aus der russischen Kultur heraus geschrieben; die Bewertung auf Russisch braucht eine Verbindung. Neu ist auch ein Spanischkurs A1 aus Spanien, in einer experimentellen Version. Die Oberfläche ist auf Englisch, Spanisch, Französisch, Deutsch, Russisch, Hindi und Arabisch übersetzt. Weitere Kurse sind geplant; Französisch und Deutsch kommen als Nächstes.
 
 IDEAL FÜR
 - Lernende, die beim Englischsprechen verstanden werden wollen
