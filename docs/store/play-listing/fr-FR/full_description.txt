@@ -5,10 +5,10 @@ POURQUOI GLOSSO
 - Anglais américain ou britannique : choisissez votre accent, tout le cours suit
 - À vous : écoutez une réplique et répondez de mémoire, en anglais
 - Révision au bon moment : les phrases que vous avez dites reviennent quelques jours plus tard
-- Nouveau : un cours de russe de A1 à B2 construit à partir de la culture russe, avec des notes culturelles dans chaque leçon
+- Nouveau : un cours de russe de A1 à B2 construit à partir de la culture russe, avec des notes culturelles dans chaque leçon (expérimental)
 - Nouveau : un cours d'espagnol A1 d'Espagne, dans une première version expérimentale
 - Prononciation notée mot par mot et son par son (API)
-- Notation sur l'appareil : téléchargez le modèle et pratiquez hors ligne
+- Notation sur l'appareil pour l'anglais : téléchargez le modèle et pratiquez hors ligne
 - Privé par conception : sans publicité ni traceurs tiers
 
 * DES LEÇONS QUI FONT PARLER
@@ -27,13 +27,13 @@ Parlez et recevez une note pour chaque mot et chaque son. Voyez exactement quel 
 Les phrases que vous avez dites reviennent dans les leçons suivantes : le lendemain, quelques jours après, puis quelques semaines après. C'est ainsi qu'elles restent.
 
 * PRIVÉ ET HORS LIGNE
-Glosso peut noter votre voix sur votre appareil. Téléchargez le modèle une fois et pratiquez sans connexion : en avion, dans le métro, à la maison. Dans la bêta actuelle, la notation peut passer par notre serveur, et l'application vous en informe. Votre audio sert uniquement à noter votre tentative : jamais vendu, jamais utilisé pour la publicité.
+Par défaut, vos prises sont notées sur le serveur de Glosso. Pour l'anglais, vous pouvez télécharger le modèle une fois (environ 350 Mo) et chaque prise est notée sur votre téléphone, sans connexion : en avion, dans le métro, à la maison. Votre audio sert uniquement à noter votre tentative : jamais vendu, jamais utilisé pour la publicité.
 
 * VOTRE PROGRESSION
 Voyez quels sons vous maîtrisez et lesquels demandent du travail, avec votre propre tendance dans le temps, des séries quotidiennes et des succès.
 
 * LANGUES
-Le cours d'anglais (américain et britannique, niveaux A1 à B2) est disponible aujourd'hui, tout comme le nouveau cours de russe, de A1 à B2, écrit à partir de la culture russe ; la notation en russe demande une connexion. Un cours d'espagnol A1 d'Espagne est aussi nouveau, en version expérimentale. L'interface est traduite en anglais, espagnol, français, allemand, russe, hindi et arabe. D'autres cours sont prévus ; le français et l'allemand arrivent ensuite.
+Anglais (américain et britannique) : plus de 220 leçons de A1 à B2. Russe : plus de 180 leçons de A1 à B2, écrites à partir de la culture russe, encore expérimental. Espagnol d'Espagne : 20 leçons de niveau A1, expérimental. La notation en russe et en espagnol demande une connexion. L'interface est traduite en anglais, espagnol, français, allemand, russe, hindi et arabe. D'autres cours sont prévus ; le français et l'allemand arrivent ensuite.
 
 IDÉAL POUR
 - Ceux qui veulent être compris quand ils parlent anglais
@@ -42,4 +42,4 @@ IDÉAL POUR
 - Les immigrés et expatriés qui s'adaptent à un nouveau pays
 - Les enseignants et tuteurs de prononciation ou d'accent
 
-Glosso est en bêta ouverte et gratuit pendant sa croissance. Téléchargez-le et parlez avec plus d'assurance : un retour honnête et privé, sur votre téléphone.
+Glosso est gratuit pour tous, sans publicité ni version payante, et open source. Téléchargez-le et parlez avec plus d'assurance : un retour honnête et privé, sur votre téléphone.

@@ -19,10 +19,12 @@ you speak and tells you exactly which sounds you pronounce wrong. No ads, no sub
 Glosso is a language course that measures your pronunciation for real. It listens to each take,
 recognizes the sounds you actually made, compares them with the expected ones and tells you
 exactly which sound to fix. On Android, and in the browser as an installable web app (iPhone, desktop).
-Languages: English (British and American), French, German and Russian.
+Courses: English (British and American, A1 to B2), Russian (A1 to B2) and Spanish (A1); Russian
+and Spanish are still experimental.
 
 The same phonetic engine runs on the phone (offline, ONNX Runtime) and on the server, so a
-take gets the same score in both places.
+take gets the same score in both places. Offline scoring covers English; Russian and Spanish
+are scored on the server.
 
 Glosso is free for everyone, with no paid tier. Support is a voluntary donation.
 

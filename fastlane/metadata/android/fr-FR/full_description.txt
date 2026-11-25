@@ -1,13 +1,13 @@
 Glosso est un cours de langues qui mesure vraiment votre prononciation. Il écoute chaque essai, reconnaît les sons que vous avez réellement produits, les compare aux sons attendus et vous dit exactement quel son corriger.
 
-Cours : anglais (britannique et américain), ainsi que russe et espagnol en cours expérimentaux pour débutants.
+Cours : anglais (britannique et américain, de A1 à B2), russe (de A1 à B2) et espagnol (A1). Le russe et l'espagnol sont encore expérimentaux.
 
 <b>Ce que vous obtenez</b>
 <ul>
 <li>Des leçons avec dialogues, histoires, vocabulaire et exercices, avec audio.</li>
 <li>Une correction de la prononciation son par son : parfait, proche ou manqué, avec le son produit à côté du son attendu.</li>
 <li>Une révision espacée des mots et des sons les plus difficiles pour vous.</li>
-<li>Une évaluation hors ligne facultative : téléchargez le modèle (environ 350 Mo) ou importez-le depuis un fichier, et chaque essai est évalué sur le téléphone avec le même moteur que le serveur.</li>
+<li>Une évaluation hors ligne facultative pour l'anglais : téléchargez le modèle (environ 350 Mo) ou importez-le depuis un fichier, et chaque essai est évalué sur le téléphone avec le même moteur que le serveur.</li>
 <li>Des leçons téléchargeables pour étudier sans connexion.</li>
 </ul>
 

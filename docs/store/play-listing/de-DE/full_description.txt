@@ -5,10 +5,10 @@ WARUM GLOSSO
 - Amerikanisches oder britisches Englisch: Du wählst den Akzent, der ganze Kurs folgt
 - Du bist dran: Hör einen Satz und antworte aus dem Kopf, auf Englisch
 - Wiederholung zur richtigen Zeit: Gesagte Sätze kommen Tage später zurück
-- Neu: ein Russischkurs von A1 bis B2 aus der russischen Kultur heraus, mit Kulturnotizen in jeder Lektion
+- Neu: ein Russischkurs von A1 bis B2 aus der russischen Kultur heraus, mit Kulturnotizen in jeder Lektion (experimentell)
 - Neu: ein Spanischkurs A1 aus Spanien, in einer ersten experimentellen Version
 - Aussprache bewertet Wort für Wort und Laut für Laut (IPA)
-- Bewertung auf dem Gerät: Modell herunterladen und offline üben
+- Bewertung auf dem Gerät für Englisch: Modell herunterladen und offline üben
 - Privat von Grund auf: keine Werbung und keine Tracker von Dritten
 
 * LEKTIONEN, DIE DICH ZUM SPRECHEN BRINGEN
@@ -27,13 +27,13 @@ Sprich und erhalte eine Bewertung für jedes Wort und jeden Laut. Sieh genau, we
 Die Sätze, die du gesagt hast, kommen in späteren Lektionen zurück: nach einem Tag, nach einigen Tagen, dann nach Wochen. So bleiben sie.
 
 * PRIVAT UND OFFLINE
-Glosso kann deine Stimme auf deinem Gerät bewerten. Lade das Modell einmal herunter und übe ohne Verbindung: im Flugzeug, in der U-Bahn, zu Hause. In der aktuellen Beta kann die Bewertung stattdessen über unseren Server laufen, und die App sagt es dir. Dein Audio wird nur zur Bewertung deines Versuchs genutzt: nie verkauft, nie für Werbung verwendet.
+Standardmäßig werden deine Aufnahmen auf Glossos eigenem Server bewertet. Für Englisch kannst du das Modell einmal herunterladen (etwa 350 MB), dann wird jede Aufnahme auf deinem Handy bewertet, ohne Verbindung: im Flugzeug, in der U-Bahn, zu Hause. Dein Audio wird nur zur Bewertung deines Versuchs genutzt: nie verkauft, nie für Werbung verwendet.
 
 * DEIN FORTSCHRITT
 Sieh, welche Laute du beherrschst und welche Arbeit brauchen, mit deinem eigenen Trend über die Zeit, täglichen Serien und Erfolgen.
 
 * SPRACHEN
-Der Englischkurs (amerikanisch und britisch, Niveaus A1 bis B2) ist heute verfügbar, ebenso der neue Russischkurs von A1 bis B2, aus der russischen Kultur heraus geschrieben; die Bewertung auf Russisch braucht eine Verbindung. Neu ist auch ein Spanischkurs A1 aus Spanien, in einer experimentellen Version. Die Oberfläche ist auf Englisch, Spanisch, Französisch, Deutsch, Russisch, Hindi und Arabisch übersetzt. Weitere Kurse sind geplant; Französisch und Deutsch kommen als Nächstes.
+Englisch (amerikanisch und britisch): über 220 Lektionen von A1 bis B2. Russisch: über 180 Lektionen von A1 bis B2, aus der russischen Kultur heraus geschrieben, noch experimentell. Spanisch aus Spanien: 20 Lektionen auf A1, experimentell. Die Bewertung auf Russisch und Spanisch braucht eine Verbindung. Die Oberfläche ist auf Englisch, Spanisch, Französisch, Deutsch, Russisch, Hindi und Arabisch übersetzt. Weitere Kurse sind geplant; Französisch und Deutsch kommen als Nächstes.
 
 IDEAL FÜR
 - Lernende, die beim Englischsprechen verstanden werden wollen
@@ -42,4 +42,4 @@ IDEAL FÜR
 - Zugewanderte und Expats, die sich in einem neuen Land einleben
 - Lehrkräfte und Tutoren für Aussprache oder Akzenttraining
 
-Glosso ist in der offenen Beta und kostenlos, solange es wächst. Lade es herunter und sprich mit mehr Selbstvertrauen: ehrliches, privates Feedback auf deinem Handy.
+Glosso ist kostenlos für alle, ohne Werbung und ohne Bezahlversion, und Open Source. Lade es herunter und sprich mit mehr Selbstvertrauen: ehrliches, privates Feedback auf deinem Handy.

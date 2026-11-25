@@ -6,8 +6,8 @@ POR QUÉ GLOSSO
 - Tu turno: escuchas una frase y respondes de memoria, en inglés
 - Pronunciación puntuada palabra por palabra y sonido a sonido (IPA)
 - Repaso en el momento justo: las frases que dijiste vuelven días después
-- Puntuación en el dispositivo: descarga el modelo y practica sin conexión
-- Nuevo: un curso de ruso de A1 a B2 hecho desde la cultura rusa, con notas de cultura en cada lección
+- Puntuación en el dispositivo para inglés: descarga el modelo y practica sin conexión
+- Nuevo: un curso de ruso de A1 a B2 hecho desde la cultura rusa, con notas de cultura en cada lección (experimental)
 - Nuevo: un curso de español A1 de España, en una primera versión experimental
 - Privado por diseño: sin anuncios ni rastreadores de terceros
 
@@ -27,13 +27,13 @@ Habla y recibe una nota por cada palabra y cada sonido. Ves exactamente qué son
 Las frases que dijiste vuelven en lecciones posteriores: al día siguiente, a los pocos días y a las semanas. Así se quedan.
 
 * PRIVADO Y SIN CONEXIÓN
-Glosso puede puntuar tu voz en tu dispositivo. Descarga el modelo una vez y practica sin conexión: en un avión, en el metro, en casa. En la beta actual la puntuación puede usar nuestro servidor, y la app te avisa. Tu audio solo se usa para puntuar tu intento: nunca se vende ni se usa para anuncios.
+Por defecto tus tomas se puntúan en el servidor propio de Glosso. Para inglés puedes descargar el modelo una vez (unos 350 MB) y cada toma se puntúa en tu móvil, sin conexión: en un avión, en el metro, en casa. Tu audio solo se usa para puntuar tu intento: nunca se vende ni se usa para anuncios.
 
 * TU PROGRESO
 Ves qué sonidos dominas y cuáles necesitan trabajo, con tu propia tendencia en el tiempo, rachas diarias y logros.
 
 * IDIOMAS
-El curso de inglés (americano y británico, niveles A1 a B2) está disponible hoy, y también el nuevo curso de ruso, de A1 a B2, escrito desde la cultura rusa; para puntuar en ruso hace falta conexión. También es nuevo un curso de español A1 de España, en versión experimental. La interfaz está traducida a inglés, español, francés, alemán, ruso, hindi y árabe. Habrá más cursos: francés y alemán son los siguientes.
+Inglés (americano y británico): más de 220 lecciones de A1 a B2. Ruso: más de 180 lecciones de A1 a B2, escritas desde la cultura rusa, todavía experimental. Español de España: 20 lecciones de A1, experimental. Para puntuar en ruso y en español hace falta conexión. La interfaz está traducida a inglés, español, francés, alemán, ruso, hindi y árabe. Habrá más cursos: francés y alemán son los siguientes.
 
 IDEAL PARA
 - Quien quiere que se le entienda al hablar inglés
@@ -42,4 +42,4 @@ IDEAL PARA
 - Inmigrantes y expatriados que se adaptan a un país nuevo
 - Profesores y tutores de pronunciación o acento
 
-Glosso está en beta abierta y es gratis mientras crece. Descárgalo y empieza a hablar con más confianza: feedback honesto y privado, en tu móvil.
+Glosso es gratis para todos, sin anuncios ni versión de pago, y de código abierto. Descárgalo y empieza a hablar con más confianza: feedback honesto y privado, en tu móvil.

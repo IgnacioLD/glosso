@@ -5,10 +5,10 @@ WHY GLOSSO
 - American or British English: pick your accent and the whole course follows
 - Your turn: hear a line and answer from memory, in English
 - Drills on the sounds of each lesson, at normal and slow speed
-- New: a Russian course from A1 to B2, built from Russian culture, with culture notes in every lesson
+- New: a Russian course from A1 to B2, built from Russian culture, with culture notes in every lesson (experimental)
 - New: a Spanish A1 course from Spain, in an early experimental version
 - Pronunciation scored word by word and sound by sound (IPA)
-- On-device scoring: download the model and practice offline
+- On-device scoring for English: download the model and practice offline
 - Private by design: no ads and no third-party trackers
 
 * LESSONS THAT MAKE YOU SPEAK
@@ -27,13 +27,13 @@ Each drill pairs the sound with the one it gets confused with ("think" and "sink
 Speak and get a score for every word and every sound. See exactly which sound slipped, hear the reference again and try once more. When a recording cannot be judged, the app says so instead of giving you a low score.
 
 * PRIVATE AND OFFLINE
-Glosso can score your voice on your device. Download the model once and practice without a connection: on a plane, on the subway, at home. In the current beta, scoring may use our server instead, and the app tells you when. Your audio is used only to score your attempt: never sold, never used for ads.
+By default your takes are scored on Glosso's own server. For English you can download the model once (about 350 MB) and every take is scored on your phone, with no connection: on a plane, on the subway, at home. Your audio is used only to score your attempt: never sold, never used for ads.
 
 * YOUR PROGRESS
 See which sounds you have mastered and which need work, with your own trend over time, daily streaks and achievements.
 
 * LANGUAGES
-The English course (American and British, levels A1 to B2) is available today, and so is a new Russian course from A1 to B2, written from Russian culture; scoring Russian needs a connection. A Spanish A1 course from Spain is new too, in an experimental version. The app interface is translated into English, Spanish, French, German, Russian, Hindi and Arabic. More courses are planned; French and German come next.
+English (American and British): over 220 lessons from A1 to B2. Russian: over 180 lessons from A1 to B2, written from Russian culture, still experimental. Spanish from Spain: 20 A1 lessons, experimental. Scoring Russian and Spanish needs a connection. The app interface is translated into English, Spanish, French, German, Russian, Hindi and Arabic. More courses are planned; French and German come next.
 
 PERFECT FOR
 - Learners who want their spoken English to be understood
@@ -42,4 +42,4 @@ PERFECT FOR
 - Immigrants and expats adapting to a new country
 - Teachers and tutors of pronunciation or accent training
 
-Glosso is in open beta and free while it grows. Download it and start speaking with more confidence: honest, private feedback, on your phone.
+Glosso is free for everyone, with no ads and no paid tier, and it is open source. Download it and start speaking with more confidence: honest, private feedback, on your phone.
