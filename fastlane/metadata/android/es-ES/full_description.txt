@@ -1,13 +1,13 @@
 Glosso es un curso de idiomas que mide tu pronunciación de verdad. Escucha cada intento, reconoce los sonidos que has hecho de verdad, los compara con los esperados y te dice exactamente qué sonido corregir.
 
-Cursos: inglés (británico y americano), además de ruso y español como cursos experimentales de nivel inicial.
+Cursos: inglés (británico y americano, de A1 a B2), ruso (de A1 a B2) y español (A1). Ruso y español son todavía experimentales.
 
 <b>Qué incluye</b>
 <ul>
 <li>Lecciones con diálogos, historias, vocabulario y ejercicios, con audio.</li>
 <li>Corrección de la pronunciación por sonido: perfecto, cerca o fallado, con el sonido que hiciste junto al esperado.</li>
 <li>Repaso espaciado de las palabras y los sonidos que más te cuestan.</li>
-<li>Puntuación sin conexión opcional: descarga el modelo (unos 350 MB) o impórtalo desde un archivo, y cada intento se puntúa en el móvil con el mismo motor que usa el servidor.</li>
+<li>Puntuación sin conexión opcional para inglés: descarga el modelo (unos 350 MB) o impórtalo desde un archivo, y cada intento se puntúa en el móvil con el mismo motor que usa el servidor.</li>
 <li>Descarga lecciones para estudiar sin conexión.</li>
 </ul>
 
