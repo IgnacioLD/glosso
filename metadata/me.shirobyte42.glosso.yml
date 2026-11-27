@@ -4,6 +4,12 @@
 # behind every field (and why there is no TetheredNet: Settings > Advanced >
 # Server points the app at any self-hosted instance). Before submitting: tag the release, put its full commit
 # hash in `commit`, and check versionName/versionCode match androidApp/build.gradle.kts.
+# Developer-signed reproducible build: F-Droid rebuilds unsigned, copies the
+# signature from the APK at `Binaries`, and publishes ours only if it verifies.
+AntiFeatures:
+  NonFreeAssets:
+    en-US: The lesson texts and audio, downloaded from the Glosso server, are not
+      under a free licence.
 Categories:
   - Science & Education
 License: AGPL-3.0-or-later
@@ -15,19 +21,22 @@ AutoName: Glosso
 
 RepoType: git
 Repo: https://github.com/IgnacioLD/glosso.git
+Binaries: https://github.com/IgnacioLD/glosso/releases/download/v%v/glosso-%v-fdroid.apk
 
 Builds:
   - versionName: 2.5.5
     versionCode: 2227
     commit: v2.5.5
     subdir: androidApp
-    rm:
-      - shared/src/wasmJsMain/resources/stb_vorbis.wasm
     gradle:
       - fdroid
+    rm:
+      - shared/src/wasmJsMain/resources/stb_vorbis.wasm
     gradleprops:
       - glosso.ios=false
       - glosso.web=false
+
+AllowedAPKSigningKeys: e1cce8e8b8801e8b3ec90df840b6f80c99248d68b9c276bf79e8ead0f310c984
 
 AutoUpdateMode: Version
 UpdateCheckMode: Tags
