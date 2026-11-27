@@ -169,6 +169,15 @@ data class LessonState(
         get() = dialogue != null || story != null || article != null
 
     /**
+     * Where opening the lesson [lessonId] starts, whatever screen opens it: the
+     * step it was left at when it is the lesson in progress, otherwise its start.
+     * A finished lesson has nothing saved (reaching SUMMARY clears it), and a
+     * step this build does not know was already read back as BASE.
+     */
+    fun startStepFor(lessonId: String): LessonStep =
+        if (lessonId == resumeLessonId && resumeStep != LessonStep.SUMMARY) resumeStep else LessonStep.BASE
+
+    /**
      * True while the pronunciation step has no drill to show but may still be
      * loading one. The base load counts too: opening straight into DRILLS leaves
      * `loading` set while its plan is still pending, and that must not read as a
@@ -375,8 +384,11 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         }
     }
 
-    /** Fetches everything the lesson needs: its base, its exercises, its words. */
-    fun openLesson(lesson: LessonModel, startStep: LessonStep = LessonStep.BASE) {
+    /**
+     * Fetches everything the lesson needs: its base, its exercises, its words.
+     * By default it opens where the learner left it (see [LessonState.startStepFor]).
+     */
+    fun openLesson(lesson: LessonModel, startStep: LessonStep = _state.value.startStepFor(lesson.id)) {
         // A retry reopens the same lesson; only a new one is a start.
         val reopening = _state.value.active?.id == lesson.id
         if (!reopening) {
@@ -499,14 +511,6 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
                 UsageEvents.appError("content_failed", "lesson", e)
             }
         }
-    }
-
-    fun resume() {
-        val id = _state.value.resumeLessonId ?: return
-        val step = _state.value.resumeStep
-        if (step == LessonStep.SUMMARY) return
-        val lesson = _state.value.lessons.firstOrNull { it.id == id } ?: return
-        openLesson(lesson, startStep = step)
     }
 
     fun closeLesson() {
