@@ -220,12 +220,7 @@ fun LessonsScreen(
                         today != null && today.id != first?.id -> Res.string.lessons_next_kicker
                         else -> Res.string.lessons_start_kicker
                     }
-                    val openToday: () -> Unit = {
-                        when {
-                            resumeStep != null -> vm.resume()
-                            else -> today?.let { vm.openLesson(it) }
-                        }
-                    }
+                    val openToday: () -> Unit = { today?.let { vm.openLesson(it) } }
 
                     // Measure the real layout, not the item index: item 0 is
                     // exactly the hero card, so the bar shows precisely once that

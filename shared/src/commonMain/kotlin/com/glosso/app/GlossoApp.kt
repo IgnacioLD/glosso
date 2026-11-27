@@ -226,7 +226,7 @@ fun GlossoApp() {
             Reopen.GiveUp -> lessonToRestore = null
             is Reopen.Open -> {
                 lessonToRestore = null
-                if (lessonState.resumeLessonId == id) lessonVm.resume() else lessonVm.openLesson(reopen.item)
+                lessonVm.openLesson(reopen.item)
             }
         }
     }
@@ -348,10 +348,7 @@ fun GlossoApp() {
     }
     val startTodayLesson: () -> Unit = {
         shell = shell.openLessons()
-        when {
-            today.resumable -> lessonVm.resume()
-            else -> today.lesson?.let { lessonVm.openLesson(it) }
-        }
+        today.lesson?.let { lessonVm.openLesson(it) }
     }
     val browseLessons: () -> Unit = {
         shell = shell.openLessons()
