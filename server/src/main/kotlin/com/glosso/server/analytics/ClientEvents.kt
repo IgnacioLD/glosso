@@ -105,7 +105,12 @@ object ClientEvents {
         "flow_abandoned" to mapOf("flow" to Id, "step" to Id, "reason" to Id),
         "mic_permission_denied" to mapOf("flow" to Id),
         "screen_view" to mapOf("screen" to SCREEN),
-        "lesson_step" to mapOf("lesson_id" to Id, "step" to LESSON_STEP),
+        "lesson_step" to mapOf(
+            "lesson_id" to Id,
+            "step" to LESSON_STEP,
+            // How a lesson reached its drills when it skipped steps on the way.
+            "via" to OneOf(setOf("shortcut", "pronunciation_only")),
+        ),
         "audio_played" to mapOf(
             "source" to OneOf(setOf("drill", "line", "partner", "piece", "word", "story", "example", "take")),
             "speed" to OneOf(setOf("normal", "slow")),
@@ -118,7 +123,10 @@ object ClientEvents {
         "story_closed" to mapOf("story_id" to Id, "read_pct" to Count(100)),
         "setting_changed" to mapOf(
             "setting" to OneOf(
-                setOf("target_language", "accent", "ui_language", "phonetics", "translations", "reminder", "wifi_only", "sounds"),
+                setOf(
+                    "target_language", "accent", "ui_language", "phonetics", "translations", "reminder", "wifi_only",
+                    "sounds", "pronunciation_only",
+                ),
             ),
             "value" to Id,
             "enabled" to Bool,

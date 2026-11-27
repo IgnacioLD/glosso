@@ -29,6 +29,22 @@ class ClientEventsTest {
     }
 
     @Test
+    fun `a jump to pronunciation keeps how it got there`() {
+        fun via(value: String) = ClientEvents.sanitize(
+            "lesson_step",
+            buildJsonObject {
+                put("lesson_id", JsonPrimitive("es.lesson.a1.01"))
+                put("step", JsonPrimitive("drills"))
+                put("via", JsonPrimitive(value))
+            },
+        )?.keys
+
+        assertEquals(setOf("lesson_id", "step", "via"), via("shortcut"))
+        assertEquals(setOf("lesson_id", "step", "via"), via("pronunciation_only"))
+        assertEquals(setOf("lesson_id", "step"), via("somewhere"))
+    }
+
+    @Test
     fun `a screen outside the list is not a screen`() {
         assertEquals(
             "settings",

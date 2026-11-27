@@ -115,6 +115,8 @@
     <string name="lessons_summary_high">Ваше произношение становится лучше. Попробуйте урок посложнее.</string>
     <string name="lessons_summary_keep">Возвращайтесь завтра: звук закрепляется повторением.</string>
     <string name="lessons_summary_read">Вы прочитали текст и выполнили упражнения. Произношением займёмся в следующий раз.</string>
+    <string name="lessons_summary_drills_skipped">В этот раз вы пропустили все упражнения на произношение. Вернитесь к ним, когда захотите.</string>
+    <string name="lessons_go_to_drills">К произношению</string>
     <string name="lessons_all">Все</string>
     <string name="lessons_pick_level">Выбрать уровень</string>
     <string name="lessons_level">Уровень</string>
@@ -508,6 +510,8 @@
     <string name="settings_sounds">Звуки</string>
     <string name="settings_sounds_desc">Короткие звуки при верном и неверном ответе, в конце урока и при новых достижениях.</string>
     <string name="settings_sounds_toggle">Включить звуки</string>
+    <string name="settings_pronunciation_only">Только произношение</string>
+    <string name="settings_pronunciation_only_desc">Уроки открываются сразу на произношении, без текста, упражнений и «Вашей очереди».</string>
     <string name="translation_show">Показать перевод</string>
     <string name="translation_hide">Скрыть перевод</string>
     <string name="practice_work_on_plain">Над звуком стоит поработать</string>

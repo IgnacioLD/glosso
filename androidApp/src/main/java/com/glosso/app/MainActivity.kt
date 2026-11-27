@@ -28,6 +28,7 @@ class MainActivity : ComponentActivity() {
         alignDefaultLocales(this)
         LanguagePreferences.init(applicationContext)
         PhoneticsPreferences.init(applicationContext)
+        PronunciationOnlyPreference.init(applicationContext)
         TranslationPreferences.init(applicationContext)
         UiLanguage.init(applicationContext)
         OnboardingStore.init(applicationContext)

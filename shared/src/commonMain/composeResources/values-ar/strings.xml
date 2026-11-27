@@ -122,6 +122,8 @@
     <string name="lessons_summary_high">نطقك يتحسن. جرّب درسًا أصعب.</string>
     <string name="lessons_summary_keep">عُد غدًا، فالتكرار هو ما يثبّت الصوت.</string>
     <string name="lessons_summary_read">قرأت النص وحللت التمارين. تمارين النطق تنتظرك في المرة القادمة.</string>
+    <string name="lessons_summary_drills_skipped">تخطيت كل تمارين النطق هذه المرة. عد إليها متى شئت.</string>
+    <string name="lessons_go_to_drills">انتقل إلى النطق</string>
     <string name="lessons_all">الكل</string>
     <string name="lessons_pick_level">اختر المستوى</string>
     <string name="lessons_level">المستوى</string>
@@ -533,6 +535,8 @@
     <string name="settings_sounds">الأصوات</string>
     <string name="settings_sounds_desc">أصوات قصيرة عند الإجابة الصحيحة أو الخاطئة، وعند إنهاء درس، وعند تحقيق إنجاز.</string>
     <string name="settings_sounds_toggle">تشغيل الأصوات</string>
+    <string name="settings_pronunciation_only">النطق فقط</string>
+    <string name="settings_pronunciation_only_desc">تبدأ الدروس مباشرة بالنطق، دون القصة والتمارين و«دورك».</string>
     <string name="translation_show">إظهار الترجمة</string>
     <string name="translation_hide">إخفاء الترجمة</string>
     <string name="practice_work_on_plain">صوت يحتاج إلى تدريب</string>

@@ -51,23 +51,54 @@ enum class LessonStep { REVIEW, CONTEXT, BASE, EXERCISES, SPEAK, DRILLS, SUMMARY
 /** True for the steps where a phrase is said from memory. */
 val LessonStep.fromMemory: Boolean get() = this == LessonStep.REVIEW || this == LessonStep.SPEAK
 
-/** The steps a lesson really has, in order. */
-fun lessonSteps(hasSpeak: Boolean, hasReview: Boolean = false, hasContext: Boolean = false): List<LessonStep> =
+/** The steps before pronunciation that its shortcut can jump from. */
+val LessonStep.canJumpToDrills: Boolean get() = this > LessonStep.REVIEW && this < LessonStep.DRILLS
+
+/**
+ * The steps a lesson really has, in order. [skippedAfter] is the last step
+ * taken before jumping straight to pronunciation (the shortcut, or REVIEW for
+ * the "pronunciation only" setting): the steps between it and DRILLS were not
+ * taken and are not shown.
+ */
+fun lessonSteps(
+    hasSpeak: Boolean,
+    hasReview: Boolean = false,
+    hasContext: Boolean = false,
+    skippedAfter: LessonStep? = null,
+): List<LessonStep> =
     LessonStep.entries.filter { step ->
-        when (step) {
+        val present = when (step) {
             LessonStep.REVIEW -> hasReview
             LessonStep.CONTEXT -> hasContext
             LessonStep.SPEAK -> hasSpeak
             else -> true
         }
+        present && (skippedAfter == null || step <= skippedAfter || step >= LessonStep.DRILLS)
     }
+
+/**
+ * Where a lesson opens. From its start it first asks back what is [due], then
+ * sets the scene with its notes; resumed half-way it goes straight to where it
+ * was. [pronunciationOnly] skips everything before DRILLS except the review:
+ * the due phrases are said aloud too, and they are the only place earlier
+ * lessons come back.
+ */
+fun firstLessonStep(startStep: LessonStep, due: Boolean, hasNotes: Boolean, pronunciationOnly: Boolean): LessonStep {
+    val fromStart = startStep <= LessonStep.BASE
+    return when {
+        fromStart && due -> LessonStep.REVIEW
+        pronunciationOnly && startStep < LessonStep.DRILLS -> LessonStep.DRILLS
+        fromStart && hasNotes -> LessonStep.CONTEXT
+        else -> startStep.coerceAtLeast(LessonStep.BASE)
+    }
+}
 
 /**
  * The steps of a lesson seen from the list, before its content is loaded: a
  * dialogue lesson is assumed to have its speaking step.
  */
-fun lessonSteps(lesson: LessonModel): List<LessonStep> =
-    lessonSteps(hasSpeak = lesson.dialogueId != null, hasContext = lesson.notes.isNotEmpty())
+fun lessonSteps(lesson: LessonModel, skippedAfter: LessonStep? = null): List<LessonStep> =
+    lessonSteps(hasSpeak = lesson.dialogueId != null, hasContext = lesson.notes.isNotEmpty(), skippedAfter = skippedAfter)
 
 data class LessonState(
     val loading: Boolean = false,
@@ -85,6 +116,15 @@ data class LessonState(
     /** Lesson and step to offer under "Continue", restored across launches. */
     val resumeLessonId: String? = null,
     val resumeStep: LessonStep = LessonStep.BASE,
+    /** The saved [skippedAfter] of the lesson to resume. */
+    val resumeSkippedAfter: LessonStep? = null,
+    /**
+     * The last step taken before jumping straight to pronunciation, or null when
+     * the lesson follows its whole flow. See [lessonSteps].
+     */
+    val skippedAfter: LessonStep? = null,
+    /** True once this lesson's drill plan came back empty: there is no pronunciation to jump to. */
+    val noDrills: Boolean = false,
     val dialogue: DialogueModel? = null,
     val story: StoryModel? = null,
     val article: ArticleModel? = null,
@@ -163,7 +203,24 @@ data class LessonState(
                 hasSpeak = hasSpeak,
                 hasReview = reviewCards.isNotEmpty(),
                 hasContext = active?.notes?.isNotEmpty() == true,
+                skippedAfter = skippedAfter,
             )
+        }
+
+    /** True when the "go to pronunciation" shortcut is offered on the current step. */
+    val canJumpToDrills: Boolean
+        get() = active != null && baseReady && !noDrills && step.canJumpToDrills
+
+    /**
+     * Where a lesson that jumped to pronunciation goes back to when it turns out
+     * to have no drills: the step it jumped from, or the first step of the
+     * normal flow after the review for the setting. Null when nothing jumped.
+     */
+    val drillsFallback: LessonStep?
+        get() {
+            val from = skippedAfter ?: return null
+            if (step != LessonStep.DRILLS) return null
+            return if (from.canJumpToDrills) from else copy(skippedAfter = null).steps.first { it > LessonStep.REVIEW }
         }
     val baseReady: Boolean
         get() = dialogue != null || story != null || article != null
@@ -257,6 +314,7 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         _state.value = _state.value.copy(
             resumeLessonId = snapshot.resumeLessonId,
             resumeStep = savedStep ?: LessonStep.BASE,
+            resumeSkippedAfter = savedSkippedAfter(progress.getString(ProgressKeys.LESSON_SKIPPED_AFTER)),
             // Open in the level the learner actually left: the lesson still in
             // progress wins, then the level they picked by hand, then the level
             // of the last finished lesson. Never blindly back to A1.
@@ -386,9 +444,15 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
 
     /**
      * Fetches everything the lesson needs: its base, its exercises, its words.
-     * By default it opens where the learner left it (see [LessonState.startStepFor]).
+     * By default it opens where the learner left it (see [LessonState.startStepFor]);
+     * [skippedAfter] carries a saved jump to pronunciation into the lesson resumed there.
      */
-    fun openLesson(lesson: LessonModel, startStep: LessonStep = _state.value.startStepFor(lesson.id)) {
+    fun openLesson(
+        lesson: LessonModel,
+        startStep: LessonStep = _state.value.startStepFor(lesson.id),
+        skippedAfter: LessonStep? = _state.value.resumeSkippedAfter
+            .takeIf { lesson.id == _state.value.resumeLessonId && startStep != LessonStep.BASE },
+    ) {
         // A retry reopens the same lesson; only a new one is a start.
         val reopening = _state.value.active?.id == lesson.id
         if (!reopening) {
@@ -397,26 +461,29 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         }
         viewModelScope.launch {
             engine.clearResult()
-            // A lesson opened from its start first asks back what is due from
-            // earlier ones, then sets the scene with its notes; resumed half-way,
-            // it goes straight to where it was.
             val fromStart = startStep <= LessonStep.BASE
             val due = if (fromStart) {
                 inCurrentWording(recall.due(LanguagePreferences.current.code, platform.uiLanguage))
             } else {
                 emptyList()
             }
-            val first = when {
-                due.isNotEmpty() -> LessonStep.REVIEW
-                fromStart && lesson.notes.isNotEmpty() -> LessonStep.CONTEXT
-                else -> startStep.coerceAtLeast(LessonStep.BASE)
+            PronunciationOnlyPreference.init(services.context)
+            val pronunciationOnly = PronunciationOnlyPreference.enabled.value && startStep < LessonStep.DRILLS
+            val first = firstLessonStep(startStep, due.isNotEmpty(), lesson.notes.isNotEmpty(), pronunciationOnly)
+            if (!reopening || _state.value.step != first) {
+                trackStep(lesson.id, first, via = if (first == LessonStep.DRILLS && pronunciationOnly) "pronunciation_only" else null)
             }
-            if (!reopening || _state.value.step != first) trackStep(lesson.id, first)
             _state.value = _state.value.copy(
                 loading = true,
                 error = null,
                 active = lesson,
                 step = first,
+                skippedAfter = when {
+                    pronunciationOnly -> LessonStep.REVIEW
+                    startStep >= LessonStep.DRILLS -> skippedAfter
+                    else -> null
+                },
+                noDrills = false,
                 reviewCards = due,
                 scheduledForReview = 0,
                 drills = emptyList(),
@@ -544,7 +611,7 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         val lesson = _state.value.active ?: return
         // Keep the step the lesson was opening at, so a lesson resumed in
         // drills/exercises does not fall back to the top on a retry.
-        openLesson(lesson, startStep = _state.value.step)
+        openLesson(lesson, startStep = _state.value.step, skippedAfter = _state.value.skippedAfter)
     }
 
     /** Downloads the open lesson so it can be studied with no connection. */
@@ -557,13 +624,13 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         viewModelScope.launch { services.onDevice.download(api) }
     }
 
-    fun stepTo(step: LessonStep) {
+    fun stepTo(step: LessonStep, via: String? = null) {
         val previous = _state.value.step
         piece.stop()
         engine.clearResult()
         _state.value = _state.value.copy(step = step)
         val active = _state.value.active
-        if (active != null && step != previous) trackStep(active.id, step)
+        if (active != null && step != previous) trackStep(active.id, step, via)
         if (step == LessonStep.SUMMARY && previous != LessonStep.SUMMARY) {
             active?.id?.let { ProgressStore.recordLesson(it) }
             FeedbackSounds.play(FeedbackCue.COMPLETE)
@@ -607,13 +674,23 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         }
     }
 
+    /** The quiet shortcut: leaves the current step for this lesson's pronunciation. */
+    fun jumpToDrills() {
+        val s = _state.value
+        if (!s.canJumpToDrills) return
+        _state.value = s.copy(skippedAfter = s.step)
+        stepTo(LessonStep.DRILLS, via = "shortcut")
+    }
+
     fun nextStep() {
         val current = _state.value.step
         // The first step this lesson has after the current one. Looking it up by
         // order, not by position in the list, keeps a step the lesson does not
         // have (a stale state) from restarting the lesson.
         val next = _state.value.steps.firstOrNull { it > current } ?: return
-        stepTo(next)
+        // Past the review, "pronunciation only" skips on to the drills.
+        val skipping = next == LessonStep.DRILLS && _state.value.skippedAfter == current
+        stepTo(next, via = if (skipping) "pronunciation_only" else null)
     }
 
     // ------------------------------------------------------------- your turn
@@ -655,8 +732,10 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         Analytics.track("recall_answered", mapOf("verdict" to verdict, "step" to step))
     }
 
-    private fun trackStep(lessonId: String, step: LessonStep) {
-        Analytics.track("lesson_step", mapOf("lesson_id" to lessonId, "step" to step.name.lowercase()))
+    /** [via] names a jump to pronunciation: "shortcut" or "pronunciation_only". */
+    private fun trackStep(lessonId: String, step: LessonStep, via: String? = null) {
+        val properties = mapOf("lesson_id" to lessonId, "step" to step.name.lowercase())
+        Analytics.track("lesson_step", if (via != null) properties + ("via" to via) else properties)
     }
 
     /**
@@ -830,7 +909,15 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
                 drillIndex = 0,
                 drillsLoading = false,
                 previousScore = null,
+                noDrills = drills.isEmpty(),
             )
+            // A jump to pronunciation that finds none goes back to the normal flow.
+            if (drills.isEmpty()) {
+                _state.value.drillsFallback?.let { back ->
+                    _state.value = _state.value.copy(skippedAfter = null)
+                    stepTo(back)
+                }
+            }
         }
     }
 
@@ -936,13 +1023,14 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         orderedLevels(OfflineStore.state.value.metas.map { it.level })
 
     private fun saveProgress(lessonId: String, step: LessonStep, lessonLevel: String) {
-        saveLessonProgress(progress, lessonId, step, lessonLevel)
-        _state.value = _state.value.copy(resumeLessonId = lessonId, resumeStep = step)
+        val skippedAfter = _state.value.skippedAfter
+        saveLessonProgress(progress, lessonId, step, lessonLevel, skippedAfter)
+        _state.value = _state.value.copy(resumeLessonId = lessonId, resumeStep = step, resumeSkippedAfter = skippedAfter)
     }
 
     private fun clearProgress() {
         clearLessonProgress(progress)
-        _state.value = _state.value.copy(resumeLessonId = null, resumeStep = LessonStep.BASE)
+        _state.value = _state.value.copy(resumeLessonId = null, resumeStep = LessonStep.BASE, resumeSkippedAfter = null)
     }
 
     override fun onCleared() {

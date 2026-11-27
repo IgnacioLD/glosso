@@ -41,6 +41,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -266,6 +267,7 @@ fun LessonsScreen(
                                         lesson = today,
                                         kicker = heroKicker,
                                         step = resumeStep,
+                                        skippedAfter = state.resumeSkippedAfter,
                                         onOpen = openToday,
                                     )
                                 }
@@ -290,7 +292,9 @@ fun LessonsScreen(
                                                 first = index == 0,
                                                 last = index == lessons.lastIndex,
                                                 finished = finished,
-                                                stepFraction = inProgressStep?.let { stepFraction(lessonSteps(lesson), it) },
+                                                stepFraction = inProgressStep?.let {
+                                                    stepFraction(lessonSteps(lesson, state.resumeSkippedAfter), it)
+                                                },
                                             ) {
                                                 LessonRow(
                                                     lesson = lesson,
@@ -406,6 +410,7 @@ private fun TodayHeroCard(
     lesson: LessonModel,
     kicker: StringResource,
     step: LessonStep?,
+    skippedAfter: LessonStep?,
     onOpen: () -> Unit,
 ) {
     LessonHeroSurface(
@@ -415,7 +420,7 @@ private fun TodayHeroCard(
         LessonHeroTitle(lesson.title, lesson.objective)
         if (step != null) {
             Spacer(Modifier.height(Space.x20))
-            LessonStepProgress(lessonSteps(lesson), step)
+            LessonStepProgress(lessonSteps(lesson, skippedAfter), step)
         }
         Spacer(Modifier.height(Space.x24))
         PrimaryButton(
@@ -739,7 +744,25 @@ private fun LessonPlayer(vm: LessonViewModel, modifier: Modifier = Modifier) {
         }
         if (!unavailable) {
             Spacer(Modifier.height(Space.x8))
-            LessonStepProgress(state.steps, state.step, Modifier.padding(horizontal = Space.gutter))
+            LessonStepProgress(
+                state.steps,
+                state.step,
+                Modifier.padding(horizontal = Space.gutter),
+                trailing = if (state.canJumpToDrills && !opening) {
+                    {
+                        // Caption-sized and flush with the gutter, so it sits on the
+                        // step caption's line without crowding it out.
+                        QuietTextButton(
+                            text = stringResource(Res.string.lessons_go_to_drills),
+                            onClick = { vm.jumpToDrills() },
+                            modifier = Modifier.offset(x = Space.x12),
+                            style = MaterialTheme.typography.labelMedium,
+                        )
+                    }
+                } else {
+                    null
+                },
+            )
         }
         Spacer(Modifier.height(Space.x16))
 
@@ -1383,9 +1406,12 @@ private fun SummaryStep(state: LessonState, onDebugReviewDue: () -> Unit) {
         } else {
             StaggeredAppear(index = 0) { RewardSeal(size = 96.dp) }
             Spacer(Modifier.height(Space.x8))
+            // A lesson that jumped to pronunciation and skipped every drill was
+            // not "read": say what really happened.
+            val jumped = state.skippedAfter != null
             StaggeredAppear(index = 1) {
                 Text(
-                    stringResource(Res.string.lessons_read),
+                    stringResource(if (jumped) Res.string.lessons_completed else Res.string.lessons_read),
                     style = MaterialTheme.typography.displaySmall,
                     color = MaterialTheme.colorScheme.onSurface,
                     textAlign = androidx.compose.ui.text.style.TextAlign.Center,
@@ -1394,7 +1420,7 @@ private fun SummaryStep(state: LessonState, onDebugReviewDue: () -> Unit) {
             Spacer(Modifier.height(Space.x12))
             StaggeredAppear(index = 2) {
                 Text(
-                    stringResource(Res.string.lessons_summary_read),
+                    stringResource(if (jumped) Res.string.lessons_summary_drills_skipped else Res.string.lessons_summary_read),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     textAlign = androidx.compose.ui.text.style.TextAlign.Center,
@@ -1424,13 +1450,19 @@ internal fun stepFraction(steps: List<LessonStep>, step: LessonStep): Float =
 
 /** "Step 2 of 5 · Exercises" over the step bar, counting only the steps the lesson has. */
 @Composable
-internal fun LessonStepProgress(steps: List<LessonStep>, step: LessonStep, modifier: Modifier = Modifier) {
+internal fun LessonStepProgress(
+    steps: List<LessonStep>,
+    step: LessonStep,
+    modifier: Modifier = Modifier,
+    trailing: (@Composable () -> Unit)? = null,
+) {
     val index = steps.indexOf(step).coerceAtLeast(0)
     LabelledSteps(
         current = index,
         total = steps.size,
         caption = stringResource(Res.string.lessons_step_progress, index + 1, steps.size, stepName(step)),
         modifier = modifier,
+        trailing = trailing,
     )
 }
 

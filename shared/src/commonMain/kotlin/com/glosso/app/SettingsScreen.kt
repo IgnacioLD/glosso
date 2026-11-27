@@ -299,6 +299,35 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
             }
 
             SectionBreak()
+            SectionLabel(stringResource(Res.string.lessons_title))
+            Spacer(Modifier.height(Space.x8))
+            Text(
+                stringResource(Res.string.settings_pronunciation_only_desc),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(Modifier.height(Space.x20))
+            val pronunciationOnly by PronunciationOnlyPreference.enabled.collectAsState()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    stringResource(Res.string.settings_pronunciation_only),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.weight(1f),
+                )
+                Switch(
+                    checked = pronunciationOnly,
+                    onCheckedChange = {
+                        PronunciationOnlyPreference.set(context, it)
+                        UsageEvents.settingChanged("pronunciation_only", it)
+                    },
+                )
+            }
+
+            SectionBreak()
             SectionLabel(stringResource(Res.string.settings_reminder))
             Spacer(Modifier.height(Space.x8))
             Text(

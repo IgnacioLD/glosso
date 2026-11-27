@@ -132,6 +132,8 @@
     <string name="lessons_summary_high">Your pronunciation is improving. Try a harder lesson.</string>
     <string name="lessons_summary_keep">Come back tomorrow: repetition is what fixes a sound.</string>
     <string name="lessons_summary_read">You read the base and did the exercises. Drills wait for next time.</string>
+    <string name="lessons_summary_drills_skipped">You skipped every drill this time. Come back to them whenever you like.</string>
+    <string name="lessons_go_to_drills">Go to pronunciation</string>
     <string name="lessons_all">All</string>
     <string name="lessons_pick_level">Pick level</string>
     <string name="lessons_level">Level</string>
@@ -536,6 +538,8 @@
     <string name="settings_sounds">Sounds</string>
     <string name="settings_sounds_desc">Short sounds for right and wrong answers, finished lessons and achievements.</string>
     <string name="settings_sounds_toggle">Play sounds</string>
+    <string name="settings_pronunciation_only">Pronunciation only</string>
+    <string name="settings_pronunciation_only_desc">Lessons open directly at pronunciation, skipping the story, exercises and your turn.</string>
     <string name="translation_show">Show translation</string>
     <string name="translation_hide">Hide translation</string>
     <string name="practice_work_on_plain">A sound needs work</string>
