@@ -14,6 +14,7 @@ const val PROGRESS_FILE = "glosso_progress"
 object ProgressKeys {
     const val LESSON_ID = "lesson_id"
     const val LESSON_STEP = "lesson_step"
+    const val LESSON_SKIPPED_AFTER = "lesson_skipped_after"
     const val RESUME_LEVEL = "resume_level"
     const val LEVEL = "level"
     const val LAST_COMPLETED_LEVEL = "last_completed_level"
@@ -42,17 +43,31 @@ fun readProgressSnapshot(prefs: KeyValueStore): ProgressSnapshot = ProgressSnaps
 fun savedLessonStep(name: String?): LessonStep? =
     name?.let { runCatching { LessonStep.valueOf(it) }.getOrNull() }?.coerceAtLeast(LessonStep.BASE)
 
-/** Stores the lesson in progress and its level. Never touches the learner's levels. */
+/** The saved step a lesson in progress jumped to pronunciation after, or null when it did not. */
+fun savedSkippedAfter(name: String?): LessonStep? =
+    name?.let { runCatching { LessonStep.valueOf(it) }.getOrNull() }
+
+/**
+ * Stores the lesson in progress and its level. Never touches the learner's
+ * levels. [skippedAfter] keeps a jump to pronunciation across launches, so the
+ * resumed lesson shows only the steps it took.
+ */
 fun saveLessonProgress(
     prefs: KeyValueStore,
     lessonId: String,
     step: LessonStep,
     lessonLevel: String,
+    skippedAfter: LessonStep? = null,
 ) {
     prefs.edit {
         putString(ProgressKeys.LESSON_ID, lessonId)
         putString(ProgressKeys.LESSON_STEP, step.name)
         putString(ProgressKeys.RESUME_LEVEL, lessonLevel)
+        if (skippedAfter != null) {
+            putString(ProgressKeys.LESSON_SKIPPED_AFTER, skippedAfter.name)
+        } else {
+            remove(ProgressKeys.LESSON_SKIPPED_AFTER)
+        }
     }
 }
 
@@ -69,6 +84,7 @@ fun clearLessonProgress(prefs: KeyValueStore) {
     prefs.edit {
         remove(ProgressKeys.LESSON_ID)
         remove(ProgressKeys.LESSON_STEP)
+        remove(ProgressKeys.LESSON_SKIPPED_AFTER)
         remove(ProgressKeys.RESUME_LEVEL)
     }
 }

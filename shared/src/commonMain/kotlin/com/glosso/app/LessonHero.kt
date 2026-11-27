@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -96,19 +97,35 @@ internal fun LessonHeroTitle(title: String, objective: String?) {
 
 /**
  * The lesson steps as segments (done and current filled) with one caption
- * naming where the learner is. Reads "where am I" at once.
+ * naming where the learner is. Reads "where am I" at once. [trailing] is an
+ * optional quiet action at the end of the caption line.
  */
 @Composable
-internal fun LabelledSteps(current: Int, total: Int, caption: String, modifier: Modifier = Modifier) {
+internal fun LabelledSteps(
+    current: Int,
+    total: Int,
+    caption: String,
+    modifier: Modifier = Modifier,
+    trailing: (@Composable () -> Unit)? = null,
+) {
     Column(modifier.fillMaxWidth()) {
         StepProgress(total = total, current = current)
         Spacer(Modifier.height(Space.x8))
-        Text(
-            text = caption,
-            style = MaterialTheme.typography.labelMedium,
-            color = GlossoColors.accentText,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
-        )
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                text = caption,
+                style = MaterialTheme.typography.labelMedium,
+                color = GlossoColors.accentText,
+                // Beside an action a long step name wraps instead of losing its end.
+                maxLines = if (trailing != null) 2 else 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(1f),
+            )
+            if (trailing != null) {
+                // The button keeps its full touch target but lends the line no
+                // height, so the step content never shifts when it comes and goes.
+                Box(Modifier.height(Space.x16).wrapContentHeight(unbounded = true)) { trailing() }
+            }
+        }
     }
 }

@@ -136,6 +136,8 @@
     <string name="lessons_summary_high">Deine Aussprache wird besser. Versuche eine schwierigere Lektion.</string>
     <string name="lessons_summary_keep">Komm morgen wieder: Wiederholung festigt einen Laut.</string>
     <string name="lessons_summary_read">Du hast die Basis gelesen und die Übungen gemacht. Die Ausspracheübungen warten aufs nächste Mal.</string>
+    <string name="lessons_summary_drills_skipped">Diesmal hast du alle Ausspracheübungen übersprungen. Komm zurück, wann immer du willst.</string>
+    <string name="lessons_go_to_drills">Zur Aussprache</string>
     <string name="lessons_all">Alle</string>
     <string name="lessons_pick_level">Stufe wählen</string>
     <string name="lessons_level">Stufe</string>
@@ -509,6 +511,8 @@
     <string name="settings_sounds">Töne</string>
     <string name="settings_sounds_desc">Kurze Töne bei richtigen und falschen Antworten, fertigen Lektionen und Erfolgen.</string>
     <string name="settings_sounds_toggle">Töne abspielen</string>
+    <string name="settings_pronunciation_only">Nur Aussprache</string>
+    <string name="settings_pronunciation_only_desc">Lektionen starten direkt bei der Aussprache, ohne Geschichte, Übungen und „Du bist dran“.</string>
     <string name="translation_show">Übersetzung anzeigen</string>
     <string name="translation_hide">Übersetzung ausblenden</string>
     <string name="practice_work_on_plain">Ein Laut braucht Übung</string>

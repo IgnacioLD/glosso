@@ -413,6 +413,7 @@ fun GlossoApp() {
                             GlossoDestination.TODAY -> TodayScreen(
                                 plan = today,
                                 step = lessonState.resumeStep.takeIf { today.resumable },
+                                skippedAfter = lessonState.resumeSkippedAfter,
                                 loading = lessonState.loading && lessonState.lessons.isEmpty(),
                                 hasLessons = lessonState.lessons.isNotEmpty(),
                                 offline = !online,

@@ -59,6 +59,7 @@ fun TodayScreen(
     plan: TodayPlan,
     loading: Boolean,
     step: LessonStep? = null,
+    skippedAfter: LessonStep? = null,
     hasLessons: Boolean,
     onStartLesson: () -> Unit,
     onBrowseLessons: () -> Unit,
@@ -116,6 +117,7 @@ fun TodayScreen(
                         loading = loading,
                         canResume = plan.resumable,
                         step = step,
+                        skippedAfter = skippedAfter,
                         hasLessons = hasLessons,
                         onStart = onStartLesson,
                         onBrowse = onBrowseLessons,
@@ -166,6 +168,7 @@ private fun LessonCard(
     loading: Boolean,
     canResume: Boolean,
     step: LessonStep?,
+    skippedAfter: LessonStep?,
     hasLessons: Boolean,
     onStart: () -> Unit,
     onBrowse: () -> Unit,
@@ -207,7 +210,7 @@ private fun LessonCard(
                 LessonHeroTitle(lesson.title, lesson.objective)
                 if (canResume && step != null) {
                     Spacer(Modifier.height(Space.x20))
-                    LessonStepProgress(lessonSteps(lesson), step)
+                    LessonStepProgress(lessonSteps(lesson, skippedAfter), step)
                 }
                 Spacer(Modifier.height(Space.x24))
                 PrimaryButton(

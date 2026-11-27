@@ -155,6 +155,7 @@ private fun wire(): AppServices {
     // Then what MainActivity initialises before the UI.
     LanguagePreferences.init(context)
     PhoneticsPreferences.init(context)
+    PronunciationOnlyPreference.init(context)
     TranslationPreferences.init(context)
     UiLanguage.init(context)
     OnboardingStore.init(context)

@@ -99,6 +99,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil3.compose.SubcomposeAsyncImage
@@ -672,7 +673,12 @@ internal fun glossoTextFieldColors() = androidx.compose.material3.OutlinedTextFi
 
 /** Secondary actions stay muted; the accent is reserved for the one primary action. */
 @Composable
-fun QuietTextButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun QuietTextButton(
+    text: String,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    style: TextStyle = MaterialTheme.typography.labelLarge,
+) {
     TextButton(
         onClick = onClick,
         modifier = modifier.pointerHoverIcon(PointerIcon.Hand),
@@ -680,7 +686,7 @@ fun QuietTextButton(text: String, onClick: () -> Unit, modifier: Modifier = Modi
             contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
         ),
     ) {
-        Text(text, style = MaterialTheme.typography.labelLarge)
+        Text(text, style = style)
     }
 }
 

@@ -117,6 +117,8 @@
     <string name="lessons_summary_high">Tu pronunciación mejora. Prueba una lección más difícil.</string>
     <string name="lessons_summary_keep">Vuelve mañana: la repetición es lo que fija un sonido.</string>
     <string name="lessons_summary_read">Has leído la base y hecho los ejercicios. Los de pronunciación esperan a la próxima.</string>
+    <string name="lessons_summary_drills_skipped">Esta vez te has saltado todos los ejercicios de pronunciación. Vuelve a ellos cuando quieras.</string>
+    <string name="lessons_go_to_drills">Ir a pronunciación</string>
     <string name="lessons_all">Todos</string>
     <string name="lessons_pick_level">Elegir nivel</string>
     <string name="lessons_level">Nivel</string>
@@ -509,6 +511,8 @@
     <string name="settings_sounds">Sonidos</string>
     <string name="settings_sounds_desc">Sonidos breves al acertar o fallar, al terminar una lección y al conseguir un logro.</string>
     <string name="settings_sounds_toggle">Reproducir sonidos</string>
+    <string name="settings_pronunciation_only">Solo pronunciación</string>
+    <string name="settings_pronunciation_only_desc">Las lecciones se abren directamente en pronunciación, sin la historia, los ejercicios ni tu turno.</string>
     <string name="translation_show">Ver traducción</string>
     <string name="translation_hide">Ocultar traducción</string>
     <string name="practice_work_on_plain">Un sonido necesita trabajo</string>

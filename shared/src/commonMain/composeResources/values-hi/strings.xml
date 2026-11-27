@@ -122,6 +122,8 @@
     <string name="lessons_summary_high">आपका उच्चारण बेहतर हो रहा है। अब कोई मुश्किल लेसन आज़माएँ।</string>
     <string name="lessons_summary_keep">कल फिर आएँ: दोहराने से ही साउंड पक्का होता है।</string>
     <string name="lessons_summary_read">आपने लेसन पढ़ लिया और एक्सरसाइज़ कर लीं। ड्रिल अगली बार के लिए बाक़ी हैं।</string>
+    <string name="lessons_summary_drills_skipped">इस बार आपने सारे उच्चारण ड्रिल छोड़ दिए। जब चाहें, फिर से आज़माएँ।</string>
+    <string name="lessons_go_to_drills">उच्चारण पर जाएँ</string>
     <string name="lessons_all">सभी</string>
     <string name="lessons_pick_level">लेवल चुनें</string>
     <string name="lessons_level">लेवल</string>
@@ -525,6 +527,8 @@
     <string name="settings_sounds">साउंड</string>
     <string name="settings_sounds_desc">सही और गलत जवाब, पूरे हुए लेसन और नई उपलब्धियों पर छोटी-सी आवाज़।</string>
     <string name="settings_sounds_toggle">साउंड चलाएँ</string>
+    <string name="settings_pronunciation_only">सिर्फ़ उच्चारण</string>
+    <string name="settings_pronunciation_only_desc">लेसन सीधे उच्चारण से शुरू होते हैं, कहानी, एक्सरसाइज़ और आपकी बारी के बिना।</string>
     <string name="translation_show">अनुवाद दिखाएँ</string>
     <string name="translation_hide">अनुवाद छिपाएँ</string>
     <string name="practice_work_on_plain">एक साउंड पर काम करना है</string>
