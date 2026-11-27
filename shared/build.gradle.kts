@@ -235,7 +235,7 @@ if (webEnabled) {
     // FakeFileSystem still uses kotlinx.datetime.Clock, which kotlinx-datetime 0.7
     // (brought by Compose) dropped; its compat build keeps it next to the 0.7 API.
     configurations.matching { it.name.startsWith("wasmJs") }.configureEach {
-        resolutionStrategy.force("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1-0.6.x-compat")
+        resolutionStrategy.force("org.jetbrains.kotlinx:kotlinx-datetime:0.8.0-0.6.x-compat")
     }
     tasks.named<ProcessResources>("wasmJsProcessResources") {
         // The two answer cues, served next to the page (FeedbackSounds.wasmJs.kt).
