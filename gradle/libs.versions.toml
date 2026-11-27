@@ -35,7 +35,7 @@ androidx-core = "1.19.1"
 androidx-fragment = "1.9.1"
 androidx-activity-compose = "1.13.0"
 androidx-lifecycle = "2.11.0"
-compose-bom = "2026.09.00"
+compose-bom = "2026.11.01"
 # Coil 3 is multiplatform (images in the shared UI). 3.6 is built on Compose
 # Multiplatform 1.12. Android keeps OkHttp 4.12 as the
 # network fetcher, iOS uses Ktor.
