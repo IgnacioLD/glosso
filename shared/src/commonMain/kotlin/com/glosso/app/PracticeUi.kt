@@ -170,7 +170,7 @@ internal fun DrillCard(
         if (showPhonetics && ipa.isNotBlank()) {
             Spacer(Modifier.height(Space.x12))
             Text(
-                text = ipa,
+                text = GlossoType.ipa(ipa),
                 style = GlossoType.MonoIPA,
                 color = GlossoColors.accentText,
             )
@@ -546,7 +546,7 @@ private fun SoundTile(sound: PhoneticLoop.SoundScore, modifier: Modifier = Modif
             Column(Modifier.padding(horizontal = Space.x12, vertical = Space.x12)) {
                 Row(verticalAlignment = Alignment.Bottom) {
                     Text(
-                        text = "/${shownSound(sound.phoneme)}/",
+                        text = GlossoType.ipa("/${shownSound(sound.phoneme)}/"),
                         style = GlossoType.MonoIPA,
                         color = MaterialTheme.colorScheme.onSurface,
                         maxLines = 1,
@@ -978,7 +978,7 @@ internal fun ExampleWords(words: List<String>, modifier: Modifier = Modifier) {
                     )
                 } else {
                     Text(
-                        text = word,
+                        text = GlossoType.ipa(word),
                         style = GlossoType.MonoIPA,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                         modifier = Modifier.padding(vertical = Space.x8),
@@ -1023,7 +1023,7 @@ private fun ExampleWordChip(word: String, playing: Boolean, onClick: () -> Unit)
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = word,
+                text = GlossoType.ipa(word),
                 style = GlossoType.MonoIPA,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
             )
@@ -1196,7 +1196,7 @@ private fun FocusTrend(focus: FocusPractice) {
             )
             Spacer(Modifier.height(Space.x2))
             Text(
-                text = trend,
+                text = GlossoType.ipa(trend),
                 style = GlossoType.MonoIPA,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )

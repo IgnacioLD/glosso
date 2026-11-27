@@ -292,7 +292,7 @@ private fun PronunciationPanel(
                 Spacer(Modifier.height(Space.x16))
                 moved.forEach { (phoneme, from, to) ->
                     Text(
-                        text = stringResource(Res.string.you_sound_delta, shownSound(phoneme), from, to),
+                        text = GlossoType.ipa(stringResource(Res.string.you_sound_delta, shownSound(phoneme), from, to)),
                         style = GlossoType.MonoIPA,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )
@@ -309,7 +309,7 @@ private fun SoundBarRow(stat: PhonemeStatModel, todayDelta: Int?) {
     val color = accuracyColor(stat.accuracy)
     Row(verticalAlignment = Alignment.CenterVertically) {
         Text(
-            text = "/${shownSound(stat.phoneme)}/",
+            text = GlossoType.ipa("/${shownSound(stat.phoneme)}/"),
             style = GlossoType.MonoIPA,
             color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier.widthIn(min = 52.dp),
@@ -465,7 +465,7 @@ private fun PracticeRow(item: PracticeItem) {
             when (item.kind) {
                 PracticeKind.SOUND -> Text(
                     text = if (showPhonetics) {
-                        shownSound(item.phoneme.orEmpty())
+                        GlossoType.ipa(shownSound(item.phoneme.orEmpty()))
                     } else {
                         stringResource(Res.string.you_plan_sound)
                     },
@@ -819,7 +819,7 @@ private fun FocusNote(stat: PhonemeStatModel) {
         ) {
             if (showPhonetics) {
                 Text(
-                    shownSound(stat.phoneme),
+                    GlossoType.ipa(shownSound(stat.phoneme)),
                     style = GlossoType.MonoIPA,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                 )

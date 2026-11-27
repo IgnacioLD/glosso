@@ -1077,7 +1077,7 @@ private fun VocabularyWord(word: WordModel, onPlay: () -> Unit) {
         if (showPhonetics && ipa.isNotBlank()) {
             Spacer(Modifier.height(Space.x2))
             Text(
-                text = ipa,
+                text = GlossoType.ipa(ipa),
                 style = GlossoType.MonoIPA,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
@@ -1154,7 +1154,7 @@ internal fun DialogueTurn(
                 if (showPhonetics && ipa.isNotBlank()) {
                     Spacer(Modifier.height(Space.x4))
                     Text(
-                        text = ipa,
+                        text = GlossoType.ipa(ipa),
                         style = GlossoType.MonoIPA,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                     )

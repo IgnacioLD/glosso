@@ -42,6 +42,7 @@ import androidx.compose.material.icons.outlined.GraphicEq
 import androidx.compose.material.icons.outlined.Quiz
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -207,9 +208,12 @@ fun OnboardingScreen(onFinish: () -> Unit) {
                 GlossoWordmark(Modifier.weight(1f))
                 // The header skip leaves the whole onboarding. On the seed page
                 // the footer already offers the same exit with a clearer label, so
-                // the header one is hidden there to avoid two identical exits.
+                // the header one is hidden there to avoid two identical exits. Its
+                // touch-target height stays, so the logo does not jump between pages.
                 if (page < LAST_PAGE) {
                     QuietTextButton(stringResource(Res.string.onboarding_skip), onClick = { finish(true) })
+                } else {
+                    Spacer(Modifier.minimumInteractiveComponentSize())
                 }
             }
 

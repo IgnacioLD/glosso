@@ -22,8 +22,8 @@ class GlossoApiCacheTest {
 
     private class VersionStore(initial: String? = null) : AssetVersionStore {
         var value: String? = initial
-        override fun load(): String? = value
-        override fun save(version: String) {
+        override fun load(language: String): String? = value
+        override fun save(language: String, version: String) {
             value = version
         }
     }

@@ -155,7 +155,7 @@ class ServerSwitchTest {
         ProductConfigRepository.api = { api }
         api.manifest()
         ProductConfigRepository.refresh()
-        assertEquals("a-v1", ApiCache.load())
+        assertEquals("a-v1", ApiCache.load("en"))
         assertTrue(ProductConfigRepository.config.value.flag("server_a"))
         assertEquals("learner@example.com", GoogleAccountStore.email.value)
 
@@ -167,7 +167,7 @@ class ServerSwitchTest {
         assertNull("an account linked on A is not linked on B", GoogleAccountStore.email.value)
         assertFalse(ProductConfigRepository.config.value.flag("server_a"))
         assertTrue(ProductConfigRepository.config.value.flag("server_b"))
-        assertEquals("b-v1", ApiCache.load())
+        assertEquals("b-v1", ApiCache.load("en"))
         assertEquals("b-v1", api.contentVersion)
         assertTrue(requests.isNotEmpty())
         assertTrue("every request goes to B: $requests", requests.all { it.startsWith("https://b.test/") })

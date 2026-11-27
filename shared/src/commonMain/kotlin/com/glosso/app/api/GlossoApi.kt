@@ -163,28 +163,49 @@ class GlossoApi(
     private val anonymousAnalytics: Boolean = false,
 ) {
 
-    /** The server this client last used, to notice a switch (see [baseUrl]). */
+    /** The server and course this client last used, to notice a switch (see [baseUrl]). */
     @Volatile
     private var currentServer: String? = null
 
+    @Volatile
+    private var currentLanguage: String? = null
+
     /**
-     * The server for this request. On a switch, what this client learned from the
-     * previous server (the manifest and its content version) is forgotten, and
-     * the content version is read again from the store `ServerSwitch` emptied.
+     * The server for this request. On a switch of server or course, what this
+     * client learned for the previous one (the manifest and its content version)
+     * is forgotten, and the content version is read again from the store: the
+     * new course's own, or none after `ServerSwitch` emptied it.
      */
     private val baseUrl: String
         get() {
             val base = serverBase()
-            if (base != currentServer) {
+            val lang = language
+            if (base != currentServer || lang != currentLanguage) {
                 if (currentServer != null) {
                     lastManifest = null
                     manifestLoaded = false
-                    assetVersion = versionStore.load().orEmpty()
+                    val previous = assetVersion
+                    assetVersion = versionStore.load(lang).orEmpty()
+                    if (assetVersion.isNotEmpty() && assetVersion != previous) {
+                        onContentVersionChanged?.invoke(assetVersion)
+                    }
                 }
                 currentServer = base
+                currentLanguage = lang
             }
             return base
         }
+
+    /**
+     * The URL of one content kind. A course seen for the first time has no
+     * version yet, so its manifest is read first: the request then carries this
+     * course's version, never the previous course's or none.
+     */
+    private suspend fun contentUrl(kind: String): String {
+        val base = baseUrl
+        if (assetVersion.isEmpty() && !manifestLoaded) ensureAssetVersion()
+        return "$base/v1/content/$kind"
+    }
 
     /** The target language every request and asset URL is scoped to. */
     private val language: String get() = scope.language
@@ -274,15 +295,20 @@ class GlossoApi(
         }
     }
 
-    private suspend fun fetchManifest(base: String): ContentManifest =
-        client.get("$base/v1/content/manifest") {
+    private suspend fun fetchManifest(base: String): ContentManifest {
+        val lang = language
+        val manifest = client.get("$base/v1/content/manifest") {
             headers { append(HttpHeaders.CacheControl, "no-cache") }
-            url { parameters.append("language", language) }
-        }.body<ContentManifest>().also {
-            lastManifest = it
+            url { parameters.append("language", lang) }
+        }.body<ContentManifest>()
+        updateAssetVersion(lang, manifest.assetVersion)
+        // A course switch during the fetch: this manifest is not the current course's.
+        if (lang == currentLanguage) {
+            lastManifest = manifest
             manifestLoaded = true
-            updateAssetVersion(it.assetVersion)
         }
+        return manifest
+    }
 
     /**
      * Byte size of an asset as published in the manifest, or null when the
@@ -327,7 +353,7 @@ class GlossoApi(
         }.successBody()
 
     suspend fun drills(limit: Int = 10, level: String? = null): List<DrillModel> =
-        client.get("$baseUrl/v1/content/DRILL") {
+        client.get(contentUrl("DRILL")) {
             versioned()
             url {
                 parameters.append("language", language)
@@ -430,7 +456,7 @@ class GlossoApi(
         }.status.value
 
     suspend fun stories(limit: Int = 20): List<StoryModel> =
-        client.get("$baseUrl/v1/content/STORY") {
+        client.get(contentUrl("STORY")) {
             versioned()
             url {
                 parameters.append("language", language)
@@ -444,7 +470,7 @@ class GlossoApi(
      * the same IPA, meaning and audio.
      */
     suspend fun words(theme: String? = null, limit: Int = 200): List<WordModel> =
-        client.get("$baseUrl/v1/content/WORD") {
+        client.get(contentUrl("WORD")) {
             versioned()
             url {
                 parameters.append("language", language)
@@ -465,7 +491,7 @@ class GlossoApi(
     suspend fun wordsByLemmas(lemmas: Collection<String>): List<WordModel> {
         val wanted = lemmas.map { it.trim().lowercase() }.filter { it.isNotEmpty() }.distinct()
         if (wanted.isEmpty()) return emptyList()
-        val fetched: List<WordModel> = client.get("$baseUrl/v1/content/WORD") {
+        val fetched: List<WordModel> = client.get(contentUrl("WORD")) {
             versioned()
             url {
                 parameters.append("language", language)
@@ -482,7 +508,7 @@ class GlossoApi(
         ref: String? = null,
         limit: Int = 50,
     ): List<ExerciseModel> =
-        client.get("$baseUrl/v1/content/EXERCISE") {
+        client.get(contentUrl("EXERCISE")) {
             versioned()
             url {
                 parameters.append("language", language)
@@ -494,7 +520,7 @@ class GlossoApi(
 
     /** The study units: one base item plus exercises plus drill targets each. */
     suspend fun lessons(level: String? = null, limit: Int = 200): List<LessonModel> =
-        client.get("$baseUrl/v1/content/LESSON") {
+        client.get(contentUrl("LESSON")) {
             versioned()
             url {
                 parameters.append("language", language)
@@ -519,7 +545,7 @@ class GlossoApi(
         byIds<WordModel>("WORD", ids) { it.id }.map { it.forAccent(accent, authoredAccent) }
 
     suspend fun drillsByTheme(theme: String, level: String? = null, limit: Int = 8): List<DrillModel> =
-        client.get("$baseUrl/v1/content/DRILL") {
+        client.get(contentUrl("DRILL")) {
             versioned()
             url {
                 parameters.append("language", language)
@@ -541,7 +567,7 @@ class GlossoApi(
         idOf: (T) -> String,
     ): List<T> {
         if (ids.isEmpty()) return emptyList()
-        val fetched: List<T> = client.get("$baseUrl/v1/content/$kind") {
+        val fetched: List<T> = client.get(contentUrl(kind)) {
             versioned()
             url {
                 parameters.append("language", language)
@@ -560,7 +586,7 @@ class GlossoApi(
      * for the current target language, under `content/<lang>/`.
      */
     @Volatile
-    private var assetVersion: String = versionStore.load().orEmpty()
+    private var assetVersion: String = versionStore.load(language).orEmpty()
 
     /** The last manifest fetched, for local size estimates and per-asset sizes. */
     @Volatile
@@ -582,7 +608,7 @@ class GlossoApi(
     @Volatile
     private var manifestRound = 0
 
-    /** The content version currently in use, empty until the manifest is seen. */
+    /** The current course's content version, empty until its manifest is seen. */
     val contentVersion: String get() = assetVersion
 
     /**
@@ -597,12 +623,14 @@ class GlossoApi(
      * catalogue survive any stale CDN/HTTP cache. When the version changes, the
      * entries cached under the old one are dropped instead of lingering.
      */
-    private suspend fun updateAssetVersion(version: String) {
-        if (version.isBlank() || version == assetVersion) return
-        val previous = assetVersion
+    private suspend fun updateAssetVersion(language: String, version: String) {
+        if (version.isBlank()) return
+        val previous = versionStore.load(language)
+        if (version != previous) versionStore.save(language, version)
+        // Only a new catalogue of the same course makes the cached entries stale.
+        if (!previous.isNullOrEmpty() && previous != version) contentCache?.clear()
+        if (language != currentLanguage || version == assetVersion) return
         assetVersion = version
-        versionStore.save(version)
-        if (previous.isNotEmpty()) contentCache?.clear()
         onContentVersionChanged?.invoke(version)
     }
 

@@ -166,9 +166,12 @@ class AndroidStorageCompatibilityTest {
 
         prefs("glosso_http_cache").edit().putString("asset_version", "v42").commit()
         ApiCache.init(app)
-        assertEquals("v42", ApiCache.load())
-        ApiCache.save("v43")
-        assertEquals("v43", prefs("glosso_http_cache").getString("asset_version", null))
+        // The single pre-course key passes to the first course asked for: the one in use.
+        assertEquals("v42", ApiCache.load("ru"))
+        assertNull(prefs("glosso_http_cache").getString("asset_version", null))
+        assertNull(ApiCache.load("en"))
+        ApiCache.save("ru", "v43")
+        assertEquals("v43", prefs("glosso_http_cache").getString("asset_version_ru", null))
 
         UiLanguage.init(app)
         assertEquals("en", UiLanguage.current.value)

@@ -170,7 +170,7 @@ internal fun SoundDial(
                 drawArc(color, -90f, 360f * fill.value, false, topLeft, arc, style = Stroke(w, cap = StrokeCap.Round))
             }
             Text(
-                text = phoneme,
+                text = GlossoType.ipa(phoneme),
                 style = GlossoType.MonoIPA,
                 color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center,

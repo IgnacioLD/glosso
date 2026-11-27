@@ -40,8 +40,8 @@ class OfflineStoreVersionTest {
     val folder = TemporaryFolder()
 
     private class VersionStore : AssetVersionStore {
-        override fun load(): String? = null
-        override fun save(version: String) = Unit
+        override fun load(language: String): String? = null
+        override fun save(language: String, version: String) = Unit
     }
 
     private fun bundle() = OfflineBundle(
