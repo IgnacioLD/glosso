@@ -1,0 +1,8 @@
+model,params,int8_mb,licence,note
+w2v2-lv60,315M,358,Apache-2.0,"facebook/wav2vec2-lv-60-espeak-cv-ft; accuracy in fp32 (transformers), int8 = the server file"
+w2v2-en-int8,315M,358,Apache-2.0 (base) / own fine-tune,"deployed English model, en only (anchor)"
+zipa-cr-small,64M,71,CC-BY-4.0,"anyspeech/zipa-small-crctc-500k, model.int8.onnx"
+zipa-cr-large,300M,310,CC-BY-4.0,"anyspeech/zipa-large-crctc-500k, model.int8.onnx"
+zipa-t-small,65M,71,CC-BY-4.0,"anyspeech/zipa-small-noncausal-500k, transducer int8"
+zipa-cr-ns-small,64M,71,CC-BY-NC-SA-4.0 (NOT usable),"anyspeech/zipa-small-crctc-ns-700k, reference only"
+whisper-ipa-base,74M,182,Apache-2.0,"neurlang/ipa-whisper-base, fp32 (transformers); int8 = onnx-community encoder+merged decoder"
