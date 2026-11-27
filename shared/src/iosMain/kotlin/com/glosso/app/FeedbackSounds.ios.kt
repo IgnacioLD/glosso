@@ -9,15 +9,14 @@ import platform.Foundation.NSBundle
 actual fun feedbackSoundPlayer(context: PlatformContext): FeedbackSoundPlayer = BundleCues()
 
 /**
- * The same two WAV cues, read from the app bundle and kept prepared.
- * The Xcode project (iosApp/project.yml) copies `feedback_correct.wav` and
- * `feedback_wrong.wav` from shared/src/androidMain/res/raw into the bundle.
+ * The same WAV cues, read from the app bundle and kept prepared. The Xcode
+ * project (iosApp/project.yml) copies every `feedback_*.wav` from
+ * shared/src/androidMain/res/raw into the bundle.
  */
 @OptIn(ExperimentalForeignApi::class)
 private class BundleCues : FeedbackSoundPlayer {
 
-    private var correctPlayer = player("feedback_correct")
-    private var wrongPlayer = player("feedback_wrong")
+    private val players = FeedbackCue.entries.mapNotNull { cue -> player(cue.file)?.let { cue to it } }.toMap()
 
     private fun player(name: String): AVAudioPlayer? {
         val url = NSBundle.mainBundle.URLForResource(name, withExtension = "wav") ?: return null
@@ -27,18 +26,11 @@ private class BundleCues : FeedbackSoundPlayer {
         }
     }
 
-    override fun correct() {
-        correctPlayer?.let { it.currentTime = 0.0; it.play() }
-    }
-
-    override fun wrong() {
-        wrongPlayer?.let { it.currentTime = 0.0; it.play() }
+    override fun play(cue: FeedbackCue) {
+        players[cue]?.let { it.currentTime = 0.0; it.play() }
     }
 
     override fun release() {
-        correctPlayer?.stop()
-        wrongPlayer?.stop()
-        correctPlayer = null
-        wrongPlayer = null
+        players.values.forEach { it.stop() }
     }
 }

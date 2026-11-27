@@ -562,6 +562,7 @@ class LessonViewModel(private val services: AppServices) : ViewModel() {
         if (active != null && step != previous) trackStep(active.id, step)
         if (step == LessonStep.SUMMARY && previous != LessonStep.SUMMARY) {
             active?.id?.let { ProgressStore.recordLesson(it) }
+            FeedbackSounds.play(FeedbackCue.COMPLETE)
             active?.let {
                 Analytics.track(
                     "lesson_completed",

@@ -61,6 +61,8 @@ class ExerciseSession(exercises: List<ExerciseModel>, private val maxAttempts: I
     var round by mutableIntStateOf(0); private set
     /** Number of exercises answered right plus those that hit the miss limit. */
     var settled by mutableIntStateOf(0); private set
+    /** Correct answers in a row, for the rising answer cue. */
+    var combo = 0; private set
 
     val total = exercises.size
     val progress: Float get() = if (total == 0) 0f else settled.toFloat() / total
@@ -71,6 +73,7 @@ class ExerciseSession(exercises: List<ExerciseModel>, private val maxAttempts: I
         if (revealed) return
         lastCorrect = correct
         revealed = true
+        combo = if (correct) combo + 1 else 0
     }
 
     fun advance() {
@@ -178,7 +181,7 @@ internal fun ExerciseRunner(
                             "exercise_completed",
                             mapOf("kind" to exercise.type.lowercase(), "mastery" to correct),
                         )
-                        if (correct) FeedbackSounds.correct() else FeedbackSounds.wrong()
+                        FeedbackSounds.answer(correct, session.combo)
                         haptics.answer(correct)
                         ProgressStore.recordAnswer(
                             correct,
@@ -221,7 +224,10 @@ internal fun ExerciseRunner(
             current != null && session.revealed -> BottomActionBar(navigationInset = !embedded) {
                 PrimaryButton(
                     text = stringResource(Res.string.exercise_continue),
-                    onClick = { session.advance() },
+                    onClick = {
+                        session.advance()
+                        if (session.current == null) FeedbackSounds.play(FeedbackCue.COMPLETE)
+                    },
                 )
             }
 

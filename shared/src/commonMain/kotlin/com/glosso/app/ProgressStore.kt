@@ -140,7 +140,7 @@ object ProgressStore {
         } else {
             null
         }
-        commit(
+        val celebrated = commit(
             touchToday(d).copy(
                 drills = d.drills + 1,
                 bestDrill = maxOf(d.bestDrill, score),
@@ -151,6 +151,7 @@ object ProgressStore {
             fallback = fallback,
         )
         if (dailyStreak > d.dailyStreak) Analytics.track("streak_extended", mapOf("days" to dailyStreak))
+        FeedbackSounds.takeCue(celebrated, dailyStreak > d.dailyStreak, score)?.let(FeedbackSounds::play)
     }
 
     /** Bumps today's tally in the activity log, pruning anything past 400 days. */
@@ -207,7 +208,8 @@ object ProgressStore {
         )
     }
 
-    private fun commit(next: ProgressData, fallback: Celebration? = null) {
+    /** Saves [next]; true when it raised a celebration. */
+    private fun commit(next: ProgressData, fallback: Celebration? = null): Boolean {
         val live = signals.copy(today = todayLong())
         val newly = AchievementCatalog.all.filter { it.id !in next.unlocked && it.earned(next, live) }
         val withUnlocked = if (newly.isEmpty()) next else next.copy(unlocked = next.unlocked + newly.map { it.id })
@@ -223,6 +225,7 @@ object ProgressStore {
             else -> null
         }
         if (celebration != null) _celebration.value = celebration
+        return celebration != null
     }
 
     private fun todayLong(): Long = todayEpochDay()

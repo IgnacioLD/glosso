@@ -30,12 +30,31 @@ targets:
       - path: Glosso
         excludes:
           - Info.plist
-      # The two answer cues the Android app plays from res/raw; iOS reads them from
+      # The feedback cues the Android app plays from res/raw; iOS reads them from
       # the bundle (FeedbackSounds.ios.kt). One copy of the files for both apps.
+      # Listed one by one: a folder entry adds a group named after the checkout.
       - path: ../shared/src/androidMain/res/raw/feedback_correct.wav
         buildPhase: resources
         group: Glosso/Sounds
+      - path: ../shared/src/androidMain/res/raw/feedback_correct_2.wav
+        buildPhase: resources
+        group: Glosso/Sounds
+      - path: ../shared/src/androidMain/res/raw/feedback_correct_3.wav
+        buildPhase: resources
+        group: Glosso/Sounds
       - path: ../shared/src/androidMain/res/raw/feedback_wrong.wav
+        buildPhase: resources
+        group: Glosso/Sounds
+      - path: ../shared/src/androidMain/res/raw/feedback_complete.wav
+        buildPhase: resources
+        group: Glosso/Sounds
+      - path: ../shared/src/androidMain/res/raw/feedback_perfect.wav
+        buildPhase: resources
+        group: Glosso/Sounds
+      - path: ../shared/src/androidMain/res/raw/feedback_achievement.wav
+        buildPhase: resources
+        group: Glosso/Sounds
+      - path: ../shared/src/androidMain/res/raw/feedback_streak.wav
         buildPhase: resources
         group: Glosso/Sounds
     settings:
