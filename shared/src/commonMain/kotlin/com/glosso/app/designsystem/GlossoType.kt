@@ -131,7 +131,22 @@ object GlossoType {
         fontFeatureSettings = "tnum",
     )
 
-    /** IPA transcription. Always monospaced, and left to right in any interface. */
+    /**
+     * [ipa] as shown in a [MonoIPA] line: a stress mark inside a word is glued to
+     * the letter before it with a WORD JOINER, because line breaking allows a
+     * break before ˈ and ˌ and "nˈovyj" would wrap as "n" / "ˈovyj". Display only:
+     * what is scored or compared keeps the plain transcription.
+     */
+    fun ipa(ipa: String): String = buildString(ipa.length + 4) {
+        ipa.forEachIndexed { i, c ->
+            if ((c == 'ˈ' || c == 'ˌ') && i > 0 && !ipa[i - 1].isWhitespace() && ipa[i - 1] != WORD_JOINER) {
+                append(WORD_JOINER)
+            }
+            append(c)
+        }
+    }
+
+    /** IPA transcription. Always monospaced, and left to right in any interface. Text goes through [ipa]. */
     val MonoIPA: TextStyle @Composable get() = TextStyle(
         fontFamily = GlossoFonts.Mono,
         fontWeight = FontWeight.Normal,
@@ -322,3 +337,5 @@ internal fun Typography.forScript(uiLanguage: String): Typography {
 }
 
 private const val TALL_SCRIPT_LEADING = 1.2f
+
+private const val WORD_JOINER = '\u2060'
