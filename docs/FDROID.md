@@ -71,9 +71,9 @@ declare `TetheredNet`:
 downloading "additional executable binary files ... without explicit user
 consent". The ONNX model (Apache-2.0) and the lessons are data, downloaded only
 when the learner asks. `NonFreeAssets` applies to assets under non-commercial or
-no-derivatives licences: the model is Apache-2.0; the lesson texts and audio
-(authored in `glosso-data`) need a stated free licence, otherwise a reviewer may
-apply it (owner decision). The model can also be imported from a local file
+no-derivatives licences: the model is Apache-2.0, but the lesson texts and audio
+(authored in `glosso-data`) stay unlicensed (owner decision), so the recipe
+declares `AntiFeatures: NonFreeAssets` with that reason. The model can also be imported from a local file
 (below), so a phone never has to reach the server for it.
 
 **Tracking.** Anti-Features: not applied when the feature is "opt-in (i.e. you
@@ -100,12 +100,26 @@ toolchain (a prebuilt Node download) out of the F-Droid build.
 **Self-updater.** None. The server's version policy is only a dismissible notice
 with no link and no download.
 
-**Signing and reproducible builds.** Optional
-([Reproducible Builds](https://f-droid.org/docs/Reproducible_Builds/)). Without
-them F-Droid signs with its own key, so the F-Droid and Play installs cannot
-update each other. Publishing developer-signed APKs (`Binaries` +
-`AllowedAPKSigningKeys`) is possible later but hard to switch to after the first
-release (owner decision).
+**Signing and reproducible builds.** F-Droid publishes our own signed APK
+([Reproducible Builds](https://f-droid.org/docs/Reproducible_Builds/), owner
+decision), so F-Droid, Play and direct installs update each other. F-Droid
+builds the recipe unsigned, copies the signature from the APK at `Binaries` onto
+it (apksigcopier) and publishes ours only if the signature verifies, that is, if
+the two builds are byte-identical apart from the signature.
+`AllowedAPKSigningKeys` pins the SHA-256 of the release certificate
+(`apksigner verify --print-certs`). What keeps the build reproducible:
+
+- `vcsInfo.include = false` on release: AGP's
+  `META-INF/version-control-info.textproto` depends on the checkout (a git
+  worktree writes `NO_VALID_GIT_FOUND`, a clone the commit hash).
+- `dependenciesInfo.includeInApk = false` (above).
+- No native code is compiled; `libonnxruntime.so` comes prebuilt from Maven Central.
+- Checked for 2.5.5: the signed APK built in a git worktree with Homebrew
+  OpenJDK 21 and an unsigned rebuild from a fresh clone in another directory,
+  with the recipe's `rm:` and properties, were byte-identical apart from the
+  signature (`apksigcopier compare`), also when the rebuild ran on OpenJDK 26.
+  The JDK only runs the build (Java 17 bytecode, D8/R8 output does not depend on
+  it), so the recipe does not pin one; Gradle 9 needs JDK 17 or newer.
 
 **Metadata.** [Descriptions and graphics](https://f-droid.org/docs/All_About_Descriptions_Graphics_and_Screenshots/):
 `fastlane/metadata/android/<locale>/` with `title.txt` (max 50),
@@ -148,8 +162,15 @@ Checked for 2.5.5 (2227) on 2026-11-22: the steps below passed locally.
      `ANDROID_HOME=... ./gradlew :androidApp:assembleFdroidRelease -Pglosso.ios=false -Pglosso.web=false`.
    - `fdroid scanner --exit-code` on that APK, and the scanner's `scan_source` on
      the clone: the only source finding is the `rm:`'d `stb_vorbis.wasm`.
-3. Tag the release commit `v<versionName>` and push the tag. F-Droid builds from
+3. Build the signed APK from the release commit with the same properties and
+   the `SIGNING_*` variables set (see the signing config in
+   `androidApp/build.gradle.kts`), and check it against the unsigned rebuild of
+   step 2: `apksigcopier compare <signed.apk> --unsigned <unsigned.apk>` (needs
+   `apksigner` on `PATH`) must pass.
+4. Tag the release commit `v<versionName>` and push the tag. F-Droid builds from
    tags (`UpdateCheckMode: Tags`), and the recipe's `commit:` is the tag.
-4. First submission only: open the merge request to fdroiddata with
+5. Create the GitHub release for the tag and attach the signed APK as
+   `glosso-<versionName>-fdroid.apk`, the name `Binaries` points at.
+6. First submission only: open the merge request to fdroiddata with
    `metadata/me.shirobyte42.glosso.yml`. Later versions are picked up from new
-   tags (`AutoUpdateMode: Version`).
+   tags (`AutoUpdateMode: Version`); each still needs step 5 before F-Droid builds it.

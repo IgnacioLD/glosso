@@ -198,6 +198,10 @@ android {
             )
             // Unsigned when no keystore is configured, so a clean clone still builds.
             if (releaseSigning != null) signingConfig = releaseSigning
+            // Reproducible build (docs/FDROID.md): AGP's VCS file depends on how the
+            // tree was checked out (a git worktree writes an error, a clone the hash),
+            // so the F-Droid rebuild would not match the APK we sign.
+            vcsInfo.include = false
         }
     }
 }
