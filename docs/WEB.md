@@ -98,7 +98,11 @@ Then, on the VPS, in `/opt/glosso/deploy`:
 1. Copy the build (without `*.map`) to `web/releases/<ts>`.
 2. Switch with `ln -sfn releases/<ts> web/current.new && mv -T web/current.new web/current`. That is
    atomic, and Caddy sees it at once.
-3. To roll back, point `current` at the previous release the same way.
+3. Also copy the previous release's `*.wasm` into the new one (`cp -n`). Cloudflare turns the
+   `no-cache` on `glosso.js` into `max-age=14400`, so a returning browser can keep the old `glosso.js`
+   for up to 4 hours, and it asks for the old hashed wasm files. A Cloudflare Cache Rule on `app.` that
+   respects the origin's cache headers would remove the need.
+4. To roll back, point `current` at the previous release the same way.
 
 Never replace `deploy/web` itself. The bind mount follows the directory Caddy started with, so a
 new folder at that path stays invisible until Caddy is recreated.
