@@ -70,6 +70,8 @@ class LicensesTest {
             "font:BricolageGrotesque" to "Bricolage Grotesque Project Authors",
             "font:PlusJakartaSans" to "Plus Jakarta Sans Project Authors",
             "font:JetBrainsMono" to "JetBrains Mono Project Authors",
+            "font:Geologica-Cyrillic" to "Geologisk Project Authors",
+            "font:Onest-Cyrillic" to "Onest Project Authors",
         )
         fonts.forEach { (id, copyright) ->
             val text = catalog.texts.getValue(byId.getValue(id).licenseText!!)
@@ -88,6 +90,8 @@ class LicensesTest {
             "font:BricolageGrotesque",
             "font:PlusJakartaSans",
             "font:JetBrainsMono",
+            "font:Geologica-Cyrillic",
+            "font:Onest-Cyrillic",
         ).forEach { assertTrue("missing attribution for $it", it in ids) }
     }
 

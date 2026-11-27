@@ -117,6 +117,8 @@ class TestAssetIntegrity(unittest.TestCase):
             "font:BricolageGrotesque": "Bricolage Grotesque Project Authors",
             "font:PlusJakartaSans": "Plus Jakarta Sans Project Authors",
             "font:JetBrainsMono": "JetBrains Mono Project Authors",
+            "font:Geologica-Cyrillic": "Geologisk Project Authors",
+            "font:Onest-Cyrillic": "Onest Project Authors",
         }
         for font_id, copyright_line in expected.items():
             text = asset["texts"][by_id[font_id]["licenseText"]]
@@ -137,6 +139,8 @@ class TestAssetIntegrity(unittest.TestCase):
             "font:BricolageGrotesque",
             "font:PlusJakartaSans",
             "font:JetBrainsMono",
+            "font:Geologica-Cyrillic",
+            "font:Onest-Cyrillic",
         ):
             self.assertIn(required, ids)
 
