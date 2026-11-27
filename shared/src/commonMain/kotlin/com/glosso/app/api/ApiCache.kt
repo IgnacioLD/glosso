@@ -8,7 +8,7 @@ import kotlin.concurrent.Volatile
 
 /**
  * Process-wide HTTP cache: a size-bounded, LRU disk store under the cache dir and
- * the persisted content version. Initialised from the application context.
+ * the persisted content version of each course. Initialised from the application context.
  */
 object ApiCache : AssetVersionStore {
     private const val FILE = "glosso_http_cache"
@@ -30,15 +30,28 @@ object ApiCache : AssetVersionStore {
     /** The shared disk cache, or null before [init] (tests inject their own). */
     fun storageOrNull(): LruCacheStorage? = storage
 
-    override fun load(): String? = prefs?.getString(KEY)?.takeIf { it.isNotBlank() }
-
-    override fun save(version: String) {
-        prefs?.edit { putString(KEY, version) }
+    override fun load(language: String): String? {
+        val prefs = prefs ?: return null
+        // Before versions were per course, one key held the version of the course
+        // in use. The first course asked for after the update is that course
+        // (the client is built for it), so it inherits the key and an offline
+        // start still reaches what is cached.
+        prefs.getString(KEY)?.let { legacy ->
+            prefs.edit(commit = true) {
+                remove(KEY)
+                if (!prefs.contains("${KEY}_$language")) putString("${KEY}_$language", legacy)
+            }
+        }
+        return prefs.getString("${KEY}_$language")?.takeIf { it.isNotBlank() }
     }
 
-    /** Drops the content version and every cached response (a server switch). */
+    override fun save(language: String, version: String) {
+        prefs?.edit { putString("${KEY}_$language", version) }
+    }
+
+    /** Drops every course's content version and every cached response (a server switch). */
     suspend fun forget() {
-        prefs?.edit(commit = true) { remove(KEY) }
+        prefs?.edit(commit = true) { clear() }
         storage?.clear()
     }
 }
