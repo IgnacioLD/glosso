@@ -522,6 +522,9 @@
     <string name="settings_translations">अनुवाद</string>
     <string name="settings_translations_desc">वाक्य का मतलब, जो आपके माँगने तक छिपा रहता है। देखने के लिए वाक्य के साथ दिए "अनुवाद दिखाएँ" पर टैप करें।</string>
     <string name="settings_translations_toggle">अनुवाद दिखाएँ</string>
+    <string name="settings_sounds">साउंड</string>
+    <string name="settings_sounds_desc">सही और गलत जवाब, पूरे हुए लेसन और नई उपलब्धियों पर छोटी-सी आवाज़।</string>
+    <string name="settings_sounds_toggle">साउंड चलाएँ</string>
     <string name="translation_show">अनुवाद दिखाएँ</string>
     <string name="translation_hide">अनुवाद छिपाएँ</string>
     <string name="practice_work_on_plain">एक साउंड पर काम करना है</string>

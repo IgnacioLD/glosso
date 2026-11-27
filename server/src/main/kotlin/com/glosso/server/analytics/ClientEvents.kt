@@ -118,7 +118,7 @@ object ClientEvents {
         "story_closed" to mapOf("story_id" to Id, "read_pct" to Count(100)),
         "setting_changed" to mapOf(
             "setting" to OneOf(
-                setOf("target_language", "accent", "ui_language", "phonetics", "translations", "reminder", "wifi_only"),
+                setOf("target_language", "accent", "ui_language", "phonetics", "translations", "reminder", "wifi_only", "sounds"),
             ),
             "value" to Id,
             "enabled" to Bool,

@@ -506,6 +506,9 @@
     <string name="settings_translations">Traducción</string>
     <string name="settings_translations_desc">El significado de la frase, oculto hasta que lo pides. Toca Ver traducción en cualquier frase para verlo.</string>
     <string name="settings_translations_toggle">Mostrar traducciones</string>
+    <string name="settings_sounds">Sonidos</string>
+    <string name="settings_sounds_desc">Sonidos breves al acertar o fallar, al terminar una lección y al conseguir un logro.</string>
+    <string name="settings_sounds_toggle">Reproducir sonidos</string>
     <string name="translation_show">Ver traducción</string>
     <string name="translation_hide">Ocultar traducción</string>
     <string name="practice_work_on_plain">Un sonido necesita trabajo</string>

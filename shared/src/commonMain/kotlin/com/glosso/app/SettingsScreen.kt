@@ -270,6 +270,35 @@ fun SettingsScreen(onBack: () -> Unit, vm: ScoringViewModel = scoringViewModel()
             }
 
             SectionBreak()
+            SectionLabel(stringResource(Res.string.settings_sounds))
+            Spacer(Modifier.height(Space.x8))
+            Text(
+                stringResource(Res.string.settings_sounds_desc),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+            )
+            Spacer(Modifier.height(Space.x20))
+            val sounds by FeedbackSounds.enabled.collectAsState()
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                Text(
+                    stringResource(Res.string.settings_sounds_toggle),
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    modifier = Modifier.weight(1f),
+                )
+                Switch(
+                    checked = sounds,
+                    onCheckedChange = {
+                        FeedbackSounds.setEnabled(context, it)
+                        UsageEvents.settingChanged("sounds", it)
+                    },
+                )
+            }
+
+            SectionBreak()
             SectionLabel(stringResource(Res.string.settings_reminder))
             Spacer(Modifier.height(Space.x8))
             Text(

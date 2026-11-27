@@ -505,6 +505,9 @@
     <string name="settings_translations">Перевод</string>
     <string name="settings_translations_desc">Значение фразы скрыто, пока вы его не запросите. Чтобы увидеть перевод, нажмите «Показать перевод» под фразой.</string>
     <string name="settings_translations_toggle">Показывать переводы</string>
+    <string name="settings_sounds">Звуки</string>
+    <string name="settings_sounds_desc">Короткие звуки при верном и неверном ответе, в конце урока и при новых достижениях.</string>
+    <string name="settings_sounds_toggle">Включить звуки</string>
     <string name="translation_show">Показать перевод</string>
     <string name="translation_hide">Скрыть перевод</string>
     <string name="practice_work_on_plain">Над звуком стоит поработать</string>

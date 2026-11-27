@@ -506,6 +506,9 @@
     <string name="settings_translations">Traduction</string>
     <string name="settings_translations_desc">Le sens de la phrase, masqué jusqu'à ce que tu le demandes. Touche « Voir la traduction » sur une phrase pour l'afficher.</string>
     <string name="settings_translations_toggle">Afficher les traductions</string>
+    <string name="settings_sounds">Sons</string>
+    <string name="settings_sounds_desc">De courts sons pour les bonnes et les mauvaises réponses, les leçons terminées et les succès.</string>
+    <string name="settings_sounds_toggle">Activer les sons</string>
     <string name="translation_show">Voir la traduction</string>
     <string name="translation_hide">Masquer la traduction</string>
     <string name="practice_work_on_plain">Un son à travailler</string>

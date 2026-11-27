@@ -1,7 +1,12 @@
 package com.glosso.app
 
+import com.glosso.app.platform.KeyValueStore
 import com.glosso.app.platform.PlatformContext
+import com.glosso.app.platform.keyValueStore
 import com.glosso.engine.phonetics.PhoneticLoop
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 /**
  * The feedback cues. Each one ships as `feedback_<name>.wav` in
@@ -35,18 +40,40 @@ interface FeedbackSoundPlayer {
 /** This platform's cues: SoundPool over `res/raw` on Android, `AVAudioPlayer` on iOS, `<audio>` on the web. */
 expect fun feedbackSoundPlayer(context: PlatformContext): FeedbackSoundPlayer
 
-/** Plays the cues. Loaded once per process; silent until [init]. */
+/** Plays the cues. Loaded once per process; silent until [init] and while the Settings switch is off. */
 object FeedbackSounds {
 
-    private var player: FeedbackSoundPlayer? = null
+    private const val FILE = "glosso_sounds"
+    private const val KEY_ENABLED = "enabled"
 
-    fun init(context: PlatformContext) {
-        if (player != null) return
-        player = feedbackSoundPlayer(context)
+    private var player: FeedbackSoundPlayer? = null
+    private var prefs: KeyValueStore? = null
+
+    private val _enabled = MutableStateFlow(true)
+
+    /** The Settings "Sounds" switch, on by default. */
+    val enabled: StateFlow<Boolean> = _enabled.asStateFlow()
+
+    fun init(context: PlatformContext, makePlayer: () -> FeedbackSoundPlayer = { feedbackSoundPlayer(context) }) {
+        loadPrefs(context)
+        if (player == null) player = makePlayer()
+    }
+
+    fun setEnabled(context: PlatformContext, value: Boolean) {
+        loadPrefs(context)
+        _enabled.value = value
+        prefs?.edit { putBoolean(KEY_ENABLED, value) }
+    }
+
+    private fun loadPrefs(context: PlatformContext) {
+        if (prefs != null) return
+        val loaded = keyValueStore(context, FILE)
+        prefs = loaded
+        _enabled.value = loaded.getBoolean(KEY_ENABLED, true)
     }
 
     fun play(cue: FeedbackCue) {
-        player?.play(cue)
+        if (_enabled.value) player?.play(cue)
     }
 
     /** [combo] is the run of correct answers including this one. */

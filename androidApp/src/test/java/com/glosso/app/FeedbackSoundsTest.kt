@@ -1,19 +1,62 @@
 package com.glosso.app
 
+import android.content.Context
 import android.media.AudioAttributes
 import com.glosso.engine.model.ExerciseModel
 import java.io.File
+import org.junit.After
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [34])
 class FeedbackSoundsTest {
+
+    private val app get() = RuntimeEnvironment.getApplication()
+    private val played = mutableListOf<FeedbackCue>()
+
+    /** A fresh process with no saved choice, and a player that records instead of sounding. */
+    @Before
+    fun freshProcess() {
+        app.getSharedPreferences("glosso_sounds", Context.MODE_PRIVATE).edit().clear().commit()
+        FeedbackSounds.release()
+        FeedbackSounds.javaClass.getDeclaredField("prefs").apply { isAccessible = true }.set(FeedbackSounds, null)
+        FeedbackSounds.init(app) {
+            object : FeedbackSoundPlayer {
+                override fun play(cue: FeedbackCue) { played += cue }
+                override fun release() = Unit
+            }
+        }
+    }
+
+    @After
+    fun releasePlayer() = FeedbackSounds.release()
+
+    @Test
+    fun `sounds are on by default`() {
+        assertTrue(FeedbackSounds.enabled.value)
+        FeedbackSounds.answer(correct = true, combo = 1)
+
+        assertEquals(listOf(FeedbackCue.CORRECT), played)
+    }
+
+    @Test
+    fun `the switch off mutes every cue and is remembered`() {
+        FeedbackSounds.setEnabled(app, false)
+        FeedbackCue.entries.forEach(FeedbackSounds::play)
+        FeedbackSounds.answer(correct = false, combo = 0)
+
+        assertTrue(played.isEmpty())
+        assertFalse(app.getSharedPreferences("glosso_sounds", Context.MODE_PRIVATE).getBoolean("enabled", true))
+    }
 
     @Test
     fun `feedback cues route to the media stream`() {
