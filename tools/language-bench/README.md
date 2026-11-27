@@ -141,3 +141,32 @@ is not wired), so its row is an upper bound.
 `results/models.csv`, `results/samples.json` (three transcripts per group). No
 audio and no model files are committed. Measured 2026-11-22 on an Apple M1 Max
 laptop (10 cores), espeak-ng 1.52.
+
+## Spanish course bench (`es_course.py`)
+
+Is ZIPA (`zipa-cr-small`) better than the multilingual wav2vec2 int8 for the
+es-ES course? Measured on what learners meet, through a local server's
+`/v1/score` (`GLOSSO_MODEL_FILES=es=wav2vec2_phoneme_multilingual_int8_dyn_pertensor.onnx`),
+with the content's own `ipa` as `expectedIpa` (espeak-ng `es`, per sentence,
+`tools/content/phonemize.py`). Steps and scoring ways are in the script's
+docstring; numbers in `results/es_course.csv`. Measured 2026-11-27.
+
+- Course: 281 normal-speed reference clips (50 drills, 120 words, 111 dialogue
+  turns; stories have no per-paragraph reference).
+- Swap: 32 contrast drills (r/rr, θ/s, ñ/n, j/k) read right and with the
+  minimal-pair word swapped in, same es-ES Cartesia voice. English voice: the 50
+  drills read by an English Cartesia voice. 4,263 characters.
+
+| | w2v2 (prod path) | zipa |
+| --- | --- | --- |
+| course mean / % >= 98 | 88.4 / 27.8 % | 96.5 / 63.0 % |
+| course clips < 50 (w2v2: 4 one-word clips heard as nothing) | 3.2 % | 0 % |
+| swap: drill rule fires on the error and not on the right take | 46.9 % | 25.0 % |
+| right take wrongly flagged with the drill's rule | 3.1 % | 31.2 % |
+| English voice: mean / drop vs the course clip | 84.7 / 9.2 | 86.8 / 9.8 |
+
+ZIPA never writes `θ β ð ɣ ʝ` on the course audio (0 of 75 `θ`, 0 of 116 `β`)
+and mostly writes `r` for the tap: its high native score is the `es` matrix
+forgiving `s/θ`, `b/β`, `d/ð`, `ɡ/ɣ`, while `es.z.s` fires on 19 % of native
+clips. wav2vec2 hears `θ` 62 of 75 times. Neither model's score drops on a
+single swapped phone; neither flags r/rr (the 0.9 `ɾ/r` similarity).

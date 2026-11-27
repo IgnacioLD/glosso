@@ -1,0 +1,4 @@
+way,course_all_n,course_all_mean,course_all_ge98_pct,course_drill_n,course_drill_mean,course_drill_ge98_pct,course_word_n,course_word_mean,course_word_ge98_pct,course_dialogue_n,course_dialogue_mean,course_dialogue_ge98_pct,course_empty_or_lt50_pct,swap_n,ok_mean,swap_mean,swap_drop_mean,swap_dropped_pct,swap_rule_flag_pct,ok_false_flag_pct,swap_discriminated_pct,en_voice_mean,en_voice_drop_vs_course,en_voice_ge98_pct
+w2v2,281,88.4,27.8,50,93.9,26.0,120,83.4,35.8,111,91.3,19.8,3.2,32,92.8,93.4,-0.6,31.2,50.0,3.1,46.9,84.7,9.2,0.0
+w2v2-ipa,281,88.3,27.8,50,93.9,26.0,120,83.2,35.8,111,91.2,19.8,3.2,32,92.8,93.4,-0.6,31.2,50.0,3.1,46.9,84.6,9.3,0.0
+zipa,281,96.5,63.0,50,96.7,52.0,120,96.4,73.3,111,96.5,56.8,0.0,32,96.7,96.6,0.1,21.9,56.2,31.2,25.0,86.8,9.8,6.0

@@ -268,7 +268,8 @@ def tts_sentences(lang):
     return texts[:TTS_SENTENCES]
 
 
-def cmd_tts(args):
+def cartesia_client(language):
+    """The content pipeline's Cartesia client, returning raw 16 kHz PCM."""
     if not os.environ.get("SSL_CERT_FILE") and os.path.isfile("/etc/ssl/cert.pem"):
         os.environ["SSL_CERT_FILE"] = "/etc/ssl/cert.pem"
     from cartesia_a1_audio import CartesiaClient, DEFAULT_API_VERSION, DEFAULT_BASE_URL, DEFAULT_MODEL, read_api_key
@@ -290,11 +291,15 @@ def cmd_tts(args):
             return data
 
     key = read_api_key(str(Path.home() / "glosso-keys" / ".env"))
+    return Client16k(key, DEFAULT_BASE_URL, DEFAULT_API_VERSION, DEFAULT_MODEL, language=language)
+
+
+def cmd_tts(args):
     rows = load_manifest()
     chars = 0
     for lang in args.langs:
         _, voice, voices = LANGS[lang]
-        client = Client16k(key, DEFAULT_BASE_URL, DEFAULT_API_VERSION, DEFAULT_MODEL, language=lang)
+        client = cartesia_client(lang)
         for i, text in enumerate(tts_sentences(lang)):
             for name, vid in voices:
                 cid = f"tts.{lang}.{name}.{i:02d}"
