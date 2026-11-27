@@ -73,7 +73,7 @@ object StudioImport {
     )
 
     private val NO_EQUIVALENT_KEYS = setOf(
-        "theme_mode", "ipa_visible", "translation_visible", "feedback_sounds", "tutorial_shown",
+        "theme_mode", "ipa_visible", "translation_visible", "tutorial_shown",
         "latin_warning_acknowledged", "playback_speed", "mastery_combo", "best_mastery_streak",
     )
 
@@ -232,6 +232,12 @@ object StudioImport {
                 }
             } else {
                 report.discard("level_not_published")
+            }
+        }
+
+        (studioPrefs["feedback_sounds"] as? Boolean)?.let { on ->
+            if (writeBooleanIfAbsent(context, "glosso_sounds", "enabled", on, keysWritten, conflicts)) {
+                report.mapped++
             }
         }
 

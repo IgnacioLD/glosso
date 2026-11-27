@@ -978,7 +978,10 @@ internal fun AchievementOverlay(modifier: Modifier = Modifier) {
     LaunchedEffect(celebration) {
         if (celebration != null) {
             shown = celebration
-            kotlinx.coroutines.delay(2800)
+            // Lets an answer's ding finish before the seal's cue, as the card lands.
+            kotlinx.coroutines.delay(Motion.medium.toLong())
+            FeedbackSounds.play(FeedbackCue.ACHIEVEMENT)
+            kotlinx.coroutines.delay(2800L - Motion.medium)
             ProgressStore.consumeCelebration()
         }
     }

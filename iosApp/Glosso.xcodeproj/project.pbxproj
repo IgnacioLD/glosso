@@ -8,18 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		16B888F4B65F81975810B51B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1710C17CE48546F87CB16AB4 /* Assets.xcassets */; };
+		4DFF6C23CFEF73C3C013556A /* feedback_perfect.wav in Resources */ = {isa = PBXBuildFile; fileRef = 647422C147E1279B352311F3 /* feedback_perfect.wav */; };
 		57EA3517EB728435656F231F /* GlossoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA00E313C12051296365B87D /* GlossoApp.swift */; };
 		5C48DFD4F271929874B02005 /* feedback_wrong.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7F93A32271977271A6AEAB9 /* feedback_wrong.wav */; };
 		6984419D0392BCBF885689D4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 85602AE4A81871D00E173504 /* InfoPlist.strings */; };
+		851AD282D28F7F3B129F1248 /* feedback_streak.wav in Resources */ = {isa = PBXBuildFile; fileRef = 845B3F033CCD3438765032BC /* feedback_streak.wav */; };
+		C4555AA2245C48878A80787B /* feedback_correct_2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 62521A8B39FFC613DD941D81 /* feedback_correct_2.wav */; };
+		CC545C53901C786FC3AFFECC /* feedback_complete.wav in Resources */ = {isa = PBXBuildFile; fileRef = 2E9E0377A800BD88A214F204 /* feedback_complete.wav */; };
 		DACE2475D4A7216AB24D73EC /* feedback_correct.wav in Resources */ = {isa = PBXBuildFile; fileRef = E50D027BE53C25D0968E7F6E /* feedback_correct.wav */; };
+		E1C0223F850FAB1F2F8583FE /* feedback_correct_3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 287A1A765493BCFD8D5E5221 /* feedback_correct_3.wav */; };
+		FCC5BA6FE144EC46B21C31B8 /* feedback_achievement.wav in Resources */ = {isa = PBXBuildFile; fileRef = 95D914AAC261DBA3833D34EA /* feedback_achievement.wav */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		1710C17CE48546F87CB16AB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		287A1A765493BCFD8D5E5221 /* feedback_correct_3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = feedback_correct_3.wav; path = ../../shared/src/androidMain/res/raw/feedback_correct_3.wav; sourceTree = "<group>"; };
 		2C846B35EC361723B1F178C7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2DCA6E830AB1B85E58DD06F9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2E9E0377A800BD88A214F204 /* feedback_complete.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = feedback_complete.wav; path = ../../shared/src/androidMain/res/raw/feedback_complete.wav; sourceTree = "<group>"; };
+		62521A8B39FFC613DD941D81 /* feedback_correct_2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = feedback_correct_2.wav; path = ../../shared/src/androidMain/res/raw/feedback_correct_2.wav; sourceTree = "<group>"; };
+		647422C147E1279B352311F3 /* feedback_perfect.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = feedback_perfect.wav; path = ../../shared/src/androidMain/res/raw/feedback_perfect.wav; sourceTree = "<group>"; };
 		7575A080657F8079D31AE601 /* Glosso.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Glosso.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		845B3F033CCD3438765032BC /* feedback_streak.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = feedback_streak.wav; path = ../../shared/src/androidMain/res/raw/feedback_streak.wav; sourceTree = "<group>"; };
 		9429EE506615E286177826C7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		95D914AAC261DBA3833D34EA /* feedback_achievement.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = feedback_achievement.wav; path = ../../shared/src/androidMain/res/raw/feedback_achievement.wav; sourceTree = "<group>"; };
 		A4612224C469C3EDA918DBDD /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		AEDDF511B972F243238FAA08 /* Glosso.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Glosso.xcconfig; sourceTree = "<group>"; };
 		C7F93A32271977271A6AEAB9 /* feedback_wrong.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = feedback_wrong.wav; path = ../../shared/src/androidMain/res/raw/feedback_wrong.wav; sourceTree = "<group>"; };
@@ -47,7 +59,13 @@
 		80617E1F570E6CF7F5FD7DEB /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				95D914AAC261DBA3833D34EA /* feedback_achievement.wav */,
+				2E9E0377A800BD88A214F204 /* feedback_complete.wav */,
+				62521A8B39FFC613DD941D81 /* feedback_correct_2.wav */,
+				287A1A765493BCFD8D5E5221 /* feedback_correct_3.wav */,
 				E50D027BE53C25D0968E7F6E /* feedback_correct.wav */,
+				647422C147E1279B352311F3 /* feedback_perfect.wav */,
+				845B3F033CCD3438765032BC /* feedback_streak.wav */,
 				C7F93A32271977271A6AEAB9 /* feedback_wrong.wav */,
 			);
 			name = Sounds;
@@ -139,7 +157,13 @@
 			files = (
 				16B888F4B65F81975810B51B /* Assets.xcassets in Resources */,
 				6984419D0392BCBF885689D4 /* InfoPlist.strings in Resources */,
+				FCC5BA6FE144EC46B21C31B8 /* feedback_achievement.wav in Resources */,
+				CC545C53901C786FC3AFFECC /* feedback_complete.wav in Resources */,
 				DACE2475D4A7216AB24D73EC /* feedback_correct.wav in Resources */,
+				C4555AA2245C48878A80787B /* feedback_correct_2.wav in Resources */,
+				E1C0223F850FAB1F2F8583FE /* feedback_correct_3.wav in Resources */,
+				4DFF6C23CFEF73C3C013556A /* feedback_perfect.wav in Resources */,
+				851AD282D28F7F3B129F1248 /* feedback_streak.wav in Resources */,
 				5C48DFD4F271929874B02005 /* feedback_wrong.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

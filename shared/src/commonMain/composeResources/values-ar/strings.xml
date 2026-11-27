@@ -530,6 +530,9 @@
     <string name="settings_translations">الترجمة</string>
     <string name="settings_translations_desc">معنى العبارة، مخفي حتى تطلبه. اضغط على «إظهار الترجمة» في أي عبارة لتراه.</string>
     <string name="settings_translations_toggle">إظهار الترجمات</string>
+    <string name="settings_sounds">الأصوات</string>
+    <string name="settings_sounds_desc">أصوات قصيرة عند الإجابة الصحيحة أو الخاطئة، وعند إنهاء درس، وعند تحقيق إنجاز.</string>
+    <string name="settings_sounds_toggle">تشغيل الأصوات</string>
     <string name="translation_show">إظهار الترجمة</string>
     <string name="translation_hide">إخفاء الترجمة</string>
     <string name="practice_work_on_plain">صوت يحتاج إلى تدريب</string>

@@ -42,6 +42,18 @@ class ClientEventsTest {
     }
 
     @Test
+    fun `the sounds switch is a known setting`() {
+        val kept = ClientEvents.sanitize(
+            "setting_changed",
+            buildJsonObject {
+                put("setting", JsonPrimitive("sounds"))
+                put("enabled", JsonPrimitive(false))
+            },
+        )
+        assertEquals(setOf("setting", "enabled"), kept?.keys)
+    }
+
+    @Test
     fun `a crash keeps its type and frame but never a message`() {
         val kept = ClientEvents.sanitize(
             "app_crash",

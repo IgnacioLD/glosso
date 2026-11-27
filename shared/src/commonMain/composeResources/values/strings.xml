@@ -533,6 +533,9 @@
     <string name="settings_translations">Translation</string>
     <string name="settings_translations_desc">The meaning of the phrase, hidden until you ask for it. Tap Show translation on any phrase to see it.</string>
     <string name="settings_translations_toggle">Show translations</string>
+    <string name="settings_sounds">Sounds</string>
+    <string name="settings_sounds_desc">Short sounds for right and wrong answers, finished lessons and achievements.</string>
+    <string name="settings_sounds_toggle">Play sounds</string>
     <string name="translation_show">Show translation</string>
     <string name="translation_hide">Hide translation</string>
     <string name="practice_work_on_plain">A sound needs work</string>

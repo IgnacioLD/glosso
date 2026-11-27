@@ -80,6 +80,9 @@ class StudioImportTest {
         assertTrue(OnboardingStore.done.value)
         assertEquals("B1", prefs("glosso_progress").getString("level", null))
 
+        // A learner who muted studio's sounds stays muted.
+        assertFalse(prefs("glosso_sounds").getBoolean("enabled", true))
+
         // 4: no lesson is invented, so nothing is resumed or finished.
         assertNull(prefs("glosso_progress").getString("lesson_id", null))
         assertNull(prefs("glosso_progress").getString("resume_level", null))
@@ -124,7 +127,7 @@ class StudioImportTest {
 
         // 15-18, 20: discarded state never leaks into any pro store.
         val discardedKeys = setOf(
-            "theme_mode", "ipa_visible", "translation_visible", "feedback_sounds", "playback_speed",
+            "theme_mode", "ipa_visible", "translation_visible", "playback_speed",
             "selected_voice", "tutorial_shown", "latin_warning_acknowledged", "mastery_combo",
             "best_mastery_streak", "acknowledged_milestone", "last_review_prompt_ms",
             "migrated_to_v10", "migrated_to_v11b", "batch_level", "batch_queue",
@@ -235,7 +238,7 @@ class StudioImportTest {
             .putInt("theme_mode", 2)
             .putBoolean("ipa_visible", true)
             .putBoolean("translation_visible", false)
-            .putBoolean("feedback_sounds", true)
+            .putBoolean("feedback_sounds", false)
             .putBoolean("onboarding_shown", true)
             .putBoolean("tutorial_shown", true)
             .putBoolean("latin_warning_acknowledged", false)
