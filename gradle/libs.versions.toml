@@ -16,7 +16,7 @@ okio = "3.18.2"
 # Two versions on purpose. Android needs 1.30.0 (16 KB pages). The JVM artifact of
 # 1.30.0 dies with SIGSEGV on the production VPS (docs/DEPLOY-ONNX-1.30-ROLLBACK-2026-09-27.md),
 # so the server stays on the version it has always run.
-onnxruntime-jvm = "1.20.0"
+onnxruntime-jvm = "1.32.0"
 onnxruntime-android = "1.30.0"
 kotlin-logging = "8.0.7"
 slf4j = "2.0.20"
