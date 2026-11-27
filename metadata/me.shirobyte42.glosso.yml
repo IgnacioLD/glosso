@@ -8,8 +8,8 @@
 # signature from the APK at `Binaries`, and publishes ours only if it verifies.
 AntiFeatures:
   NonFreeAssets:
-    en-US: The lesson texts and audio, downloaded from the Glosso server, are not under a free licence.
-
+    en-US: The lesson texts and audio, downloaded from the Glosso server, are not
+      under a free licence.
 Categories:
   - Science & Education
 License: AGPL-3.0-or-later
@@ -28,10 +28,10 @@ Builds:
     versionCode: 2227
     commit: v2.5.5
     subdir: androidApp
-    rm:
-      - shared/src/wasmJsMain/resources/stb_vorbis.wasm
     gradle:
       - fdroid
+    rm:
+      - shared/src/wasmJsMain/resources/stb_vorbis.wasm
     gradleprops:
       - glosso.ios=false
       - glosso.web=false
