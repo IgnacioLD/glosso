@@ -24,3 +24,10 @@ regexes = [
   '''(?i)REDACTED''',
   '''xi-api-key=REDACTED''',
 ]
+
+[[allowlists]]
+description = "F-Droid recipe: AllowedAPKSigningKeys is the public SHA-256 of our signing certificate"
+paths = ['''metadata/me\.shirobyte42\.glosso\.yml''']
+regexTarget = "line"
+regexes = ['''^AllowedAPKSigningKeys: [0-9a-f]{64}$''']
+condition = "AND"
