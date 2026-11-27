@@ -29,6 +29,10 @@ import org.jetbrains.compose.resources.FontResource
  * - Plus Jakarta Sans: the whole UI. Geometric, open counters, excellent at
  *   small sizes and with full Latin for es/fr/de.
  * - JetBrains Mono: IPA and tabular numbers.
+ *
+ * Neither brand face ships Cyrillic, so tools/fonts/cyrillic.py merges it in
+ * (letters from Geologica and Onest, fitted to each weight): Russian stays in
+ * the brand faces instead of falling back to Roboto or SF.
  */
 @OptIn(ExperimentalTextApi::class)
 object GlossoFonts {

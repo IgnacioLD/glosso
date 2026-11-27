@@ -11,7 +11,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import com.glosso.app.platform.currentUiLanguage
 import com.glosso.app.resources.noto_sans_arabic
-import com.glosso.app.resources.noto_sans_cyrillic
 import com.glosso.app.resources.noto_sans_devanagari
 import org.jetbrains.compose.resources.Font
 import org.jetbrains.compose.resources.FontResource
@@ -98,7 +97,6 @@ fun main() {
 @Composable
 private fun scriptFallback(uiLanguage: String): List<Font>? {
     val resource = when (uiLanguage) {
-        "ru" -> Res.font.noto_sans_cyrillic
         "hi" -> Res.font.noto_sans_devanagari
         "ar" -> Res.font.noto_sans_arabic
         else -> return null

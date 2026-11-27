@@ -47,8 +47,10 @@ cd shared/build/dist/wasmJs/productionExecutable && python3 -m http.server 8096
 - **IPA symbols** that JetBrains Mono lacks come from a Noto Sans Mono subset
   (`wasmJsMain/composeResources/font`). It is preloaded as the fallback font, because a browser gives
   Skia no system fonts.
-- **Russian, Hindi and Arabic** need a fallback for the same reason: Noto subsets in the same folder,
-  57 to 130 KB gzipped, each fetched only when it is the interface language. Compose takes no layout
+- **Hindi and Arabic** need a fallback for the same reason: Noto subsets in the same folder,
+  57 to 130 KB gzipped, each fetched only when it is the interface language. Cyrillic needs none:
+  the bundled faces carry it (`tools/fonts/cyrillic.py`), so Russian is set in the brand faces on
+  every platform. Compose takes no layout
   direction from the page, so `Main.kt` sets right to left for Arabic.
 - **Back**: the browser's Back button (and Safari's edge swipe) runs the innermost `PlatformBackHandler`.
 
